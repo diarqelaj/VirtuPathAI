@@ -1,0 +1,18 @@
+/* styles/colors.css */
+
+.bg-black-100 {
+    background-color: #040720;
+  }
+  
+  .bg-black-200 {
+    background-color: #1e1e1e;
+  }
+  
+  .text-gray-100 {
+    color: #e5e5e5;
+  }
+  
+  .border-gray-400 {
+    border-color: #a3a3a3;
+  }
+  

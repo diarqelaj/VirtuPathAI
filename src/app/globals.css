@@ -1,26 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base styles */
+* {
+  scroll-behavior: smooth;
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+button:active {
+  outline: none;
+}
+
+/* Color variables */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: var(--primary);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: var(--primary);
+  --input: var(--primary);
+  --ring: var(--primary);
+}
+
+/* Utility classes */
+.bg-100 {
+  background-color: #000319;
+}
+.bg-black-100 {
+  background-color: rgb(2, 4, 17);
+}
+
+.bg-black-200 {
+  background-color: rgba(17, 25, 40, 0.75);
+}
+
+.bg-black-300 {
+  background-color: rgba(255, 255, 255, 0.125);
+}
+
+.text-white-100 {
+  color: #BEC1DD;
+}
+
+.text-white-200 {
+  color: #C1C2D3;
+}
+
+.bg-blue-100 {
+  background-color: #E4ECFF;
+}
+
+.text-purple {
+  color: #CBACF9;
+}
+
+.bg-purple {
+  background-color: #CBACF9;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 2.25rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: 3rem;
+  }
+}
+
+/* Grid patterns */
+.bg-grid {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(0 0 0)'><path d='M0 .5H31.5V32'/></svg>");
+}
+
+.dark .bg-grid {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(255 255 255)'><path d='M0 .5H31.5V32'/></svg>");
+}
+/* global.css */
+/* ========== Spotlight Animation ========== */
+@keyframes spotlight {
+  from {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s 1 forwards;
+  will-change: transform, opacity;
+}
+
+/* Translation helpers to match original config */
+.-translate-x-72 { --tw-translate-x: -72%; }
+.-translate-y-62 { --tw-translate-y: -62%; }
+.-translate-x-50 { --tw-translate-x: -50%; }
+.-translate-y-40 { --tw-translate-y: -40%; }
+
+.translate-3d {
+  transform: translate3d(
+    var(--tw-translate-x, 0), 
+    var(--tw-translate-y, 0), 
+    0
+  );
+}
+
+/* Hardware acceleration */
+.boost-rendering {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* global.css */
+/* ========== Keyframes ========== */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes spotlight {
+  from { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  to { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+@keyframes shimmer {
+  from { background-position: 0 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes moveHorizontal {
+  0% { transform: translateX(-50%) translateY(-10%); }
+  50% { transform: translateX(50%) translateY(10%); }
+  100% { transform: translateX(-50%) translateY(-10%); }
+}
+
+@keyframes moveInCircle {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes moveVertical {
+  0% { transform: translateY(-50%); }
+  50% { transform: translateY(50%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scroll {
+  to { transform: translate(calc(-50% - 0.5rem)); }
+}
+
+/* ========== Animation Classes ========== */
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s forwards;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 200%;
+}
+
+.animate-first {
+  animation: moveVertical 30s ease infinite;
+}
+
+.animate-second {
+  animation: moveInCircle 20s reverse infinite;
+}
+
+.animate-third {
+  animation: moveInCircle 40s linear infinite;
+}
+
+.animate-fourth {
+  animation: moveHorizontal 40s ease infinite;
+}
+
+.animate-fifth {
+  animation: moveInCircle 20s ease infinite;
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
+/* ========== Color Utilities ========== */
+.bg-black-100 { background-color: #000319; }
+.bg-black-200 { background-color: rgba(17, 25, 40, 0.75); }
+.bg-black-300 { background-color: rgba(255, 255, 255, 0.125); }
+
+.text-white-100 { color: #BEC1DD; }
+.text-white-200 { color: #C1C2D3; }
+
+.bg-blue-100 { background-color: #E4ECFF; }
+.text-purple { color: #CBACF9; }
+.bg-purple { background-color: #CBACF9; }
+
+/* ========== Grid Patterns ========== */
+.bg-grid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(0 0 0 / 0.03)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.dark .bg-grid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(255 255 255 / 0.03)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.bg-grid-small {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='8' height='8' fill='none' stroke='rgba(0 0 0 / 0.03)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.dark .bg-grid-small {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='8' height='8' fill='none' stroke='rgba(255 255 255 / 0.03)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.bg-dot {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='none'%3e%3ccircle fill='rgba(0 0 0 / 0.05)' cx='10' cy='10' r='1.6257'/%3e%3c/svg%3e");
+}
+
+.dark .bg-dot {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='none'%3e%3ccircle fill='rgba(255 255 255 / 0.05)' cx='10' cy='10' r='1.6257'/%3e%3c/svg%3e");
+}
+
+/* ========== Component Styles ========== */
+.heading {
+  font-weight: 700;
+  font-size: 2.25rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: 3rem;
+  }
+}
+
+/* ========== Utility Classes ========== */
+.border-border { border-color: hsl(var(--border)); }
+.bg-background { background-color: hsl(var(--background)); }
+.text-foreground { color: hsl(var(--foreground)); }
+
+/* ========== Transform Helpers ========== */
+.translate-x-50 { --tw-translate-x: 50%; }
+.-translate-x-50 { --tw-translate-x: -50%; }
+.translate-y-50 { --tw-translate-y: 50%; }
+.-translate-y-50 { --tw-translate-y: -50%; }
+
+.translate-3d {
+  transform: translate3d(
+    var(--tw-translate-x, 0),
+    var(--tw-translate-y, 0),
+    0
+  );
 }
