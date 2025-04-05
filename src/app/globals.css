@@ -104,23 +104,13 @@ button:active {
   font-size: 2.25rem;
   text-align: center;
 }
-
-@media (min-width: 768px) {
-  .heading {
-    font-size: 3rem;
+/* Modify the spotlight animation section */
+@media (max-width: 768px) {
+  .animate-spotlight {
+    animation: spotlight 1.5s ease-out 0.3s forwards; /* Faster animation on mobile */
   }
 }
 
-/* Grid patterns */
-.bg-grid {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(0 0 0)'><path d='M0 .5H31.5V32'/></svg>");
-}
-
-.dark .bg-grid {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(255 255 255)'><path d='M0 .5H31.5V32'/></svg>");
-}
-/* global.css */
-/* ========== Spotlight Animation ========== */
 @keyframes spotlight {
   from {
     opacity: 0;
@@ -133,23 +123,37 @@ button:active {
 }
 
 .animate-spotlight {
-  animation: spotlight 2s ease 0.75s 1 forwards;
+  animation: spotlight 2s ease 0.75s forwards;
   will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1); /* Enhanced GPU acceleration */
 }
 
-/* Translation helpers to match original config */
-.-translate-x-72 { --tw-translate-x: -72%; }
-.-translate-y-62 { --tw-translate-y: -62%; }
-.-translate-x-50 { --tw-translate-x: -50%; }
-.-translate-y-40 { --tw-translate-y: -40%; }
-
+/* Add these mobile-specific optimizations */
 .translate-3d {
   transform: translate3d(
     var(--tw-translate-x, 0), 
-    var(--tw-translate-y, 0), 
-    0
-  );
+    var(--tw-translate-y, 0),
+    var(--tw-translate-z, 0)
+  ) rotate(var(--tw-rotate, 0)) scaleX(var(--tw-scale-x, 1)) 
+    scaleY(var(--tw-scale-y, 1)) scaleZ(var(--tw-scale-z, 1));
 }
+
+.boost-rendering {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  contain: strict; /* Limits browser reflow calculations */
+}
+
+/* Grid patterns */
+.bg-grid {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(0 0 0)'><path d='M0 .5H31.5V32'/></svg>");
+}
+
+.dark .bg-grid {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='100' height='100' fill='none' stroke='rgb(255 255 255)'><path d='M0 .5H31.5V32'/></svg>");
+}
+
 
 /* Hardware acceleration */
 .boost-rendering {
