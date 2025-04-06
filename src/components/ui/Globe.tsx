@@ -111,7 +111,6 @@ export function Globe({ globeConfig, data }: WorldProps) {
       _buildMaterial();
     }
   }, []);
- 
 
   const _buildMaterial = () => {
     if (!globeRef.current) return;
