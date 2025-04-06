@@ -82,7 +82,9 @@ button:active {
 .text-white-100 {
   color: #BEC1DD;
 }
-
+.text-deeppurple-100 {
+  color : rgb(75, 94, 211);
+}
 .text-white-200 {
   color: #C1C2D3;
 }
