@@ -11,7 +11,7 @@ import '../globals.css';
 
 const Page = () => {
   return (
-    <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
+    <div className="relative bg-black-100 text-white flex flex-col min-h-screen ">
       <FloatingNav navItems={navItems} />
 
       <div className="pt-20 px-4 md:px-6 flex-grow">
@@ -19,7 +19,7 @@ const Page = () => {
         <Spotlight className="h-[80vh] w-[50vw] top-10 left-full" fill="purple" />
         <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
         
-        <div className="relative z-10 text-center max-w-6xl mx-auto">
+        <div className="relative z-10 text-center max-w-6xl mx-auto mt-27 px-4 md:px-6 flex-grow">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Explore Career Training
           </h1>
@@ -44,13 +44,13 @@ const Page = () => {
                   
                   <div className="relative h-full bg-[#0c0c16] rounded-2xl p-6 border border-gray-800/50 backdrop-blur-sm flex flex-col"> {/* Flex column layout */}
                     {program.enrolled > 2000 && (
-                      <span className="absolute top-4 right-4 bg-yellow-400/90 text-black px-2 py-1 rounded-full text-xs font-bold animate-pulse">
+                      <span className="absolute top-4 right-4 bg-yellow-400/90 text-black px-2 py-1 rounded-full text-xs font-bold animate-pulse z-10">
                         🔥 POPULAR
                       </span>
                     )}
 
                     {/* Image section with fixed height */}
-                    <div className="relative w-full h-40 mb-4 overflow-hidden rounded-xl flex-shrink-0">
+                    <div className="relative w-full h-40 mb-4 overflow-hidden rounded-xl flex-shrink-0 z-0">
                       <Image
                         src={program.img}
                         alt={program.title}
@@ -65,7 +65,7 @@ const Page = () => {
 
                     {/* Content section with flex-grow */}
                     <div className="flex flex-col gap-3 flex-grow">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between text-left"> 
                         <h3 className="text-xl font-semibold">{program.title}</h3>
                       </div>
 
@@ -78,7 +78,7 @@ const Page = () => {
                         </span>
                       </div>
 
-                      <p className="text-gray-300 text-sm line-clamp-3 mb-4">
+                      <p className="text-gray-300 text-sm line-clamp-3 mb-4 flex items-center justify-between text-left">
                         {program.description}
                       </p>
 
