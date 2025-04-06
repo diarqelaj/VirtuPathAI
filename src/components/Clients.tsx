@@ -49,7 +49,7 @@ const Clients = () => {
         })}
 
         {/* ✅ Filler Elements to Make the Bottom Even */}
-        <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-[#00001e] to-transparent pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-[#000000] to-transparent pointer-events-none"></div>
       </div>
 
       {/* ✅ Company Logos */}

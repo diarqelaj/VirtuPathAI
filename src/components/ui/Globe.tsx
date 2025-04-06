@@ -199,7 +199,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     );
 
     globeRef.current
-      .arcsData(validData)
+      .arcsData(validData as unknown as object[])
       .arcStartLat((d) => (d as Position).startLat)
       .arcStartLng((d) => (d as Position).startLng)
       .arcEndLat((d) => (d as Position).endLat)
@@ -213,15 +213,15 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .arcDashAnimateTime(defaultProps.arcTime);
 
     globeRef.current
-      .pointsData(globeData)
+      .pointsData(globeData as unknown as object[])
       .pointColor((d) => (d as any).color(0))
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
 
     globeRef.current
-      .ringsData([])
-      .ringColor((e: { color: (t: number) => string }) => e.color)
+      .ringsData([] as unknown as object[])
+      .ringColor((e: any) => e.color)
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
@@ -240,7 +240,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
       );
 
       globeRef.current?.ringsData(
-        globeData.filter((_, i) => ringIndexes.includes(i))
+        globeData
+          .filter((_, i) => ringIndexes.includes(i))
+          .map((d) => d as unknown as object)
       );
     }, 2000);
 
