@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import {
   motion,
@@ -7,6 +8,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 
@@ -17,7 +19,7 @@ export const FloatingNav = ({
   navItems: {
     name: string;
     link: string;
-    icon?: JSX.Element;
+    icon?: React.ReactNode;
   }[];
   className?: string;
 }) => {
@@ -30,10 +32,10 @@ export const FloatingNav = ({
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
@@ -88,16 +90,16 @@ export const FloatingNav = ({
                 minWidth: "200px",
               }}
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Escape' && setIsOpen(false)}
+              onKeyDown={(e) => e.key === "Escape" && setIsOpen(false)}
               role="menu"
               aria-labelledby="mobile-menu"
             >
               {navItems.map((navItem, idx) => (
-                <NavLink 
-                  key={idx} 
-                  navItem={navItem} 
-                  mobile 
-                  setIsOpen={setIsOpen} // PROPERLY PASS SETISOPEN HERE
+                <NavLink
+                  key={idx}
+                  navItem={navItem}
+                  mobile
+                  setIsOpen={setIsOpen}
                 />
               ))}
             </motion.div>
@@ -108,50 +110,58 @@ export const FloatingNav = ({
   );
 };
 
-// UPDATED NAVLINK COMPONENT WITH PROPER PROPS
 interface NavLinkProps {
   navItem: {
     name: string;
     link: string;
-    icon?: JSX.Element;
+    icon?: React.ReactNode;
   };
   mobile?: boolean;
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavLink = ({ navItem, mobile, setIsOpen }: NavLinkProps) => (
-  <Link
-    href={navItem.link}
-    className={cn(
-      "text-neutral-50 hover:text-neutral-300 transition-colors",
-      mobile ? "block text-sm p-2" : "flex items-center space-x-1"
-    )}
-    onClick={(e) => {
-      if (mobile && setIsOpen) { // SAFELY CHECK FOR SETISOPEN
-        setIsOpen(false);
-        (document.activeElement as HTMLElement)?.blur();
-      }
-      
-      if (navItem.link.startsWith('#')) {
-        e.preventDefault();
+const NavLink = ({ navItem, mobile, setIsOpen }: NavLinkProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleSmartNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const isHash = navItem.link.startsWith("#");
+
+    if (mobile && setIsOpen) {
+      setIsOpen(false);
+      (document.activeElement as HTMLElement)?.blur();
+    }
+
+    if (isHash) {
+      e.preventDefault();
+
+      if (pathname !== "/") {
+        // Navigate to home with hash
+        router.push(`/${navItem.link}`);
+      } else {
+        // Already on home page
         const target = document.querySelector(navItem.link);
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-          
-          if (history.pushState) {
-            history.pushState(null, '', navItem.link);
-          } else {
-            window.location.hash = navItem.link;
-          }
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState({}, "", navItem.link);
         }
       }
-    }}
-    role="menuitem"
-  >
-    {navItem.icon && <span className={mobile ? "mr-2" : ""}>{navItem.icon}</span>}
-    <span className={mobile ? "text-base" : "text-sm"}>{navItem.name}</span>
-  </Link>
-);
+    }
+  };
+
+  return (
+    <Link
+      href={navItem.link}
+      className={cn(
+        "text-neutral-50 hover:text-neutral-300 transition-colors",
+        mobile ? "block text-sm p-2" : "flex items-center space-x-1"
+      )}
+      onClick={handleSmartNavigation}
+      scroll={false}
+      role="menuitem"
+    >
+      {navItem.icon && <span className={mobile ? "mr-2" : ""}>{navItem.icon}</span>}
+      <span className={mobile ? "text-base" : "text-sm"}>{navItem.name}</span>
+    </Link>
+  );
+};

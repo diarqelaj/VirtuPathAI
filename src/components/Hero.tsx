@@ -2,6 +2,7 @@ import { FaLocationArrow } from "react-icons/fa6";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -42,14 +43,14 @@ const Hero = () => {
         </p>
 
         <div className="w-full flex justify-center mt-4">
-          <a href="#pricing" className="text center max-w-[300px]">
-            <MagicButton
-              title="Get started"
-              icon={null}
-              position={""}
-            />
-          </a>
-        </div>
+        <Link href="/careers" className="text-center max-w-[300px] block">
+          <MagicButton
+            title="Get started"
+            icon={null}
+            position=""
+          />
+        </Link>
+      </div>
       </div>
     </div>
   );

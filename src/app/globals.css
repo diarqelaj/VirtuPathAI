@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss/preflight";
 @tailwind utilities;
+
 @import "tailwindcss";
 /* Base styles */
 * {
