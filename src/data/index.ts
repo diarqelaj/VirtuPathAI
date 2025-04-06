@@ -3,6 +3,7 @@ export const navItems = [
   { name: "About", link: "#about" },
   { name: "Courses", link: "/careers" },
   { name: "Contact", link: "#contact" },
+  { name: "Log In", link: "/login" },
 ];
 
 export const gridItems = [
@@ -400,7 +401,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 18,
+    id: 18, 
     title: "Journalist",
     description: "Report, investigate, and write with AI-assisted research and ethics.",
     location: "Remote",

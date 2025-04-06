@@ -1,5 +1,4 @@
 "use client";
-
 import { Spotlight } from "@/components/ui/Spotlight";
 import { careers, navItems } from "@/data";
 import Image from "next/image";
@@ -8,6 +7,9 @@ import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import { GlobeAltIcon, ClockIcon, UserIcon, StarIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import '../globals.css';
+import { useAuth } from '@/lib/useAuth';
+
+import { useRouter } from 'next/navigation';
 
 interface Career {
   id: number;
@@ -26,13 +28,25 @@ const Page = () => {
   const [selectedProgram, setSelectedProgram] = useState<Career | null>(null);
   const [showEnrollment, setShowEnrollment] = useState(false);
 
+
   const EnrollmentTab = () => {
+    const { isLoggedIn } = useAuth();
+    const router = useRouter();
+
     if (!selectedProgram) return null;
 
     const discount = Math.round(
       (1 - parseFloat(selectedProgram.price.replace('€','')) /
       parseFloat(selectedProgram.originalPrice.replace('€',''))) * 100
     );
+
+    const handleEnrollment = () => {
+      if (!isLoggedIn()) {
+        router.push('/login');
+      } else {
+        router.push('/payment');
+      }
+    };
 
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -93,7 +107,10 @@ const Page = () => {
                       </p>
                     </div>
 
-                    <button className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                    <button 
+                      onClick={handleEnrollment}
+                      className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
+                    >
                       <BookOpenIcon className="h-5 w-5" />
                       Complete Enrollment
                     </button>
