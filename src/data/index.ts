@@ -202,6 +202,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/fullstack.jpg",
     price: "€49",
+    enrolled: 2458,
+    rating: "4.9",
+    skills: ["JavaScript", "React", "Node.js", "AWS"],
+    originalPrice: "€99"
   },
   {
     id: 2,
@@ -210,6 +214,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/content-creator.jpg",
     price: "€49",
+    enrolled: 1890,
+    rating: "4.7",
+    skills: ["Video Editing", "Scriptwriting", "Social Media", "SEO"],
+    originalPrice: "€99"
   },
   {
     id: 3,
@@ -218,6 +226,10 @@ export const careers = [
     location: "Online",
     img: "/careers/businessman.jpg",
     price: "€59",
+    enrolled: 1560,
+    rating: "4.6",
+    skills: ["Business Strategy", "Pitching", "Scaling", "Finance"],
+    originalPrice: "€119"
   },
   {
     id: 4,
@@ -226,6 +238,10 @@ export const careers = [
     location: "Hybrid",
     img: "/careers/mmafighter.jpg",
     price: "€69",
+    enrolled: 890,
+    rating: "4.5",
+    skills: ["Striking", "Grappling", "Fight Strategy", "Conditioning"],
+    originalPrice: "€139"
   },
   {
     id: 5,
@@ -234,6 +250,10 @@ export const careers = [
     location: "Online",
     img: "/careers/chef.jpg",
     price: "€39",
+    enrolled: 2100,
+    rating: "4.8",
+    skills: ["Knife Skills", "Plating", "Menu Design", "Food Safety"],
+    originalPrice: "€79"
   },
   {
     id: 6,
@@ -242,6 +262,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/graphicdesigner.jpg",
     price: "€39",
+    enrolled: 3250,
+    rating: "4.8",
+    skills: ["Figma", "Illustrator", "Typography", "Branding"],
+    originalPrice: "€79"
   },
   {
     id: 7,
@@ -250,6 +274,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/fashiondesigner.jpg",
     price: "€39",
+    enrolled: 1420,
+    rating: "4.6",
+    skills: ["Pattern Making", "Textiles", "Fashion Illustration", "Trend Analysis"],
+    originalPrice: "€79"
   },
   {
     id: 8,
@@ -258,6 +286,10 @@ export const careers = [
     location: "Online",
     img: "/careers/footballer.png",
     price: "€49",
+    enrolled: 1765,
+    rating: "4.7",
+    skills: ["Tactical Analysis", "Fitness Training", "Team Strategy", "Nutrition"],
+    originalPrice: "€99"
   },
   {
     id: 9,
@@ -266,8 +298,11 @@ export const careers = [
     location: "Online",
     img: "/careers/trader.png",
     price: "€49",
+    enrolled: 2980,
+    rating: "4.9",
+    skills: ["Technical Analysis", "Risk Management", "Cryptocurrency", "Forex"],
+    originalPrice: "€99"
   },
-
   {
     id: 10,
     title: "Data Scientist",
@@ -275,6 +310,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/data-scientist.png",
     price: "€59",
+    enrolled: 4120,
+    rating: "4.9",
+    skills: ["Python", "Machine Learning", "SQL", "Data Visualization"],
+    originalPrice: "€119"
   },
   {
     id: 11,
@@ -283,6 +322,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/actor.png",
     price: "€39",
+    enrolled: 980,
+    rating: "4.5",
+    skills: ["Method Acting", "Voice Modulation", "Improvisation", "Screen Presence"],
+    originalPrice: "€79"
   },
   {
     id: 12,
@@ -291,6 +334,10 @@ export const careers = [
     location: "Online",
     img: "/careers/cybersecurity.png",
     price: "€59",
+    enrolled: 2650,
+    rating: "4.8",
+    skills: ["Ethical Hacking", "Network Security", "Cryptography", "Incident Response"],
+    originalPrice: "€119"
   },
   {
     id: 13,
@@ -299,6 +346,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/author.png",
     price: "€39",
+    enrolled: 1230,
+    rating: "4.6",
+    skills: ["Creative Writing", "Editing", "Publishing", "Worldbuilding"],
+    originalPrice: "€79"
   },
   {
     id: 14,
@@ -307,6 +358,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/investor.png",
     price: "€69",
+    enrolled: 3450,
+    rating: "4.9",
+    skills: ["Portfolio Management", "Market Analysis", "Venture Capital", "ROI Optimization"],
+    originalPrice: "€139"
   },
   {
     id: 15,
@@ -315,6 +370,10 @@ export const careers = [
     location: "Online",
     img: "/careers/musician.png",
     price: "€39",
+    enrolled: 1670,
+    rating: "4.7",
+    skills: ["Music Theory", "DAWs", "Sound Design", "Mixing/Mastering"],
+    originalPrice: "€79"
   },
   {
     id: 16,
@@ -323,6 +382,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/game-developer.jpg",
     price: "€49",
+    enrolled: 2310,
+    rating: "4.8",
+    skills: ["C#", "Unity", "3D Modeling", "Game Design"],
+    originalPrice: "€99"
   },
   {
     id: 17,
@@ -331,6 +394,10 @@ export const careers = [
     location: "Online",
     img: "/careers/animator.jpg",
     price: "€39",
+    enrolled: 1340,
+    rating: "4.6",
+    skills: ["3D Modeling", "Rigging", "Motion Graphics", "Character Design"],
+    originalPrice: "€79"
   },
   {
     id: 18,
@@ -339,6 +406,10 @@ export const careers = [
     location: "Remote",
     img: "/careers/journalist.jpg",
     price: "€39",
+    enrolled: 890,
+    rating: "4.5",
+    skills: ["Investigative Reporting", "Fact-Checking", "Interviewing", "AP Style"],
+    originalPrice: "€79"
   },
   {
     id: 19,
@@ -347,7 +418,11 @@ export const careers = [
     location: "Online",
     img: "/careers/ecommerce.jpg",
     price: "€49",
-  },
+    enrolled: 2870,
+    rating: "4.8",
+    skills: ["Shopify", "Digital Marketing", "Inventory Management", "Conversion Optimization"],
+    originalPrice: "€99"
+  }
 ];
 
 
