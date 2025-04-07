@@ -29,8 +29,9 @@ const PaymentPage = () => {
     setSuccess(true);
 
     setTimeout(() => {
-      router.push('/');
+      router.push('/tasks');
     }, 2000);
+    
   };
 
   return (

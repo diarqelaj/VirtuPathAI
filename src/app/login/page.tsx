@@ -8,10 +8,15 @@ import { EnvelopeIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/2
 import { Spotlight } from '@/components/ui/Spotlight';
 import { navItems } from "@/data";
 
-const mockCredentials = {
+type Credentials = {
+  [email: string]: { password: string; role: string };
+};
+
+const mockCredentials: Credentials = {
   'admin@example.com': { password: 'admin123', role: 'admin' },
   'user@example.com': { password: 'user123', role: 'user' },
 };
+
 
 const AuthPage = () => {
   const [email, setEmail] = useState('');

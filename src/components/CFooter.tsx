@@ -10,6 +10,23 @@ const Footer = () => {
         <img src="/footer-grid.svg" alt="grid" className="w-full h-full" />
       </div>
 
+      <div className="flex flex-col items-center text-center">
+        <h1 className="heading lg:max-w-[45vw]">
+          Empower Your Future 
+        </h1>
+        <p className="text-white-200 md:mt-10 my-5">
+          Start your journey in AI-powered professional training today.  
+          Gain skills, complete daily tasks, and unlock new career opportunities.
+        </p>
+        <a href="mailto:support@virtuweb.ai">
+          <MagicButton
+            title="Get Started Now"
+            icon={<FaRobot />}
+            position="right"
+          />
+        </a>
+      </div>
+
       <div className="flex mt-16 md:flex-row flex-col justify-between items-center w-full px-6">
         <p className="md:text-base text-sm md:font-normal font-light">
           Copyright © 2025 Virtu Path AI. All rights reserved.

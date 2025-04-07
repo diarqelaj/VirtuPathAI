@@ -5,7 +5,7 @@ import { navItems } from "@/data";
 import Hero from "@/components/Hero";
 import Grid from "@/components/Grid";
 import Clients from "../components/Clients";
-import Footer from "@/components/Footer";
+import CFooter from "@/components/CFooter";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import Approach from "@/components/Approach";
 
@@ -30,7 +30,7 @@ const Home = () => {
         <Approach />
         <Grid />
         <Clients />
-        <Footer />
+        <CFooter />
       </div>
     </main>
   );

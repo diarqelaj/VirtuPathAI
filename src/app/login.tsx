@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
 import { FloatingNav } from '@/components/ui/FloatingNavbar';
 
-const mockCredentials = {
+const mockCredentials: Record<string, { password: string; role: string }> = {
   'admin@example.com': { password: 'admin123', role: 'admin' },
   'user@example.com': { password: 'user123', role: 'user' },
 };
