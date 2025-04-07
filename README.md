@@ -42,7 +42,7 @@ Contributions are welcome! To contribute:
 4. Push your branch and create a pull request.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md)  file for details. 
 
 ## Contact
 For support or inquiries, reach out via diarqelaj15@gmail.com
