@@ -22,6 +22,7 @@ export const gridItems = [
     title: "Real-World Simulations & Assessments",
     description: "",
     className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
     imgClassName: "",
     titleClassName: "justify-start",
     img: "",
