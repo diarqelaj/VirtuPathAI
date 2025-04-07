@@ -10,10 +10,8 @@ import {
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { MenuIcon, XIcon } from "lucide-react";
+import { HiUserCircle } from "react-icons/hi";
 import { cn } from "@/lib/utils";
-
-const defaultAvatar =
-  "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
 
 export const FloatingNav = ({
   navItems,
@@ -31,12 +29,20 @@ export const FloatingNav = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
 
-  // Simulated logged-in user (replace with real user logic)
-  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "null") : null;
+  const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }, []);
+
 
   useEffect(() => {
     const checkMobile = () => {
@@ -64,7 +70,7 @@ export const FloatingNav = ({
       <motion.div
         initial={{ opacity: 1, y: -100 }}
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.0 }}
         className={cn(
           "flex items-center max-w-fit fixed z-[5000] top-4 right-4 md:top-10 md:inset-x-0 md:mx-auto",
           "px-4 py-2 md:px-10 md:py-5 rounded-lg border border-black/.1 shadow-lg",
@@ -93,22 +99,34 @@ export const FloatingNav = ({
             ))}
         </div>
 
-        {user ? (
-          <div className="relative ml-4">
-            <motion.img
-              whileTap={{ scale: 0.9 }}
-              src={user.avatar || defaultAvatar}
-              alt="Avatar"
-              className="w-10 h-10 rounded-full cursor-pointer border border-white/20"
-              onClick={() => setMenuOpen(!menuOpen)}
-            />
+        {!isMobile && (
+          <div className="relative ml-4 flex items-center space-x-2">
+            {user ? (
+              <div
+                className="cursor-pointer flex items-center space-x-1 text-white text-sm hover:text-neutral-300"
+                onClick={() => setMenuOpen(!menuOpen)}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+              >
+                <HiUserCircle size={36} className="text-purple-400" />
+                <span>{user.name || "User"}</span>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="text-sm text-neutral-100 hover:text-neutral-300 transition"
+              >
+                Log In
+              </Link>
+            )}
+
             <AnimatePresence>
-              {menuOpen && (
+              {menuOpen && user && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute right-0 mt-2 w-48 bg-[rgba(17,25,40,0.95)] rounded-lg shadow-lg border border-white/10"
+                  className="absolute left-25 mt-2 top-5 w-48 bg-[rgba(17,25,40,0.95)] rounded-lg shadow-lg border border-white/10"
                 >
                   <Link
                     href="/profile"
@@ -127,7 +145,7 @@ export const FloatingNav = ({
               )}
             </AnimatePresence>
           </div>
-        ) : null}
+        )}
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -157,6 +175,37 @@ export const FloatingNav = ({
                     setIsOpen={setIsOpen}
                   />
                 ))}
+
+              <div className="border-t border-white/10 pt-3">
+                {user ? (
+                  <>
+                    <Link
+                      href="/profile"
+                      className="block text-sm text-neutral-200 hover:text-neutral-100 p-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                      className="block w-full text-left text-sm text-red-400 hover:text-red-300 p-2"
+                    >
+                      Log out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="block text-sm text-neutral-100 hover:text-neutral-300 p-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Log In
+                  </Link>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
