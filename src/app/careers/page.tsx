@@ -42,11 +42,15 @@ const Page = () => {
 
     const handleEnrollment = () => {
       if (!isLoggedIn()) {
-        router.push('/login');
+        // Save course to localStorage before redirecting to login
+        localStorage.setItem("pendingEnrollment", JSON.stringify(selectedProgram));
+        router.push("/login");
       } else {
-        router.push('/payment');
+        localStorage.setItem("pendingEnrollment", JSON.stringify(selectedProgram));
+        router.push("/payment");
       }
     };
+    
 
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">

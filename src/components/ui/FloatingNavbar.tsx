@@ -9,8 +9,11 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const defaultAvatar =
+  "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
 
 export const FloatingNav = ({
   navItems,
@@ -27,12 +30,18 @@ export const FloatingNav = ({
   const [visible, setVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Simulated logged-in user (replace with real user logic)
+  const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "null") : null;
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -45,6 +54,11 @@ export const FloatingNav = ({
     }
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -52,7 +66,7 @@ export const FloatingNav = ({
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         className={cn(
-          "flex max-w-fit fixed z-[5000] top-4 right-4 md:top-10 md:inset-x-0 md:mx-auto",
+          "flex items-center max-w-fit fixed z-[5000] top-4 right-4 md:top-10 md:inset-x-0 md:mx-auto",
           "px-4 py-2 md:px-10 md:py-5 rounded-lg border border-black/.1 shadow-lg",
           className
         )}
@@ -72,11 +86,50 @@ export const FloatingNav = ({
         </button>
 
         <div className="hidden md:flex space-x-4">
-          {navItems.map((navItem, idx) => (
-            <NavLink key={idx} navItem={navItem} />
-          ))}
+          {navItems
+            .filter((item) => !(item.name === "Log In" && user))
+            .map((navItem, idx) => (
+              <NavLink key={idx} navItem={navItem} />
+            ))}
         </div>
 
+        {user ? (
+          <div className="relative ml-4">
+            <motion.img
+              whileTap={{ scale: 0.9 }}
+              src={user.avatar || defaultAvatar}
+              alt="Avatar"
+              className="w-10 h-10 rounded-full cursor-pointer border border-white/20"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 mt-2 w-48 bg-[rgba(17,25,40,0.95)] rounded-lg shadow-lg border border-white/10"
+                >
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-white hover:bg-white/10"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-white/10"
+                  >
+                    Log out
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ) : null}
+
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && isMobile && (
             <motion.div
@@ -94,14 +147,16 @@ export const FloatingNav = ({
               role="menu"
               aria-labelledby="mobile-menu"
             >
-              {navItems.map((navItem, idx) => (
-                <NavLink
-                  key={idx}
-                  navItem={navItem}
-                  mobile
-                  setIsOpen={setIsOpen}
-                />
-              ))}
+              {navItems
+                .filter((item) => !(item.name === "Log In" && user))
+                .map((navItem, idx) => (
+                  <NavLink
+                    key={idx}
+                    navItem={navItem}
+                    mobile
+                    setIsOpen={setIsOpen}
+                  />
+                ))}
             </motion.div>
           )}
         </AnimatePresence>
@@ -134,12 +189,9 @@ const NavLink = ({ navItem, mobile, setIsOpen }: NavLinkProps) => {
 
     if (isHash) {
       e.preventDefault();
-
       if (pathname !== "/") {
-        // Navigate to home with hash
         router.push(`/${navItem.link}`);
       } else {
-        // Already on home page
         const target = document.querySelector(navItem.link);
         if (target) {
           target.scrollIntoView({ behavior: "smooth", block: "start" });

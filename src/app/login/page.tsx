@@ -24,12 +24,20 @@ const AuthPage = () => {
 
   const handleSubmit = () => {
     setError('');
-    
+  
+    const pending = localStorage.getItem('pendingEnrollment');
+  
     if (isLogin) {
       const user = mockCredentials[email];
       if (user && user.password === password) {
         localStorage.setItem('user', JSON.stringify({ email, role: user.role }));
-        router.push(user.role === 'admin' ? '/admin' : '/');
+  
+        if (pending) {
+          localStorage.removeItem('pendingEnrollment'); // Clear it after redirect
+          router.push('/payment');
+        } else {
+          router.push(user.role === 'admin' ? '/admin' : '/');
+        }
       } else {
         setError('Invalid email or password');
       }
@@ -38,12 +46,21 @@ const AuthPage = () => {
         setError('Passwords do not match');
         return;
       }
-      // Mock signup logic
+  
+      // Simulate creating a user
       mockCredentials[email] = { password, role: 'user' };
       localStorage.setItem('user', JSON.stringify({ email, role: 'user' }));
-      router.push('/');
+  
+      if (pending) {
+        localStorage.removeItem('pendingEnrollment'); // Clear it here too
+        router.push('/payment');
+      } else {
+        router.push('/');
+      }
     }
   };
+  
+  
 
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
