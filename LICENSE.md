@@ -1,4 +1,4 @@
-# Custom License Agreement
+## Exclusive Rights License
 
 Copyright 2025 Dijar Qelaj at VirtuWeb Systems. All rights reserved.
 
