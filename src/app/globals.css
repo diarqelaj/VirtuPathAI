@@ -317,3 +317,35 @@ button:active {
     0
   );
 }
+
+.react-datepicker-dark {
+  background: #111113;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: white;
+}
+
+.react-datepicker-dark .react-datepicker__header {
+  background: #1f1f22;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.react-datepicker-dark .react-datepicker__day {
+  color: #e5e7eb;
+}
+
+.react-datepicker-dark .react-datepicker__day--selected {
+  background: #9333ea;
+  color: white;
+}
+
+.react-datepicker-dark .react-datepicker__day:hover {
+  background: #6b21a8;
+}
+
+.react-datepicker-dark .react-datepicker__current-month {
+  color: #e5e7eb;
+}
+
+.react-datepicker-dark .react-datepicker__day-name {
+  color: #9ca3af;
+}
