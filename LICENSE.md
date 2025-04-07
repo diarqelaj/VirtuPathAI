@@ -18,7 +18,7 @@ Any unauthorized use, duplication, distribution, or attempt to bypass these rest
 
 ## Contact Information
 
-For permissions or inquiries regarding use of this repository, please contact [Your Contact Information or Email].
+For permissions or inquiries regarding use of this repository, please contact diarqelaj15@gmail.com .
 
 ## No Warranty
 
