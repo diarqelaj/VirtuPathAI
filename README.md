@@ -1,6 +1,6 @@
-# VirtuWeb AI
+# VirtuPath AI
 
-VirtuWeb AI is an advanced web assistant designed to streamline professional tasks across multiple domains. It leverages cutting-edge AI models to assist users in various professions with intelligent automation, smart suggestions, and enhanced productivity features.
+VirtuPath AI is an advanced web assistant designed to streamline professional tasks across multiple domains. It leverages cutting-edge AI models to assist users in various professions with intelligent automation, smart suggestions, and enhanced productivity features.
 
 ## Features
 - **Multi-profession Support**: Tailored functionalities for different professional needs.
@@ -10,15 +10,15 @@ VirtuWeb AI is an advanced web assistant designed to streamline professional tas
 - **Secure & Scalable**: Built with robust security and scalability in mind.
 
 ## Installation
-To set up VirtuWeb AI on your local machine, follow these steps:
+To set up VirtuPath AI on your local machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/VirtuWeb-AI.git
+   git clone https://github.com/diarqelaj/VirtuPathAI.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd VirtuWeb-AI
+   cd VirtuPathAi
    ```
 3. Install dependencies:
    ```bash
