@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "./provider";
+import Chatbot from "@/components/chatbot"; // 👈 Import it
 import './globals.css';
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +18,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={inter.className}>
         <ThemeProvider
-          attribute="class" // Changed from data-theme to class
+          attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
           {children}
+          <Chatbot /> {/* 👈 Add this at the end */}
         </ThemeProvider>
       </body>
     </html>
