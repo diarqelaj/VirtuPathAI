@@ -196,7 +196,8 @@ export const FloatingNav = ({
                       Log out
                     </button>
                   </>
-                ) : (
+                ) : 
+                (
                   <Link
                     href="/login"
                     className="block text-sm text-neutral-100 hover:text-neutral-300 p-2"
