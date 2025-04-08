@@ -204,7 +204,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .arcStartLng((d) => (d as Position).startLng)
       .arcEndLat((d) => (d as Position).endLat)
       .arcEndLng((d) => (d as Position).endLng)
-      .arcColor((d) => (d as Position).color)
+      .arcColor(() => "#9370DB")
       .arcAltitude((d) => (d as Position).arcAlt || 0)
       .arcStroke(() => [0.32, 0.28, 0.3][Math.floor(Math.random() * 3)])
       .arcDashLength(defaultProps.arcLength)

@@ -5,9 +5,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "./MovingBorders";
 
+
 type Card = {
   id: number;
-  content: JSX.Element | React.ReactNode | string;
+  content: React.ReactNode;
   className: string;
   thumbnail: string;
 };
