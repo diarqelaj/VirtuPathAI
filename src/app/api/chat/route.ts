@@ -18,15 +18,16 @@ export async function POST(req: NextRequest) {
 
     // Use Deepseek R1 via OpenRouter for the model
     const response = await openai.chat.completions.create({
-      model: 'deepseek/deepseek-r1', // Update to Deepseek R1 model from OpenRouter
+      model: 'openai/gpt-4o', // 🔁 Switched from deepseek to ChatGPT-4o
       messages: [
-        { 
-          role: 'system', 
-          content: `You are a helpful assistant. Here is some context about the website: ${websiteContent}` 
+        {
+          role: 'system',
+          content: `You are a helpful assistant. Here is some context about the website: ${websiteContent}`,
         },
         ...messages.filter((msg: Message) => msg.role !== 'system'),
       ],
     });
+    
 
     const reply = response.choices[0]?.message?.content || 'No response';
 

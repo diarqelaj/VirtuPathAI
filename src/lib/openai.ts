@@ -1,10 +1,10 @@
-import OpenAI from 'openai'; 
+import OpenAI from 'openai';
 
 export const openai = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY,
-  baseURL: 'https://openrouter.ai/api/v1', // OpenRouter endpoint
+  baseURL: 'https://openrouter.ai/api/v1', // ✅ Required for OpenRouter
+  apiKey: process.env.OPENROUTER_API_KEY || '', // Set this in your `.env.local`
   defaultHeaders: {
-    'HTTP-Referer': 'http://localhost:3000', // your actual domain in production
-    'X-Title': 'my-nextjs-chat',
+    'HTTP-Referer': 'https://virtu-path-ai.vercel.app/', // 🔐 Optional but recommended
+    'X-Title': 'VirtuPath AI Chatbot',
   },
 });
