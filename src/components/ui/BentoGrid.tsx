@@ -115,9 +115,11 @@ export const BentoGridItem = ({
         </div>
         {id === 6 && (
           // add background animation , remove the p tag
-          <BackgroundGradientAnimation>
-            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-          </BackgroundGradientAnimation>
+         
+          <div className="absolute z-50 inset-0 flex items-start justify-start text-white font-bold px-4 pointer-events-none text-3xl md:text-4xl lg:text-7xl">
+         
+          </div>
+        
         )}
 
         <div
@@ -181,22 +183,15 @@ export const BentoGridItem = ({
                 className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"
                   }`}
               >
-                {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie
-                  animationData={animationData}
-                  loop={copied}
-                  autoplay={copied}
-                  className="w-[400px] h-[200px]"
-                />
-
+          
               </div>
 
               <MagicButton
                   title="Start Now"
                   icon={<FaRocket />} // Using a rocket icon for a launch effect
                   position="left"
-                  handleClick={() => window.location.href = "#about"} // Change to your actual sign-up section
-                  otherClasses="!bg-transparent" // Adjusting color to match the theme
+                  handleClick={() => window.location.href = "/careers"} // Change to your actual sign-up section
+                  
               />
 
             </div>

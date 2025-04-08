@@ -49,7 +49,7 @@ export const gridItems = [
     imgClassName: "",
     titleClassName: "justify-start",
     img: "/grid.svg",
-    spareImg: "/career-boost.svg",
+    spareImg: "/b4.svg",
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ export const gridItems = [
     className: "lg:col-span-2 md:col-span-3 md:row-span-1",
     imgClassName: "",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+    titleClassName: "justify-start md:max-w-full max-w-60 text-start",
     img: "",
     spareImg: "",
   },

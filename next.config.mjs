@@ -1,6 +1,8 @@
 export default {
-    eslint: {
-      ignoreDuringBuilds: true,
-    },
-  };
-  
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['fs', 'path']
+  }
+};
