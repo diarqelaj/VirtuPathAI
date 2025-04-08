@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { openai } from '@/lib/openai'; // ✅ This uses your existing setup for OpenRouter API
+import { openai } from '@/lib/openai';
 
-// Define the message type
 interface Message {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -12,25 +11,23 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const messages: Message[] = body.messages;
 
-    // Extract the system message and dynamically update it with website content
     const systemMessage = messages.find((msg: Message) => msg.role === 'system');
     const websiteContent = systemMessage?.content || '';
 
-    // Use Deepseek R1 via OpenRouter for the model
     const response = await openai.chat.completions.create({
-      model: 'openai/gpt-4o', // 🔁 Switched from deepseek to ChatGPT-4o
+      model: 'openrouter/quasar-alpha',
+
       messages: [
         {
           role: 'system',
-          content: `You are a helpful assistant. Here is some context about the website: ${websiteContent}`,
+          content: `You are a helpful assistant for VirtuPath AI. Here is some context about the website: ${websiteContent}`,
         },
         ...messages.filter((msg: Message) => msg.role !== 'system'),
       ],
+      max_tokens: 1000, // ✅ Avoid 402 errors by staying under credit limits
     });
-    
 
     const reply = response.choices[0]?.message?.content || 'No response';
-
     return NextResponse.json({ reply });
   } catch (error) {
     console.error('❌ Chat API error:', error);

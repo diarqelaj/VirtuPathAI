@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X, Bot } from 'lucide-react';
 
 export default function Chatbot() {
@@ -8,6 +8,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [loading, setLoading] = useState(false);
   const [websiteContent, setWebsiteContent] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchWebsiteContent = async () => {
@@ -26,6 +27,11 @@ export default function Chatbot() {
     fetchWebsiteContent();
   }, []);
 
+  useEffect(() => {
+    // Scroll to bottom when new messages are added
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   const toggleChat = () => setOpen(prev => !prev);
 
   const sendMessage = async () => {
@@ -36,15 +42,21 @@ export default function Chatbot() {
     setInput('');
     setLoading(true);
 
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: newMessages }),
-    });
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newMessages }),
+      });
 
-    const data = await res.json();
-    setMessages([...newMessages, { role: 'assistant', content: data.reply }]);
-    setLoading(false);
+      const data = await res.json();
+      setMessages([...newMessages, { role: 'assistant', content: data.reply || 'Something went wrong.' }]);
+    } catch (err) {
+      console.error('❌ Failed to get response from /api/chat:', err);
+      setMessages([...newMessages, { role: 'assistant', content: 'Sorry, something went wrong. Please try again.' }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,6 +97,7 @@ export default function Chatbot() {
                 </div>
               ))}
             {loading && <p className="text-gray-400 italic">Thinking...</p>}
+            <div ref={messagesEndRef} />
           </div>
 
           <div className="p-3 border-t border-purple-400 bg-white/5">
@@ -94,6 +107,7 @@ export default function Chatbot() {
                 onChange={e => setInput(e.target.value)}
                 className="flex-1 bg-transparent text-white placeholder-white/50 border border-white/20 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
                 placeholder="Type your question..."
+                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
               />
               <button
                 onClick={sendMessage}
@@ -108,4 +122,3 @@ export default function Chatbot() {
     </div>
   );
 }
-
