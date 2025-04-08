@@ -7,31 +7,37 @@ import { navItems } from "@/data";
 import { Spotlight } from "@/components/ui/Spotlight";
 
 const faqs = [
-  {
-    question: "Does VirtuPath have tools for complex learners?",
-    answer: "Yes, VirtuPath AI supports advanced goal setting, multi-track planning, and real-time personalization even for high-level learners and professionals.",
-  },
-  {
-    question: "How does buy now, pay later work?",
-    answer: "We partner with crypto providers and traditional gateways to offer flexible payment terms, allowing learners to start immediately and pay over time.",
-  },
-  {
-    question: "What are merchant services?",
-    answer: "For institutions or group plans, we support bulk licensing, API billing integration, and managed service dashboards.",
-  },
-  {
-    question: "How does VirtuPath compare to other platforms?",
-    answer: "Our AI engine delivers real-time personalized pathways, unlike static course platforms. We also support both fiat and crypto payments out of the box.",
-  },
-  {
-    question: "Does VirtuPath support professional upskilling?",
-    answer: "Absolutely. From coding to business strategy, our platform recommends resources tailored to real-world job roles.",
-  },
-  {
-    question: "What kind of resources does VirtuPath provide?",
-    answer: "Video content, interactive challenges, quizzes, AI tutors, and personalized notes all adapt to your progress over time.",
-  },
-];
+    {
+      question: "What is VirtuPath AI?",
+      answer:
+        "VirtuPath AI is a personalized AI-powered learning platform that adapts to your goals and helps you master skills efficiently with interactive guidance.",
+    },
+    {
+      question: "How does the AI personalization work?",
+      answer:
+        "Our AI tracks your learning behavior and progress, adjusting content difficulty and suggestions in real-time to ensure you're always moving forward.",
+    },
+    {
+      question: "What payment methods do you support?",
+      answer:
+        "We support major credit/debit cards, PayPal, and cryptocurrency payments including USDT (BEP20 and TRC20 networks).",
+    },
+    {
+      question: "Is my crypto payment secure?",
+      answer:
+        "Yes. Crypto transactions are processed through verified, secure gateways, and blockchain confirmations ensure integrity and safety.",
+    },
+    {
+      question: "Can I get a refund?",
+      answer:
+        "Refunds are available for non-consumed course packages within 7 days of purchase. Crypto payments are non-refundable due to blockchain finality.",
+    },
+    {
+      question: "Do I need any prior knowledge to get started?",
+      answer:
+        "Nope! VirtuPath AI offers beginner-friendly paths and personalized tutorials whether you're starting from scratch or leveling up.",
+    },
+  ];
 
 export default function FAQPage() {
   const [open, setOpen] = useState<number | null>(null);
