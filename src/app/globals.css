@@ -348,4 +348,13 @@ button:active {
 
 .react-datepicker-dark .react-datepicker__day-name {
   color: #9ca3af;
+} 
+.spotlight {
+  will-change: transform, opacity;
+}
+@media (max-width: 768px) {
+  .spotlight {
+    width: 40vw;  /* Adjust size for mobile devices */
+    height: 60vh;
+  }
 }

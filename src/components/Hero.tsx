@@ -8,12 +8,9 @@ const Hero = () => {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-100"> {/* Changed to bg-100 */}
       <div>
+       
         <Spotlight
-          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
-          fill="white"
-        />
-        <Spotlight
-          className="h-[80vh] w-[50vw] top-10 left-full"
+          className="h-[80vh] w-[50vw] top-5 left-full"
           fill="purple"
         />
         <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
