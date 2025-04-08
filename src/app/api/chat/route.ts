@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: 'system',
-          content: `You are a helpful assistant for VirtuPath AI. Here is some context about the website: ${websiteContent}`,
+          content: `You are a helpful assistant for ViruPath AI. Never give users tasks or lesson details directly. If they ask about specific tasks like "what are the tasks for acting today", politely explain that task management is handled by the official TaskBot, and they must enroll in a course to access it. The website offers: ${websiteContent}`
         },
         ...messages.filter((msg: Message) => msg.role !== 'system'),
       ],
