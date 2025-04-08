@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Footer from "@/components/Footer";
+import CFooter from "@/components/CFooter";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import { navItems } from "@/data";
 import { Spotlight } from "@/components/ui/Spotlight";
@@ -79,7 +79,7 @@ export default function FAQPage() {
         </div>
       </main>
 
-      <Footer />
+      <CFooter />
     </div>
   );
 }
