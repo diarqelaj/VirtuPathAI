@@ -39,6 +39,7 @@ const AuthPage = () => {
   
         if (foundUser) {
           localStorage.setItem('user', JSON.stringify(foundUser));
+          localStorage.setItem('userID', foundUser.userID.toString()); // ✅ FIXED: store userID
   
           if (pending) {
             localStorage.removeItem('pendingEnrollment');
@@ -62,13 +63,15 @@ const AuthPage = () => {
         const newUser = {
           fullName: name,
           email,
-          passwordHash: password, // You should hash this on backend ideally
+          passwordHash: password, // In production, hash this!
           registrationDate: new Date().toISOString(),
         };
   
         const response = await api.post('/Users', newUser);
   
-        localStorage.setItem('user', JSON.stringify(response.data));
+        const registeredUser = response.data;
+        localStorage.setItem('user', JSON.stringify(registeredUser));
+        localStorage.setItem('userID', registeredUser.userID.toString()); // ✅ FIXED: store userID
   
         if (pending) {
           localStorage.removeItem('pendingEnrollment');
@@ -81,6 +84,7 @@ const AuthPage = () => {
       }
     }
   };
+  
   
   
   

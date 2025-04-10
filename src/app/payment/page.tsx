@@ -16,22 +16,44 @@ const PaymentPage = () => {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     setError('');
     const validCards = ['4111 1111 1111 1111', '4242 4242 4242 4242'];
-
+  
     if (!validCards.includes(cardNumber.trim())) {
       setError('Invalid card number. Try a test card like 4111 1111 1111 1111');
       return;
     }
-
-    localStorage.removeItem('pendingEnrollment');
-    setSuccess(true);
-
-    setTimeout(() => {
-      router.push('/tasks');
-    }, 2000);
-    
+  
+    // Assume you stored the selected course in localStorage during the course selection step
+    const pending = JSON.parse(localStorage.getItem('pendingEnrollment') || '{}');
+    const { careerPathID, userID } = pending;
+  
+    try {
+      await fetch('/api/UserSubscriptions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userID,
+          careerPathID,
+          startDate: new Date().toISOString(),
+          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // example: 30-day access
+          lastAccessedDay: 0,
+        }),
+      });
+  
+      localStorage.removeItem('pendingEnrollment');
+      setSuccess(true);
+  
+      setTimeout(() => {
+        router.push('/tasks');
+      }, 2000);
+    } catch (err) {
+      console.error(err);
+      setError('Something went wrong while processing your subscription.');
+    }
   };
 
   return (
