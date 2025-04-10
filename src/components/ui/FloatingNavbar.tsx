@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { MenuIcon, XIcon } from "lucide-react";
 import { HiUserCircle } from "react-icons/hi";
 import { cn } from "@/lib/utils";
+import api from '@/lib/api';// <-- Axios instance with base URL
 
 export const FloatingNav = ({
   navItems,
@@ -30,19 +31,27 @@ export const FloatingNav = ({
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   const router = useRouter();
   const pathname = usePathname();
 
-  const [user, setUser] = useState<any>(null);
-
-    useEffect(() => {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          const { userID } = JSON.parse(storedUser);
+          const res = await api.get(`/Users/${userID}`);
+          setUser(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setUser(null);
       }
-    }, []);
-
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -109,7 +118,7 @@ export const FloatingNav = ({
                 onMouseLeave={() => setHovered(false)}
               >
                 <HiUserCircle size={36} className="text-purple-400" />
-                <span>{user.name || "User"}</span>
+                <span>{user.fullName || "User"}</span>
               </div>
             ) : (
               <Link
@@ -196,8 +205,7 @@ export const FloatingNav = ({
                       Log out
                     </button>
                   </>
-                ) : 
-                (
+                ) : (
                   <Link
                     href="/login"
                     className="block text-sm text-neutral-100 hover:text-neutral-300 p-2"

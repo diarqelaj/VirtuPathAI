@@ -7,15 +7,12 @@ import { useRouter } from 'next/navigation';
 import { EnvelopeIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { Spotlight } from '@/components/ui/Spotlight';
 import { navItems } from "@/data";
+import api from '@/lib/api';
 
 type Credentials = {
   [email: string]: { password: string; role: string };
 };
 
-const mockCredentials: Credentials = {
-  'admin@example.com': { password: 'admin123', role: 'admin' },
-  'user@example.com': { password: 'user123', role: 'user' },
-};
 
 
 const AuthPage = () => {
@@ -27,24 +24,33 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setError('');
-  
     const pending = localStorage.getItem('pendingEnrollment');
   
     if (isLogin) {
-      const user = mockCredentials[email];
-      if (user && user.password === password) {
-        localStorage.setItem('user', JSON.stringify({ email, role: user.role }));
+      try {
+        const response = await api.get('/Users');
+        const users = response.data;
   
-        if (pending) {
-          localStorage.removeItem('pendingEnrollment'); // Clear it after redirect
-          router.push('/payment');
+        const foundUser = users.find(
+          (user: any) => user.email === email && user.passwordHash === password
+        );
+  
+        if (foundUser) {
+          localStorage.setItem('user', JSON.stringify(foundUser));
+  
+          if (pending) {
+            localStorage.removeItem('pendingEnrollment');
+            router.push('/payment');
+          } else {
+            router.push('/');
+          }
         } else {
-          router.push(user.role === 'admin' ? '/admin' : '/');
+          setError('Invalid email or password');
         }
-      } else {
-        setError('Invalid email or password');
+      } catch (err) {
+        setError('Failed to fetch users');
       }
     } else {
       if (password !== confirmPassword) {
@@ -52,18 +58,30 @@ const AuthPage = () => {
         return;
       }
   
-      // Simulate creating a user
-      mockCredentials[email] = { password, role: 'user' };
-      localStorage.setItem('user', JSON.stringify({ email, role: 'user' }));
+      try {
+        const newUser = {
+          fullName: name,
+          email,
+          passwordHash: password, // You should hash this on backend ideally
+          registrationDate: new Date().toISOString(),
+        };
   
-      if (pending) {
-        localStorage.removeItem('pendingEnrollment'); // Clear it here too
-        router.push('/payment');
-      } else {
-        router.push('/');
+        const response = await api.post('/Users', newUser);
+  
+        localStorage.setItem('user', JSON.stringify(response.data));
+  
+        if (pending) {
+          localStorage.removeItem('pendingEnrollment');
+          router.push('/payment');
+        } else {
+          router.push('/');
+        }
+      } catch (err) {
+        setError('Registration failed. Email might already exist.');
       }
     }
   };
+  
   
   
 
