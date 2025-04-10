@@ -22,35 +22,32 @@ const TaskPage = () => {
     const fetchTasks = async () => {
       try {
         setLoading(true);
-
+  
         const userID = localStorage.getItem('userID');
         if (!userID || userID === '0') {
           setError('Invalid user ID. Please log in again.');
           return;
         }
-        
-        
-
-        // Optional debug
-        console.log('Fetching subscriptions for userID:', userID);
-
+  
         const subscriptionsRes = await api.get(`/UserSubscriptions?userID=${userID}`);
         const subscriptions = subscriptionsRes.data;
-
+  
         if (!subscriptions || subscriptions.length === 0) {
           setError('No active subscriptions found.');
           return;
         }
-
+  
         const { careerPathID } = subscriptions[0];
-
-        const tasksRes = await api.get(`/DailyTasks?careerPathID=${careerPathID}`);
+        const day = new Date().getDay(); // Gets day of the week (0 = Sunday, 1 = Monday...)
+  
+        // You can replace this with a custom value if needed
+        const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${day}`);
         const formattedTasks = tasksRes.data.map((task: any) => ({
           id: task.taskID,
           text: task.taskDescription,
           checked: false,
         }));
-
+  
         setTasks(formattedTasks);
       } catch (err) {
         console.error(err);
@@ -59,7 +56,7 @@ const TaskPage = () => {
         setLoading(false);
       }
     };
-
+  
     fetchTasks();
   }, []);
 
