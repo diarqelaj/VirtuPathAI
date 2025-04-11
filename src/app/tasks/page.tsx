@@ -13,8 +13,13 @@ type Task = {
   checked: boolean;
 };
 
+type CompletionMap = {
+  [taskID: number]: number; // taskID => completionID
+};
+
 const TaskPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [completionMap, setCompletionMap] = useState<CompletionMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -52,7 +57,13 @@ const TaskPage = () => {
           setError('No tasks found for this career path on this day.');
         } else {
           const completionsRes = await api.get(`/TaskCompletion?userID=${userID}`);
-          const completedTaskIDs = completionsRes.data.map((comp: any) => comp.taskID);
+          const completionData = completionsRes.data;
+
+          const completionMapTemp: CompletionMap = {};
+          const completedTaskIDs = completionData.map((comp: any) => {
+            completionMapTemp[comp.taskID] = comp.completionID;
+            return comp.taskID;
+          });
 
           const formattedTasks = tasksRes.data.map((task: any) => ({
             id: task.taskID,
@@ -61,6 +72,7 @@ const TaskPage = () => {
           }));
 
           setTasks(formattedTasks);
+          setCompletionMap(completionMapTemp);
         }
       } catch (err) {
         console.error('Error loading tasks:', err);
@@ -88,11 +100,33 @@ const TaskPage = () => {
     };
 
     try {
-      await api.post('/TaskCompletion', completionData);
-      console.log('Task completion recorded:', completionData);
+      const res = await api.post('/TaskCompletion', completionData);
+      console.log('Task completion recorded:', res.data);
+      setCompletionMap((prev) => ({ ...prev, [taskID]: res.data.completionID }));
     } catch (err) {
       console.error('Error recording task completion:', err);
       setError('Failed to record task completion.');
+    }
+  };
+
+  const deleteTaskCompletion = async (taskID: number) => {
+    const completionID = completionMap[taskID];
+    if (!completionID) {
+      console.warn('No completion ID found for task:', taskID);
+      return;
+    }
+
+    try {
+      await api.delete(`/TaskCompletion/${completionID}`);
+      console.log('Deleted completion:', completionID);
+      setCompletionMap((prev) => {
+        const newMap = { ...prev };
+        delete newMap[taskID];
+        return newMap;
+      });
+    } catch (err) {
+      console.error('Error deleting task completion:', err);
+      setError('Failed to delete task completion.');
     }
   };
 
@@ -102,11 +136,13 @@ const TaskPage = () => {
     t.checked = !t.checked;
     setTasks(updatedTasks);
 
-    if (t.checked) {
-      await recordTaskCompletion(t.id);
-    }
-
     try {
+      if (t.checked) {
+        await recordTaskCompletion(t.id);
+      } else {
+        await deleteTaskCompletion(t.id);
+      }
+
       const orig = await api.get(`/DailyTasks/${t.id}`);
       const fullTask = orig.data;
       fullTask.isCompleted = t.checked;
