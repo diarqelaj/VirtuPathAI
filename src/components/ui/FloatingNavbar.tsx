@@ -144,6 +144,20 @@ export const FloatingNav = ({
                   >
                     Profile
                   </Link>
+                  <Link
+                    href="/tasks"
+                    className="block px-4 py-2 text-sm text-white hover:bg-white/10"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    My Tasks
+                  </Link>
+                  <Link
+                    href="/progress"
+                    className="block px-4 py-2 text-sm text-white hover:bg-white/10"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    My Progress
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-white/10"
