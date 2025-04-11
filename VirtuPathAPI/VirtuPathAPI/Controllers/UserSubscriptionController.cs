@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VirtuPathAPI.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VirtuPathAPI.Controllers
 {
@@ -34,8 +35,10 @@ namespace VirtuPathAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<UserSubscription>> CreateUserSubscription(UserSubscription subscription)
         {
+            // Don't touch EndDate at all since it's a computed column
             _context.UserSubscriptions.Add(subscription);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetUserSubscription), new { id = subscription.SubscriptionID }, subscription);
         }
 
@@ -46,7 +49,22 @@ namespace VirtuPathAPI.Controllers
                 return BadRequest();
 
             _context.Entry(subscription).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+
+            // Don't allow EndDate to be modified
+            _context.Entry(subscription).Property(x => x.EndDate).IsModified = false;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.UserSubscriptions.Any(e => e.SubscriptionID == id))
+                    return NotFound();
+                else
+                    throw;
+            }
+
             return NoContent();
         }
 
@@ -59,6 +77,7 @@ namespace VirtuPathAPI.Controllers
 
             _context.UserSubscriptions.Remove(subscription);
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }

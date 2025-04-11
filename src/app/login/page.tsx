@@ -27,7 +27,7 @@ const AuthPage = () => {
   const handleSubmit = async () => {
     setError('');
     const pending = localStorage.getItem('pendingEnrollment');
-  
+    
     if (isLogin) {
       try {
         const response = await api.get('/Users');
@@ -42,7 +42,8 @@ const AuthPage = () => {
           localStorage.setItem('userID', foundUser.userID.toString()); // ✅ FIXED: store userID
   
           if (pending) {
-            localStorage.removeItem('pendingEnrollment');
+            // Ensure pending data is transferred to the next page
+            localStorage.setItem('pendingEnrollment', pending);
             router.push('/payment');
           } else {
             router.push('/');
@@ -74,7 +75,8 @@ const AuthPage = () => {
         localStorage.setItem('userID', registeredUser.userID.toString()); // ✅ FIXED: store userID
   
         if (pending) {
-          localStorage.removeItem('pendingEnrollment');
+          // Ensure pending data is transferred to the next page
+          localStorage.setItem('pendingEnrollment', pending);
           router.push('/payment');
         } else {
           router.push('/');
@@ -84,6 +86,7 @@ const AuthPage = () => {
       }
     }
   };
+  
   
   
   

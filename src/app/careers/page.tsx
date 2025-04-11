@@ -2,21 +2,14 @@
 
 import { Spotlight } from "@/components/ui/Spotlight";
 import { navItems } from "@/data";
-import Image from "next/image";
 import Footer from "@/components/Footer";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import {
-  GlobeAltIcon,
-  ClockIcon,
-  UserIcon,
-  StarIcon,
-  BookOpenIcon
-} from "@heroicons/react/24/outline";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import "../globals.css";
 import { useAuth } from "@/lib/useAuth";
 import { useRouter } from "next/navigation";
-import api from "@/lib/api"; // ✅ import the custom API client
+import api from "@/lib/api";
 
 interface Career {
   careerPathID: number;
@@ -25,15 +18,27 @@ interface Career {
   price: number;
 }
 
+interface User {
+  email: string;
+  role: string;
+  userID: number;
+}
+
 const Page = () => {
   const [careerPaths, setCareerPaths] = useState<Career[]>([]);
   const [selectedProgram, setSelectedProgram] = useState<Career | null>(null);
   const [showEnrollment, setShowEnrollment] = useState(false);
 
+  const auth = useAuth();
+  const user = auth.user as User | null; // ✅ Typecast for TS to recognize userID
+  const isLoggedIn = auth.isLoggedIn;
+
+  const router = useRouter();
+
   useEffect(() => {
     const fetchCareers = async () => {
       try {
-        const res = await api.get<Career[]>("CareerPaths"); // ✅ using custom api helper
+        const res = await api.get<Career[]>("CareerPaths");
         setCareerPaths(res.data);
       } catch (err) {
         console.error("Failed to fetch careers:", err);
@@ -43,21 +48,25 @@ const Page = () => {
     fetchCareers();
   }, []);
 
-  const EnrollmentTab = () => {
-    const { isLoggedIn } = useAuth();
-    const router = useRouter();
+  const handleEnrollment = () => {
+    if (!selectedProgram) return;
 
-    if (!selectedProgram) return null;
-
-    const handleEnrollment = () => {
-      if (!isLoggedIn()) {
-        localStorage.setItem("pendingEnrollment", JSON.stringify(selectedProgram));
-        router.push("/login");
-      } else {
-        localStorage.setItem("pendingEnrollment", JSON.stringify(selectedProgram));
-        router.push("/payment");
-      }
+    const pendingData = {
+      ...selectedProgram,
+      userID: user?.userID || null, // ✅ TS now knows userID exists
     };
+
+    localStorage.setItem("pendingEnrollment", JSON.stringify(pendingData));
+
+    if (!isLoggedIn()) {
+      router.push("/login");
+    } else {
+      router.push("/payment");
+    }
+  };
+
+  const EnrollmentTab = () => {
+    if (!selectedProgram) return null;
 
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">

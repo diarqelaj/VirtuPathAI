@@ -1,11 +1,13 @@
 "use client";
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
 import { FloatingNav } from '@/components/ui/FloatingNavbar';
 import { navItems } from '@/data';
 import { CreditCardIcon, CalendarIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Spotlight } from '@/components/ui/Spotlight';
+import api from '@/lib/api';
 
 const PaymentPage = () => {
   const [cardNumber, setCardNumber] = useState('');
@@ -14,42 +16,62 @@ const PaymentPage = () => {
   const [cardName, setCardName] = useState('');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [courseDetails, setCourseDetails] = useState({ name: '', price: 0, discount: 0 });
   const router = useRouter();
+
+  useEffect(() => {
+    const pending = JSON.parse(localStorage.getItem('pendingEnrollment') || '{}');
+    const { careerPathID } = pending;
+
+    const fetchCourseDetails = async (careerPathID: number) => {
+      try {
+        const res = await api.get(`/CareerPaths/${careerPathID}`);
+        const course = res.data;
+        setCourseDetails({
+          name: course.name,
+          price: course.price,
+          discount: course.discount || 0,
+        });
+      } catch (err) {
+        console.error("Failed to fetch course details", err);
+      }
+    };
+
+    if (careerPathID) {
+      fetchCourseDetails(careerPathID);
+    }
+  }, []);
 
   const handlePayment = async () => {
     setError('');
-    const validCards = ['4111 1111 1111 1111', '4242 4242 4242 4242'];
-  
-    if (!validCards.includes(cardNumber.trim())) {
+    const cleanCard = cardNumber.replace(/\s+/g, '');
+    const validCards = ['4111111111111111', '4242424242424242'];
+
+    if (!validCards.includes(cleanCard)) {
       setError('Invalid card number. Try a test card like 4111 1111 1111 1111');
       return;
     }
-  
-    // Assume you stored the selected course in localStorage during the course selection step
+
     const pending = JSON.parse(localStorage.getItem('pendingEnrollment') || '{}');
     const { careerPathID, userID } = pending;
-  
+
+    if (!careerPathID || !userID) {
+      setError('Missing enrollment data. Please log in again.');
+      return;
+    }
+
     try {
-      await fetch('/api/UserSubscriptions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userID,
-          careerPathID,
-          startDate: new Date().toISOString(),
-          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // example: 30-day access
-          lastAccessedDay: 0,
-        }),
+      await api.post(`UserSubscriptions?userID=${userID}`, {
+        userID,
+        careerPathID,
+        startDate: new Date().toISOString(),
+        lastAccessedDay: 0
+        // ⛔ DO NOT INCLUDE endDate — it's computed by the DB
       });
-  
+
       localStorage.removeItem('pendingEnrollment');
       setSuccess(true);
-  
-      setTimeout(() => {
-        router.push('/tasks');
-      }, 2000);
+      setTimeout(() => router.push('/tasks'), 2000);
     } catch (err) {
       console.error(err);
       setError('Something went wrong while processing your subscription.');
@@ -139,21 +161,21 @@ const PaymentPage = () => {
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-400">Web Development Course</span>
-                    <span className="font-medium">€49.00</span>
+                    <span className="text-gray-400">{courseDetails.name}</span>
+                    <span className="font-medium">€{courseDetails.price}</span>
                   </div>
 
                   <div className="flex justify-between items-center">
                     <span className="text-gray-400">Discount</span>
-                    <span className="text-green-400">-€10.00</span>
+                    <span className="text-green-400">-€{courseDetails.discount}</span>
                   </div>
 
                   <div className="pt-4 border-t border-gray-800/50">
                     <div className="flex justify-between items-center">
                       <span className="font-semibold">Total</span>
                       <div className="flex items-center gap-2">
-                        <span className="line-through text-gray-500">€59.00</span>
-                        <span className="text-xl font-bold text-purple-400">€49.00</span>
+                        <span className="line-through text-gray-500">€{courseDetails.price + courseDetails.discount}</span>
+                        <span className="text-xl font-bold text-purple-400">€{courseDetails.price - courseDetails.discount}</span>
                       </div>
                     </div>
                   </div>
