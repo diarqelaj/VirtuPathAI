@@ -91,14 +91,20 @@ const TaskPage = () => {
       setError('Invalid user ID. Please log in again.');
       return;
     }
-
+  
+    // ⛔ Prevent sending a duplicate request
+    if (completionMap[taskID]) {
+      console.warn(`Task ${taskID} already marked complete.`);
+      return;
+    }
+  
     const completionData = {
       completionID: 0,
       userID: parseInt(userID),
       taskID: taskID,
       completionDate: new Date().toISOString(),
     };
-
+  
     try {
       const res = await api.post('/TaskCompletion', completionData);
       console.log('Task completion recorded:', res.data);
@@ -108,7 +114,7 @@ const TaskPage = () => {
       setError('Failed to record task completion.');
     }
   };
-
+  
   const deleteTaskCompletion = async (taskID: number) => {
     const completionID = completionMap[taskID];
     if (!completionID) {

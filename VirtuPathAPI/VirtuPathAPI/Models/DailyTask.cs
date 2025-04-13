@@ -1,8 +1,9 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VirtuPathAPI.Models
 {
+    [Table("DailyTasks")]
     public class DailyTask
     {
         [Key]
@@ -17,4 +18,3 @@ namespace VirtuPathAPI.Models
         public int Day { get; set; }
     }
 }
-

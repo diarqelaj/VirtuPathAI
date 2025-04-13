@@ -5,20 +5,44 @@ namespace VirtuPathAPI.Models
 {
     public class TaskCompletionContext : DbContext
     {
-        public TaskCompletionContext(DbContextOptions<TaskCompletionContext> options) 
-            : base(options) 
-        { 
+        public TaskCompletionContext(DbContextOptions<TaskCompletionContext> options)
+            : base(options)
+        {
         }
 
         public DbSet<TaskCompletion> TaskCompletions { get; set; }
+        public DbSet<UserSubscription> UserSubscriptions { get; set; }
+        public DbSet<DailyTask> DailyTasks { get; set; }
+        public DbSet<PerformanceReview> PerformanceReviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Map the TaskCompletion entity to the actual table name in your database
+            // TaskCompletion
             modelBuilder.Entity<TaskCompletion>(entity =>
             {
-                entity.ToTable("TaskCompletion");      // <-- your existing table name
-                entity.HasKey(tc => tc.CompletionID);  // <-- define CompletionID as the PK
+                entity.ToTable("TaskCompletion");
+                entity.HasKey(tc => tc.CompletionID);
+            });
+
+            // UserSubscription
+            modelBuilder.Entity<UserSubscription>(entity =>
+            {
+                entity.ToTable("UserSubscriptions");
+                entity.HasKey(us => us.SubscriptionID); // Assuming SubscriptionID is the PK
+            });
+
+            // DailyTask
+            modelBuilder.Entity<DailyTask>(entity =>
+            {
+                entity.ToTable("DailyTasks");
+                entity.HasKey(dt => dt.TaskID);
+            });
+
+            // PerformanceReview
+            modelBuilder.Entity<PerformanceReview>(entity =>
+            {
+                entity.ToTable("PerformanceReviews");
+                entity.HasKey(pr => pr.ReviewID);
             });
 
             base.OnModelCreating(modelBuilder);

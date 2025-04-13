@@ -1,7 +1,11 @@
-﻿namespace VirtuPathAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VirtuPathAPI.Models
 {
+
     public class PerformanceReview
     {
+        [Key]
         public int ReviewID { get; set; }
         public int UserID { get; set; }
         public int CareerPathID { get; set; }
