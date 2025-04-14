@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSession, signIn } from 'next-auth/react';
 import Footer from '@/components/Footer';
 import { FloatingNav } from '@/components/ui/FloatingNavbar';
 import { useRouter } from 'next/navigation';
@@ -9,12 +10,6 @@ import { Spotlight } from '@/components/ui/Spotlight';
 import { navItems } from "@/data";
 import api from '@/lib/api';
 
-type Credentials = {
-  [email: string]: { password: string; role: string };
-};
-
-
-
 const AuthPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +17,48 @@ const AuthPage = () => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [isLogin, setIsLogin] = useState(true);
+  const { data: session } = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+    const handleGoogleAuth = async () => {
+      if (session?.user?.email) {
+        try {
+          const response = await api.get('/Users');
+          const users = response.data;
+
+          let foundUser = users.find((user: any) => user.email === session.user.email);
+
+          if (!foundUser) {
+            const newUser = {
+              fullName: session.user.name || '',
+              email: session.user.email,
+              passwordHash: '', // No password for Google users
+              registrationDate: new Date().toISOString(),
+            };
+
+            const createResponse = await api.post('/Users', newUser);
+            foundUser = createResponse.data;
+          }
+
+          localStorage.setItem('user', JSON.stringify(foundUser));
+          localStorage.setItem('userID', foundUser.userID.toString());
+
+          const pending = localStorage.getItem('pendingEnrollment');
+          if (pending) {
+            localStorage.setItem('pendingEnrollment', pending);
+            router.push('/payment');
+          } else {
+            router.push('/');
+          }
+        } catch (err) {
+          setError('Google authentication failed.');
+        }
+      }
+    };
+
+    handleGoogleAuth();
+  }, [session, router]);
 
   const handleSubmit = async () => {
     setError('');
@@ -86,11 +122,6 @@ const AuthPage = () => {
       }
     }
   };
-  
-  
-  
-  
-  
 
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
@@ -178,6 +209,13 @@ const AuthPage = () => {
                 <span className="flex-shrink mx-4 text-gray-500 text-sm">OR</span>
                 <div className="flex-grow border-t border-gray-800"></div>
               </div>
+
+              <button
+                onClick={() => signIn('google')}
+                className="w-full py-3.5 bg-gradient-to-r from-red-600 to-yellow-600 rounded-lg font-medium hover:from-red-700 hover:to-yellow-700 transition-all"
+              >
+                Sign in with Google
+              </button>
 
               <p className="text-center text-gray-400 text-sm">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}

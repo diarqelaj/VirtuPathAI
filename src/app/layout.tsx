@@ -1,7 +1,7 @@
+// app/layout.tsx
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "./provider";
-import Chatbot from "@/components/chatbot"; // 👈 Import it
 import './globals.css';
+import Providers from './providers';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,15 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/jsm-logo.png" sizes="any" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+        <Providers>
           {children}
-          <Chatbot /> {/* 👈 Add this at the end */}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
