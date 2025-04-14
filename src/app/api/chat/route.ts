@@ -14,9 +14,17 @@ export async function POST(req: NextRequest) {
     const systemMessage = messages.find((msg: Message) => msg.role === 'system');
     const websiteContent = systemMessage?.content || '';
 
-    const response = await openai.chat.completions.create({
-      model: 'openrouter/quasar-alpha',
+    const freeModels = [
+      'microsoft/phi-3-mini-128k-instruct',
+      'mistralai/mistral-7b-instruct',
+      'deepseek/deepseek-r1-distill-llama-70b',
+      'meta/llama-3.1-8b-instruct',
+      'openchat/openchat-8b'
+    ];
+    const selectedModel = freeModels[Math.floor(Math.random() * freeModels.length)];
 
+    const response = await openai.chat.completions.create({
+      model: selectedModel,
       messages: [
         {
           role: 'system',
@@ -24,7 +32,7 @@ export async function POST(req: NextRequest) {
         },
         ...messages.filter((msg: Message) => msg.role !== 'system'),
       ],
-      max_tokens: 1000, // ✅ Avoid 402 errors by staying under credit limits
+      max_tokens: 1000,
     });
 
     const reply = response.choices[0]?.message?.content || 'No response';

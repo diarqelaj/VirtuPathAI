@@ -5,7 +5,7 @@ export const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY || '',
   defaultHeaders: {
-    'HTTP-Referer': 'https://yourdomain.com/', // ✅ Replace with your actual domain
+    'HTTP-Referer': 'https://virtu-path-ai.vercel.app/',
     'X-Title': 'ViruPath AI Chatbot',
   },
 });
