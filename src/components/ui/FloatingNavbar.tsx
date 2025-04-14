@@ -12,7 +12,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { MenuIcon, XIcon } from "lucide-react";
 import { HiUserCircle } from "react-icons/hi";
 import { cn } from "@/lib/utils";
-import api from '@/lib/api';// <-- Axios instance with base URL
+import api from "@/lib/api";
+import { signOut } from "next-auth/react"; // ✅ Added
 
 export const FloatingNav = ({
   navItems,
@@ -69,9 +70,10 @@ export const FloatingNav = ({
     }
   });
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem("user");
-    router.push("/login");
+    localStorage.removeItem("userID");
+    await signOut({ callbackUrl: "/login" }); // ✅ Updated to sign out from next-auth
   };
 
   return (
@@ -170,7 +172,6 @@ export const FloatingNav = ({
           </div>
         )}
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && isMobile && (
             <motion.div
