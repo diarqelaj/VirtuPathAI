@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, Bot, Smile } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
+import ReactMarkdown from 'react-markdown';
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -46,13 +47,9 @@ export default function Chatbot() {
       if (!hasShownScrollNote && !open) {
         setShowScrollNote(true);
         setHasShownScrollNote(true);
-
-        setTimeout(() => {
-          setShowScrollNote(false);
-        }, 5000);
+        setTimeout(() => setShowScrollNote(false), 5000);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasShownScrollNote, open]);
@@ -75,7 +72,9 @@ export default function Chatbot() {
       });
 
       const data = await res.json();
-      setMessages([...newMessages, { role: 'assistant', content: data.reply || 'Something went wrong.' }]);
+      let reply = data.reply || '';
+
+      setMessages([...newMessages, { role: 'assistant', content: reply.trim() || '...' }]);
     } catch (err) {
       console.error('❌ Failed to get response from /api/chat:', err);
       setMessages([
@@ -102,11 +101,51 @@ export default function Chatbot() {
     if (open) {
       window.addEventListener('keydown', handleKeyDown);
     }
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [open]);
+
+  const renderContent = (content: string) => {
+    const parts = content.split(/(◁think▷[\s\S]*?◁\/think▷)/gi);
+
+    return parts.map((part, i) => {
+      if (part.startsWith('◁think▷')) {
+        const thought = part.replace('◁think▷', '').replace('◁/think▷', '').trim();
+        return (
+          <div key={i} className="text-white/50 text-xs italic mb-1 whitespace-pre-wrap">
+            {thought}
+          </div>
+        );
+      } else {
+        return (
+          <ReactMarkdown
+            key={i}
+            components={{
+              p: ({ children }) => (
+                <p className="whitespace-pre-wrap leading-relaxed">{children}</p>
+              ),
+              strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+              em: ({ children }) => <em className="italic">{children}</em>,
+              ul: ({ children }) => <ul className="list-disc ml-5">{children}</ul>,
+              li: ({ children }) => <li className="mb-1">{children}</li>,
+              a: ({ href, children }) => (
+                <a
+                  href={href || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 underline hover:text-blue-300"
+                >
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {part}
+          </ReactMarkdown>
+
+        );
+      }
+    });
+  };
 
   return (
     <>
@@ -145,13 +184,13 @@ export default function Chatbot() {
               .map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`px-4 py-3 rounded-2xl max-w-[85%] text-[0.95rem] whitespace-pre-wrap leading-relaxed ${
+                  className={`px-4 py-3 rounded-2xl max-w-[85%] text-[0.95rem] leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-gradient-to-br from-purple-600 to-blue-500 text-white self-end ml-auto'
                       : 'bg-[#1a1d33] text-white self-start mr-auto'
                   }`}
                 >
-                  <p>{msg.content}</p>
+                  {renderContent(msg.content)}
                 </div>
               ))}
 
