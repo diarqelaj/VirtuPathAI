@@ -24,6 +24,10 @@ export default function Chatbot() {
             role: 'system',
             content: `You are a helpful assistant. Here is some context about the website: ${data.content}`,
           },
+          {
+            role: 'assistant',
+            content: `👋 Hi there! I'm **VirtuPath AI**, your smart assistant.\n\nI can help you explore career paths, answer questions, and guide you through our platform.\n\nHow can I help you today?`,
+          },
         ]);
       } catch (error) {
         console.error('❌ Failed to fetch website content:', error);
@@ -32,11 +36,16 @@ export default function Chatbot() {
             role: 'system',
             content: 'I could not fetch the website content. Please try again later.',
           },
+          {
+            role: 'assistant',
+            content: `👋 Hi! I'm **VirtuPath AI**. Let me know how I can help you get started.`,
+          },
         ]);
       }
     };
     fetchWebsiteContent();
   }, []);
+  
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
