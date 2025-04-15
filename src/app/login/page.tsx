@@ -214,8 +214,9 @@ const AuthPage = () => {
                 onClick={() => signIn('google')}
                 className="w-full py-3.5 bg-gradient-to-r from-red-600 to-yellow-600 rounded-lg font-medium hover:from-red-700 hover:to-yellow-700 transition-all"
               >
-                Sign in with Google
+                {isLogin ? 'Sign in with Google' : 'Sign up with Google'}
               </button>
+
 
               <p className="text-center text-gray-400 text-sm">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
