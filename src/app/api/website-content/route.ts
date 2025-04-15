@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const websiteContent = `
-Welcome to ViruPath AI – your AI-powered career training hub.
+Welcome to VirtuPath AI – your AI-powered career training hub.
 
 ✅ Current Career Trainings (19 total):
 1. Software Developer – Full-stack web dev with real tools.

@@ -211,11 +211,34 @@ const AuthPage = () => {
               </div>
 
               <button
-                onClick={() => signIn('google')}
-                className="w-full py-3.5 bg-gradient-to-r from-red-600 to-yellow-600 rounded-lg font-medium hover:from-red-700 hover:to-yellow-700 transition-all"
-              >
-                {isLogin ? 'Sign in with Google' : 'Sign up with Google'}
-              </button>
+                  onClick={() => signIn('google')}
+                  className="w-full py-3.5 flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 533.5 544.3"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M533.5 278.4c0-17.4-1.4-34.1-4-50.3H272v95.1h146.9c-6.3 33.7-25 62.2-53.1 81.2v67.3h85.9c50.2-46.3 81.8-114.5 81.8-193.3z"
+                      fill="#4285F4"
+                    />
+                    <path
+                      d="M272 544.3c72.6 0 133.5-24.1 178-65.3l-85.9-67.3c-23.9 16-54.4 25.4-92.1 25.4-70.8 0-130.9-47.8-152.5-112.1H30.8v70.7c44.8 88.1 137.6 148.6 241.2 148.6z"
+                      fill="#34A853"
+                    />
+                    <path
+                      d="M119.5 324.9c-10.4-30.3-10.4-62.9 0-93.2v-70.7H30.8c-36.6 72.9-36.6 161 0 233.9l88.7-70z"
+                      fill="#FBBC05"
+                    />
+                    <path
+                      d="M272 107.7c39.5 0 75.1 13.6 103.1 40.2l77.1-77.1C405.5 25 344.6 0 272 0 168.4 0 75.6 60.5 30.8 148.6l88.7 70.7c21.6-64.3 81.7-111.6 152.5-111.6z"
+                      fill="#EA4335"
+                    />
+                  </svg>
+                  {isLogin ? 'Sign in with Google' : 'Sign up with Google'}
+                </button>
+
 
 
               <p className="text-center text-gray-400 text-sm">
