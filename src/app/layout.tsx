@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/jsm-logo.png" sizes="any" />
+        <link rel="preload" href="/footer-grid.svg" as="image" />
       </head>
       <body className={inter.className}>
         <Providers>
