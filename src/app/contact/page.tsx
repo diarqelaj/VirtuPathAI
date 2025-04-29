@@ -43,7 +43,7 @@ const ContactPage = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 Contact Us
               </h1>
-              <p className="mt-2 text-gray-400">We would love to hear from you!</p>
+              <p className="mt-2 text-gray-400">We would love to hear from you !</p>
             </div>
 
             {(error || success) && (
