@@ -1,10 +1,28 @@
 export const navItems = [
-  { name: "Home", link: "#hero" },
-  { name: "FAQ", link: "/FAQ" },
-  { name: "Courses", link: "/careers" },
-  { name: "Contact", link: "/contact" },
+  { name: "HOME", link: "#hero" },
+  { name: "HOW IT WORKS", link: "#approach" },
+  { name: "CAREER PATHS", link: "/careers" },
+  { name: "PRICING", link: "/contact" },
 
 ];
+export const footerLinks = {
+  company: [
+    { name: "About Us", link: "/about" },
+    { name: "Careers", link: "/careers" },
+    { name: "Blog", link: "/blog" },
+  ],
+  legal: [
+    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Terms of Service", link: "/terms-of-service" },
+    { name: "Cookie Policy", link: "/cookie-policy" },
+  ],
+  support: [
+    { name: "Contact", link: "/contact" },
+    { name: "Help Center", link: "/faq" },
+    { name: "Report a Bug", link: "/support" },
+  ],
+};
+
 
 export const gridItems = [
   {
@@ -212,7 +230,7 @@ export const careers = [
     enrolled: 2458,
     rating: "4.9",
     skills: ["JavaScript", "React", "Node.js", "AWS"],
-    originalPrice: "€99"
+    originalPrice: "€139.99"
   },
   {
     id: 2,
@@ -224,7 +242,7 @@ export const careers = [
     enrolled: 1890,
     rating: "4.7",
     skills: ["Video Editing", "Scriptwriting", "Social Media", "SEO"],
-    originalPrice: "€99"
+    originalPrice: "€99.99"
   },
   {
     id: 3,
@@ -236,7 +254,7 @@ export const careers = [
     enrolled: 1560,
     rating: "4.6",
     skills: ["Business Strategy", "Pitching", "Scaling", "Finance"],
-    originalPrice: "€119"
+    originalPrice: "€179.99"
   },
   {
     id: 4,
@@ -248,7 +266,7 @@ export const careers = [
     enrolled: 890,
     rating: "4.5",
     skills: ["Striking", "Grappling", "Fight Strategy", "Conditioning"],
-    originalPrice: "€139"
+    originalPrice: "€139.99"
   },
   {
     id: 5,
@@ -260,7 +278,7 @@ export const careers = [
     enrolled: 2100,
     rating: "4.8",
     skills: ["Knife Skills", "Plating", "Menu Design", "Food Safety"],
-    originalPrice: "€79"
+    originalPrice: "€109.98"
   },
   {
     id: 6,
@@ -272,7 +290,7 @@ export const careers = [
     enrolled: 3250,
     rating: "4.8",
     skills: ["Figma", "Illustrator", "Typography", "Branding"],
-    originalPrice: "€79"
+    originalPrice: "€129.97"
   },
   {
     id: 7,
@@ -284,7 +302,7 @@ export const careers = [
     enrolled: 1420,
     rating: "4.6",
     skills: ["Pattern Making", "Textiles", "Fashion Illustration", "Trend Analysis"],
-    originalPrice: "€79"
+    originalPrice: "€106.99"
   },
   {
     id: 8,
@@ -296,7 +314,7 @@ export const careers = [
     enrolled: 1765,
     rating: "4.7",
     skills: ["Tactical Analysis", "Fitness Training", "Team Strategy", "Nutrition"],
-    originalPrice: "€99"
+    originalPrice: "€159.99"
   },
   {
     id: 9,
@@ -308,7 +326,7 @@ export const careers = [
     enrolled: 2980,
     rating: "4.9",
     skills: ["Technical Analysis", "Risk Management", "Cryptocurrency", "Forex"],
-    originalPrice: "€99"
+    originalPrice: "€219.99"
   },
   {
     id: 11,
@@ -320,7 +338,7 @@ export const careers = [
     enrolled: 4120,
     rating: "4.9",
     skills: ["Python", "Machine Learning", "SQL", "Data Visualization"],
-    originalPrice: "€119"
+    originalPrice: "€159.99"
   },
   {
     id: 12,
@@ -332,7 +350,7 @@ export const careers = [
     enrolled: 980,
     rating: "4.5",
     skills: ["Method Acting", "Voice Modulation", "Improvisation", "Screen Presence"],
-    originalPrice: "€79"
+    originalPrice: "€179.99"
   },
   {
     id: 13,
@@ -344,7 +362,7 @@ export const careers = [
     enrolled: 2650,
     rating: "4.8",
     skills: ["Ethical Hacking", "Network Security", "Cryptography", "Incident Response"],
-    originalPrice: "€119"
+    originalPrice: "€179.99"
   },
   {
     id: 14,
@@ -356,7 +374,7 @@ export const careers = [
     enrolled: 1230,
     rating: "4.6",
     skills: ["Creative Writing", "Editing", "Publishing", "Worldbuilding"],
-    originalPrice: "€79"
+    originalPrice: "€79.99"
   },
   {
     id: 15,
@@ -368,7 +386,7 @@ export const careers = [
     enrolled: 3450,
     rating: "4.9",
     skills: ["Portfolio Management", "Market Analysis", "Venture Capital", "ROI Optimization"],
-    originalPrice: "€139"
+    originalPrice: "€189.99"
   },
   {
     id: 16,
@@ -380,7 +398,7 @@ export const careers = [
     enrolled: 1670,
     rating: "4.7",
     skills: ["Music Theory", "DAWs", "Sound Design", "Mixing/Mastering"],
-    originalPrice: "€79"
+    originalPrice: "€98.99"
   },
   {
     id: 17,
@@ -392,7 +410,7 @@ export const careers = [
     enrolled: 2310,
     rating: "4.8",
     skills: ["C#", "Unity", "3D Modeling", "Game Design"],
-    originalPrice: "€99"
+    originalPrice: "€149.99"
   },
   {
     id: 18,
@@ -404,7 +422,7 @@ export const careers = [
     enrolled: 1340,
     rating: "4.6",
     skills: ["3D Modeling", "Rigging", "Motion Graphics", "Character Design"],
-    originalPrice: "€79"
+    originalPrice: "€139.99"
   },
   {
     id: 19, 
@@ -416,7 +434,7 @@ export const careers = [
     enrolled: 890,
     rating: "4.5",
     skills: ["Investigative Reporting", "Fact-Checking", "Interviewing", "AP Style"],
-    originalPrice: "€79"
+    originalPrice: "€89.99"
   },
   {
     id: 20,
@@ -428,7 +446,7 @@ export const careers = [
     enrolled: 2870,
     rating: "4.8",
     skills: ["Shopify", "Digital Marketing", "Inventory Management", "Conversion Optimization"],
-    originalPrice: "€99"
+    originalPrice: "€119.99"
   }
 ];
 

@@ -1,38 +1,83 @@
-import { FaRobot } from "react-icons/fa6";
-import { socialMedia } from "@/data";
-import MagicButton from "./MagicButton";
+import { socialMedia, footerLinks } from "@/data";
 
 const Footer = () => {
   return (
     <footer
-      className="w-full min-h-[400px] pt-20 pb-10 bg-black-900 text-white relative overflow-hidden bg-[url('/footer-grid.svg')] bg-cover bg-center bg-no-repeat"
+      className="w-full mt-32 pt-20 pb-10 bg-black-900 text-white relative overflow-hidden"
       id="contact"
     >
-      {/* No need for extra <img> now */}
-      <div className="flex mt-16 md:flex-row flex-col justify-between items-center w-full px-6 relative z-10">
-        <p className="md:text-base text-sm md:font-normal font-light">
-          Copyright © 2025 Virtu Path AI. All rights reserved.
-        </p>
+      {/* Background grid */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50"
+        style={{ backgroundImage: "url('/footer-grid.svg')" }}
+      />
 
-        <div className="flex items-center md:gap-3 gap-6">
-          {socialMedia.map((info) => (
-            <a key={info.id} href={info.link} target="_blank" rel="noopener noreferrer">
-              <div className="w-10 h-10 cursor-pointer flex justify-center items-center bg-opacity-75 bg-gray-800 rounded-lg border border-gray-600">
+      {/* Footer Grid Section */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 px-6 md:px-20 relative z-10">
+        {/* Column: Company */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Company</h4>
+          <ul className="space-y-2 text-white/70 text-sm">
+            {footerLinks.company.map((item) => (
+              <li key={item.name}>
+                <a href={item.link} className="hover:text-white transition">
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Column: Legal */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Legal</h4>
+          <ul className="space-y-2 text-white/70 text-sm">
+            {footerLinks.legal.map((item) => (
+              <li key={item.name}>
+                <a href={item.link} className="hover:text-white transition">
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Column: Support */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Support</h4>
+          <ul className="space-y-2 text-white/70 text-sm">
+            {footerLinks.support.map((item) => (
+              <li key={item.name}>
+                <a href={item.link} className="hover:text-white transition">
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Column: Social Media */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Follow Us</h4>
+          <div className="flex space-x-4">
+            {socialMedia.map((info) => (
+              <a
+                key={info.id}
+                href={info.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex justify-center items-center bg-gray-800 rounded-md border border-gray-600 hover:bg-gray-700 transition"
+              >
                 <img src={info.img} alt={info.name} width={20} height={20} />
-              </div>
-            </a>
-          ))}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="mt-10 flex flex-col md:flex-row justify-center items-center text-center gap-4 text-sm text-white-200 relative z-10">
-        <a href="/about" className="hover:text-purple transition">About Us</a>
-        <span className="hidden md:inline">|</span>
-        <a href="/privacy-policy" className="hover:text-purple transition">Privacy Policy</a>
-        <span className="hidden md:inline">|</span>
-        <a href="/terms-of-service" className="hover:text-purple transition">Terms of Service</a>
-        <span className="hidden md:inline">|</span>
-        <a href="/contact" className="hover:text-purple transition">Contact</a>
+      {/* Footer Bottom */}
+      <div className="text-center text-white/40 text-sm border-t border-white/10 pt-6 mt-10 px-6 md:px-20 relative z-10">
+        © 2025 Virtu Path AI. All rights reserved.
       </div>
     </footer>
   );

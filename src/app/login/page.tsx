@@ -263,7 +263,7 @@ const AuthPage = () => {
     className="accent-purple-600"
   />
   <label htmlFor="rememberMe" className="text-sm text-gray-400">
-    Remember Me (1-month session)
+    Remember Me
   </label>
 </div>
 

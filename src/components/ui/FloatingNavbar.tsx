@@ -130,7 +130,7 @@ export const FloatingNav = ({
                 href="/login"
                 className="text-sm text-neutral-100 hover:text-neutral-300 transition"
               >
-                Log In
+                SIGN IN
               </Link>
             )}
 
