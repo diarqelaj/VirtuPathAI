@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 import { FloatingNav } from '@/components/ui/FloatingNavbar';
@@ -14,7 +14,7 @@ type Task = {
 };
 
 type CompletionMap = {
-  [taskID: number]: number; // taskID => completionID
+  [taskID: number]: number;
 };
 
 const TaskPage = () => {
@@ -28,9 +28,12 @@ const TaskPage = () => {
       try {
         setLoading(true);
 
-        const userID = localStorage.getItem('userID');
-        if (!userID || userID === '0') {
-          setError('Invalid user ID. Please log in again.');
+        let userID: number;
+        try {
+          const res = await api.get('/users/me');
+          userID = res.data.userID;
+        } catch {
+          setError('Session expired. Please log in again.');
           return;
         }
 
@@ -86,45 +89,33 @@ const TaskPage = () => {
   }, []);
 
   const recordTaskCompletion = async (taskID: number) => {
-    const userID = localStorage.getItem('userID');
-    if (!userID || userID === '0') {
-      setError('Invalid user ID. Please log in again.');
-      return;
-    }
-  
-    // ⛔ Prevent sending a duplicate request
-    if (completionMap[taskID]) {
-      console.warn(`Task ${taskID} already marked complete.`);
-      return;
-    }
-  
-    const completionData = {
-      completionID: 0,
-      userID: parseInt(userID),
-      taskID: taskID,
-      completionDate: new Date().toISOString(),
-    };
-  
+    if (completionMap[taskID]) return;
+
     try {
+      const resUser = await api.get('/users/me');
+      const userID = resUser.data.userID;
+
+      const completionData = {
+        completionID: 0,
+        userID,
+        taskID,
+        completionDate: new Date().toISOString(),
+      };
+
       const res = await api.post('/TaskCompletion', completionData);
-      console.log('Task completion recorded:', res.data);
       setCompletionMap((prev) => ({ ...prev, [taskID]: res.data.completionID }));
     } catch (err) {
       console.error('Error recording task completion:', err);
       setError('Failed to record task completion.');
     }
   };
-  
+
   const deleteTaskCompletion = async (taskID: number) => {
     const completionID = completionMap[taskID];
-    if (!completionID) {
-      console.warn('No completion ID found for task:', taskID);
-      return;
-    }
+    if (!completionID) return;
 
     try {
       await api.delete(`/TaskCompletion/${completionID}`);
-      console.log('Deleted completion:', completionID);
       setCompletionMap((prev) => {
         const newMap = { ...prev };
         delete newMap[taskID];
@@ -138,35 +129,34 @@ const TaskPage = () => {
 
   const toggleTask = async (index: number) => {
     const updatedTasks = [...tasks];
-    const t = updatedTasks[index];
-    t.checked = !t.checked;
+    const task = updatedTasks[index];
+    task.checked = !task.checked;
     setTasks(updatedTasks);
 
     try {
-      if (t.checked) {
-        await recordTaskCompletion(t.id);
+      if (task.checked) {
+        await recordTaskCompletion(task.id);
       } else {
-        await deleteTaskCompletion(t.id);
+        await deleteTaskCompletion(task.id);
       }
 
-      const orig = await api.get(`/DailyTasks/${t.id}`);
+      const orig = await api.get(`/DailyTasks/${task.id}`);
       const fullTask = orig.data;
-      fullTask.isCompleted = t.checked;
-      await api.put(`/DailyTasks/${t.id}`, fullTask);
+      fullTask.isCompleted = task.checked;
+      await api.put(`/DailyTasks/${task.id}`, fullTask);
     } catch (err) {
       console.error('Error updating task:', err);
       setError('Failed to update task status.');
     }
   };
 
-  const completedTasks = tasks.filter((task) => task.checked).length;
+  const completedTasks = tasks.filter((t) => t.checked).length;
   const totalTasks = tasks.length;
   const progress = totalTasks ? (completedTasks / totalTasks) * 100 : 0;
 
   return (
     <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
       <FloatingNav navItems={navItems} />
-
       <main className="flex-1 pt-40 px-6 md:px-12 max-w-4xl mx-auto">
         <div className="bg-black-100/80 border border-white/10 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
@@ -245,7 +235,6 @@ const TaskPage = () => {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );

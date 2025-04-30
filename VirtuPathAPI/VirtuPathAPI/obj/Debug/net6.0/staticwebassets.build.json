@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "cBgZWhpui2AY43GPSuaDQt/5a8rvpshzy7uUBGC/gpU=",
+  "Hash": "GX4Lngupe8iuNHn4+lX+1RtyOKyLlGhzfHJCOrFp1d0=",
   "Source": "VirtuPathAPI",
   "BasePath": "_content/VirtuPathAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

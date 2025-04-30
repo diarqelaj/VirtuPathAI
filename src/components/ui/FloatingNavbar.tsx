@@ -40,19 +40,17 @@ export const FloatingNav = ({
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-          const { userID } = JSON.parse(storedUser);
-          const res = await api.get(`/Users/${userID}`);
-          setUser(res.data);
-        }
+        const res = await api.get('/users/me');
+        setUser(res.data);
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error('User not logged in');
         setUser(null);
       }
     };
+  
     fetchUser();
   }, []);
+  
 
   useEffect(() => {
     const checkMobile = () => {
@@ -71,11 +69,16 @@ export const FloatingNav = ({
   });
 
   const handleLogout = async () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("userID");
-    await signOut({ callbackUrl: "/login" }); // ✅ Updated to sign out from next-auth
+    try {
+      await api.post('/users/logout'); // ✅ invalidate session on server
+    } catch (err) {
+      console.warn("Server logout failed (maybe session already expired)");
+    }
+  
+    await signOut({ redirect: false }); // in case you use NextAuth (Google)
+    router.push('/login'); // redirect manually
   };
-
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div

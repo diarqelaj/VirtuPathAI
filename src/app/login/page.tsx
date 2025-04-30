@@ -11,12 +11,14 @@ import api from "@/lib/api";
 import { auth } from "@/lib/firebase";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { navItems } from "@/data";
+
 declare global {
   interface Window {
     recaptchaVerifier?: RecaptchaVerifier;
     recaptchaWidgetId?: number;
   }
 }
+
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +29,7 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const { data: session } = useSession();
   const router = useRouter();
-
+  const [rememberMe, setRememberMe] = useState(false);
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmationResult, setConfirmationResult] = useState<any>(null);
@@ -49,19 +51,17 @@ const AuthPage = () => {
               passwordHash: "",
               registrationDate: new Date().toISOString(),
             };
-            const createResponse = await api.post("/Users", newUser);
-            foundUser = createResponse.data;
+            await api.post("/Users", newUser);
           }
 
-          localStorage.setItem("user", JSON.stringify(foundUser));
-          localStorage.setItem("userID", foundUser.userID.toString());
+          // Session login
+          await api.post("/Users/login", {
+            email: session.user.email,
+            password: "", // allow empty password login for Google accounts in backend
+          });
 
           const pending = localStorage.getItem("pendingEnrollment");
-          if (pending) {
-            router.push("/payment");
-          } else {
-            router.push("/");
-          }
+          router.push(pending ? "/payment" : "/");
         } catch {
           setError("Google authentication failed.");
         }
@@ -78,23 +78,19 @@ const AuthPage = () => {
 
     if (isLogin) {
       try {
-        const response = await api.get("/Users");
-        const users = response.data;
+        const response = await api.post("/Users/login", {
+          email,
+          password,
+          rememberMe
+        });
 
-        const foundUser = users.find(
-          (user: any) => user.email === email && user.passwordHash === password
-        );
-
-        if (foundUser) {
-          localStorage.setItem("user", JSON.stringify(foundUser));
-          localStorage.setItem("userID", foundUser.userID.toString());
-
-          pending ? router.push("/payment") : router.push("/");
+        if (response.status === 200) {
+          router.push(pending ? "/payment" : "/");
         } else {
           setError("Invalid email or password");
         }
       } catch {
-        setError("Failed to fetch users");
+        setError("Login failed. Please try again.");
       }
     } else {
       if (password !== confirmPassword) {
@@ -110,13 +106,14 @@ const AuthPage = () => {
           registrationDate: new Date().toISOString(),
         };
 
-        const response = await api.post("/Users", newUser);
-        const registeredUser = response.data;
+        await api.post("/Users", newUser);
 
-        localStorage.setItem("user", JSON.stringify(registeredUser));
-        localStorage.setItem("userID", registeredUser.userID.toString());
+        await api.post("/Users/login", {
+          email,
+          password,
+        });
 
-        pending ? router.push("/payment") : router.push("/");
+        router.push(pending ? "/payment" : "/");
       } catch {
         setError("Registration failed. Email might already exist.");
       }
@@ -125,21 +122,19 @@ const AuthPage = () => {
 
   const setupRecaptcha = () => {
     if (typeof window === "undefined" || window.recaptchaVerifier) return;
-  
+
     window.recaptchaVerifier = new RecaptchaVerifier(
       auth,
       "recaptcha-container",
       {
         size: "invisible",
-        callback: (response: any) => {
-          console.log("✅ reCAPTCHA solved:", response);
-        },
+        callback: () => {},
         "expired-callback": () => {
-          console.warn("reCAPTCHA expired, please try again.");
+          console.warn("reCAPTCHA expired.");
         },
       }
     );
-  
+
     window.recaptchaVerifier.render().then((widgetId: number) => {
       window.recaptchaWidgetId = widgetId;
     });
@@ -157,7 +152,6 @@ const AuthPage = () => {
       setError(err.message || "Failed to send OTP.");
     }
   };
-  
 
   const handleVerifyOTP = async () => {
     try {
@@ -175,16 +169,17 @@ const AuthPage = () => {
           passwordHash: "",
           registrationDate: new Date().toISOString(),
         };
-        const createResponse = await api.post("/Users", newUser);
-        foundUser = createResponse.data;
+        await api.post("/Users", newUser);
       }
 
-      localStorage.setItem("user", JSON.stringify(foundUser));
-      localStorage.setItem("userID", foundUser.userID.toString());
+      await api.post("/Users/login", {
+        email: `${phone}@virtupath.ai`,
+        password: "",
+      });
 
       setShowPhoneModal(false);
       const pending = localStorage.getItem("pendingEnrollment");
-      pending ? router.push("/payment") : router.push("/");
+      router.push(pending ? "/payment" : "/");
     } catch {
       setError("Invalid OTP");
     }
@@ -194,7 +189,6 @@ const AuthPage = () => {
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} />
       <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
-
       <main className="flex-1 pt-50 pb-12 px-4">
         <div className="max-w-md mx-auto">
           <div className="relative bg-gradient-to-br from-purple-500/10 to-blue-500/10 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-2xl">
@@ -260,6 +254,19 @@ const AuthPage = () => {
                   </div>
                 )}
               </div>
+              <div className="flex items-center space-x-2">
+  <input
+    type="checkbox"
+    checked={rememberMe}
+    onChange={(e) => setRememberMe(e.target.checked)}
+    id="rememberMe"
+    className="accent-purple-600"
+  />
+  <label htmlFor="rememberMe" className="text-sm text-gray-400">
+    Remember Me (1-month session)
+  </label>
+</div>
+
 
               <button onClick={handleSubmit} className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium">
                 {isLogin ? "Sign In" : "Sign Up"}

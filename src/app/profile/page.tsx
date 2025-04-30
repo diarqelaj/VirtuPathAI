@@ -24,24 +24,24 @@ const ProfilePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      if (!parsedUser.userID || parsedUser.userID === 0) {
+    const checkSession = async () => {
+      try {
+        const res = await api.get("/users/me");
+        const sessionUser = res.data;
+        setUser(sessionUser);
+        setFormData((prev) => ({
+          ...prev,
+          name: sessionUser.fullName || "",
+        }));
+      } catch {
+        alert("Session expired. Please log in again.");
         router.push("/login");
-        return;
       }
-
-      setUser(parsedUser);
-      setFormData((prev) => ({
-        ...prev,
-        name: parsedUser.fullName || "",
-      }));
-    } else {
-      router.push("/login");
-    }
+    };
+  
+    checkSession();
   }, [router]);
-
+  
   const handleUpdate = async () => {
     setError("");
 
