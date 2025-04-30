@@ -62,7 +62,7 @@ export default function PricingPage() {
       <FloatingNav navItems={navItems} />
 
       {/* MAIN CONTENT */}
-      <main className="relative z-10 pt-32 pb-24 px-6 md:px-20 flex-1">
+      <main className="relative z-10 pt-39 pb-24 px-6 md:px-20 flex-1">
 
         {/* Dot Background + Spotlight inside main only */}
         <div className="absolute inset-0 z-0 pointer-events-none">
