@@ -311,7 +311,7 @@ export const careers = [
     originalPrice: "€99"
   },
   {
-    id: 10,
+    id: 11,
     title: "Data Scientist",
     description: "Learn to analyze data, build models, and gain data-driven insights.",
     location: "Remote",
@@ -323,7 +323,7 @@ export const careers = [
     originalPrice: "€119"
   },
   {
-    id: 11,
+    id: 12,
     title: "Actor",
     description: "Hone your craft through virtual stage and film training modules.",
     location: "Remote",
@@ -335,7 +335,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 12,
+    id: 13,
     title: "Cybersecurity Specialist",
     description: "Protect systems and data through hands-on hacking simulations.",
     location: "Online",
@@ -347,7 +347,7 @@ export const careers = [
     originalPrice: "€119"
   },
   {
-    id: 13,
+    id: 14,
     title: "Author",
     description: "Unlock creative storytelling and learn how to publish effectively.",
     location: "Remote",
@@ -359,7 +359,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 14,
+    id: 15,
     title: "Investor",
     description: "Build wealth with courses on stock markets, crypto, and real estate.",
     location: "Remote",
@@ -371,7 +371,7 @@ export const careers = [
     originalPrice: "€139"
   },
   {
-    id: 15,
+    id: 16,
     title: "Musician",
     description: "Compose, produce, and mix tracks with digital and AI tools.",
     location: "Online",
@@ -383,7 +383,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 16,
+    id: 17,
     title: "Game Developer",
     description: "Design, code, and publish games using Unity and Unreal Engine.",
     location: "Remote",
@@ -395,7 +395,7 @@ export const careers = [
     originalPrice: "€99"
   },
   {
-    id: 17,
+    id: 18,
     title: "Animator",
     description: "Create engaging 2D/3D animations using Blender and After Effects.",
     location: "Online",
@@ -407,7 +407,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 18, 
+    id: 19, 
     title: "Journalist",
     description: "Report, investigate, and write with AI-assisted research and ethics.",
     location: "Remote",
@@ -419,7 +419,7 @@ export const careers = [
     originalPrice: "€79"
   },
   {
-    id: 19,
+    id: 20,
     title: "E-commerce Specialist",
     description: "Build and manage online stores using Shopify, SEO, and marketing tools.",
     location: "Online",
@@ -431,6 +431,7 @@ export const careers = [
     originalPrice: "€99"
   }
 ];
+
 
 
 export const socialMedia = [
