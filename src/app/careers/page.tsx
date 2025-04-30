@@ -96,7 +96,7 @@ const Page = () => {
   );
 
   return (
-    <div className="relative bg-[#0a0a15] text-white flex flex-col min-h-screen">
+    <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} />
       <div className="pt-20 px-4 md:px-6 flex-grow">
         <div className="top-25 relative z-10 text-center max-w-6xl mx-auto px-4 md:px-6 flex-grow">

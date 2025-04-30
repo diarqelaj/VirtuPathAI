@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/jsm-logo.png" sizes="any" />
+        <link rel="icon" href="/virtupathai-favicon.png" sizes="any" />
         <link rel="preload" href="/footer-grid.svg" as="image" />
       </head>
       <body className={inter.className}>
