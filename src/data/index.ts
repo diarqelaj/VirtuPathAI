@@ -2,7 +2,7 @@ export const navItems = [
   { name: "HOME", link: "#hero" },
   { name: "HOW IT WORKS", link: "#approach" },
   { name: "CAREER PATHS", link: "/careers" },
-  { name: "PRICING", link: "/contact" },
+  { name: "PRICING", link: "/pricing" },
 
 ];
 export const footerLinks = {
@@ -15,11 +15,12 @@ export const footerLinks = {
     { name: "Privacy Policy", link: "/privacy-policy" },
     { name: "Terms of Service", link: "/terms-of-service" },
     { name: "Cookie Policy", link: "/cookie-policy" },
+    { name: "Refund Policy", link: "/refund-policy" },
   ],
   support: [
     { name: "Contact", link: "/contact" },
-    { name: "Help Center", link: "/faq" },
-    { name: "Report a Bug", link: "/support" },
+    { name: "Help Center", link: "/FAQ" },
+    { name: "Report a Bug", link: "/report-a-bug" },
   ],
 };
 
