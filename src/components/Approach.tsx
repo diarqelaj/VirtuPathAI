@@ -15,7 +15,7 @@ interface AceternityIconProps {
 
 const Approach = () => {
   return (
-    <section className="w-full py-20">
+    <section id="approach" className="w-full py-20">
       <h1 className="heading">
         How it <span className="text-purple">works</span>
       </h1>
