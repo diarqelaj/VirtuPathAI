@@ -473,3 +473,20 @@ export const socialMedia = [
     link: "https://linkedin.com",
   },
 ];
+export const services = [
+  {
+    title: "Brand Identity",
+    projects: "145",
+    icon: "/icons/fountain-pen.svg",
+  },
+  {
+    title: "Insights and Strategy",
+    projects: "214",
+    icon: "/icons/chess-knight.svg",
+  },
+  {
+    title: "Experience Design",
+    projects: "85",
+    icon: "/icons/brain.svg",
+  },
+];
