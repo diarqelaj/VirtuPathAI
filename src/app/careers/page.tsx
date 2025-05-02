@@ -148,12 +148,28 @@ const Page = () => {
               </div>
 
               <button
-                onClick={() => router.push(`/payment?careerId=${career.careerPathID}`)}
+                onClick={async () => {
+                  try {
+                    const userRes = await api.get("/users/me");
+                    localStorage.setItem(
+                      "pendingEnrollment",
+                      JSON.stringify({
+                        careerPathID: career.careerPathID,
+                        userID: userRes.data.userID,
+                      })
+                    );
+                    router.push(`/payment`);
+                  } catch (err) {
+                    console.error("User not logged in.");
+                    router.push("/login");
+                  }
+                }}
                 className="bg-purple-600 hover:bg-purple-700 px-4 py-2 text-sm font-medium rounded-lg text-white flex items-center gap-2"
               >
                 <BookOpenIcon className="w-4 h-4" />
                 Enroll
               </button>
+
             </div>
           </div>
         </div>
