@@ -24,11 +24,12 @@
       "@/*": ["./src/*"]
     },
     "typeRoots": [
-      "node_modules/@types",
-      "node_modules/next/types",
-      "./types,", "./node_modules/@types"
+    "node_modules/@types",
+    "node_modules/next/types",
+    "./types",
+    "./node_modules/@types"
+]
 
-    ]
   },
   "include": [
     "next-env.d.ts",

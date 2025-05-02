@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VirtuPathAPI.Models;
+using BCrypt.Net;
 
 namespace VirtuPathAPI.Controllers
 {
@@ -31,22 +32,27 @@ namespace VirtuPathAPI.Controllers
             return user;
         }
 
-        // ✅ POST /api/users — create new user
+        // ✅ POST /api/users — Register new user with hashed password
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
+            // Hash the password before saving
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, user);
         }
 
-        // ✅ PUT user
+        // ✅ PUT /api/users/{id} — Update existing user
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, User user)
         {
             if (id != user.UserID) return BadRequest();
+
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
 
@@ -56,24 +62,27 @@ namespace VirtuPathAPI.Controllers
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return NotFound();
+
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        // ✅ POST /api/users/login — Login with session
+        // ✅ POST /api/users/login — Login with password verification
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
-            var user = await _context.Users
-                         .FirstOrDefaultAsync(u => u.Email == req.Email &&
-                                                   u.PasswordHash == req.Password);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
             if (user == null) return Unauthorized();
 
-            // start 1-minute session
+            // Compare input password with hashed password
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
+            if (!isPasswordValid) return Unauthorized();
+
+            // Start 1-minute session
             HttpContext.Session.SetInt32("UserID", user.UserID);
 
-            // if remember-me → add 1-month cookie holding the user id
+            // If remember-me → set long-lived cookie
             if (req.RememberMe)
             {
                 Response.Cookies.Append(
@@ -95,10 +104,9 @@ namespace VirtuPathAPI.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            Response.Cookies.Delete("VirtuPathRemember");   // ← kill long cookie
+            Response.Cookies.Delete("VirtuPathRemember");
             return Ok();
         }
-
 
         // ✅ GET /api/users/me — Get current session user
         [HttpGet("me")]
@@ -114,12 +122,10 @@ namespace VirtuPathAPI.Controllers
         }
     }
 
-    // ✅ Helper class for login request
     public class LoginRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
-
 }

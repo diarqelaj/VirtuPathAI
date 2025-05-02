@@ -35,13 +35,38 @@ const AuthPage = () => {
   const [confirmationResult, setConfirmationResult] = useState<any>(null);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
 
+  // 🔹 Password Reset
+  const [resetModal, setResetModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+
+  const handleResetPassword = async () => {
+    setError("");
+    try {
+      const res = await fetch("/api/send-reset", {
+        method: "POST",
+        body: JSON.stringify({ email: resetEmail }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess("Password reset email sent!");
+        setResetModal(false);
+        setResetEmail("");
+      } else {
+        setError(data.error || "Failed to send reset email.");
+      }
+    } catch {
+      setError("Error sending reset email.");
+    }
+  };
+
   useEffect(() => {
     const handleGoogleAuth = async () => {
       if (session?.user?.email) {
         try {
           const response = await api.get("/Users");
           const users = response.data;
-
           let foundUser = users.find((user: any) => user.email === session.user.email);
 
           if (!foundUser) {
@@ -54,10 +79,9 @@ const AuthPage = () => {
             await api.post("/Users", newUser);
           }
 
-          // Session login
           await api.post("/Users/login", {
             email: session.user.email,
-            password: "", // allow empty password login for Google accounts in backend
+            password: "",
           });
 
           const pending = localStorage.getItem("pendingEnrollment");
@@ -107,12 +131,7 @@ const AuthPage = () => {
         };
 
         await api.post("/Users", newUser);
-
-        await api.post("/Users/login", {
-          email,
-          password,
-        });
-
+        await api.post("/Users/login", { email, password });
         router.push(pending ? "/payment" : "/");
       } catch {
         setError("Registration failed. Email might already exist.");
@@ -129,9 +148,7 @@ const AuthPage = () => {
       {
         size: "invisible",
         callback: () => {},
-        "expired-callback": () => {
-          console.warn("reCAPTCHA expired.");
-        },
+        "expired-callback": () => console.warn("reCAPTCHA expired."),
       }
     );
 
@@ -148,7 +165,6 @@ const AuthPage = () => {
       setConfirmationResult(confirmation);
       setSuccess("OTP sent! Check your phone.");
     } catch (err: any) {
-      console.error("📲 Firebase Phone Auth Error:", err);
       setError(err.message || "Failed to send OTP.");
     }
   };
@@ -241,6 +257,13 @@ const AuthPage = () => {
                     className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800"
                   />
                 </div>
+                {isLogin && (
+                  <div className="text-right text-sm">
+                    <button onClick={() => setResetModal(true)} className="text-purple-400 hover:underline">
+                      Forgot password?
+                    </button>
+                  </div>
+                )}
                 {!isLogin && (
                   <div className="group relative">
                     <LockClosedIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -254,24 +277,23 @@ const AuthPage = () => {
                   </div>
                 )}
               </div>
-              <div className="flex items-center space-x-2">
-  <input
-    type="checkbox"
-    checked={rememberMe}
-    onChange={(e) => setRememberMe(e.target.checked)}
-    id="rememberMe"
-    className="accent-purple-600"
-  />
-  <label htmlFor="rememberMe" className="text-sm text-gray-400">
-    Remember Me
-  </label>
-</div>
 
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  id="rememberMe"
+                  className="accent-purple-600"
+                />
+                <label htmlFor="rememberMe" className="text-sm text-gray-400">Remember Me</label>
+              </div>
 
               <button onClick={handleSubmit} className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium">
                 {isLogin ? "Sign In" : "Sign Up"}
               </button>
 
+              {/* Socials */}
               <div className="relative flex items-center py-4">
                 <div className="flex-grow border-t border-gray-800"></div>
                 <span className="flex-shrink mx-4 text-gray-500 text-sm">OR</span>
@@ -279,12 +301,14 @@ const AuthPage = () => {
               </div>
 
               <button onClick={() => signIn("google")} className="w-full py-3.5 flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium">
+                {/* Google Icon */}
                 <svg className="w-5 h-5" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg">
                   <path fill="#4285F4" d="M533.5 278.4c0-17.4-1.4-34.1-4-50.3H272v95.1h146.9c-6.3 33.7-25 62.2-53.1 81.2v67.3h85.9c50.2-46.3 81.8-114.5 81.8-193.3z" />
                   <path fill="#34A853" d="M272 544.3c72.6 0 133.5-24.1 178-65.3l-85.9-67.3c-23.9 16-54.4 25.4-92.1 25.4-70.8 0-130.9-47.8-152.5-112.1H30.8v70.7c44.8 88.1 137.6 148.6 241.2 148.6z" />
                   <path fill="#FBBC05" d="M119.5 324.9c-10.4-30.3-10.4-62.9 0-93.2v-70.7H30.8c-36.6 72.9-36.6 161 0 233.9l88.7-70z" />
                   <path fill="#EA4335" d="M272 107.7c39.5 0 75.1 13.6 103.1 40.2l77.1-77.1C405.5 25 344.6 0 272 0 168.4 0 75.6 60.5 30.8 148.6l88.7 70.7c21.6-64.3 81.7-111.6 152.5-111.6z" />
                 </svg>
+
                 {isLogin ? "Sign in with Google" : "Sign up with Google"}
               </button>
 
@@ -304,6 +328,7 @@ const AuthPage = () => {
         </div>
       </main>
 
+      {/* Phone Modal */}
       {showPhoneModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
           <div className="bg-black border border-white/10 rounded-xl p-6 w-full max-w-md shadow-xl">
@@ -336,6 +361,29 @@ const AuthPage = () => {
             <button onClick={() => setShowPhoneModal(false)} className="mt-4 text-sm text-gray-400 hover:underline text-center w-full">
               Cancel
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Reset Password Modal */}
+      {resetModal && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
+          <div className="bg-[#111827] border border-white/10 p-6 rounded-xl shadow-xl w-full max-w-md">
+            <h2 className="text-xl font-semibold text-white mb-4">Reset Password</h2>
+            <p className="text-sm text-gray-400 mb-4">We’ll send reset instructions to your email.</p>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={resetEmail}
+              onChange={(e) => setResetEmail(e.target.value)}
+              className="w-full px-4 py-3 mb-4 rounded-lg bg-black/30 border border-gray-800 text-white"
+            />
+            <div className="flex justify-end gap-2">
+              <button onClick={() => setResetModal(false)} className="text-sm text-gray-400 hover:underline">Cancel</button>
+              <button onClick={handleResetPassword} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                Send Reset Link
+              </button>
+            </div>
           </div>
         </div>
       )}
