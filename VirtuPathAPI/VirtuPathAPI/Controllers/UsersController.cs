@@ -67,6 +67,26 @@ namespace VirtuPathAPI.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpPatch("2fa")]
+        public async Task<IActionResult> SetTwoFactorCode([FromBody] TwoFactorRequest req)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
+            if (user == null) return NotFound();
+
+            user.TwoFactorCode = req.Code;
+            user.TwoFactorCodeExpiresAt = req.ExpiresAt;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { success = true });
+        }
+
+        public class TwoFactorRequest
+        {
+            public string Email { get; set; }
+            public string Code { get; set; }
+            public DateTime ExpiresAt { get; set; }
+        }
 
         // ✅ POST /api/users/login — Login with password verification
         [HttpPost("login")]
