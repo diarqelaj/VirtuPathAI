@@ -17,6 +17,8 @@ builder.Services.AddDbContext<UserSubscriptionContext>(opt => opt.UseSqlServer(c
 builder.Services.AddDbContext<TaskCompletionContext>(opt => opt.UseSqlServer(cs));
 builder.Services.AddDbContext<PerformanceReviewContext>(opt => opt.UseSqlServer(cs));
 builder.Services.AddDbContext<CareerPathContext>(opt => opt.UseSqlServer(cs));
+builder.Services.AddDbContext<BugReportContext>(opt => opt.UseSqlServer(cs));
+builder.Services.AddDbContext<BugReportContext>(opt => opt.UseSqlServer(cs)); //
 
 //------------------------------------------------------------
 // 2)  CORS  (only allow the React/Next front-end)

@@ -2,7 +2,7 @@
 
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import { Spotlight } from "@/components/ui/Spotlight";
-import CFooter from "@/components/CFooter";
+import Footer from "@/components/Footer";
 import { navItems } from "@/data";
 
 export default function RefundPolicyPage() {
@@ -51,7 +51,7 @@ export default function RefundPolicyPage() {
         </div>
       </main>
 
-      <CFooter />
+      <Footer />
     </div>
   );
 }
