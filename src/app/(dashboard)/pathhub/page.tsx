@@ -6,6 +6,9 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import api from "@/lib/api";
 
+const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
+const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
+
 export default function VirtuPathDashboard() {
   const [user, setUser] = useState<any>(null);
   const [completionCount, setCompletionCount] = useState(0);
@@ -46,10 +49,21 @@ export default function VirtuPathDashboard() {
     <main className="px-6 md:px-10 py-10 w-full">
       {/* Welcome Card */}
       <div className="bg-white/5 p-6 rounded-2xl flex items-center gap-6 mb-10">
-        {user?.profileImage ? (
-          <Image src={user.profileImage} alt="User" width={72} height={72} className="rounded-full" />
+        {user ? (
+          <Image
+            src={
+              user.profilePictureUrl
+                ? `${API_HOST}${user.profilePictureUrl}`
+                : defaultAvatar
+            }
+            alt="User Avatar"
+            width={80}
+            height={80}
+            unoptimized
+            className="rounded-full object-cover ring-2 ring-purple-600 shadow-md hover:scale-105 transition-transform duration-200"
+          />
         ) : (
-          <HiUserCircle size={72} className="text-purple-400" />
+          <HiUserCircle size={80} className="text-purple-400" />
         )}
         <div>
           <h1 className="text-4xl font-bold mb-1">
@@ -114,7 +128,10 @@ export default function VirtuPathDashboard() {
           <div className="h-40 bg-black-100 rounded-xl flex items-end gap-2 p-3">
             {[40, 60, 50, 70, 90, 100, 80].map((val, i) => (
               <div key={i} className="flex flex-col items-center justify-end w-full">
-                <div className="w-2 bg-purple-400 rounded-full transition-all" style={{ height: `${val}%` }} />
+                <div
+                  className="w-2 bg-purple-400 rounded-full transition-all"
+                  style={{ height: `${val}%` }}
+                />
                 <p className="text-xs text-white/40 mt-1">{"SMTWTFS"[i]}</p>
               </div>
             ))}
@@ -127,7 +144,10 @@ export default function VirtuPathDashboard() {
           <div className="h-40 bg-black-100 rounded-xl flex items-end gap-2 p-3">
             {[1, 3, 5, 6, 8, 10, 7].map((val, i) => (
               <div key={i} className="flex flex-col items-center justify-end w-full">
-                <div className="w-2 bg-purple-300 rounded-full transition-all" style={{ height: `${val * 10}%` }} />
+                <div
+                  className="w-2 bg-purple-300 rounded-full transition-all"
+                  style={{ height: `${val * 10}%` }}
+                />
                 <p className="text-xs text-white/40 mt-1">{"SMTWTFS"[i]}</p>
               </div>
             ))}

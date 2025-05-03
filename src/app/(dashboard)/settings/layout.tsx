@@ -15,7 +15,8 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const pathname = usePathname();
 
   return (
-    <div className="w-full px-6 py-8">
+    <div className="w-full px-2 sm:px-4 md:px-6 py-8">
+
       {/* Nav Tabs */}
       <nav className="relative mb-8 border-b border-white/10 pb-2 flex gap-8">
         {settingsNav.map((item) => {

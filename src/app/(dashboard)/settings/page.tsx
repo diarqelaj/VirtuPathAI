@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { navItems } from "@/data";
-import { CheckCircle2, Lock } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import api from "@/lib/api";
 
+const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
 
 const ProfilePage = () => {
@@ -34,7 +34,6 @@ const ProfilePage = () => {
 
   const handleUpdate = async () => {
     setError("");
-
     try {
       const updateData = {
         userID: user.userID,
@@ -60,6 +59,52 @@ const ProfilePage = () => {
     }
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("userId", user.userID);
+
+    try {
+      const res = await api.post("/users/upload-profile-picture", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const updatedUser = {
+        ...user,
+        profilePictureUrl: res.data.profilePictureUrl,
+      };
+
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    } catch (err) {
+      console.error("Upload failed", err);
+      setError("Failed to upload profile picture. Please try again.");
+    }
+  };
+
+  const handleImageDelete = async () => {
+    if (!user) return;
+    try {
+      await api.delete(`/users/delete-profile-picture`, {
+        params: { userId: user.userID },
+      });
+
+      const updatedUser = {
+        ...user,
+        profilePictureUrl: null,
+      };
+
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    } catch (err) {
+      console.error("Delete failed", err);
+      setError("Failed to delete profile picture. Please try again.");
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black-100 text-white">
@@ -69,7 +114,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
+    <div className="relative bg-black-100 text-white flex flex-col">
       {/* Notification */}
       <AnimatePresence>
         {showNotification && (
@@ -85,20 +130,100 @@ const ProfilePage = () => {
         )}
       </AnimatePresence>
 
-      <main className="min-h-screen pt-10 py-16 px-4 md:px-8">
-        <motion.div
-          className="max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <section className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center gap-6">
-            <img
-              src={user?.avatar || defaultAvatar}
-              alt="User Avatar"
-              className="w-28 h-28 rounded-full border border-white/20 object-cover"
-            />
+      <main className="w-full pt-10 px-0 sm:px-4 md:px-8">
+      <motion.div
+      className="w-full max-w-none sm:max-w-2xl md:max-w-3xl mx-auto px-4"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
 
+
+        <section className="w-full bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center gap-6">
+
+            {/* Avatar + Actions */}
+            <div className="flex flex-col items-center gap-3">
+              <div className="relative group w-28 h-28 rounded-full overflow-hidden">
+                <img
+                  src={
+                    user?.profilePictureUrl
+                      ? `${API_HOST}${user.profilePictureUrl}`
+                      : defaultAvatar
+                  }
+                  alt="User Avatar"
+                  className="w-28 h-28 object-cover transition duration-300 group-hover:brightness-75"
+                />
+
+                {/* Desktop hover overlay */}
+                {user?.profilePictureUrl ? (
+                  <div className="absolute inset-0 hidden md:flex opacity-0 group-hover:opacity-100 transition duration-300">
+                    <label
+                      htmlFor="profile-upload"
+                      className="w-1/2 flex items-center justify-center bg-black/50 text-white text-xs cursor-pointer"
+                    >
+                      Change
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id="profile-upload"
+                        className="hidden"
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                    <div
+                      onClick={handleImageDelete}
+                      className="w-1/2 flex items-center justify-center bg-black/50 text-red-500 text-xs cursor-pointer"
+                    >
+                      Delete
+                    </div>
+                  </div>
+                ) : (
+                  <label
+                    htmlFor="profile-upload"
+                    className="absolute inset-0 hidden md:flex items-center justify-center bg-black/60 text-white text-xs cursor-pointer opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    Change
+                    <input
+                      type="file"
+                      accept="image/*"
+                      id="profile-upload"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                )}
+              </div>
+
+              {/* Mobile-only action buttons */}
+              <div className="mt-3 md:hidden flex gap-3 w-full">
+              <label
+                htmlFor="profile-upload"
+                className="flex-1 bg-white/10 text-white text-center py-2 rounded-md text-sm font-medium cursor-pointer hover:bg-white/20 transition"
+              >
+                Change
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="profile-upload"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                />
+              </label>
+
+              {user?.profilePictureUrl && (
+                <button
+                  onClick={handleImageDelete}
+                  className="flex-1 bg-red-500/20 text-red-400 py-2 rounded-md text-sm font-medium hover:bg-red-500/30 transition"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+
+
+            </div>
+
+            {/* Form */}
             <div className="flex-1 w-full space-y-4">
               {error && (
                 <div className="p-3 bg-red-500/20 text-red-300 rounded-lg text-sm">{error}</div>

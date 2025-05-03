@@ -57,6 +57,62 @@ namespace VirtuPathAPI.Controllers
 
             return NoContent();
         }
+        [HttpPost("upload-profile-picture")]
+        public async Task<IActionResult> UploadProfilePicture([FromForm] IFormFile file, [FromForm] int userId)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Ensure the folder exists
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "profile-pictures");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            // Generate unique file name
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            // Save file to server
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Set relative URL to serve from frontend
+            var imageUrl = $"/profile-pictures/{fileName}";
+            user.ProfilePictureUrl = imageUrl;
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { profilePictureUrl = imageUrl });
+        }
+        [HttpDelete("delete-profile-picture")]
+        public async Task<IActionResult> DeleteProfilePicture([FromQuery] int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null) return NotFound("User not found.");
+
+            if (!string.IsNullOrEmpty(user.ProfilePictureUrl))
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePictureUrl.TrimStart('/'));
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                user.ProfilePictureUrl = null;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { message = "Profile picture deleted." });
+        }
+
+
 
         // ✅ DELETE user
         [HttpDelete("{id}")]

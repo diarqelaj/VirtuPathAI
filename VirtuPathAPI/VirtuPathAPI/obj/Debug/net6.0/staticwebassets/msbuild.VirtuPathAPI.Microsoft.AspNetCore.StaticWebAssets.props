@@ -1,0 +1,58 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\profile-pictures\a56e4212-3233-4b9f-ae72-51696f7d7425.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VirtuPathAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VirtuPathAPI</BasePath>
+      <RelativePath>profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>35j6g7hhec</Fingerprint>
+      <Integrity>mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\profile-pictures\a56e4212-3233-4b9f-ae72-51696f7d7425.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\screenshots\305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VirtuPathAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VirtuPathAPI</BasePath>
+      <RelativePath>uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>gdijcu7zq7</Fingerprint>
+      <Integrity>PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\screenshots\305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\screenshots\d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VirtuPathAPI</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VirtuPathAPI</BasePath>
+      <RelativePath>uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>gdijcu7zq7</Fingerprint>
+      <Integrity>PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\screenshots\d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

@@ -1,12 +1,331 @@
 {
   "Version": 1,
-  "Hash": "cBgZWhpui2AY43GPSuaDQt/5a8rvpshzy7uUBGC/gpU=",
+  "Hash": "75/U7Av9TmJMhBpasAEGxSB4RZYfCbZQMPUDztR+1S8=",
   "Source": "VirtuPathAPI",
   "BasePath": "_content/VirtuPathAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "VirtuPathAPI/wwwroot",
+      "Source": "VirtuPathAPI",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
+      "BasePath": "_content/VirtuPathAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "SourceId": "VirtuPathAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
+      "BasePath": "_content/VirtuPathAPI",
+      "RelativePath": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "35j6g7hhec",
+      "Integrity": "mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg"
+    },
+    {
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "SourceId": "VirtuPathAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
+      "BasePath": "_content/VirtuPathAPI",
+      "RelativePath": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gdijcu7zq7",
+      "Integrity": "PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png"
+    },
+    {
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "SourceId": "VirtuPathAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
+      "BasePath": "_content/VirtuPathAPI",
+      "RelativePath": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gdijcu7zq7",
+      "Integrity": "PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.35j6g7hhec.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 22:25:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "35j6g7hhec"
+        },
+        {
+          "Name": "label",
+          "Value": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 22:25:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.gdijcu7zq7.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:35:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gdijcu7zq7"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:35:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.gdijcu7zq7.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:34:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gdijcu7zq7"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:34:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    }
+  ]
 }

@@ -76,6 +76,8 @@ app.UseHttpsRedirection();
 // --- Session must come BEFORE custom middleware -------------
 app.UseSession();
 
+app.UseStaticFiles(); // Enables serving wwwroot
+
 //------------------------------------------------------------
 // 7)  “REMEMBER-ME” RE-HYDRATE MIDDLEWARE
 //------------------------------------------------------------

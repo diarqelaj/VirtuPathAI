@@ -188,3 +188,4 @@ C:/Users/taula/OneDrive/Documents/GitHub/VirtuPathAI/VirtuPathAPI/VirtuPathAPI/o
 /home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/obj/Debug/net6.0/VirtuPathAPI.pdb
 /home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/obj/Debug/net6.0/VirtuPathAPI.genruntimeconfig.cache
 /home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/obj/Debug/net6.0/ref/VirtuPathAPI.dll
+/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/bin/Debug/net6.0/VirtuPathAPI.staticwebassets.runtime.json
