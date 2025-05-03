@@ -4,18 +4,14 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { navItems } from "@/data";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Lock } from "lucide-react";
 import api from "@/lib/api";
 
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
 
 const ProfilePage = () => {
   const [user, setUser] = useState<any>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formData, setFormData] = useState({ name: "" });
   const [showNotification, setShowNotification] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -26,42 +22,32 @@ const ProfilePage = () => {
         const res = await api.get("/users/me");
         const sessionUser = res.data;
         setUser(sessionUser);
-        setFormData((prev) => ({
-          ...prev,
-          name: sessionUser.fullName || "",
-        }));
+        setFormData({ name: sessionUser.fullName || "" });
       } catch {
         alert("Session expired. Please log in again.");
         router.push("/login");
       }
     };
-  
+
     checkSession();
   }, [router]);
-  
+
   const handleUpdate = async () => {
     setError("");
-
-    if (formData.password && formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
 
     try {
       const updateData = {
         userID: user.userID,
         fullName: formData.name.trim(),
-        passwordHash: formData.password || user.passwordHash,
+        passwordHash: user.passwordHash,
         email: user.email,
         registrationDate: user.registrationDate,
       };
 
       const response = await api.put(`/Users/${user.userID}`, updateData);
-
       const updatedUser = {
         ...user,
         fullName: response.data.fullName,
-        passwordHash: response.data.passwordHash,
       };
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -84,8 +70,6 @@ const ProfilePage = () => {
 
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
-
-
       {/* Notification */}
       <AnimatePresence>
         {showNotification && (
@@ -93,7 +77,7 @@ const ProfilePage = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed top-30 left-1/2 transform -translate-x-1/2 bg-black-100 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg flex items-center space-x-2 z-50"
+            className="fixed top-28 left-1/2 transform -translate-x-1/2 bg-black-100 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg flex items-center space-x-2 z-50"
           >
             <CheckCircle2 className="text-green-400" size={20} />
             <span className="text-sm text-white">Profile updated successfully</span>
@@ -101,7 +85,6 @@ const ProfilePage = () => {
         )}
       </AnimatePresence>
 
-      {/* Main Content */}
       <main className="min-h-screen pt-10 py-16 px-4 md:px-8">
         <motion.div
           className="max-w-3xl mx-auto"
@@ -140,25 +123,16 @@ const ProfilePage = () => {
                 disabled
               />
 
-              <InputField
-                label="New Password"
-                type="password"
-                value={formData.password}
-                onChange={(val) => setFormData({ ...formData, password: val })}
-              />
-
-              {formData.password && (
-                <InputField
-                  label="Confirm Password"
-                  type="password"
-                  value={formData.confirmPassword}
-                  onChange={(val) => setFormData({ ...formData, confirmPassword: val })}
-                />
-              )}
+              <div className="text-sm text-neutral-400 pt-1">
+                Want to change your password?{" "}
+                <a href="/settings/security" className="text-purple-400 hover:underline">
+                  Go to Security Settings
+                </a>
+              </div>
 
               <button
                 onClick={handleUpdate}
-                className="mt-4 bg-white/10 hover:bg-white/20 px-5 py-2 rounded-lg transition-all"
+                className="mt-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-5 py-2 rounded-lg font-medium transition"
               >
                 Save Changes
               </button>
@@ -174,11 +148,14 @@ const ProfilePage = () => {
               .
             </Card>
             <Card title="Security">
-              Change your password or view session info to enhance your account’s security.
+              Manage your sessions and password in the{" "}
+              <a href="/settings/security" className="text-purple-400 hover:underline">
+                security tab
+              </a>
+              .
             </Card>
           </section>
         </motion.div>
-
       </main>
     </div>
   );

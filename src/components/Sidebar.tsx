@@ -47,20 +47,22 @@ export default function Sidebar() {
   ];
 
   const SidebarContent = ({ mobile = false }: { mobile?: boolean }) => (
-    <>
-      <div className={`flex items-center gap-3 mb-10 px-2 ${mobile ? "mt-14" : ""}`}>
+    <div className="flex flex-col h-full">
+      {/* Logo Section */}
+      <div className="flex items-center gap-3 px-2 mb-6">
         <Image src="/virtupathai.png" alt="VirtuPath Logo" width={40} height={40} />
         <span className="font-bold text-xl text-white">VirtuPath AI</span>
       </div>
-
-      <nav className="space-y-3">
+  
+      {/* Nav Links */}
+      <nav className="flex-1 space-y-2">
         {navItems.map((item) => {
           const isActive = pathname === item.link;
           return (
             <Link
               key={item.name}
               href={item.link}
-              onClick={() => setIsOpen(false)} // close on mobile nav click
+              onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg w-full text-left transition ${
                 isActive
                   ? "bg-purple-700 text-white font-semibold"
@@ -73,8 +75,9 @@ export default function Sidebar() {
           );
         })}
       </nav>
-
-      <div className="px-2 mt-10">
+  
+      {/* Profile Info at Bottom */}
+      <div className="mt-6 px-2">
         <div className="bg-white/5 rounded-xl p-3 flex items-center gap-3">
           {user?.profileImage ? (
             <Image
@@ -95,8 +98,9 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
+  
 
   return (
     <>

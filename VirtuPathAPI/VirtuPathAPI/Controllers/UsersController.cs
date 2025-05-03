@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using VirtuPathAPI.Models;
 using BCrypt.Net;
+using System.Text.RegularExpressions;
+
 
 namespace VirtuPathAPI.Controllers
 {
@@ -31,7 +33,7 @@ namespace VirtuPathAPI.Controllers
             if (user == null) return NotFound();
             return user;
         }
-
+        
         // ✅ POST /api/users — Register new user with hashed password
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User user)
@@ -140,7 +142,39 @@ namespace VirtuPathAPI.Controllers
 
             return Ok(user);
         }
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest req)
+        {
+            var userId = HttpContext.Session.GetInt32("UserID");
+            if (userId == null)
+                return Unauthorized(new { error = "User not logged in" });
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return Unauthorized(new { error = "User not found" });
+
+            // Verify old password
+            if (!BCrypt.Net.BCrypt.Verify(req.OldPassword, user.PasswordHash))
+                return BadRequest(new { error = "Current password is incorrect" });
+
+            // Validate new password
+            if (string.IsNullOrWhiteSpace(req.NewPassword) || req.NewPassword.Length < 8 ||
+                !Regex.IsMatch(req.NewPassword, @"[A-Z]") ||
+                !Regex.IsMatch(req.NewPassword, @"[0-9]") ||
+                !Regex.IsMatch(req.NewPassword, @"[!@#$%^&*()_+{}\[\]:;'"",.<>/?\\|`~\-]"))
+            {
+                return BadRequest(new { error = "Password must be 8+ characters with uppercase, number, and symbol" });
+            }
+
+            // Save new password
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.NewPassword);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { success = true });
+        }
+
     }
+     
 
     public class LoginRequest
     {
@@ -148,4 +182,10 @@ namespace VirtuPathAPI.Controllers
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
+    public class ChangePasswordRequest
+{
+    public string OldPassword { get; set; }
+    public string NewPassword { get; set; }
+}
+
 }
