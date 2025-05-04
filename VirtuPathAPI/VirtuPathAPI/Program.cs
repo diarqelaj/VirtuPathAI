@@ -1,6 +1,8 @@
 ﻿// Program.cs  –  VirtuPathAPI
 //------------------------------------------------------------
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using VirtuPathAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,19 +20,28 @@ builder.Services.AddDbContext<TaskCompletionContext>(opt => opt.UseSqlServer(cs)
 builder.Services.AddDbContext<PerformanceReviewContext>(opt => opt.UseSqlServer(cs));
 builder.Services.AddDbContext<CareerPathContext>(opt => opt.UseSqlServer(cs));
 builder.Services.AddDbContext<BugReportContext>(opt => opt.UseSqlServer(cs));
-builder.Services.AddDbContext<BugReportContext>(opt => opt.UseSqlServer(cs)); //
 
 //------------------------------------------------------------
-// 2)  CORS  (only allow the React/Next front-end)
+// 2)  CORS Policies
 //------------------------------------------------------------
 builder.Services.AddCors(options =>
 {
+    // ✅ Allow only the React/Next.js frontend in production
     options.AddPolicy("AllowFrontend", p =>
     {
         p.WithOrigins("https://localhost:3000")
          .AllowCredentials()
          .AllowAnyHeader()
          .AllowAnyMethod();
+    });
+
+    // ✅ Allow Swagger UI in development (open policy)
+    options.AddPolicy("AllowSwagger", p =>
+    {
+        p.WithOrigins("https://localhost:3000")
+         .AllowAnyHeader()
+         .AllowAnyMethod()
+         .AllowCredentials();
     });
 });
 
@@ -45,13 +56,20 @@ builder.Services.AddSession(opt =>
     opt.Cookie.HttpOnly = true;
     opt.Cookie.IsEssential = true;
     opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    opt.IdleTimeout = TimeSpan.FromMinutes(1);      // short session
+    opt.IdleTimeout = TimeSpan.FromMinutes(1); // short session
 });
 
 //------------------------------------------------------------
 // 4)  MVC / Swagger
 //------------------------------------------------------------
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -67,9 +85,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
-app.UseCors("AllowFrontend");
+    // ✅ Allow Swagger CORS in dev
+    app.UseCors("AllowSwagger");
+}
+else
+{
+    // ✅ Use stricter CORS in production
+    app.UseCors("AllowFrontend");
+}
 
 app.UseHttpsRedirection();
 
@@ -80,9 +104,6 @@ app.UseStaticFiles(); // Enables serving wwwroot
 
 //------------------------------------------------------------
 // 7)  “REMEMBER-ME” RE-HYDRATE MIDDLEWARE
-//------------------------------------------------------------
-// If the 1-minute session is gone but the 30-day remember-me
-// cookie still exists, recreate the session automatically
 //------------------------------------------------------------
 app.Use(async (ctx, next) =>
 {
@@ -98,7 +119,6 @@ app.Use(async (ctx, next) =>
     await next();
 });
 
-//------------------------------------------------------------
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,9 +1,6 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
-import { FloatingNav } from '@/components/ui/FloatingNavbar';
-import Footer from '@/components/Footer';
-import { navItems } from '@/data';
 import { SparklesIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import api from '@/lib/api';
 
@@ -22,61 +19,60 @@ const TaskPage = () => {
   const [completionMap, setCompletionMap] = useState<CompletionMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [userDay, setUserDay] = useState<number | null>(null); // ⬅️ Track day globally
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         setLoading(true);
 
-        let userID: number;
-        try {
-          const res = await api.get('/users/me');
-          userID = res.data.userID;
-        } catch {
-          setError('Session expired. Please log in again.');
+        const userRes = await api.get('/users/me');
+        const user = userRes.data;
+        const userID = user.userID;
+        const careerPathID = user.careerPathID;
+        const day = user.currentDay;
+
+        if (!careerPathID || !day || day < 1) {
+          setError("No career path or day found for user.");
           return;
         }
+        
+        
 
-        const subscriptionsRes = await api.get(`/UserSubscriptions?userID=${userID}`);
-        const subscriptions = subscriptionsRes.data;
+        setUserDay(day); // ⬅️ Save day for later use in record
 
-        if (!subscriptions || subscriptions.length === 0) {
-          setError('No active subscriptions found.');
-          return;
-        }
-
-        const activeSubscription = subscriptions.reduce((latest, current) => {
-          const latestStartDate = new Date(latest.startDate);
-          const currentStartDate = new Date(current.startDate);
-          return latestStartDate > currentStartDate ? latest : current;
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        await api.post('/Progress/check', {
+          userID,
+          careerPathID,
+          timeZone: timezone,
         });
 
-        const careerPathID = activeSubscription.careerPathID;
-        let startDay = activeSubscription.lastAccessedDay || 1;
+        const tasksRes = await api.get(`/DailyTasks/bycareerandday`, {
+          params: { careerPathId: careerPathID, day },
+        });
 
-        const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${startDay}`);
+        const dailyTasks: Task[] = tasksRes.data.map((task: any) => ({
+          id: task.taskID,
+          text: task.taskDescription,
+          checked: false,
+        }));
 
-        if (!tasksRes.data || tasksRes.data.length === 0) {
-          setError('No tasks found for this career path on this day.');
-        } else {
-          const completionsRes = await api.get(`/TaskCompletion?userID=${userID}`);
-          const completionData = completionsRes.data;
+        const completionsRes = await api.get(`/TaskCompletion?userID=${userID}`);
+        const completionData = completionsRes.data;
 
-          const completionMapTemp: CompletionMap = {};
-          const completedTaskIDs = completionData.map((comp: any) => {
-            completionMapTemp[comp.taskID] = comp.completionID;
-            return comp.taskID;
-          });
+        const map: CompletionMap = {};
+        completionData.forEach((comp: any) => {
+          map[comp.taskID] = comp.completionID;
+        });
 
-          const formattedTasks = tasksRes.data.map((task: any) => ({
-            id: task.taskID,
-            text: task.taskDescription,
-            checked: completedTaskIDs.includes(task.taskID),
-          }));
+        const finalTasks = dailyTasks.map((task) => ({
+          ...task,
+          checked: map[task.id] !== undefined,
+        }));
 
-          setTasks(formattedTasks);
-          setCompletionMap(completionMapTemp);
-        }
+        setTasks(finalTasks);
+        setCompletionMap(map);
       } catch (err) {
         console.error('Error loading tasks:', err);
         setError('Failed to load tasks.');
@@ -92,13 +88,15 @@ const TaskPage = () => {
     if (completionMap[taskID]) return;
 
     try {
-      const resUser = await api.get('/users/me');
-      const userID = resUser.data.userID;
+      const userRes = await api.get('/users/me');
+      const userID = userRes.data.userID;
+      const careerDay = userRes.data.currentDay; // or use userDay
 
       const completionData = {
         completionID: 0,
         userID,
         taskID,
+        careerDay, // ✅ Ensure careerDay is sent
         completionDate: new Date().toISOString(),
       };
 
@@ -117,9 +115,9 @@ const TaskPage = () => {
     try {
       await api.delete(`/TaskCompletion/${completionID}`);
       setCompletionMap((prev) => {
-        const newMap = { ...prev };
-        delete newMap[taskID];
-        return newMap;
+        const map = { ...prev };
+        delete map[taskID];
+        return map;
       });
     } catch (err) {
       console.error('Error deleting task completion:', err);
@@ -128,10 +126,10 @@ const TaskPage = () => {
   };
 
   const toggleTask = async (index: number) => {
-    const updatedTasks = [...tasks];
-    const task = updatedTasks[index];
+    const updated = [...tasks];
+    const task = updated[index];
     task.checked = !task.checked;
-    setTasks(updatedTasks);
+    setTasks(updated);
 
     try {
       if (task.checked) {
@@ -139,11 +137,6 @@ const TaskPage = () => {
       } else {
         await deleteTaskCompletion(task.id);
       }
-
-      const orig = await api.get(`/DailyTasks/${task.id}`);
-      const fullTask = orig.data;
-      fullTask.isCompleted = task.checked;
-      await api.put(`/DailyTasks/${task.id}`, fullTask);
     } catch (err) {
       console.error('Error updating task:', err);
       setError('Failed to update task status.');
@@ -156,12 +149,10 @@ const TaskPage = () => {
 
   return (
     <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
-      <FloatingNav navItems={navItems} />
-      <main className="flex-1 pt-40 px-6 md:px-12 max-w-4xl mx-auto">
+      <main className="flex-1 pt-15 px-6 md:px-12 max-w-4xl mx-auto">
         <div className="bg-black-100/80 border border-white/10 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl" />
-
           <div className="relative z-10">
             <div className="text-center mb-12">
               <SparklesIcon className="h-12 w-12 text-purple-400/30 mx-auto mb-4" />
@@ -187,23 +178,13 @@ const TaskPage = () => {
                     onClick={() => toggleTask(index)}
                   >
                     {task.checked ? (
-                      <CheckCircleIcon className="h-7 w-7 flex-shrink-0 text-gray-400" />
+                      <CheckCircleIcon className="h-7 w-7 text-gray-400" />
                     ) : (
-                      <svg
-                        className="h-7 w-7 flex-shrink-0 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="h-7 w-7 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" />
                       </svg>
                     )}
-                    <span
-                      className={`text-lg font-medium tracking-wide ${
-                        task.checked ? 'text-gray-200' : 'text-gray-400'
-                      }`}
-                    >
+                    <span className={`text-lg font-medium tracking-wide ${task.checked ? 'text-gray-200' : 'text-gray-400'}`}>
                       {task.text}
                     </span>
                   </div>
@@ -215,27 +196,19 @@ const TaskPage = () => {
               <div className="mt-12 space-y-2">
                 <div className="flex justify-between text-sm font-medium text-purple-300">
                   <span>Progress</span>
-                  <span>
-                    {completedTasks}/{totalTasks} tasks
-                  </span>
+                  <span>{completedTasks}/{totalTasks} tasks</span>
                 </div>
                 <div className="relative h-3 rounded-full bg-purple-900/30 backdrop-blur-sm overflow-hidden">
-                  <div
-                    className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-500"
-                    style={{ width: `${progress}%` }}
-                  >
+                  <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}>
                     <div className="absolute inset-0 bg-purple-500/20 animate-pulse" />
                   </div>
                 </div>
-                <p className="text-right text-sm text-purple-300/70">
-                  {Math.round(progress)}% completed
-                </p>
+                <p className="text-right text-sm text-purple-300/70">{Math.round(progress)}% completed</p>
               </div>
             )}
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

@@ -149,11 +149,13 @@ const Page = () => {
                 onClick={async () => {
                   try {
                     const userRes = await api.get("/users/me");
+                    const user = userRes.data;
+
+                    // ✅ Just store careerPathID for now (not userID)
                     localStorage.setItem(
                       "pendingEnrollment",
                       JSON.stringify({
-                        careerPathID: career.careerPathID,
-                        userID: userRes.data.userID,
+                        careerPathID: career.careerPathID
                       })
                     );
                     router.push(`/payment`);
@@ -167,6 +169,7 @@ const Page = () => {
                 <BookOpenIcon className="w-4 h-4" />
                 Enroll
               </button>
+
 
             </div>
           </div>

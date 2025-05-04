@@ -39,8 +39,21 @@ namespace VirtuPathAPI.Controllers
             _context.UserSubscriptions.Add(subscription);
             await _context.SaveChangesAsync();
 
+            // ✅ Now also update the User's CareerPathID and progress
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserID == subscription.UserID);
+            if (user != null)
+            {
+                user.CareerPathID = subscription.CareerPathID;
+                user.CurrentDay = 0;
+                user.LastTaskDate = null;
+                user.LastKnownIP = HttpContext.Connection.RemoteIpAddress?.ToString(); // optional
+
+                await _context.SaveChangesAsync();
+            }
+
             return CreatedAtAction(nameof(GetUserSubscription), new { id = subscription.SubscriptionID }, subscription);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserSubscription(int id, UserSubscription subscription)

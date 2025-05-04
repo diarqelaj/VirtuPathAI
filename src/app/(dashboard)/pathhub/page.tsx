@@ -11,7 +11,8 @@ const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&c
 
 export default function VirtuPathDashboard() {
   const [user, setUser] = useState<any>(null);
-  const [completionCount, setCompletionCount] = useState(0);
+  const [completedToday, setCompletedToday] = useState(0);
+  const [totalToday, setTotalToday] = useState(0);
   const [performance, setPerformance] = useState<any>(null);
   const [currentPath, setCurrentPath] = useState("Loading...");
 
@@ -19,24 +20,44 @@ export default function VirtuPathDashboard() {
     const fetchDashboardData = async () => {
       try {
         const userRes = await api.get("/users/me");
-        setUser(userRes.data);
+        const currentUser = userRes.data;
+        setUser(currentUser);
 
-        const completionRes = await api.get("/taskcompletion");
-        setCompletionCount(completionRes.data?.length || 0);
+        const { careerPathID, currentDay, userID } = currentUser;
+        console.log("User:", currentUser);
+        console.log("CareerPathID:", careerPathID);
+        console.log("CurrentDay:", currentDay);
 
+        // Fetch today's tasks
+        const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${currentDay}`);
+        const todayTasks = tasksRes.data;
+        console.log("TodayTasks:", todayTasks);
+        setTotalToday(todayTasks.length);
+
+        // Fetch user completions
+        const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
+        const userCompletions = completionRes.data;
+        console.log("All User Completions:", userCompletions);
+
+        const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+        const todayCompletions = userCompletions.filter(
+          (tc: any) =>
+            tc.careerDay === currentDay &&
+            tc.completionDate?.startsWith(today)
+        );
+        
+        
+        console.log("Filtered Today Completions:", todayCompletions);
+        setCompletedToday(todayCompletions.length);
+
+        // Fetch performance
         const perfRes = await api.get("/performancereviews");
         setPerformance(perfRes.data?.[0]);
 
-        const subRes = await api.get("/UserSubscriptions");
-        const subs = subRes.data;
-        if (subs?.length > 0) {
-          const latest = subs.reduce((a: any, b: any) =>
-            new Date(a.startDate) > new Date(b.startDate) ? a : b
-          );
-          setCurrentPath(latest?.careerPathName || "No Path");
-        } else {
-          setCurrentPath("No Active Path");
-        }
+        // Get career path name
+        const pathRes = await api.get(`/CareerPaths/${careerPathID}`);
+        setCurrentPath(pathRes.data?.name || "Unknown Path");
+
       } catch (err) {
         console.error("Error loading dashboard data:", err);
       }
@@ -44,6 +65,8 @@ export default function VirtuPathDashboard() {
 
     fetchDashboardData();
   }, []);
+
+  const completionPercent = totalToday === 0 ? 0 : Math.min((completedToday / totalToday) * 100, 100);
 
   return (
     <main className="px-6 md:px-10 py-10 w-full">
@@ -78,13 +101,15 @@ export default function VirtuPathDashboard() {
         {/* Completion */}
         <div className="bg-white/5 p-6 rounded-2xl text-center h-full flex flex-col justify-between">
           <div>
-            <h3 className="text-sm text-white/60 mb-2">Daily Task Completion</h3>
-            <p className="text-4xl font-bold text-purple-400">{completionCount}</p>
+            <h3 className="text-sm text-white/60 mb-2">Today's Task Completion</h3>
+            <p className="text-4xl font-bold text-purple-400">
+              {isNaN(completedToday) ? 0 : completedToday} / {isNaN(totalToday) ? 0 : totalToday}
+            </p>
           </div>
           <div className="mt-4 h-2 bg-white/10 rounded-full">
             <div
               className="h-full bg-purple-500 rounded-full"
-              style={{ width: `${Math.min((completionCount / 7) * 100, 100)}%` }}
+              style={{ width: `${completionPercent}%` }}
             />
           </div>
         </div>

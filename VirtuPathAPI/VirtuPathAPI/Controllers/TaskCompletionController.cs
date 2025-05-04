@@ -105,6 +105,15 @@ namespace VirtuPathAPI.Controllers
 
             return CreatedAtAction(nameof(GetTaskCompletion), new { id = completion.CompletionID }, completion);
         }
+        [HttpGet("byuser/{userId}")]
+        public async Task<ActionResult<IEnumerable<TaskCompletion>>> GetTaskCompletionsByUser(int userId)
+        {
+            return await _context.TaskCompletions
+                .Where(tc => tc.UserID == userId)
+                .ToListAsync();
+        }
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTaskCompletion(int id, TaskCompletion completion)

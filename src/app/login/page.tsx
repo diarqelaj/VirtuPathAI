@@ -67,6 +67,7 @@ const AuthPage = () => {
           const response = await api.get("/Users");
           const users = response.data;
           let foundUser = users.find((user: any) => user.email === session.user.email);
+  
           if (!foundUser) {
             const newUser = {
               fullName: session.user.name || "",
@@ -76,16 +77,33 @@ const AuthPage = () => {
             };
             await api.post("/Users", newUser);
           }
-          await api.post("/Users/login", { email: session.user.email, password: "" });
-          const pending = localStorage.getItem("pendingEnrollment");
-          router.push(pending ? "/payment" : "/");
+  
+          // ✅ Always call set-career if pending enrollment exists
+          const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || '{}');
+          if (pending?.careerPathID) {
+            await api.post("/Users/set-career", {
+              email: session.user.email,
+              careerPathId: pending.careerPathID
+            });
+          }
+  
+          await api.post("/Users/login", {
+            email: session.user.email,
+            password: ""
+          });
+  
+          const redirect = pending ? "/payment" : "/";
+          router.push(redirect);
+  
         } catch {
           setError("Google authentication failed.");
         }
       }
     };
+  
     handleGoogleAuth();
   }, [session]);
+  
 
   const handleSubmit = async () => {
     setError("");

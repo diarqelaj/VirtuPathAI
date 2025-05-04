@@ -15,6 +15,7 @@ import {
   FaSignOutAlt,
   FaUserCircle,
   FaCog,
+  FaTasks,
 } from "react-icons/fa";
 import Image from "next/image";
 import api from "@/lib/api";
@@ -56,6 +57,7 @@ export default function Sidebar() {
   const navItems = [
     { name: "Home", link: "/", icon: <FaHome /> },
     { name: "My Path", link: "/pathhub", icon: <FaUser /> },
+    { name: "My Tasks", link: "/tasks", icon: <FaTasks /> },
     { name: "Progress", link: "/progress", icon: <FaChartBar /> },
     { name: "Explore Careers", link: "/virtupathcareers", icon: <FaBook /> },
     { name: "Community", link: "/community", icon: <FaUsers /> },

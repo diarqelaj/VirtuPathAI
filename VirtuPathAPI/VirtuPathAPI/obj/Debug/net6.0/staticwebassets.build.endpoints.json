@@ -3,8 +3,8 @@
   "ManifestType": "Build",
   "Endpoints": [
     {
-      "Route": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.35j6g7hhec.jpg",
-      "AssetFile": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "Route": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.35j6g7hhec.jpg",
+      "AssetFile": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -29,7 +29,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 03 May 2025 22:25:28 GMT"
+          "Value": "Sat, 03 May 2025 23:54:27 GMT"
         }
       ],
       "EndpointProperties": [
@@ -43,13 +43,13 @@
         },
         {
           "Name": "label",
-          "Value": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg"
+          "Value": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg"
         }
       ]
     },
     {
-      "Route": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
-      "AssetFile": "profile-pictures/a56e4212-3233-4b9f-ae72-51696f7d7425.jpg",
+      "Route": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "AssetFile": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -74,7 +74,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 03 May 2025 22:25:28 GMT"
+          "Value": "Sat, 03 May 2025 23:54:27 GMT"
         }
       ],
       "EndpointProperties": [

@@ -10,13 +10,25 @@ namespace VirtuPathAPI.Models
     public string PasswordHash { get; set; }
     public DateTime RegistrationDate { get; set; }
 
-    // ✅ New properties for 2FA
+    // 2FA fields
     public bool IsTwoFactorEnabled { get; set; } = false;
     public string? TwoFactorCode { get; set; }
     public DateTime? TwoFactorCodeExpiresAt { get; set; }
 
-    // ✅ New property for profile picture (store image filename or URL)
+    // Profile
     public string? ProfilePictureUrl { get; set; }
+
+    // 🆕 Progress Tracking Fields
+    public int? CareerPathID { get; set; }
+    public int CurrentDay { get; set; } = 0; // Day user is currently on (0-6)
+    public DateTime? LastTaskDate { get; set; } // Date when user last got/completed tasks
+
+    // Optional: track IP if needed
+    public string? LastKnownIP { get; set; }
+
+    // Navigation property (optional if you want to load career path info)
+    public CareerPath? CareerPath { get; set; }
 }
+
 
 }

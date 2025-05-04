@@ -46,38 +46,52 @@ const PaymentPage = () => {
     setError('');
     const cleanCard = cardNumber.replace(/\s+/g, '');
     const validCards = ['4111111111111111', '4242424242424242'];
-
+  
     if (!validCards.includes(cleanCard)) {
       setError('Invalid card number. Try a test card like 4111 1111 1111 1111');
       return;
     }
-
-    const pending = JSON.parse(localStorage.getItem('pendingEnrollment') || '{}');
-    const { careerPathID, userID } = pending;
-
-    if (!careerPathID || !userID) {
-      setError('Missing enrollment data. Please log in again.');
-      return;
-    }
-
+  
     try {
-      await api.post(`UserSubscriptions?userID=${userID}`, {
-        userID,
+      // ✅ Get user from session
+      const userRes = await api.get('/users/me');
+      const user = userRes.data;
+  
+      // ✅ Get career path from localStorage
+      const pending = JSON.parse(localStorage.getItem('pendingEnrollment') || '{}');
+      const careerPathID = pending.careerPathID;
+  
+      if (!user?.userID || !careerPathID) {
+        setError('Missing user or career path. Please try again.');
+        return;
+      }
+      
+  
+      // ✅ Create subscription
+      await api.post(`UserSubscriptions?userID=${user.userID}`, {
+        userID: user.userID,
         careerPathID,
         startDate: new Date().toISOString(),
-        lastAccessedDay: 0
-        // ⛔ DO NOT INCLUDE endDate — it's computed by the DB
+        lastAccessedDay: 0,
       });
-
+  
+      // ✅ Set initial day and career path
+      await api.post(`/Users/set-career`, {
+        email: user.email,
+        careerPathId: careerPathID
+      });
+      console.log("set-career done")      
       localStorage.removeItem('pendingEnrollment');
       setSuccess(true);
       setTimeout(() => router.push('/tasks'), 2000);
+  
     } catch (err) {
       console.error(err);
       setError('Something went wrong while processing your subscription.');
     }
   };
-
+  
+  
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} />

@@ -112,6 +112,30 @@ namespace VirtuPathAPI.Controllers
             return Ok(new { message = "Profile picture deleted." });
         }
 
+         [HttpPost("set-career")]
+        public async Task<IActionResult> SetCareerPath([FromBody] SetCareerRequest request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if (user == null) return NotFound("User not found.");
+
+            // ✅ Only update if day is not already set
+            if (user.CurrentDay == 0)
+            {
+                user.CareerPathID = request.CareerPathId;
+                user.CurrentDay = 1;
+                user.LastTaskDate = DateTime.UtcNow;
+
+                var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+                if (ip == "::1") ip = "127.0.0.1";
+                user.LastKnownIP = ip;
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok("Career path set.");
+            Console.WriteLine("Set-career called");
+        }
+
 
 
         // ✅ DELETE user
@@ -146,21 +170,34 @@ namespace VirtuPathAPI.Controllers
             public DateTime ExpiresAt { get; set; }
         }
 
-        // ✅ POST /api/users/login — Login with password verification
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
             if (user == null) return Unauthorized();
 
-            // Compare input password with hashed password
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
-            if (!isPasswordValid) return Unauthorized();
+            // ✅ Skip password check if password is empty and user is a Google user
+            if (!string.IsNullOrEmpty(req.Password))
+            {
+                bool isPasswordValid = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
+                if (!isPasswordValid) return Unauthorized();
+            }
+            else
+            {
+                // Fix: Only allow passwordless login if user's passwordHash is empty
+                if (!string.IsNullOrEmpty(user.PasswordHash))
+                {
+                    return Unauthorized(new { error = "Password required" });
+                }
+            }
 
-            // Start 1-minute session
             HttpContext.Session.SetInt32("UserID", user.UserID);
 
-            // If remember-me → set long-lived cookie
+            var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+            if (ip == "::1") ip = "127.0.0.1";
+            user.LastKnownIP = ip;
+            await _context.SaveChangesAsync();
+
             if (req.RememberMe)
             {
                 Response.Cookies.Append(
@@ -177,6 +214,8 @@ namespace VirtuPathAPI.Controllers
 
             return Ok(new { userID = user.UserID });
         }
+
+
 
         [HttpPost("logout")]
         public IActionResult Logout()
