@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 
 const settingsNav = [
   { name: "Profile", href: "/settings" },
-  { name: "Notifications", href: "/settings/notifications" },
-  { name: "Security", href: "/settings/security" },
+  { name: "Settings", href: "/settings/security" },
   { name: "Billing", href: "/settings/billing" },
 ];
 
