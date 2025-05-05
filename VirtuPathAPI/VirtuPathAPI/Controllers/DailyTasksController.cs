@@ -82,102 +82,92 @@ namespace VirtuPathAPI.Controllers
 
             return NoContent();
         }
+[HttpGet("today")]
+public async Task<IActionResult> GetTodayTasks()
+{
+    string timeZoneId = Request.Headers["X-Timezone"];
+    if (string.IsNullOrWhiteSpace(timeZoneId))
+        return BadRequest("Missing X-Timezone header.");
 
-        [HttpGet("today")]
-        public async Task<IActionResult> GetTodayTasks()
+    TimeZoneInfo userTimeZone;
+    try
+    {
+        userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+    }
+    catch (TimeZoneNotFoundException)
+    {
+        return BadRequest("Invalid time zone.");
+    }
+
+    var nowUtc = DateTime.UtcNow;
+    var todayLocal = TimeZoneInfo.ConvertTime(nowUtc, userTimeZone).Date;
+
+    Console.WriteLine("🔍 [DailyTasks/today] Debug:");
+    Console.WriteLine($"  TimeZone: {timeZoneId}");
+    Console.WriteLine($"  UTC Now: {nowUtc}");
+    Console.WriteLine($"  Local Today: {todayLocal}");
+
+    // ✅ Get current user from session
+    var userId = HttpContext.Session.GetInt32("UserID");
+    if (userId == null)
+    {
+        Console.WriteLine("❌ User ID not found in session.");
+        return Unauthorized("User not logged in.");
+    }
+
+    var user = await _context.Users.FindAsync(userId);
+    if (user == null)
+    {
+        Console.WriteLine($"❌ User not found for ID: {userId}");
+        return Unauthorized("User not found.");
+    }
+
+    Console.WriteLine($"🎯 Serving tasks for UserID: {user.UserID}, CareerPathID: {user.CareerPathID}, CurrentDay: {user.CurrentDay}, LastTaskDate: {user.LastTaskDate?.Date}");
+
+    if (user.CareerPathID == null)
+        return BadRequest("User has not selected a career path.");
+
+    var lastTaskDate = user.LastTaskDate?.Date ?? DateOnly.MinValue.ToDateTime(TimeOnly.MinValue);
+
+    // ✅ Progress to next day only if it's a new day and all previous tasks are completed
+    if (lastTaskDate.Date < todayLocal)
+    {
+        int previousDay = user.CurrentDay;
+
+        var prevTasks = await _context.DailyTasks
+            .Where(t => t.CareerPathID == user.CareerPathID && t.Day == previousDay)
+            .Select(t => t.TaskID)
+            .ToListAsync();
+
+        var completedTasks = await _context.TaskCompletions
+            .Where(tc => tc.UserID == user.UserID && tc.CareerDay == previousDay)
+            .Select(tc => tc.TaskID)
+            .ToListAsync();
+
+        bool allCompleted = prevTasks.All(id => completedTasks.Contains(id));
+
+        Console.WriteLine($"  ✅ Date Check: LastTaskDate < Today? {lastTaskDate.Date < todayLocal}");
+        Console.WriteLine($"  🔍 prevTasks: {string.Join(",", prevTasks)}");
+        Console.WriteLine($"  ✅ completedTasks: {string.Join(",", completedTasks)}");
+        Console.WriteLine($"  ✅ All completed? {allCompleted}");
+
+        if (allCompleted)
         {
-            string timeZoneId = Request.Headers["X-Timezone"];
-            if (string.IsNullOrWhiteSpace(timeZoneId))
-                return BadRequest("Missing X-Timezone header.");
-
-            TimeZoneInfo userTimeZone;
-            try
-            {
-                userTimeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                return BadRequest("Invalid time zone.");
-            }
-
-           
-            var simulatedNow = new DateTime(2025, 5, 6, 1, 0, 0); // simulate May 6th, 1AM
-            var todayDate = TimeZoneInfo.ConvertTime(simulatedNow, userTimeZone);
-
-
-            Console.WriteLine("🔍 [DailyTasks/today] Debug:");
-            Console.WriteLine($"  TimeZone: {timeZoneId}");
-            Console.WriteLine($"  UTC Now: {DateTime.UtcNow}");
-            Console.WriteLine($"  Converted Now: {todayDate}");
-            Console.WriteLine($"  Today Date: {todayDate}");
-
-            var userEmail = User?.Identity?.Name;
-            User? user = null;
-
-            if (!string.IsNullOrWhiteSpace(userEmail))
-            {
-                user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
-                Console.WriteLine($"  Authenticated user by email: {userEmail}");
-            }
-            else
-            {
-                var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
-                if (!string.IsNullOrWhiteSpace(ip))
-                {
-                    if (ip == "::1") ip = "127.0.0.1";
-                    Console.WriteLine($"  IP fallback: Normalized IP = {ip}");
-                    user = await _context.Users.FirstOrDefaultAsync(u => u.LastKnownIP == ip);
-                }
-            }
-
-            if (user == null)
-            {
-                Console.WriteLine("❌ User not found.");
-                return Unauthorized("User not found.");
-            }
-
-            Console.WriteLine($"  UserID: {user.UserID}, CareerPathID: {user.CareerPathID}, CurrentDay: {user.CurrentDay}, LastTaskDate: {user.LastTaskDate}");
-
-            if (user.CareerPathID == null)
-                return BadRequest("User has not selected a career path.");
-
-            if (user.LastTaskDate == null || user.LastTaskDate.Value.Date < todayDate)
-            {
-                var previousDay = user.CurrentDay;
-
-                var prevTasks = await _context.DailyTasks
-                    .Where(t => t.CareerPathID == user.CareerPathID && t.Day == previousDay)
-                    .Select(t => t.TaskID)
-                    .ToListAsync();
-
-                var completed = await _context.TaskCompletions
-                    .Where(tc => tc.UserID == user.UserID && tc.CareerDay == previousDay)
-                    .Select(tc => tc.TaskID)
-                    .ToListAsync();
-
-                bool allCompleted = prevTasks.All(id => completed.Contains(id));
-
-                Console.WriteLine($"  PreviousDay: {previousDay}");
-                Console.WriteLine($"  PrevTasks: {string.Join(",", prevTasks)}");
-                Console.WriteLine($"  Completed: {string.Join(",", completed)}");
-                Console.WriteLine($"  All Completed: {allCompleted}");
-
-                if (allCompleted)
-                {
-                    user.CurrentDay += 1;
-                    user.LastTaskDate = todayDate;
-                    await _context.SaveChangesAsync();
-                    Console.WriteLine($"  ✅ Progressed to Day: {user.CurrentDay}");
-                }
-            }
-
-            var todayTasks = await _context.DailyTasks
-                .Where(t => t.CareerPathID == user.CareerPathID && t.Day == user.CurrentDay)
-                .ToListAsync();
-
-            Console.WriteLine($"  🎯 Tasks returned: {todayTasks.Count}");
-            return Ok(todayTasks);
+            user.CurrentDay += 1;
+            user.LastTaskDate = todayLocal;
+            await _context.SaveChangesAsync();
+            Console.WriteLine($"  ✅ Progressed to Day: {user.CurrentDay}");
         }
+    }
+
+    var todayTasks = await _context.DailyTasks
+        .Where(t => t.CareerPathID == user.CareerPathID && t.Day == user.CurrentDay)
+        .ToListAsync();
+
+    Console.WriteLine($"  🎯 Returning {todayTasks.Count} tasks for Day {user.CurrentDay}, CareerPathID: {user.CareerPathID}");
+
+    return Ok(todayTasks);
+}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

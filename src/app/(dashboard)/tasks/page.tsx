@@ -19,7 +19,6 @@ const TaskPage = () => {
   const [completionMap, setCompletionMap] = useState<CompletionMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [userDay, setUserDay] = useState<number | null>(null); // ⬅️ Track day globally
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -27,29 +26,14 @@ const TaskPage = () => {
         setLoading(true);
 
         const userRes = await api.get('/users/me');
-        const user = userRes.data;
-        const userID = user.userID;
-        const careerPathID = user.careerPathID;
-        const day = user.currentDay;
-
-        if (!careerPathID || !day || day < 1) {
-          setError("No career path or day found for user.");
-          return;
-        }
-        
-        
-
-        setUserDay(day); // ⬅️ Save day for later use in record
+        const userID = userRes.data.userID;
 
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        await api.post('/Progress/check', {
-          userID,
-          careerPathID,
-          timeZone: timezone,
-        });
 
-        const tasksRes = await api.get(`/DailyTasks/bycareerandday`, {
-          params: { careerPathId: careerPathID, day },
+        const tasksRes = await api.get(`/DailyTasks/today`, {
+          headers: {
+            'X-Timezone': timezone,
+          },
         });
 
         const dailyTasks: Task[] = tasksRes.data.map((task: any) => ({
@@ -90,13 +74,13 @@ const TaskPage = () => {
     try {
       const userRes = await api.get('/users/me');
       const userID = userRes.data.userID;
-      const careerDay = userRes.data.currentDay; // or use userDay
+      const careerDay = userRes.data.currentDay;
 
       const completionData = {
         completionID: 0,
         userID,
         taskID,
-        careerDay, // ✅ Ensure careerDay is sent
+        careerDay,
         completionDate: new Date().toISOString(),
       };
 
