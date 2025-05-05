@@ -111,8 +111,46 @@ namespace VirtuPathAPI.Controllers
 
             return Ok(new { message = "Profile picture deleted." });
         }
+        [HttpGet("notifications/{id}")]
+        public async Task<IActionResult> GetNotificationSettings(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) return NotFound();
 
-         [HttpPost("set-career")]
+            return Ok(new
+            {
+                user.ProductUpdates,
+                user.CareerTips,
+                user.NewCareerPathAlerts,
+                user.Promotions
+            });
+        }
+        [HttpPut("notifications/{id}")]
+        public async Task<IActionResult> UpdateNotificationSettings(int id, [FromBody] NotificationSettingsDto settings)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) return NotFound("User not found.");
+
+            user.ProductUpdates = settings.ProductUpdates;
+            user.CareerTips = settings.CareerTips;
+            user.NewCareerPathAlerts = settings.NewCareerPathAlerts;
+            user.Promotions = settings.Promotions;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Notification settings updated." });
+        }
+
+        public class NotificationSettingsDto
+        {
+            public bool ProductUpdates { get; set; }
+            public bool CareerTips { get; set; }
+            public bool NewCareerPathAlerts { get; set; }
+            public bool Promotions { get; set; }
+        }
+
+
+        [HttpPost("set-career")]
         public async Task<IActionResult> SetCareerPath([FromBody] SetCareerRequest request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);

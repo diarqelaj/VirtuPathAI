@@ -17,6 +17,10 @@ namespace VirtuPathAPI.Models
 
     // Profile
     public string? ProfilePictureUrl { get; set; }
+    public bool ProductUpdates { get; set; } = false;
+    public bool CareerTips { get; set; } = false;
+    public bool NewCareerPathAlerts { get; set; } = false;
+    public bool Promotions { get; set; } = false;
 
     // 🆕 Progress Tracking Fields
     public int? CareerPathID { get; set; }

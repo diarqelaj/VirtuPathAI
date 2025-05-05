@@ -22,6 +22,8 @@ import api from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation"; // if not already imported
+import { IoChevronUp, IoChevronDown } from "react-icons/io5";
+
 
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
@@ -103,31 +105,41 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Profile Info with Dropdown */}
-      <div className="mt-6 px-2 relative">
-        <div
-          className="bg-white/5 rounded-xl p-3 flex items-center gap-3 cursor-pointer hover:bg-white/10 transition"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          <Image
-            src={
-              user?.profilePictureUrl
-                ? `${API_HOST}${user.profilePictureUrl}`
-                : defaultAvatar
-            }
-            alt="User"
-            width={40}
-            height={40}
-            quality={100}
-            className="rounded-full object-cover aspect-square"
-            unoptimized
-          />
+        <div className="mt-6 px-2 relative">
+          <div
+            className="bg-white/5 rounded-xl p-3 flex w-54 items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            <div className="flex items-center gap-3">
+              <Image
+                src={
+                  user?.profilePictureUrl
+                    ? `${API_HOST}${user.profilePictureUrl}`
+                    : defaultAvatar
+                }
+                alt="User"
+                width={40}
+                height={40}
+                quality={100}
+                className="rounded-full object-cover aspect-square"
+                unoptimized
+              />
 
-          <div>
-            <p className="text-sm font-medium text-white">
-             {user?.fullName?.split(" ")[0] || "User"}
-            </p>
-            <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
+              <div>
+                <p className="text-sm font-medium text-white">
+                  {user?.fullName?.split(" ")[0] || "User"}
+                </p>
+                <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
+              </div>
+            </div>
+            {/* Arrow Icon */}
+            {dropdownOpen ? (
+              <IoChevronDown className="w-4 h-4 text-white/50" />
+            ) : (
+              <IoChevronUp className="w-4 h-4 text-white/50" />
+            )}
+
+            
           </div>
         </div>
 
@@ -137,7 +149,7 @@ export default function Sidebar() {
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            className="absolute bottom-14 left-2 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-lg z-50"
+            className="absolute bottom-24 left-7 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-lg z-50"
           >
             <Link
               href="/settings"
@@ -163,10 +175,11 @@ export default function Sidebar() {
               <FaSignOutAlt size={16} />
               Logout
             </button>
+            
           </motion.div>
         )}
       </div>
-    </div>
+    
   );
 
   return (

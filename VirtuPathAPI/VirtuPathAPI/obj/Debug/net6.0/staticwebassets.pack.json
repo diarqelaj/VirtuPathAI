@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "PackagePath": "staticwebassets/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg"
+    },
+    {
+      "Id": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "PackagePath": "staticwebassets/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg"
+    },
+    {
       "Id": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
       "PackagePath": "staticwebassets/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg"
     },

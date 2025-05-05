@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSession, signIn } from "next-auth/react";
 import Footer from "@/components/Footer";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
@@ -38,6 +38,10 @@ const AuthPage = () => {
   const [resetEmail, setResetEmail] = useState("");
   const [twoFACode, setTwoFACode] = useState("");
   const [isTwoFAPromptVisible, setIsTwoFAPromptVisible] = useState(false);
+  const [agreedToPolicy, setAgreedToPolicy] = useState(false);
+  const [subscribedToNews, setSubscribedToNews] = useState(false);
+  const policyRef = useRef<HTMLDivElement>(null);
+
 
   const handleResetPassword = async () => {
     setError("");
@@ -74,10 +78,11 @@ const AuthPage = () => {
               email: session.user.email,
               passwordHash: "",
               registrationDate: new Date().toISOString(),
+              subscribedToNews: subscribedToNews,
             };
             await api.post("/Users", newUser);
           }
-  
+          
           // ✅ Always call set-career if pending enrollment exists
           const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || '{}');
           if (pending?.careerPathID) {
@@ -100,10 +105,28 @@ const AuthPage = () => {
         }
       }
     };
+    
   
     handleGoogleAuth();
   }, [session]);
+  useEffect(() => {
+    const el = policyRef.current;
+    if (!el) return;
   
+    const handleScroll = () => {
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+        setAgreedToPolicy(true);
+      }
+    };
+  
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, [isLogin]);
+  
+  const validatePassword = (password: string) => {
+  const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+  return regex.test(password);
+};
 
   const handleSubmit = async () => {
     setError("");
@@ -149,15 +172,23 @@ const AuthPage = () => {
         setError("Login failed. Please try again.");
       }
     } else {
-      // ✅ Registration path (unchanged)
+      // ✅ Registration path with policy and password checks
+      if (!agreedToPolicy) return setError("Please agree to the Privacy Policy before signing up.");
+      if (!validatePassword(password)) return setError("Password must have at least 8 characters, 1 uppercase letter, 1 number, and 1 symbol.");
       if (password !== confirmPassword) return setError("Passwords do not match");
+    
       try {
         const newUser = {
           fullName: name,
           email,
           passwordHash: password,
           registrationDate: new Date().toISOString(),
+          productUpdates: subscribedToNews,
+          careerTips: subscribedToNews,
+          newCareerPathAlerts: subscribedToNews,
+          promotions: subscribedToNews
         };
+        
         await api.post("/Users", newUser);
         await api.post("/Users/login", { email, password });
         router.push(pending ? "/payment" : "/");
@@ -165,6 +196,7 @@ const AuthPage = () => {
         setError("Registration failed. Email might already exist.");
       }
     }
+    
   };
   
   
@@ -247,8 +279,8 @@ const AuthPage = () => {
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
       <FloatingNav navItems={navItems} />
-      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
-      <main className="flex-1 pt-50 pb-12 px-4">
+    
+      <main className="flex-1 pt-33 pb-12 px-4">
       <div className="max-w-md mx-auto">
         <div className="relative bg-gradient-to-br from-purple-500/10 to-blue-500/10 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-2xl">
           <div className="text-center mb-8">
@@ -299,6 +331,7 @@ const AuthPage = () => {
                   placeholder="Password"
                   className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800"
                 />
+
               </div>
               {isLogin && (
                 <div className="text-right text-sm">
@@ -319,6 +352,40 @@ const AuthPage = () => {
                   />
                 </div>
               )}
+              {!isLogin && (
+                <>
+                
+                  <div className="flex items-start gap-2 mt-4">
+                    <input
+                      type="checkbox"
+                      checked={agreedToPolicy}
+                      onChange={(e) => setAgreedToPolicy(e.target.checked)}
+                      className="accent-purple-600 mt-1"
+                    />
+                    <label className="text-sm text-gray-300">
+                      I agree to the <a href="/privacypolicy" target="_blank" className="underline text-purple-400">Privacy Policy</a> and <a href="/terms" target="_blank" className="underline text-purple-400">Terms of Service</a>.
+                    </label>
+                  </div>
+
+              
+                  <div className="flex items-start gap-2">
+                    <input
+                      type="checkbox"
+                      checked={subscribedToNews}
+                      onChange={(e) => setSubscribedToNews(e.target.checked)}
+                      className="accent-purple-600 mt-1"
+                    />
+                    <label className="text-sm text-gray-300">
+                      I'd like to receive news and updates about new features and products
+                    </label>
+
+                  </div>
+                </>
+              )}
+                
+                
+                
+              
             </div>
 
             <div className="flex items-center space-x-2">
