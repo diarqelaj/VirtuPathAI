@@ -235,18 +235,6 @@ export const careers = [
   },
   {
     id: 2,
-    title: "Content Creator",
-    description: "Build your brand, script videos, and engage your audience on digital platforms.",
-    location: "Remote",
-    img: "/careers/content-creator.jpg",
-    price: "€49",
-    enrolled: 1890,
-    rating: "4.7",
-    skills: ["Video Editing", "Scriptwriting", "Social Media", "SEO"],
-    originalPrice: "€99.99"
-  },
-  {
-    id: 3,
     title: "Businessman",
     description: "Learn to strategize, pitch, and scale businesses in competitive markets.",
     location: "Online",
@@ -258,67 +246,7 @@ export const careers = [
     originalPrice: "€179.99"
   },
   {
-    id: 4,
-    title: "MMA Fighter",
-    description: "Train your mind and body with AI-driven combat simulations and strategy.",
-    location: "Hybrid",
-    img: "/careers/mmafighter.jpg",
-    price: "€69",
-    enrolled: 890,
-    rating: "4.5",
-    skills: ["Striking", "Grappling", "Fight Strategy", "Conditioning"],
-    originalPrice: "€139.99"
-  },
-  {
-    id: 5,
-    title: "Chef",
-    description: "Master cuisines, kitchen efficiency, and modern culinary techniques.",
-    location: "Online",
-    img: "/careers/chef.jpg",
-    price: "€39",
-    enrolled: 2100,
-    rating: "4.8",
-    skills: ["Knife Skills", "Plating", "Menu Design", "Food Safety"],
-    originalPrice: "€109.98"
-  },
-  {
-    id: 6,
-    title: "Graphic Designer",
-    description: "Design stunning visuals using Figma, Adobe Suite, and AI tools.",
-    location: "Remote",
-    img: "/careers/graphicdesigner.jpg",
-    price: "€39",
-    enrolled: 3250,
-    rating: "4.8",
-    skills: ["Figma", "Illustrator", "Typography", "Branding"],
-    originalPrice: "€129.97"
-  },
-  {
-    id: 7,
-    title: "Fashion Designer",
-    description: "Sketch, design, and bring your fashion visions to life with digital tools.",
-    location: "Remote",
-    img: "/careers/fashiondesigner.jpg",
-    price: "€39",
-    enrolled: 1420,
-    rating: "4.6",
-    skills: ["Pattern Making", "Textiles", "Fashion Illustration", "Trend Analysis"],
-    originalPrice: "€106.99"
-  },
-  {
-    id: 8,
-    title: "Footballer",
-    description: "Improve tactics, vision, and decision-making with virtual football coaching.",
-    location: "Online",
-    img: "/careers/footballer.png",
-    price: "€49",
-    enrolled: 1765,
-    rating: "4.7",
-    skills: ["Tactical Analysis", "Fitness Training", "Team Strategy", "Nutrition"],
-    originalPrice: "€159.99"
-  },
-  {
-    id: 9,
+    id: 3,
     title: "Trader",
     description: "Master technical analysis, risk management, and trade execution.",
     location: "Online",
@@ -330,31 +258,19 @@ export const careers = [
     originalPrice: "€219.99"
   },
   {
-    id: 11,
-    title: "Data Scientist",
-    description: "Learn to analyze data, build models, and gain data-driven insights.",
+    id: 4,
+    title: "Content Creator",
+    description: "Build your brand, script videos, and engage your audience on digital platforms.",
     location: "Remote",
-    img: "/careers/data-scientist.png",
-    price: "€59",
-    enrolled: 4120,
-    rating: "4.9",
-    skills: ["Python", "Machine Learning", "SQL", "Data Visualization"],
-    originalPrice: "€159.99"
+    img: "/careers/content-creator.jpg",
+    price: "€49",
+    enrolled: 1890,
+    rating: "4.7",
+    skills: ["Video Editing", "Scriptwriting", "Social Media", "SEO"],
+    originalPrice: "€99.99"
   },
   {
-    id: 12,
-    title: "Actor",
-    description: "Hone your craft through virtual stage and film training modules.",
-    location: "Remote",
-    img: "/careers/actor.png",
-    price: "€39",
-    enrolled: 980,
-    rating: "4.5",
-    skills: ["Method Acting", "Voice Modulation", "Improvisation", "Screen Presence"],
-    originalPrice: "€179.99"
-  },
-  {
-    id: 13,
+    id: 5,
     title: "Cybersecurity Specialist",
     description: "Protect systems and data through hands-on hacking simulations.",
     location: "Online",
@@ -366,7 +282,91 @@ export const careers = [
     originalPrice: "€179.99"
   },
   {
-    id: 14,
+    id: 6,
+    title: "E-commerce Specialist",
+    description: "Build and manage online stores using Shopify, SEO, and marketing tools.",
+    location: "Online",
+    img: "/careers/ecommerce.jpg",
+    price: "€49",
+    enrolled: 2870,
+    rating: "4.8",
+    skills: ["Shopify", "Digital Marketing", "Inventory Management", "Conversion Optimization"],
+    originalPrice: "€119.99"
+  },
+  {
+    id: 7,
+    title: "MMA Fighter",
+    description: "Train your mind and body with AI-driven combat simulations and strategy.",
+    location: "Hybrid",
+    img: "/careers/mmafighter.jpg",
+    price: "€69",
+    enrolled: 890,
+    rating: "4.5",
+    skills: ["Striking", "Grappling", "Fight Strategy", "Conditioning"],
+    originalPrice: "€139.99"
+  },
+  {
+    id: 8,
+    title: "Chef",
+    description: "Master cuisines, kitchen efficiency, and modern culinary techniques.",
+    location: "Online",
+    img: "/careers/chef.jpg",
+    price: "€39",
+    enrolled: 2100,
+    rating: "4.8",
+    skills: ["Knife Skills", "Plating", "Menu Design", "Food Safety"],
+    originalPrice: "€109.98"
+  },
+  {
+    id: 9,
+    title: "Graphic Designer",
+    description: "Design stunning visuals using Figma, Adobe Suite, and AI tools.",
+    location: "Remote",
+    img: "/careers/graphicdesigner.jpg",
+    price: "€39",
+    enrolled: 3250,
+    rating: "4.8",
+    skills: ["Figma", "Illustrator", "Typography", "Branding"],
+    originalPrice: "€129.97"
+  },
+  {
+    id: 10,
+    title: "Footballer",
+    description: "Improve tactics, vision, and decision-making with virtual football coaching.",
+    location: "Online",
+    img: "/careers/footballer.png",
+    price: "€49",
+    enrolled: 1765,
+    rating: "4.7",
+    skills: ["Tactical Analysis", "Fitness Training", "Team Strategy", "Nutrition"],
+    originalPrice: "€159.99"
+  },
+  {
+    id: 11,
+    title: "Actor",
+    description: "Hone your craft through virtual stage and film training modules.",
+    location: "Remote",
+    img: "/careers/actor.png",
+    price: "€39",
+    enrolled: 980,
+    rating: "4.5",
+    skills: ["Method Acting", "Voice Modulation", "Improvisation", "Screen Presence"],
+    originalPrice: "€179.99"
+  },
+  {
+    id: 12,
+    title: "Data Scientist",
+    description: "Learn to analyze data, build models, and gain data-driven insights.",
+    location: "Remote",
+    img: "/careers/data-scientist.png",
+    price: "€59",
+    enrolled: 4120,
+    rating: "4.9",
+    skills: ["Python", "Machine Learning", "SQL", "Data Visualization"],
+    originalPrice: "€159.99"
+  },
+  {
+    id: 13,
     title: "Author",
     description: "Unlock creative storytelling and learn how to publish effectively.",
     location: "Remote",
@@ -378,7 +378,7 @@ export const careers = [
     originalPrice: "€79.99"
   },
   {
-    id: 15,
+    id: 14,
     title: "Investor",
     description: "Build wealth with courses on stock markets, crypto, and real estate.",
     location: "Remote",
@@ -390,7 +390,7 @@ export const careers = [
     originalPrice: "€189.99"
   },
   {
-    id: 16,
+    id: 15,
     title: "Musician",
     description: "Compose, produce, and mix tracks with digital and AI tools.",
     location: "Online",
@@ -402,7 +402,7 @@ export const careers = [
     originalPrice: "€98.99"
   },
   {
-    id: 17,
+    id: 16,
     title: "Game Developer",
     description: "Design, code, and publish games using Unity and Unreal Engine.",
     location: "Remote",
@@ -414,7 +414,7 @@ export const careers = [
     originalPrice: "€149.99"
   },
   {
-    id: 18,
+    id: 17,
     title: "Animator",
     description: "Create engaging 2D/3D animations using Blender and After Effects.",
     location: "Online",
@@ -426,7 +426,7 @@ export const careers = [
     originalPrice: "€139.99"
   },
   {
-    id: 19, 
+    id: 18,
     title: "Journalist",
     description: "Report, investigate, and write with AI-assisted research and ethics.",
     location: "Remote",
@@ -436,18 +436,6 @@ export const careers = [
     rating: "4.5",
     skills: ["Investigative Reporting", "Fact-Checking", "Interviewing", "AP Style"],
     originalPrice: "€89.99"
-  },
-  {
-    id: 20,
-    title: "E-commerce Specialist",
-    description: "Build and manage online stores using Shopify, SEO, and marketing tools.",
-    location: "Online",
-    img: "/careers/ecommerce.jpg",
-    price: "€49",
-    enrolled: 2870,
-    rating: "4.8",
-    skills: ["Shopify", "Digital Marketing", "Inventory Management", "Conversion Optimization"],
-    originalPrice: "€119.99"
   }
 ];
 

@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import { StarIcon } from "@heroicons/react/24/outline";
+import { WiDaySunny, WiDayCloudy, WiNightAltCloudy } from "react-icons/wi";
 import Image from "next/image";
 import api from "@/lib/api";
+import React from "react";
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
@@ -15,8 +17,36 @@ export default function VirtuPathDashboard() {
   const [totalToday, setTotalToday] = useState(0);
   const [performance, setPerformance] = useState<any>(null);
   const [currentPath, setCurrentPath] = useState("Loading...");
+  const [greetingData, setGreetingData] = useState<{
+    greeting: string;
+    icon: React.ReactNode;
+  } | null>(null);
+  
+
+  const getGreetingVisual = () => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+      return {
+        greeting: "Good morning",
+        icon: <WiDaySunny className="text-yellow-300 w-7 h-7" />,
+      };
+    } else if (hour < 18) {
+      return {
+        greeting: "Good afternoon",
+        icon: <WiDayCloudy className="text-orange-300 w-7 h-7" />,
+      };
+    } else {
+      return {
+        greeting: "Good evening",
+        icon: <WiNightAltCloudy className="text-blue-300 w-7 h-7" />,
+      };
+    }
+  };
 
   useEffect(() => {
+    setGreetingData(getGreetingVisual());
+
     const fetchDashboardData = async () => {
       try {
         const userRes = await api.get("/users/me");
@@ -24,40 +54,26 @@ export default function VirtuPathDashboard() {
         setUser(currentUser);
 
         const { careerPathID, currentDay, userID } = currentUser;
-        console.log("User:", currentUser);
-        console.log("CareerPathID:", careerPathID);
-        console.log("CurrentDay:", currentDay);
-
-        // Fetch today's tasks
         const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${currentDay}`);
         const todayTasks = tasksRes.data;
-        console.log("TodayTasks:", todayTasks);
         setTotalToday(todayTasks.length);
 
-        // Fetch user completions
         const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
         const userCompletions = completionRes.data;
-        console.log("All User Completions:", userCompletions);
 
-        const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+        const today = new Date().toISOString().split("T")[0];
         const todayCompletions = userCompletions.filter(
           (tc: any) =>
             tc.careerDay === currentDay &&
             tc.completionDate?.startsWith(today)
         );
-        
-        
-        console.log("Filtered Today Completions:", todayCompletions);
         setCompletedToday(todayCompletions.length);
 
-        // Fetch performance
         const perfRes = await api.get("/performancereviews");
         setPerformance(perfRes.data?.[0]);
 
-        // Get career path name
         const pathRes = await api.get(`/CareerPaths/${careerPathID}`);
         setCurrentPath(pathRes.data?.name || "Unknown Path");
-
       } catch (err) {
         console.error("Error loading dashboard data:", err);
       }
@@ -89,8 +105,9 @@ export default function VirtuPathDashboard() {
           <HiUserCircle size={80} className="text-purple-400" />
         )}
         <div>
-          <h1 className="text-4xl font-bold mb-1">
-            Hi, {user?.fullName?.split(" ")[0] || "User"}!
+          <h1 className="text-4xl font-bold mb-1 flex items-center gap-2">
+            {greetingData?.icon}
+            {greetingData?.greeting}, {user?.fullName?.split(" ")[0] || "User"}!
           </h1>
           <p className="text-white/60 text-sm">Welcome back to your career journey.</p>
         </div>

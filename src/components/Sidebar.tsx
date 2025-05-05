@@ -116,11 +116,13 @@ export default function Sidebar() {
                 : defaultAvatar
             }
             alt="User"
-            width={32}
-            height={32}
-            className="rounded-full object-cover"
+            width={40}
+            height={40}
+            quality={100}
+            className="rounded-full object-cover aspect-square"
             unoptimized
           />
+
           <div>
             <p className="text-sm font-medium text-white">
              {user?.fullName?.split(" ")[0] || "User"}

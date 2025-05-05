@@ -66,6 +66,23 @@ namespace VirtuPathAPI.Controllers
 
             return NoContent();
         }
+        // GET: api/DailyQuotes/today
+        [HttpGet("today")]
+        public async Task<IActionResult> GetTodayQuote()
+        {
+            var today = DateTime.UtcNow.Date;
+            int dayOfYear = today.DayOfYear;
+
+            // If fewer than 365 quotes, wrap around
+            int totalQuotes = await _context.DailyQuotes.CountAsync();
+            int quoteId = (dayOfYear - 1) % totalQuotes + 1;
+
+            var quote = await _context.DailyQuotes.FindAsync(quoteId);
+            if (quote == null)
+                return NotFound("Quote not found for today.");
+
+            return Ok(new { quote = quote.Quote });
+        }
 
         // DELETE: api/DailyQuotes/{id}
         [HttpDelete("{id}")]

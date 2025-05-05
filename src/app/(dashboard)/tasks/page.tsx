@@ -19,6 +19,8 @@ const TaskPage = () => {
   const [completionMap, setCompletionMap] = useState<CompletionMap>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [dailyQuote, setDailyQuote] = useState('');
+
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -108,6 +110,17 @@ const TaskPage = () => {
       setError('Failed to delete task completion.');
     }
   };
+  const fetchQuote = async () => {
+    try {
+      const res = await api.get('/DailyQuotes/today');
+      setDailyQuote(res.data.quote);
+    } catch {
+      setDailyQuote("The expert in anything was once a beginner."); // fallback
+    }
+  };
+  
+  fetchQuote();
+  
 
   const toggleTask = async (index: number) => {
     const updated = [...tasks];
@@ -141,9 +154,10 @@ const TaskPage = () => {
             <div className="text-center mb-12">
               <SparklesIcon className="h-12 w-12 text-purple-400/30 mx-auto mb-4" />
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
-                "The expert in anything was once a beginner."
+                “{dailyQuote || 'Loading daily quote...'}”
               </h1>
-              <p className="text-sm text-gray-400 font-light tracking-wide">– Helen Hayes</p>
+
+              
             </div>
 
             {loading ? (
