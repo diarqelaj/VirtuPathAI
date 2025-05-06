@@ -13,6 +13,8 @@ namespace VirtuPathAPI.Models
         // ✅ Add these two lines
         public DbSet<DailyTask> DailyTasks { get; set; }
         public DbSet<TaskCompletion> TaskCompletions { get; set; }
+        public DbSet<User> Users { get; set; }
+
 
 
 

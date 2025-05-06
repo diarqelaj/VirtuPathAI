@@ -69,6 +69,31 @@ const TaskPage = () => {
 
     fetchTasks();
   }, []);
+  useEffect(() => {
+    const fetchQuote = async () => {
+      try {
+        const res = await api.get('/DailyQuotes/today');
+        setDailyQuote(res.data.quote);
+      } catch {
+        setDailyQuote("The expert in anything was once a beginner."); // fallback
+      }
+    };
+  
+    fetchQuote();
+  
+    const interval = setInterval(() => {
+      const now = new Date().toDateString();
+      const stored = localStorage.getItem('lastQuoteDate');
+  
+      if (stored !== now) {
+        localStorage.setItem('lastQuoteDate', now);
+        fetchQuote();
+      }
+    }, 60 * 1000); // check every minute
+  
+    return () => clearInterval(interval);
+  }, []);
+  
 
   const recordTaskCompletion = async (taskID: number) => {
     if (completionMap[taskID]) return;
@@ -110,16 +135,7 @@ const TaskPage = () => {
       setError('Failed to delete task completion.');
     }
   };
-  const fetchQuote = async () => {
-    try {
-      const res = await api.get('/DailyQuotes/today');
-      setDailyQuote(res.data.quote);
-    } catch {
-      setDailyQuote("The expert in anything was once a beginner."); // fallback
-    }
-  };
-  
-  fetchQuote();
+
   
 
   const toggleTask = async (index: number) => {
@@ -157,7 +173,6 @@ const TaskPage = () => {
                 “{dailyQuote || 'Loading daily quote...'}”
               </h1>
 
-              
             </div>
 
             {loading ? (

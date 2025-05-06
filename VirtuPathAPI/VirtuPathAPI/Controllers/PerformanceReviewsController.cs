@@ -71,28 +71,35 @@ namespace VirtuPathAPI.Controllers
             return NoContent();
         }
 
-        // GET: api/PerformanceReviews/progress/daily?userId=1&day=12
         [HttpGet("progress/daily")]
         public async Task<IActionResult> GetDailyProgress([FromQuery] int userId, [FromQuery] int day)
         {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (user.CareerPathID == null)
+               return BadRequest("User does not have a CareerPath assigned.");
+
+             int careerPathId = user.CareerPathID.Value;
+
+
+
+            var assignedTasks = await _context.DailyTasks
+                .Where(dt => dt.Day == day && dt.CareerPathID == careerPathId)
+                .ToListAsync();
+
             var completedTaskIds = await _context.TaskCompletions
                 .Where(tc => tc.UserID == userId)
                 .Select(tc => tc.TaskID)
-                .Distinct()
                 .ToListAsync();
 
-            var dailyTasks = await _context.DailyTasks
-                .Where(dt => dt.Day == day)
-                .ToListAsync();
-
-            int careerPathId = dailyTasks.FirstOrDefault()?.CareerPathID ?? 0;
-
-            var assignedTasks = dailyTasks.Where(dt => dt.CareerPathID == careerPathId).ToList();
-            var completedTasks = assignedTasks.Where(t => completedTaskIds.Contains(t.TaskID)).ToList();
+            var completedTasks = assignedTasks
+                .Where(t => completedTaskIds.Contains(t.TaskID))
+                .ToList();
 
             int tasksAssigned = assignedTasks.Count;
             int tasksCompleted = completedTasks.Count;
-
             int performanceScore = tasksAssigned == 0 ? 0 : (int)Math.Round((double)(tasksCompleted * 100) / tasksAssigned);
 
             return Ok(new
@@ -106,24 +113,36 @@ namespace VirtuPathAPI.Controllers
             });
         }
 
+
         // GET: api/PerformanceReviews/progress/weekly?userId=1
         [HttpGet("progress/weekly")]
-        public async Task<IActionResult> GetWeeklyProgress([FromQuery] int userId)
+        public async Task<IActionResult> GetWeeklyProgress([FromQuery] int userId, [FromQuery] int day)
         {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (user.CareerPathID == null)
+                return BadRequest("User does not have a CareerPath assigned.");
+
+            int careerPathId = user.CareerPathID.Value;
+
+            // 🧠 Use the 'day' from query to compute the correct week range
+            int weekStart = ((day - 1) / 7) * 7 + 1;
+            int weekEnd = weekStart + 6;
+
+            var assignedTasks = await _context.DailyTasks
+                .Where(dt => dt.CareerPathID == careerPathId && dt.Day >= weekStart && dt.Day <= weekEnd)
+                .ToListAsync();
+
             var completedTaskIds = await _context.TaskCompletions
                 .Where(tc => tc.UserID == userId)
                 .Select(tc => tc.TaskID)
-                .Distinct()
                 .ToListAsync();
 
-            var weeklyTasks = await _context.DailyTasks
-                .Where(dt => dt.Day >= 1 && dt.Day <= 7)  // First week (Days 1-7)
-                .ToListAsync();
-
-            int careerPathId = weeklyTasks.FirstOrDefault()?.CareerPathID ?? 0;
-
-            var assignedTasks = weeklyTasks.Where(dt => dt.CareerPathID == careerPathId).ToList();
-            var completedTasks = assignedTasks.Where(t => completedTaskIds.Contains(t.TaskID)).ToList();
+            var completedTasks = assignedTasks
+                .Where(t => completedTaskIds.Contains(t.TaskID))
+                .ToList();
 
             int tasksAssigned = assignedTasks.Count;
             int tasksCompleted = completedTasks.Count;
@@ -133,12 +152,15 @@ namespace VirtuPathAPI.Controllers
             {
                 UserID = userId,
                 CareerPathID = careerPathId,
-                WeekRange = "Days 1-7",
+                WeekRange = $"Days {weekStart}-{weekEnd}",
                 TasksAssigned = tasksAssigned,
                 TasksCompleted = tasksCompleted,
                 PerformanceScore = performanceScore
             });
         }
+
+
+
 
         // GET: api/PerformanceReviews/progress/monthly?userId=1
         [HttpGet("progress/monthly")]

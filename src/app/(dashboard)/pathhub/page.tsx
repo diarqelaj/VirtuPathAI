@@ -15,17 +15,19 @@ export default function VirtuPathDashboard() {
   const [user, setUser] = useState<any>(null);
   const [completedToday, setCompletedToday] = useState(0);
   const [totalToday, setTotalToday] = useState(0);
-  const [performance, setPerformance] = useState<any>(null);
+  const [performanceScore, setPerformanceScore] = useState(0);
   const [currentPath, setCurrentPath] = useState("Loading...");
+  const [weeklyProgress, setWeeklyProgress] = useState<
+  { day: number; completed: number; total: number }[]
+>([]);
+
   const [greetingData, setGreetingData] = useState<{
     greeting: string;
     icon: React.ReactNode;
   } | null>(null);
-  
 
   const getGreetingVisual = () => {
     const hour = new Date().getHours();
-
     if (hour < 12) {
       return {
         greeting: "Good morning",
@@ -54,6 +56,7 @@ export default function VirtuPathDashboard() {
         setUser(currentUser);
 
         const { careerPathID, currentDay, userID } = currentUser;
+
         const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${currentDay}`);
         const todayTasks = tasksRes.data;
         setTotalToday(todayTasks.length);
@@ -69,11 +72,27 @@ export default function VirtuPathDashboard() {
         );
         setCompletedToday(todayCompletions.length);
 
-        const perfRes = await api.get("/performancereviews");
-        setPerformance(perfRes.data?.[0]);
+        const perfRes = await api.get(`/PerformanceReviews/progress/daily?userId=${userID}&day=${currentDay}`);
+        setPerformanceScore(perfRes.data?.performanceScore || 0);
 
         const pathRes = await api.get(`/CareerPaths/${careerPathID}`);
         setCurrentPath(pathRes.data?.name || "Unknown Path");
+
+        // === Weekly Progress ===
+        const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
+        const progressArr: { day: number; completed: number; total: number }[] = [];
+        
+        for (let day = weekStart; day < weekStart + 7; day++) {
+          const dayTasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${day}`);
+          const tasks = dayTasksRes.data || [];
+          const total = tasks.length;
+        
+          const completed = userCompletions.filter((c: any) => c.careerDay === day).length;
+        
+          progressArr.push({ day, completed, total });
+        }
+        setWeeklyProgress(progressArr);
+        
       } catch (err) {
         console.error("Error loading dashboard data:", err);
       }
@@ -99,7 +118,8 @@ export default function VirtuPathDashboard() {
             width={80}
             height={80}
             unoptimized
-            className="rounded-full object-cover ring-2 ring-purple-600 shadow-md hover:scale-105 transition-transform duration-200"
+            className="rounded-full object-cover aspect-square ring-purple-600 shadow-md hover:scale-105 transition-transform duration-200"
+            quality={100}
           />
         ) : (
           <HiUserCircle size={80} className="text-purple-400" />
@@ -135,18 +155,24 @@ export default function VirtuPathDashboard() {
         <div className="bg-white/5 p-6 rounded-2xl text-center h-full flex flex-col justify-between">
           <div>
             <h3 className="text-sm text-white/60 mb-2">Performance Rating</h3>
-            <div className="flex justify-center text-purple-400">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <StarIcon
-                  key={i}
-                  className={`w-6 h-6 ${
-                    i < Math.round(performance?.rating || 0)
-                      ? "text-purple-400"
-                      : "text-white/20"
-                  }`}
-                />
-              ))}
+            <div className="flex justify-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => {
+                const filled = i < Math.round(performanceScore / 20);
+                return (
+                  <StarIcon
+                    key={i}
+                    className={`w-7 h-7 ${
+                      filled
+                        ? "text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.8)]"
+                        : "text-white/20"
+                    } transition-transform duration-300`}
+                  />
+                );
+              })}
             </div>
+            <p className="mt-2 text-xs text-purple-300/80">
+              {performanceScore}% accuracy today
+            </p>
           </div>
         </div>
 
@@ -167,17 +193,24 @@ export default function VirtuPathDashboard() {
         {/* Weekly Progress */}
         <div className="bg-white/5 p-6 rounded-2xl h-full">
           <h3 className="mb-3 font-medium">Weekly Progress</h3>
-          <div className="h-40 bg-black-100 rounded-xl flex items-end gap-2 p-3">
-            {[40, 60, 50, 70, 90, 100, 80].map((val, i) => (
-              <div key={i} className="flex flex-col items-center justify-end w-full">
-                <div
-                  className="w-2 bg-purple-400 rounded-full transition-all"
-                  style={{ height: `${val}%` }}
-                />
-                <p className="text-xs text-white/40 mt-1">{"SMTWTFS"[i]}</p>
+          <div className="h-40 bg-black-100 rounded-xl flex items-end gap-4 p-4">
+          {weeklyProgress.map((item, i) => (
+            <div key={i} className="flex flex-col items-center justify-end w-full h-full group">
+              <div
+                className="w-2 bg-purple-400 rounded-full relative transition-all duration-300"
+                style={{ height: `${item.completed * 20}%` }} // Scale bar height visually (1 task = 20%)
+              >
+                <div className="absolute bottom-full mb-2 hidden group-hover:block text-xs text-center text-white bg-purple-700 px-2 py-1 rounded">
+                {item.completed} / {item.total} task{item.total !== 1 ? "s" : ""} done
+
+                </div>
               </div>
-            ))}
+              <p className="text-xs text-white/40 mt-2">{"SMTWTFS"[i]}</p>
+            </div>
+          ))}
+
           </div>
+
         </div>
 
         {/* Streak */}

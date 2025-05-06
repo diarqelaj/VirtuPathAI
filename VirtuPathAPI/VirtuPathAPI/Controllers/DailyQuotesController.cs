@@ -66,23 +66,39 @@ namespace VirtuPathAPI.Controllers
 
             return NoContent();
         }
-        // GET: api/DailyQuotes/today
         [HttpGet("today")]
-        public async Task<IActionResult> GetTodayQuote()
+        public async Task<IActionResult> GetTodayQuote([FromHeader(Name = "X-Timezone")] string timezone)
         {
-            var today = DateTime.UtcNow.Date;
-            int dayOfYear = today.DayOfYear;
+            try
+            {
+                var tz = TimeZoneInfo.FindSystemTimeZoneById(timezone);
+                var localNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
+                int dayOfYear = localNow.DayOfYear;
 
-            // If fewer than 365 quotes, wrap around
-            int totalQuotes = await _context.DailyQuotes.CountAsync();
-            int quoteId = (dayOfYear - 1) % totalQuotes + 1;
+                var totalQuotes = await _context.DailyQuotes.CountAsync();
+                if (totalQuotes == 0)
+                    return NotFound("No quotes available.");
 
-            var quote = await _context.DailyQuotes.FindAsync(quoteId);
-            if (quote == null)
-                return NotFound("Quote not found for today.");
+                int index = (dayOfYear - 1) % totalQuotes;
 
-            return Ok(new { quote = quote.Quote });
+                var quote = await _context.DailyQuotes
+                    .OrderBy(q => q.QuoteID)
+                    .Skip(index)
+                    .Take(1)
+                    .Select(q => q.Quote)
+                    .FirstOrDefaultAsync();
+
+                if (quote == null)
+                    return NotFound("Quote not found for today.");
+
+                return Ok(new { quote });
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                return BadRequest("Invalid timezone provided.");
+            }
         }
+
 
         // DELETE: api/DailyQuotes/{id}
         [HttpDelete("{id}")]
