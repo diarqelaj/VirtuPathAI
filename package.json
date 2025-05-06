@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
+    "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
     "@react-email/components": "^0.0.38",
     "@react-email/html": "^0.0.11",
@@ -20,6 +21,7 @@
     "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
     "browserslist": "^4.24.4",
+    "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "core-js": "^3.41.0",
     "emoji-picker-react": "^4.12.2",
@@ -55,6 +57,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.5",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/next": "^8.0.7",
     "@types/node": "^20.17.30",
     "@types/react": "^19.1.2",

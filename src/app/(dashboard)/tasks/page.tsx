@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SparklesIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 
 type Task = {
@@ -20,22 +21,18 @@ const TaskPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [dailyQuote, setDailyQuote] = useState('');
-
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         setLoading(true);
-
         const userRes = await api.get('/users/me');
         const userID = userRes.data.userID;
-
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
         const tasksRes = await api.get(`/DailyTasks/today`, {
-          headers: {
-            'X-Timezone': timezone,
-          },
+          headers: { 'X-Timezone': timezone },
         });
 
         const dailyTasks: Task[] = tasksRes.data.map((task: any) => ({
@@ -45,11 +42,9 @@ const TaskPage = () => {
         }));
 
         const completionsRes = await api.get(`/TaskCompletion?userID=${userID}`);
-        const completionData = completionsRes.data;
-
         const map: CompletionMap = {};
-        completionData.forEach((comp: any) => {
-          map[comp.taskID] = comp.completionID;
+        completionsRes.data.forEach((c: any) => {
+          map[c.taskID] = c.completionID;
         });
 
         const finalTasks = dailyTasks.map((task) => ({
@@ -69,31 +64,30 @@ const TaskPage = () => {
 
     fetchTasks();
   }, []);
+
   useEffect(() => {
     const fetchQuote = async () => {
       try {
         const res = await api.get('/DailyQuotes/today');
         setDailyQuote(res.data.quote);
       } catch {
-        setDailyQuote("The expert in anything was once a beginner."); // fallback
+        setDailyQuote("The expert in anything was once a beginner.");
       }
     };
-  
+
     fetchQuote();
-  
+
     const interval = setInterval(() => {
       const now = new Date().toDateString();
       const stored = localStorage.getItem('lastQuoteDate');
-  
       if (stored !== now) {
         localStorage.setItem('lastQuoteDate', now);
         fetchQuote();
       }
-    }, 60 * 1000); // check every minute
-  
+    }, 60000);
+
     return () => clearInterval(interval);
   }, []);
-  
 
   const recordTaskCompletion = async (taskID: number) => {
     if (completionMap[taskID]) return;
@@ -113,8 +107,7 @@ const TaskPage = () => {
 
       const res = await api.post('/TaskCompletion', completionData);
       setCompletionMap((prev) => ({ ...prev, [taskID]: res.data.completionID }));
-    } catch (err) {
-      console.error('Error recording task completion:', err);
+    } catch {
       setError('Failed to record task completion.');
     }
   };
@@ -130,13 +123,10 @@ const TaskPage = () => {
         delete map[taskID];
         return map;
       });
-    } catch (err) {
-      console.error('Error deleting task completion:', err);
+    } catch {
       setError('Failed to delete task completion.');
     }
   };
-
-  
 
   const toggleTask = async (index: number) => {
     const updated = [...tasks];
@@ -150,8 +140,7 @@ const TaskPage = () => {
       } else {
         await deleteTaskCompletion(task.id);
       }
-    } catch (err) {
-      console.error('Error updating task:', err);
+    } catch {
       setError('Failed to update task status.');
     }
   };
@@ -172,7 +161,6 @@ const TaskPage = () => {
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
                 “{dailyQuote || 'Loading daily quote...'}”
               </h1>
-
             </div>
 
             {loading ? (
@@ -184,10 +172,9 @@ const TaskPage = () => {
                 {tasks.map((task, index) => (
                   <div
                     key={task.id}
-                    className={`flex items-center gap-4 p-5 rounded-xl border
-                      ${task.checked ? 'border-white/10' : 'border-gray-800'}
-                      bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all duration-300
-                      cursor-pointer group`}
+                    className={`flex items-center gap-4 p-5 rounded-xl border ${
+                      task.checked ? 'border-white/10' : 'border-gray-800'
+                    } bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 cursor-pointer group`}
                     onClick={() => toggleTask(index)}
                   >
                     {task.checked ? (
@@ -212,13 +199,22 @@ const TaskPage = () => {
                   <span>{completedTasks}/{totalTasks} tasks</span>
                 </div>
                 <div className="relative h-3 rounded-full bg-purple-900/30 backdrop-blur-sm overflow-hidden">
-                  <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}>
+                  <div
+                    className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  >
                     <div className="absolute inset-0 bg-purple-500/20 animate-pulse" />
                   </div>
                 </div>
                 <p className="text-right text-sm text-purple-300/70">{Math.round(progress)}% completed</p>
               </div>
             )}
+
+            <div className="mt-6">
+              <div className="w-full bg-gradient-to-r from-purple-900 to-purple-700 text-center text-sm text-purple-200 rounded-lg px-5 py-3 border border-purple-500/20 shadow-inner">
+                Minimum 50% of tasks must be completed. A new set of daily tasks will become available after midnight local time.
+              </div>
+            </div>
           </div>
         </div>
       </main>
