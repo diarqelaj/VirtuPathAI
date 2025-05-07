@@ -45,18 +45,22 @@ export default function ResetPasswordPage() {
     setError("");
     if (!token || !email) return setError("Invalid or missing token.");
     if (password !== confirm) return setError("Passwords do not match.");
-  
+
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/.test(password)) {
+      return setError("Password must include uppercase, number, special char, and be 8+ characters.");
+    }
+
     try {
       const res = await fetch("/api/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, newPassword: password }),
       });
-  
+
       const data = await res.json();
-  
+
       if (res.ok) {
-        setSuccess("Password reset successfully. Redirecting...");
+        setSuccess("✅ Password reset successfully. Redirecting...");
         setTimeout(() => router.push("/login"), 2500);
       } else {
         setError(data.error || "Failed to reset password.");
@@ -71,9 +75,7 @@ export default function ResetPasswordPage() {
       <div className="w-full max-w-md bg-[#111827] border border-white/10 p-6 rounded-xl shadow-2xl">
         <h1 className="text-2xl font-semibold text-white mb-4">Reset Password</h1>
         <p className="text-gray-400 mb-6 text-sm">
-          {email
-            ? `Set a new password for ${email}.`
-            : "Unable to verify token or email."}
+          {email ? `Set a new password for ${email}.` : "Unable to verify token or email."}
         </p>
 
         {error && (
