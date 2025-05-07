@@ -1,11 +1,12 @@
-import dynamicImport from "next/dynamic"; // ✅ rename the import
+import { Suspense } from "react";
+import ResetPasswordPage from "./ResetPasswordPage";
 
-export const dynamic = "force-dynamic"; // ✅ safe to use this now
-
-const ResetPasswordPage = dynamicImport(() => import("./ResetPasswordPage"), {
-  ssr: false,
-});
+export const dynamic = "force-dynamic"; // ✅ disables static export
 
 export default function Page() {
-  return <ResetPasswordPage />;
+  return (
+    <Suspense fallback={<div className="text-white p-6">Loading...</div>}>
+      <ResetPasswordPage />
+    </Suspense>
+  );
 }
