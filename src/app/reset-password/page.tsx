@@ -139,3 +139,4 @@ const InputField = ({
     />
   </div>
 );
+// Note: The above code is a complete functional component for a password reset page in a Next.js application.
