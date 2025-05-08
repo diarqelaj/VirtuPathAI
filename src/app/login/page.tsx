@@ -234,22 +234,21 @@ const AuthPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code: twoFACode, rememberMe }),
       });
-      // This here changed
+  
       if (!res.ok) {
         const data = await res.json();
         setError(data.error || "Invalid 2FA code");
         return;
       }
   
-      // ✅ 2FA passed → now apply rememberMe if requested
-      await api.post("/Users/login", { email, password, rememberMe });
-  
+      // ✅ DO NOT login again here — session is already set!
       const pending = localStorage.getItem("pendingEnrollment");
       router.push(pending ? "/payment" : "/");
     } catch {
       setError("2FA verification failed");
     }
   };
+  
   
   
 
