@@ -227,28 +227,46 @@ const AuthPage = () => {
   
 
   const setupRecaptcha = () => {
-    if (typeof window === "undefined" || window.recaptchaVerifier) return;
+    const container = document.getElementById("recaptcha-container");
+    if (!container || typeof window === "undefined" || window.recaptchaVerifier) return;
+  
     window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
       size: "invisible",
-      callback: () => {},
-      "expired-callback": () => console.warn("reCAPTCHA expired."),
+      callback: () => {
+        console.log("reCAPTCHA solved");
+      },
+      "expired-callback": () => {
+        console.warn("reCAPTCHA expired");
+      },
     });
+  
     window.recaptchaVerifier.render().then((widgetId: number) => {
       window.recaptchaWidgetId = widgetId;
     });
   };
+  
 
   const handleSendOTP = async () => {
     try {
-      setupRecaptcha();
-      const appVerifier = window.recaptchaVerifier!;
-      const confirmation = await signInWithPhoneNumber(auth, phone, appVerifier);
-      setConfirmationResult(confirmation);
-      setSuccess("OTP sent! Check your phone.");
+      // Slight delay to ensure modal is fully rendered
+      setTimeout(() => {
+        setupRecaptcha();
+      }, 100); // 100ms
+      console.log("Verifier:", window.recaptchaVerifier);
+
+      // Wait a bit before using the verifier
+      setTimeout(async () => {
+        const appVerifier = window.recaptchaVerifier!;
+        const confirmation = await signInWithPhoneNumber(auth, phone, appVerifier);
+        setConfirmationResult(confirmation);
+        setSuccess("OTP sent! Check your phone.");
+      }, 300); // 300ms
     } catch (err: any) {
+      console.error(err);
       setError(err.message || "Failed to send OTP.");
     }
   };
+  
 
   const handleVerifyOTP = async () => {
     try {
