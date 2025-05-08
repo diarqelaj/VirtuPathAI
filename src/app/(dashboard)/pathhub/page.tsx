@@ -22,6 +22,7 @@ export default function VirtuPathDashboard() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [monthlyPerformance, setMonthlyPerformance] = useState<any>(null);
 
   const padded = (n: number) => String(n).padStart(2, "0");
 
@@ -97,6 +98,23 @@ export default function VirtuPathDashboard() {
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const fetchMonthlyPerformance = async () => {
+      try {
+        const userRes = await api.get("/users/me");
+        const userID = userRes.data.userID;
+
+        const monthlyPerfRes = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
+        console.log("Monthly Performance API Response:", monthlyPerfRes.data);
+        setMonthlyPerformance(monthlyPerfRes.data);
+      } catch (err) {
+        console.error("Error fetching monthly performance data:", err);
+      }
+    };
+
+    fetchMonthlyPerformance();
   }, []);
 
   const completionPercent = totalToday === 0 ? 0 : Math.min((completedToday / totalToday) * 100, 100);
@@ -193,6 +211,8 @@ export default function VirtuPathDashboard() {
             ))}
           </div>
         </div>
+
+
 
         {/* Countdown */}
         <div className="relative bg-[#0b0b1238] p-8 rounded-2xl flex flex-col justify-between overflow-hidden shadow-xl min-h-[320px]">

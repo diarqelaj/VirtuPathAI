@@ -85,8 +85,6 @@ const AuthPage = () => {
           
           // ✅ Always call set-career if pending enrollment exists
           const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || "null");
-
-
           if (pending?.careerPathID) {
             await api.post("/Users/set-career", {
               email: session.user.email,
