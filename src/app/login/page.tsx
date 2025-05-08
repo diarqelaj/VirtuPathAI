@@ -232,9 +232,9 @@ const AuthPage = () => {
       const res = await fetch("/api/verify-2fa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code: twoFACode }),
+        body: JSON.stringify({ email, code: twoFACode, rememberMe }),
       });
-  
+      // This here changed
       if (!res.ok) {
         const data = await res.json();
         setError(data.error || "Invalid 2FA code");

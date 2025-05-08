@@ -259,7 +259,14 @@ namespace VirtuPathAPI.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            Response.Cookies.Delete("VirtuPathRemember");
+            Response.Cookies.Append("VirtuPathRemember", "", new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(-1),
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax
+            });
+
             return Ok();
         }
 
