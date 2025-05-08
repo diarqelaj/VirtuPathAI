@@ -229,10 +229,10 @@ const AuthPage = () => {
   
   const handleVerify2FA = async () => {
     try {
-      const res = await fetch("/api/verify-2fa", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}users/verify-2fa`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // ✅ must be here!
+        credentials: "include", // ✅ this ensures cookies are handled properly
         body: JSON.stringify({ email, code: twoFACode, rememberMe }),
       });
   
@@ -242,13 +242,14 @@ const AuthPage = () => {
         return;
       }
   
-      // ✅ DO NOT login again here — session is already set!
       const pending = localStorage.getItem("pendingEnrollment");
       router.push(pending ? "/payment" : "/");
-    } catch {
+    } catch (err) {
+      console.error("❌ 2FA verify failed:", err);
       setError("2FA verification failed");
     }
   };
+  
   
   
   
