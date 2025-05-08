@@ -232,6 +232,7 @@ const AuthPage = () => {
       const res = await fetch("/api/verify-2fa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // ✅ must be here!
         body: JSON.stringify({ email, code: twoFACode, rememberMe }),
       });
   
