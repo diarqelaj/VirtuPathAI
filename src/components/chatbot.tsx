@@ -4,6 +4,7 @@ import { X, Bot, Smile } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import ReactMarkdown from 'react-markdown';
 
+
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
