@@ -38,7 +38,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // 4. ✅ Send code via Resend
     const emailContent = TwoFAEmail({ code });
     const { error } = await resend.emails.send({
-      from: "VirtuPath AI <onboarding@resend.dev>",
+      from: "VirtuPath AI <virtupathai@gmail.com>",
       to: [email],
       subject: "Your 2FA Code - VirtuPath AI",
       react: emailContent as React.ReactElement,
