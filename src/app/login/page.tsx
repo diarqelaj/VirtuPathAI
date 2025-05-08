@@ -109,22 +109,32 @@ const AuthPage = () => {
   
     handleGoogleAuth();
   }, [session]);
+
   useEffect(() => {
-    if (!showPhoneModal) return;
+    if (!showPhoneModal || window.recaptchaVerifier) return;
   
     const container = document.getElementById("recaptcha-container");
-    if (!container || window.recaptchaVerifier) return;
+    if (!container) return;
   
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-      size: "invisible",
-      callback: () => console.log("reCAPTCHA solved"),
-      "expired-callback": () => console.warn("reCAPTCHA expired"),
-    });
+    try {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+        size: "invisible",
+        callback: (response: any) => {
+          console.log("reCAPTCHA solved");
+        },
+        "expired-callback": () => {
+          console.warn("reCAPTCHA expired");
+        },
+      });
   
-    window.recaptchaVerifier.render().then((widgetId: number) => {
-      window.recaptchaWidgetId = widgetId;
-    });
+      window.recaptchaVerifier.render().then((widgetId: number) => {
+        window.recaptchaWidgetId = widgetId;
+      });
+    } catch (e) {
+      console.error("reCAPTCHA setup failed:", e);
+    }
   }, [showPhoneModal]);
+  
   
   useEffect(() => {
     const el = policyRef.current;
@@ -243,37 +253,29 @@ const AuthPage = () => {
   
   
 
-  const setupRecaptcha = () => {
-    const container = document.getElementById("recaptcha-container");
-    if (!container || typeof window === "undefined" || window.recaptchaVerifier) return;
-  
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-      size: "invisible",
-      callback: () => {
-        console.log("reCAPTCHA solved");
-      },
-      "expired-callback": () => {
-        console.warn("reCAPTCHA expired");
-      },
-    });
-  
-    window.recaptchaVerifier.render().then((widgetId: number) => {
-      window.recaptchaWidgetId = widgetId;
-    });
-  };
   
 
   const handleSendOTP = async () => {
+    setError("");
+    setSuccess("");
+  
     try {
-      const appVerifier = window.recaptchaVerifier!;
+      // Wait for verifier to be initialized in useEffect
+      if (!window.recaptchaVerifier) {
+        return setError("reCAPTCHA is not ready. Please wait and try again.");
+      }
+  
+      const appVerifier = window.recaptchaVerifier;
+  
       const confirmation = await signInWithPhoneNumber(auth, phone, appVerifier);
       setConfirmationResult(confirmation);
       setSuccess("OTP sent! Check your phone.");
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Failed to send OTP.");
+      console.error("❌ OTP error:", err);
+      setError(err?.message || "Failed to send OTP.");
     }
   };
+  
   
   
 
