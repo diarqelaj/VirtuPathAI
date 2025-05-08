@@ -16,6 +16,9 @@ const Page = () => {
   const [userID, setUserID] = useState<number | null>(null);
   const [tasks, setTasks] = useState<any[]>([]);
   const [error, setError] = useState('');
+  const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
+
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,15 +34,67 @@ const Page = () => {
   }, []);
 
   // Example mock logic that should be replaced with real data fetching logic when API is ready
-  const mockWeeklyData = [
-    { day: 'Mon', tasks: 4 },
-    { day: 'Tue', tasks: 6 },
-    { day: 'Wed', tasks: 8 },
-    { day: 'Thu', tasks: 5 },
-    { day: 'Fri', tasks: 7 },
-    { day: 'Sat', tasks: 3 },
-    { day: 'Sun', tasks: 2 },
-  ];
+  const [weeklyData, setWeeklyData] = useState<{ day: string; tasks: number }[]>([]);
+
+  useEffect(() => {
+    const fetchMonthlyProgress = async () => {
+      if (timeRange !== 'month' || userID === null) return;
+  
+      try {
+        const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
+        const progress = res.data;
+  
+        const formatted = (progress.weeklyProgress || []).map((week: any, i: number) => ({
+          week: `Week ${i + 1}`,
+          completed: week.completed,
+          total: week.total
+        }));
+  
+        setMonthlyData(formatted);
+      } catch (err) {
+        console.error('Error fetching monthly progress:', err);
+      }
+    };
+  
+    fetchMonthlyProgress();
+  }, [timeRange, userID]);
+  
+
+  useEffect(() => {
+    const fetchWeeklyProgress = async () => {
+      try {
+        const userRes = await api.get('/users/me');
+        const currentUser = userRes.data;
+        const { careerPathID, currentDay, userID } = currentUser;
+  
+        const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
+        const completions = completionRes.data;
+  
+        const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
+        const weekDays = Array.from({ length: 7 }, (_, i) => weekStart + i);
+  
+        const data: { day: string; tasks: number }[] = [];
+  
+        for (let i = 0; i < 7; i++) {
+          const dayNumber = weekStart + i;
+          const tasks = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
+          const completedCount = completions.filter(
+            (c: any) => c.careerDay === dayNumber
+          ).length;
+  
+          const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+          data.push({ day: dayLabel, tasks: completedCount });
+        }
+  
+        setWeeklyData(data);
+      } catch (err) {
+        console.error('Error fetching weekly progress:', err);
+      }
+    };
+  
+    fetchWeeklyProgress();
+  }, []);
+  
 
   const mockTasks = [
     { text: 'Morning coding session', done: true, date: '2024-03-25' },
@@ -47,7 +102,62 @@ const Page = () => {
     { text: 'Code review', done: false, date: '2024-03-25' },
     { text: 'Learn new framework', done: false, date: '2024-03-25' },
   ];
+  const chartContent = timeRange === 'week' ? (
+    <BarChart data={weeklyData}>
+      <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+      <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+      <Tooltip
+        contentStyle={{
+          background: '#111113',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: '12px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+        }}
+        itemStyle={{ color: '#e5e7eb' }}
+      />
+      <Bar dataKey="tasks" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
+      <defs>
+        <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#9333ea" />
+          <stop offset="100%" stopColor="#4f46e5" />
+        </linearGradient>
+      </defs>
+    </BarChart>
+  ) : (
+    <BarChart
+  data={monthlyData.map(w => ({
+    week: w.week,
+    completed: w.completed,
+    total: w.total
+  }))}
+>
+  <XAxis dataKey="week" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+  <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]} />
+  <Tooltip
+    formatter={(_, __, payload: any) => {
+      const item = payload?.[0]?.payload;
+      return `${item.completed} / ${item.total} tasks`;
+    }}
+    contentStyle={{
+      background: '#111113',
+      border: '1px solid rgba(255,255,255,0.1)',
+      borderRadius: '12px',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+    }}
+    itemStyle={{ color: '#e5e7eb' }}
+  />
+  <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
+  <defs>
+    <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#9333ea" />
+      <stop offset="100%" stopColor="#4f46e5" />
+    </linearGradient>
+  </defs>
+</BarChart>
 
+  );
+  
+  
   return (
     <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
       <FloatingNav navItems={navItems} />
@@ -83,23 +193,10 @@ const Page = () => {
 
             <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between">
               <div className="flex-1 max-w-full h-96">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={mockWeeklyData}>
-                    <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-                    <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-                    <Tooltip
-                      contentStyle={{ background: '#111113', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}
-                      itemStyle={{ color: '#e5e7eb' }}
-                    />
-                    <Bar dataKey="tasks" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
-                    <defs>
-                      <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#9333ea" />
-                        <stop offset="100%" stopColor="#4f46e5" />
-                      </linearGradient>
-                    </defs>
-                  </BarChart>
-                </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
+  {chartContent}
+</ResponsiveContainer>
+
               </div>
 
               <div className="flex flex-wrap gap-8 md:flex-nowrap md:w-1/2">
@@ -107,36 +204,22 @@ const Page = () => {
                   <div className="flex items-center gap-3 mb-6">
                     <CheckCircleIcon className="h-7 w-7 text-purple-400" />
                     <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-100">
-                      Completed Tasks
-                    </h3>
+  Completed: {mockTasks.filter(t => t.done).length}
+</h3>
+
                   </div>
-                  <div className="space-y-4">
-                    {mockTasks.filter(t => t.done).map((task, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group">
-                        <CheckCircleIcon className="h-6 w-6 text-purple-400 flex-shrink-0" />
-                        <span className="text-gray-200 text-lg">{task.text}</span>
-                      </div>
-                    ))}
-                  </div>
+                 
                 </div>
 
                 <div className="flex-1 bg-gradient-to-br from-blue-900/30 to-purple-900/20 p-8 rounded-2xl border border-white/10 backdrop-blur-lg">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="h-7 w-7 border-2 border-blue-400 rounded-full" />
                     <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-100">
-                      Pending Tasks
-                    </h3>
+  Pending: {mockTasks.filter(t => !t.done).length}
+</h3>
+
                   </div>
-                  <div className="space-y-4">
-                    {mockTasks.filter(t => !t.done).map((task, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group">
-                        <div className="h-6 w-6 border-2 border-blue-400 rounded-full flex items-center justify-center">
-                          <div className="h-3 w-3 bg-blue-400/30 rounded-full" />
-                        </div>
-                        <span className="text-gray-400 text-lg">{task.text}</span>
-                      </div>
-                    ))}
-                  </div>
+                  
                 </div>
               </div>
             </div>

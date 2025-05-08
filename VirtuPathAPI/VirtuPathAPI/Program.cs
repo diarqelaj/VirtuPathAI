@@ -81,13 +81,13 @@ var app = builder.Build();
 //------------------------------------------------------------
 // 6)  PIPELINE
 //------------------------------------------------------------
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    // ✅ Allow Swagger CORS in dev
-    app.UseCors("AllowSwagger");
+// ✅ Allow Swagger CORS in dev
+app.UseCors("AllowSwagger");
 }
 else
 {
