@@ -84,7 +84,9 @@ const AuthPage = () => {
           }
           
           // ✅ Always call set-career if pending enrollment exists
-          const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || '{}');
+          const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || "null");
+
+
           if (pending?.careerPathID) {
             await api.post("/Users/set-career", {
               email: session.user.email,
@@ -97,7 +99,7 @@ const AuthPage = () => {
             password: ""
           });
   
-          const redirect = pending ? "/payment" : "/";
+          const redirect = pending?.careerPathID ? "/payment" : "/";
           router.push(redirect);
   
         } catch {

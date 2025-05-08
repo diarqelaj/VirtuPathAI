@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
     // ✅ Allow only the React/Next.js frontend in production
     options.AddPolicy("AllowFrontend", p =>
     {
-        p.WithOrigins("https://localhost:3000")
+        p.WithOrigins("https://virtu-path-ai.vercel.app", "https://localhost:3000")
          .AllowCredentials()
          .AllowAnyHeader()
          .AllowAnyMethod();
