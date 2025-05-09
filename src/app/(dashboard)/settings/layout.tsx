@@ -14,10 +14,12 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const pathname = usePathname();
 
   return (
-    <div className="w-full px-2 sm:px-4 md:px-6 py-8">
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-8">
+
 
       {/* Nav Tabs */}
-      <nav className="relative mb-8 border-b border-white/10 pb-2 flex gap-8">
+      <nav className="relative mb-8 border-b border-white/10 pb-2 flex flex-wrap gap-4 sm:gap-6">
+
         {settingsNav.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -45,7 +47,8 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       </nav>
 
       {/* Render settings page */}
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
+
     </div>
   );
 }

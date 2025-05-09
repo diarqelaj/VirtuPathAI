@@ -195,20 +195,22 @@ export default function VirtuPathDashboard() {
         {/* Weekly Progress */}
         <div className="bg-white/5 p-6 rounded-2xl flex flex-col justify-between">
           <h3 className="mb-3 font-medium">Weekly Progress</h3>
-          <div className="h-48 bg-[#111113] rounded-xl flex items-end gap-5 px-4 py-6">
+          <div className="relative h-48 bg-[#111113] rounded-xl flex items-end gap-5 px-4 py-6">
           {weeklyProgress.map((item, i) => {
             const percent = item.total === 0 ? 0 : (item.completed / item.total) * 100;
-            const heightPercent = Math.max(10, percent); // Ensure minimum height
+            const scaledHeight = `${(percent / 100) * 100}%`; // Scale 0–100% linearly
             const dayLabel = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i];
 
             return (
-              <div key={i} className="flex flex-col items-center justify-end w-full group">
-                <div
-                  className="w-4 rounded-full bg-gradient-to-b from-purple-500 to-indigo-500 relative transition-all duration-300"
-                  style={{ height: `${heightPercent}%`, minHeight: "0.5rem" }}
-                >
-                  <div className="absolute bottom-full mb-2 hidden group-hover:block text-xs text-white bg-purple-700 px-2 py-1 rounded z-10 whitespace-nowrap">
-                    {item.completed} / {item.total} task{item.total !== 1 ? "s" : ""}
+              <div key={i} className="flex flex-col items-center justify-end w-full h-full group">
+                <div className="flex-1 flex items-end">
+                  <div
+                    className="w-4 rounded-full bg-gradient-to-b from-purple-500 to-indigo-500 relative transition-all duration-300"
+                    style={{ height: scaledHeight, minHeight: "0.5rem" }}
+                  >
+                    <div className="absolute bottom-full mb-2 hidden group-hover:block text-xs text-white bg-purple-700 px-2 py-1 rounded z-10 whitespace-nowrap">
+                      {item.completed} / {item.total} task{item.total !== 1 ? "s" : ""}
+                    </div>
                   </div>
                 </div>
                 <p className="text-xs text-white/40 mt-2">{dayLabel}</p>
@@ -216,6 +218,7 @@ export default function VirtuPathDashboard() {
             );
           })}
         </div>
+
 
         </div>
 
