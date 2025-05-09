@@ -77,7 +77,7 @@ const Page = () => {
     );
 
     return (
-      <div className="bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px] w-full max-w-[360px] flex-shrink-0">
+      <div className="bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px] w-[90vw] max-w-xs sm:max-w-sm md:max-w-[360px] flex-shrink-0 mx-auto">
         <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
           <Image
             src={career.img}
@@ -151,11 +151,10 @@ const Page = () => {
                     const userRes = await api.get("/users/me");
                     const user = userRes.data;
 
-                    // ✅ Just store careerPathID for now (not userID)
                     localStorage.setItem(
                       "pendingEnrollment",
                       JSON.stringify({
-                        careerPathID: career.careerPathID
+                        careerPathID: career.careerPathID,
                       })
                     );
                     router.push(`/payment`);
@@ -169,8 +168,6 @@ const Page = () => {
                 <BookOpenIcon className="w-4 h-4" />
                 Enroll
               </button>
-
-
             </div>
           </div>
         </div>
@@ -179,7 +176,7 @@ const Page = () => {
   };
 
   const SkeletonCard = () => (
-    <div className="bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm p-4 animate-pulse flex flex-col min-h-[520px] w-full max-w-[360px] flex-shrink-0">
+    <div className="bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm p-4 animate-pulse flex flex-col min-h-[520px] w-[90vw] max-w-xs sm:max-w-sm md:max-w-[360px] flex-shrink-0 mx-auto">
       <div className="w-full h-40 bg-gray-800 rounded-lg mb-4"></div>
       <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
       <div className="h-3 bg-gray-700 rounded w-1/2 mb-4"></div>
@@ -202,8 +199,7 @@ const Page = () => {
 
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
-
-      <div className="pt-05 px-4 md:px-6 flex-grow">
+      <div className="pt-5 px-4 md:px-6 flex-grow">
         <div className="top-25 relative z-10 text-center max-w-6xl mx-auto px-4 md:px-6 flex-grow">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Explore Career Training
@@ -220,7 +216,7 @@ const Page = () => {
           </div>
 
           {/* Mobile Carousel */}
-          <div className="flex md:hidden gap-4 overflow-x-auto no-scrollbar pb-8">
+          <div className="flex md:hidden gap-4 overflow-x-auto no-scrollbar pb-8 px-1">
             {loading
               ? Array.from({ length: 4 }).map((_, idx) => <SkeletonCard key={idx} />)
               : careerPaths.map((career) => <CareerCard key={career.careerPathID} career={career} />)}
