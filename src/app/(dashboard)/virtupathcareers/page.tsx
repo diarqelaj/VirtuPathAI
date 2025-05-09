@@ -77,7 +77,7 @@ const Page = () => {
     );
 
     return (
-      <div className="bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px] w-[90vw] max-w-xs sm:max-w-sm md:max-w-[360px] flex-shrink-0 mx-auto">
+      <div className="bg-[#10101a] border border-gray-800  overflow-x-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px] w-[90vw] max-w-xs sm:max-w-sm md:max-w-[360px] flex-shrink-0 mx-auto">
         <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
           <Image
             src={career.img}
@@ -176,7 +176,7 @@ const Page = () => {
   };
 
   const SkeletonCard = () => (
-    <div className="w-full max-w-sm mx-auto bg-[#10101a] border border-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px]">
+    <div className="w-full max-w-sm mx-auto bg-[#10101a] border border-gray-800 rounded-2xl overflow-x-hidden shadow-sm hover:shadow-lg transition-all p-4 group flex flex-col min-h-[520px]">
       <div className="w-full h-40 bg-gray-800 rounded-lg mb-4"></div>
       <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
       <div className="h-3 bg-gray-700 rounded w-1/2 mb-4"></div>

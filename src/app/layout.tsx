@@ -17,7 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/virtupathai-favicon-192.png" type="image/png" sizes="192x192" />
         <link rel="preload" href="/footer-grid.svg" as="image" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden max-w-full`}>
+
         <Providers>
           {children}
         </Providers>
