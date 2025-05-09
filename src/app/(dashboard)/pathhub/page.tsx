@@ -157,7 +157,7 @@ export default function VirtuPathDashboard() {
           <Image src={greetingData.icon} alt="Icon" width={72} height={72} />
         </div>
       </div>
-
+  
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         <div className="bg-white/5 p-6 rounded-2xl text-center">
@@ -169,7 +169,7 @@ export default function VirtuPathDashboard() {
             <div className="h-full bg-purple-500 rounded-full" style={{ width: `${completionPercent}%` }} />
           </div>
         </div>
-
+  
         <div className="bg-white/5 p-6 rounded-2xl text-center">
           <h3 className="text-sm text-white/60 mb-2">Performance Rating</h3>
           <div className="flex justify-center gap-1">
@@ -189,7 +189,7 @@ export default function VirtuPathDashboard() {
           </div>
           <p className="mt-2 text-xs text-purple-300/80">{performanceScore}% accuracy today</p>
         </div>
-
+  
         <div className="bg-white/5 p-6 rounded-2xl text-center">
           <h3 className="text-sm text-white/60 mb-2">Current Path</h3>
           <p className="text-xl font-semibold">{currentPath}</p>
@@ -198,49 +198,46 @@ export default function VirtuPathDashboard() {
           </div>
         </div>
       </div>
-
+  
       {/* Charts */}
-      <div className="bg-white/5 p-6 rounded-2xl flex flex-col justify-between">
-      <h3 className="mb-3 font-medium">Weekly Progress</h3>
-      <div className="h-64 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={weeklyProgress.map((item, i) => ({
-            day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
-            completed: item.completed,
-            total: item.total,
-          }))}>
-            <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-            <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-            <Tooltip
-              formatter={(value: any, name: any, props: any) => {
-                const { payload } = props[0];
-                return [`${payload.completed} / ${payload.total} tasks`, 'Completed'];
-              }}
-              contentStyle={{
-                background: '#111113',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '12px',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
-              }}
-              itemStyle={{ color: '#e5e7eb' }}
-            />
-            <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
-            <defs>
-              <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#9333ea" />
-                <stop offset="100%" stopColor="#4f46e5" />
-              </linearGradient>
-            </defs>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    
-
-
-
-      
-
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[320px]">
+        {/* Weekly Progress */}
+        <div className="bg-white/5 p-6 rounded-2xl flex flex-col justify-between">
+          <h3 className="mb-3 font-medium">Weekly Progress</h3>
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={weeklyProgress.map((item, i) => ({
+                day: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i],
+                completed: item.completed,
+                total: item.total,
+              }))}>
+                <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+                <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+                <Tooltip
+                  formatter={(_, __, payload: any) => {
+                    const item = payload?.[0]?.payload;
+                    return `${item.completed} / ${item.total} tasks`;
+                  }}
+                  contentStyle={{
+                    background: '#111113',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  }}
+                  itemStyle={{ color: '#e5e7eb' }}
+                />
+                <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
+                <defs>
+                  <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#9333ea" />
+                    <stop offset="100%" stopColor="#4f46e5" />
+                  </linearGradient>
+                </defs>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+  
         {/* Countdown */}
         <div className="relative bg-[#0b0b1238] p-8 rounded-2xl flex flex-col justify-between overflow-hidden shadow-xl min-h-[320px]">
           <div className="absolute inset-0 z-0 bg-gradient-to-tl from-purple-900/40 via-transparent to-transparent pointer-events-none" />
@@ -253,11 +250,11 @@ export default function VirtuPathDashboard() {
             <h2 className="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300/70 via-purple-100/60 to-purple-300/70 tracking-wide mb-2">
               New Tasks In
             </h2>
-            
             <p className="text-sm text-white/50 mt-2">Local time until reset</p>
           </div>
         </div>
       </div>
     </main>
   );
+  
 }
