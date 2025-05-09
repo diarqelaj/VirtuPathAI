@@ -200,7 +200,7 @@ const Page = () => {
   return (
     <div className="relative bg-black-100 text-white flex flex-col min-h-screen">
       <div className="pt-5 px-4 md:px-6 flex-grow">
-        <div className="top-25 relative z-10 text-center max-w-6xl mx-auto px-4 md:px-6 flex-grow">
+        <div className="top-10 relative z-10 text-center max-w-6xl mx-auto px-4 md:px-6 flex-grow">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Explore Career Training
           </h1>
