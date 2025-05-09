@@ -6,6 +6,15 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import api from "@/lib/api";
 import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
@@ -191,37 +200,45 @@ export default function VirtuPathDashboard() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[320px]">
-        {/* Weekly Progress */}
-        <div className="bg-white/5 p-6 rounded-2xl flex flex-col justify-between">
-          <h3 className="mb-3 font-medium">Weekly Progress</h3>
-          <div className="relative h-48 bg-[#111113] rounded-xl flex items-end gap-5 px-4 py-6">
-          {weeklyProgress.map((item, i) => {
-            const percent = item.total === 0 ? 0 : (item.completed / item.total) * 100;
-            const scaledHeight = `${(percent / 100) * 100}%`; // Scale 0–100% linearly
-            const dayLabel = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i];
+      <div className="bg-white/5 p-6 rounded-2xl flex flex-col justify-between">
+      <h3 className="mb-3 font-medium">Weekly Progress</h3>
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={weeklyProgress.map((item, i) => ({
+            day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+            completed: item.completed,
+            total: item.total,
+          }))}>
+            <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+            <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
+            <Tooltip
+              formatter={(value: any, name: any, props: any) => {
+                const { payload } = props[0];
+                return [`${payload.completed} / ${payload.total} tasks`, 'Completed'];
+              }}
+              contentStyle={{
+                background: '#111113',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
+              }}
+              itemStyle={{ color: '#e5e7eb' }}
+            />
+            <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
+            <defs>
+              <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#9333ea" />
+                <stop offset="100%" stopColor="#4f46e5" />
+              </linearGradient>
+            </defs>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    
 
-            return (
-              <div key={i} className="flex flex-col items-center justify-end w-full h-full group">
-                <div className="flex-1 flex items-end">
-                  <div
-                    className="w-4 rounded-full bg-gradient-to-b from-purple-500 to-indigo-500 relative transition-all duration-300"
-                    style={{ height: scaledHeight, minHeight: "0.5rem" }}
-                  >
-                    <div className="absolute bottom-full mb-2 hidden group-hover:block text-xs text-white bg-purple-700 px-2 py-1 rounded z-10 whitespace-nowrap">
-                      {item.completed} / {item.total} task{item.total !== 1 ? "s" : ""}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-xs text-white/40 mt-2">{dayLabel}</p>
-              </div>
-            );
-          })}
-        </div>
 
 
-        </div>
-
+      
 
 
         {/* Countdown */}
