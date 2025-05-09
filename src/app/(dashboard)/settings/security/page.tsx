@@ -82,11 +82,13 @@ export default function SecuritySettingsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4 space-y-10 text-white">
+    <div className="w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 md:px-10 space-y-10 text-white">
+
       <h1 className="text-3xl font-bold mb-4">Settings</h1>
 
       {/* SECURITY CARD */}
-      <section className="bg-black/30 p-6 rounded-xl border border-white/10 shadow-lg space-y-6">
+      <section className="bg-black/30 p-4 sm:p-6 rounded-xl border border-white/10 shadow-lg space-y-6">
+
         <h2 className="text-2xl font-semibold flex items-center gap-3">
           <span className="bg-yellow-500/10  text-white-100 p-2 rounded-full">
             <FaKey />
@@ -123,7 +125,8 @@ export default function SecuritySettingsPage() {
         />
       </section>
 
-      <section className="bg-black/30 p-6 rounded-xl border border-white/10 shadow-lg space-y-6">
+      <section className="bg-black/30 p-4 sm:p-6 rounded-xl border border-white/10 shadow-lg space-y-6">
+
         <h2 className="text-2xl font-semibold flex items-center gap-3">
           <span className="bg-yellow-500/10 text-white-400/65 p-2 rounded-full">
             <FaBell />
