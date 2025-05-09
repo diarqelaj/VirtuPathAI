@@ -192,23 +192,45 @@ const TaskPage = () => {
               </div>
             )}
   
-            {!loading && !error && (
-              <div className="mt-10 sm:mt-12 space-y-2">
-                <div className="flex justify-between text-xs sm:text-sm font-medium text-purple-300">
-                  <span>Progress</span>
-                  <span>{completedTasks}/{totalTasks} tasks</span>
-                </div>
-                <div className="relative h-3 rounded-full bg-purple-900/30 backdrop-blur-sm overflow-hidden">
+              {loading ? (
+              <div className="space-y-3 sm:space-y-4 animate-pulse">
+                {[1, 2, 3].map((i) => (
                   <div
-                    className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-500"
-                    style={{ width: `${progress}%` }}
+                    key={i}
+                    className="flex items-center gap-4 p-3 sm:p-5 rounded-xl border border-gray-800 bg-white/5 backdrop-blur-sm"
                   >
-                    <div className="absolute inset-0 bg-purple-500/20 animate-pulse" />
+                    <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gray-700/60" />
+                    <div className="flex-1 h-4 sm:h-5 rounded-md bg-gray-700/60" />
                   </div>
-                </div>
-                <p className="text-right text-xs sm:text-sm text-purple-300/70">{Math.round(progress)}% completed</p>
+                ))}
+              </div>
+            ) : error ? (
+              <p className="text-center text-red-400">{error}</p>
+            ) : (
+              <div className="space-y-3 sm:space-y-4">
+                {tasks.map((task, index) => (
+                  <div
+                    key={task.id}
+                    className={`flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-5 rounded-xl border ${
+                      task.checked ? 'border-white/10' : 'border-gray-800'
+                    } bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 cursor-pointer group`}
+                    onClick={() => toggleTask(index)}
+                  >
+                    {task.checked ? (
+                      <CheckCircleIcon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 mt-0.5" />
+                    ) : (
+                      <svg className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                      </svg>
+                    )}
+                    <span className={`text-sm sm:text-base font-medium tracking-wide ${task.checked ? 'text-gray-200' : 'text-gray-400'}`}>
+                      {task.text}
+                    </span>
+                  </div>
+                ))}
               </div>
             )}
+
   
             <div className="mt-5 sm:mt-6">
               <div className="w-full bg-gradient-to-r from-purple-900 to-purple-700 text-center text-xs sm:text-sm text-purple-200 rounded-lg px-4 py-2 sm:px-5 sm:py-3 border border-purple-500/20 shadow-inner">
