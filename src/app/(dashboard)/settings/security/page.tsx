@@ -82,7 +82,8 @@ export default function SecuritySettingsPage() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 md:px-10 space-y-10 text-white">
+    <div className="w-full max-w-4xl mx-auto py-8 px-4 sm:px-6 md:px-10 space-y-10 text-white overflow-x-hidden">
+
 
       <h1 className="text-3xl font-bold mb-4">Settings</h1>
 
@@ -105,14 +106,15 @@ export default function SecuritySettingsPage() {
         />
 
         {showPasswordForm && (
-          <div className="space-y-4 mt-4 bg-black/20 p-5 rounded-lg border border-white/10">
+          <div className="w-full p-3 bg-black/10 border border-white/10 rounded-md text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500">
             <input type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} placeholder="Current Password" className="input" />
             <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password" className="input" />
             <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm New Password" className="input" />
             {passwordMessage && (
               <p className={`text-sm ${passwordMessage.startsWith("✅") ? "text-green-400" : "text-red-400"}`}>{passwordMessage}</p>
             )}
-            <button onClick={handleChangePassword} className="btn-primary w-full">Save New Password</button>
+            <button onClick={handleChangePassword} className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg text-sm font-medium transition"
+            >Save New Password</button>
           </div>
         )}
 
@@ -162,7 +164,8 @@ export default function SecuritySettingsPage() {
 
 function SettingCard({ icon, title, description, action, onClick }: any) {
   return (
-    <div className="p-4 border border-white/10 rounded-lg bg-black/20 flex justify-between items-start hover:bg-white/5 transition">
+    <div className="p-4 border border-white/10 rounded-lg bg-black/20 flex flex-col sm:flex-row justify-between sm:items-start gap-4 hover:bg-white/5 transition">
+
       <div className="flex items-start gap-4">
         <div className="pt-1">{icon}</div>
         <div>
