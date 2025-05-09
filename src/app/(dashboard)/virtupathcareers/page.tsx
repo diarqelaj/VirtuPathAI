@@ -208,19 +208,14 @@ const Page = () => {
             Launch or level up your career with immersive, guided training.
           </p>
 
-          {/* Desktop Grid */}
-          <div className="hidden md:grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {loading
-              ? Array.from({ length: 6 }).map((_, idx) => <SkeletonCard key={idx} />)
-              : careerPaths.map((career) => <CareerCard key={career.careerPathID} career={career} />)}
-          </div>
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {loading
+            ? Array.from({ length: 6 }).map((_, idx) => <SkeletonCard key={idx} />)
+            : careerPaths.map((career) => (
+                <CareerCard key={career.careerPathID} career={career} />
+              ))}
+        </div>
 
-          {/* Mobile Carousel */}
-          <div className="flex md:hidden gap-4 overflow-x-auto no-scrollbar pb-8 px-1">
-            {loading
-              ? Array.from({ length: 4 }).map((_, idx) => <SkeletonCard key={idx} />)
-              : careerPaths.map((career) => <CareerCard key={career.careerPathID} career={career} />)}
-          </div>
         </div>
       </div>
 
