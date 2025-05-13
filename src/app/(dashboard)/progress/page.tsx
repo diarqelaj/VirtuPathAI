@@ -160,7 +160,8 @@ const Page = () => {
 
     return (
       <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
-        <main className="flex-1 pt-20 px-4 sm:px-6 lg:px-24 xl:px-32 max-w-[1600px] mx-auto w-full">
+        <main className="flex-1 pt-16 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 max-w-[1600px] mx-auto w-full">
+
           <div className="bg-black-100/80 border border-white/10 backdrop-blur-xl p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
             <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl" />
@@ -189,11 +190,15 @@ const Page = () => {
               </div>
     
               <div className="flex flex-col lg:flex-row gap-12 justify-between items-center">
-                <div className="flex-1 min-w-[300px] max-w-full h-96">
-                  <ResponsiveContainer width="100%" height="100%">
-                    {chartContent}
-                  </ResponsiveContainer>
+                <div className="w-full lg:flex-1 overflow-x-auto">
+                  <div className="min-w-[300px] h-80 sm:h-96">
+                    <ResponsiveContainer width="100%" height="100%">
+                      {chartContent}
+                    </ResponsiveContainer>
+                  </div>
                 </div>
+
+
     
                 <div className="flex-1 flex justify-center items-center">
                   <div className="relative w-52 h-52">
@@ -251,7 +256,6 @@ const Page = () => {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     );
     
