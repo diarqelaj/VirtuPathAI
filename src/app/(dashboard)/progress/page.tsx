@@ -122,7 +122,8 @@ const Page = () => {
     ) : (
       <BarChart data={monthlyData}>
         <XAxis dataKey="week" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, dataMax => Math.max(1, dataMax)]} />
+        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]}
+ />
         <Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
@@ -228,7 +229,10 @@ const Page = () => {
               <div className="flex justify-center">
                 <DatePicker
                   selected={selectedDate}
-                  onChange={date => setSelectedDate(date)}
+                  onChange={(date) => {
+                    if (date) setSelectedDate(date);
+                  }}
+                  
                   inline
                   className="!bg-white/5 !border !border-white/10 rounded-xl overflow-hidden"
                   wrapperClassName="react-datepicker-wrapper"
