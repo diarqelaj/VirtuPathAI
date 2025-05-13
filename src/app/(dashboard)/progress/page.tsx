@@ -10,10 +10,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import DatePicker from 'react-datepicker';
-import Footer from '@/components/Footer';
-import { navItems } from '@/data';
 import 'react-datepicker/dist/react-datepicker.css';
 import api from '@/lib/api';
+import { motion, useSpring, useTransform } from 'framer-motion';
 
 const Page = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -22,6 +21,14 @@ const Page = () => {
   const [weeklyData, setWeeklyData] = useState<{ day: string; tasks: number }[]>([]);
   const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
   const [circleStats, setCircleStats] = useState({ completed: 0, total: 1 }); // prevent divide-by-zero
+  const progressValue = (circleStats.completed / circleStats.total) * 100;
+  const animatedProgress = useSpring(progressValue, {
+  stiffness: 100,
+  damping: 20,
+  });
+  const circumference = 2 * Math.PI * 45; // r = 45
+  const dashOffset = useTransform(animatedProgress, (value) => circumference - (value / 100) * circumference);
+
 
   // Fetch user
   useEffect(() => {
@@ -210,18 +217,19 @@ const Page = () => {
                   <div className="relative w-52 h-52">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                       <circle cx="50" cy="50" r="45" stroke="#1f1f1f" strokeWidth="10" fill="none" />
-                      <circle
+                      <motion.circle
                         cx="50"
                         cy="50"
                         r="45"
                         stroke="url(#gradient)"
                         strokeWidth="10"
                         fill="none"
-                        strokeDasharray="282.6"
-                        strokeDashoffset={282.6 - (progressPercent / 100) * 282.6}
+                        strokeDasharray={circumference}
+                        strokeDashoffset={dashOffset}
                         strokeLinecap="round"
                         transform="rotate(-90 50 50)"
                       />
+
                       <defs>
                         <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor="#9333ea" />
@@ -230,9 +238,14 @@ const Page = () => {
                       </defs>
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <div className="text-3xl font-bold text-purple-300">
-                        {progressPercent}%
-                      </div>
+                    <motion.div
+                      className="text-3xl font-bold text-purple-300"
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {Math.round(progressValue)}%
+                    </motion.div>
+
                       <div className="text-sm text-white/60">Completed</div>
                       <div className="text-xs text-white/40 mt-1">
                         {circleStats.completed} / {circleStats.total}
