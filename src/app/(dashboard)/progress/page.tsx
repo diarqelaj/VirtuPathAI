@@ -215,28 +215,36 @@ const Page = () => {
     
                 <div className="flex-1 flex justify-center items-center">
                   <div className="relative w-52 h-52">
-                    <svg className="w-full h-full" viewBox="0 0 100 100">
-                      <circle cx="50" cy="50" r="45" stroke="#1f1f1f" strokeWidth="10" fill="none" />
-                      <motion.circle
-                        cx="50"
-                        cy="50"
-                        r="45"
-                        stroke="url(#gradient)"
-                        strokeWidth="10"
-                        fill="none"
-                        strokeDasharray={circumference}
-                        strokeDashoffset={dashOffset}
-                        strokeLinecap="round"
-                        transform="rotate(-90 50 50)"
-                      />
+                  <svg className="w-full h-full" viewBox="0 0 100 100">
+                    <defs>
+                      <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#9333ea" />
+                        <stop offset="100%" stopColor="#4f46e5" />
+                      </linearGradient>
+                    </defs>
 
-                      <defs>
-                        <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#9333ea" />
-                          <stop offset="100%" stopColor="#4f46e5" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      stroke="#1f1f1f"
+                      strokeWidth="10"
+                      fill="none"
+                    />
+                    <motion.circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      stroke="url(#gradient)"
+                      strokeWidth="10"
+                      fill="none"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={dashOffset}
+                      strokeLinecap="round"
+                      transform="rotate(-90 50 50)"
+                    />
+                  </svg>
+
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                     <motion.div
                       className="text-3xl font-bold text-purple-300"
