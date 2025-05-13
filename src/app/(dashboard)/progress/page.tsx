@@ -72,30 +72,30 @@ const Page = () => {
 
     const fetchMonthly = async () => {
       try {
-        const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
-        const progress = res.data?.weeklyProgress || [];
-
-        const formatted = progress.map((week: any, i: number) => ({
-          week: `Week ${i + 1}`,
-          completed: week.completed,
-          total: week.total,
-        }));
-
+        const userRes = await api.get('/users/me');
+        const { currentDay } = userRes.data;
+    
+        const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}&day=${currentDay}`);
+        const progress = res.data;
+    
+        const formatted = [{
+          week: `Month ${progress.Month}`,
+          completed: progress.TasksCompleted,
+          total: progress.TasksAssigned,
+        }];
+    
         setMonthlyData(formatted);
-
+    
         if (timeRange === 'month') {
-          const totalCompleted = formatted.reduce((sum: number, w: { completed: number }) => sum + w.completed, 0);
-          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
-          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+          setCircleStats({ completed: progress.TasksCompleted, total: progress.TasksAssigned });
         } else if (timeRange === 'all') {
-          const totalCompleted = formatted.reduce((sum: number, w: { completed: number }) => sum + w.completed, 0);
-          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
-          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+          setCircleStats({ completed: progress.TasksCompleted, total: progress.TasksAssigned }); // Update this later if you implement 'all' logic
         }
       } catch (err) {
         console.error('Error fetching monthly data:', err);
       }
     };
+    
 
     if (timeRange === 'week') fetchWeekly();
     else fetchMonthly();
