@@ -191,41 +191,38 @@ const Page = () => {
               ))}
             </div>
 
-            <div className="flex-1 flex justify-center items-center">
-              <div className="relative w-52 h-52">
-                <svg className="w-full h-full" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="45" stroke="#1f1f1f" strokeWidth="10" fill="none" />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    stroke="url(#gradient)"
-                    strokeWidth="10"
-                    fill="none"
-                    strokeDasharray="282.6"
-                    strokeDashoffset={282.6 - ((mockTasks.filter(t => t.done).length / mockTasks.length) * 282.6)}
-                    strokeLinecap="round"
-                    transform="rotate(-90 50 50)"
-                  />
-                  <defs>
-                    <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#9333ea" />
-                      <stop offset="100%" stopColor="#4f46e5" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <div className="text-3xl font-bold text-purple-300">
-                    {Math.round((mockTasks.filter(t => t.done).length / mockTasks.length) * 100)}%
+            <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between">
+              <div className="flex-1 max-w-full h-96">
+              <ResponsiveContainer width="100%" height="100%">
+  {chartContent}
+</ResponsiveContainer>
+
+              </div>
+
+              <div className="flex flex-wrap gap-8 md:flex-nowrap md:w-1/2">
+                <div className="flex-1 bg-gradient-to-br from-purple-900/30 to-blue-900/20 p-8 rounded-2xl border border-white/10 backdrop-blur-lg">
+                  <div className="flex items-center gap-3 mb-6">
+                    <CheckCircleIcon className="h-7 w-7 text-purple-400" />
+                    <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-100">
+  Completed: {mockTasks.filter(t => t.done).length}
+</h3>
+
                   </div>
-                  <div className="text-sm text-white/60">Completed</div>
-                  <div className="text-xs text-white/40 mt-1">
-                    {mockTasks.filter(t => t.done).length} / {mockTasks.length}
+                 
+                </div>
+
+                <div className="flex-1 bg-gradient-to-br from-blue-900/30 to-purple-900/20 p-8 rounded-2xl border border-white/10 backdrop-blur-lg">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-7 w-7 border-2 border-blue-400 rounded-full" />
+                    <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-100">
+  Pending: {mockTasks.filter(t => !t.done).length}
+</h3>
+
                   </div>
+                  
                 </div>
               </div>
             </div>
-
 
             <div className="mt-12 bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-lg">
               <h3 className="text-2xl font-semibold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
