@@ -76,25 +76,28 @@ const Page = () => {
         const { currentDay } = userRes.data;
     
         const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}&day=${currentDay}`);
-        const progress = res.data;
+        const data = res.data;
     
         const formatted = [{
-          week: `Month ${progress.Month}`,
-          completed: progress.TasksCompleted,
-          total: progress.TasksAssigned,
+          week: `Month ${data.month}`, // this was showing "undefined" in your chart
+          completed: data.tasksCompleted,
+          total: data.tasksAssigned,
         }];
     
         setMonthlyData(formatted);
     
         if (timeRange === 'month') {
-          setCircleStats({ completed: progress.TasksCompleted, total: progress.TasksAssigned });
-        } else if (timeRange === 'all') {
-          setCircleStats({ completed: progress.TasksCompleted, total: progress.TasksAssigned }); // Update this later if you implement 'all' logic
+          setCircleStats({
+            completed: data.tasksCompleted,
+            total: data.tasksAssigned,
+          });
         }
+    
       } catch (err) {
         console.error('Error fetching monthly data:', err);
       }
     };
+    
     
 
     if (timeRange === 'week') fetchWeekly();
