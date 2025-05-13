@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import DatePicker from 'react-datepicker';
-import { FloatingNav } from '@/components/ui/FloatingNavbar';
 import Footer from '@/components/Footer';
 import { navItems } from '@/data';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,72 +22,71 @@ const Page = () => {
   const [weeklyData, setWeeklyData] = useState<{ day: string; tasks: number }[]>([]);
   const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
   const [circleStats, setCircleStats] = useState({ completed: 0, total: 1 }); // prevent division by 0
+ 
 
-  // Fetch user ID once
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await api.get('/users/me');
-        setUserID(res.data.userID);
-      } catch (err) {
-        console.error('User not logged in');
-      }
-    };
-    fetchUser();
-  }, []);
 
-  // Fetch weekly/monthly data
-  useEffect(() => {
-    if (!userID) return;
 
-    const fetchWeekly = async () => {
-      try {
-        const userRes = await api.get('/users/me');
-        const { careerPathID, currentDay } = userRes.data;
+    useEffect(() => {
+      if (!userID) return;
 
-        const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
-        const completions = completionRes.data;
+      const fetchWeekly = async () => {
+        try {
+          const userRes = await api.get('/users/me');
+          const { careerPathID, currentDay } = userRes.data;
 
-        const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
-        const weekData: { day: string; tasks: number }[] = [];
+          const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
+          const completions = completionRes.data;
 
-        for (let i = 0; i < 7; i++) {
-          const dayNumber = weekStart + i;
-          const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
-          const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
-          const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
-          weekData.push({ day: dayLabel, tasks: completedCount });
+          const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
+          const weekData: { day: string; tasks: number }[] = [];
+
+          for (let i = 0; i < 7; i++) {
+            const dayNumber = weekStart + i;
+            const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
+            const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
+            const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+            weekData.push({ day: dayLabel, tasks: completedCount });
+          }
+
+          setWeeklyData(weekData);
+
+          const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}`);
+          setCircleStats({
+            completed: weeklyCircleRes.data.tasksCompleted,
+            total: weeklyCircleRes.data.tasksAssigned,
+          });
+        } catch (err) {
+          console.error('Error fetching weekly data:', err);
         }
+      };
 
-        setWeeklyData(weekData);
+      const fetchMonthly = async () => {
+        try {
+          const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
+          const formatted = (res.data?.weeklyProgress || []).map((week: any, i: number) => ({
+            week: `Week ${i + 1}`,
+            completed: week.completed,
+            total: week.total,
+          }));
+          setMonthlyData(formatted);
 
-        const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}`);
-        setCircleStats({
-          completed: weeklyCircleRes.data.tasksCompleted,
-          total: weeklyCircleRes.data.tasksAssigned,
-        });
-      } catch (err) {
-        console.error('Error fetching weekly data:', err);
-      }
-    };
+          // Calculate total completed and assigned for the circle
+          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
+          const totalCompleted = formatted.reduce((sum: number, w: { completed: number }) => sum + w.completed, 0);
 
-    const fetchMonthly = async () => {
-      try {
-        const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
-        const formatted = (res.data?.weeklyProgress || []).map((week: any, i: number) => ({
-          week: `Week ${i + 1}`,
-          completed: week.completed,
-          total: week.total,
-        }));
-        setMonthlyData(formatted);
-      } catch (err) {
-        console.error('Error fetching monthly data:', err);
-      }
-    };
+          setCircleStats({
+            completed: totalCompleted,
+            total: totalAssigned || 1, // prevent div by 0
+          });
+        } catch (err) {
+          console.error('Error fetching monthly data:', err);
+        }
+      };
 
-    if (timeRange === 'week') fetchWeekly();
-    if (timeRange === 'month') fetchMonthly();
-  }, [timeRange, userID]);
+      if (timeRange === 'week') fetchWeekly();
+      if (timeRange === 'month') fetchMonthly();
+    }, [timeRange, userID]);
+
 
   const progressPercent = Math.round((circleStats.completed / circleStats.total) * 100);
 
@@ -150,7 +148,6 @@ const Page = () => {
 
   return (
     <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
-      <FloatingNav navItems={navItems} />
       <main className="flex-1 pt-20 px-6 md:px-12 max-w-screen-xl mx-auto">
         <div className="bg-black-100/80 border border-white/10 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
@@ -179,7 +176,8 @@ const Page = () => {
               ))}
             </div>
 
-            <div className="flex flex-wrap md:flex-nowrap gap-8 justify-between">
+            <div className="flex flex-wrap md:flex-nowrap gap-12 justify-between items-center">
+
               <div className="flex-1 max-w-full h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   {chartContent}
