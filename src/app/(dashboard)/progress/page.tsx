@@ -215,7 +215,7 @@ const Page = () => {
     
                 <div className="flex-1 flex justify-center items-center">
                   <div className="relative w-52 h-52">
-                  <svg className="w-full h-full" viewBox="0 0 100 100">
+                  <motion.svg className="w-full h-full" viewBox="0 0 100 100">
                     <defs>
                       <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#9333ea" />
@@ -239,11 +239,12 @@ const Page = () => {
                       strokeWidth="10"
                       fill="none"
                       strokeDasharray={circumference}
-                      strokeDashoffset={dashOffset}
+                      style={{ strokeDashoffset: dashOffset }}
                       strokeLinecap="round"
                       transform="rotate(-90 50 50)"
                     />
-                  </svg>
+                  </motion.svg>
+
 
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                     <motion.div
