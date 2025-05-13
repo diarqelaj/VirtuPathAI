@@ -22,14 +22,18 @@ const Page = () => {
   const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
   const [circleStats, setCircleStats] = useState({ completed: 0, total: 1 }); // prevent divide-by-zero
   const progressValue = (circleStats.completed / circleStats.total) * 100;
-  const animatedProgress = useSpring(progressValue, {
-  stiffness: 100,
-  damping: 20,
+  const animatedProgress = useSpring(0, {
+    stiffness: 100,
+    damping: 20,
   });
+  
   const circumference = 2 * Math.PI * 45; // r = 45
   const dashOffset = useTransform(animatedProgress, (value) => circumference - (value / 100) * circumference);
 
-
+  useEffect(() => {
+    animatedProgress.set(progressValue);
+  }, [progressValue, animatedProgress]);
+  
   // Fetch user
   useEffect(() => {
     const fetchUser = async () => {
