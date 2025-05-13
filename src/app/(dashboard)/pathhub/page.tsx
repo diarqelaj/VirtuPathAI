@@ -222,19 +222,20 @@ export default function VirtuPathDashboard() {
                 <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
                 <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
                 <Tooltip
-                  formatter={(_, __, payload: any) => {
-                    const item = payload?.[0]?.payload;
-                    return item ? `${item.completed} / ${item.total} tasks` : null;
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      const item = payload[0].payload;
+                      return (
+                        <div className="text-sm bg-black rounded-xl border border-white/10 px-4 py-3 shadow-xl text-white">
+                          <div><strong>Day:</strong> {label}</div>
+                          <div><strong>Completed:</strong> {item.completed} / {item.total}</div>
+                        </div>
+                      );
+                    }
+                    return null;
                   }}
-                  labelFormatter={(label) => `Day: ${label}`}
-                  contentStyle={{
-                    background: '#111113',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '12px',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-                  }}
-                  itemStyle={{ color: '#e5e7eb' }}
                 />
+
 
 
                 <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
