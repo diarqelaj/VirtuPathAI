@@ -160,7 +160,7 @@ const Page = () => {
 
     return (
       <div className="relative bg-black-100 text-white min-h-screen flex flex-col">
-        <main className="flex-1 pt-16 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 max-w-[1600px] mx-auto w-full">
+        <main className="flex-1 pt-16 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 w-full max-w-[1600px] mx-auto overflow-x-hidden">
 
           <div className="bg-black-100/80 border border-white/10 backdrop-blur-xl p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
             <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl" />
