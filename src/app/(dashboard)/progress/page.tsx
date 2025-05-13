@@ -78,18 +78,20 @@ const Page = () => {
         const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}&day=${currentDay}`);
         const data = res.data;
     
-        const formatted = [{
-          week: `Month ${data.month}`, // this was showing "undefined" in your chart
-          completed: data.tasksCompleted,
-          total: data.tasksAssigned,
-        }];
+        const formatted = data.weeklyProgress.map((week: any) => ({
+          week: week.week,
+          completed: week.completed,
+          total: week.total,
+        }));
     
         setMonthlyData(formatted);
     
         if (timeRange === 'month') {
+          const totalCompleted = formatted.reduce((sum: number, w: any) => sum + w.completed, 0);
+          const totalAssigned = formatted.reduce((sum: number, w: any) => sum + w.total, 0);
           setCircleStats({
-            completed: data.tasksCompleted,
-            total: data.tasksAssigned,
+            completed: totalCompleted,
+            total: totalAssigned,
           });
         }
     
@@ -97,6 +99,7 @@ const Page = () => {
         console.error('Error fetching monthly data:', err);
       }
     };
+    
     
     
 
