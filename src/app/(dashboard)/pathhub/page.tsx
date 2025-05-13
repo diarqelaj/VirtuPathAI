@@ -45,60 +45,44 @@ export default function VirtuPathDashboard() {
   const [greetingData, setGreetingData] = useState(getGreetingData());
 
   useEffect(() => {
-    setGreetingData(getGreetingData());
-
-    const fetchDashboardData = async () => {
+    const fetchWeeklyProgress = async () => {
       try {
-        const userRes = await api.get("/users/me");
+        const userRes = await api.get('/users/me');
         const currentUser = userRes.data;
-        setUser(currentUser);
-
         const { careerPathID, currentDay, userID } = currentUser;
-
-        const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${currentDay}`);
-        setTotalToday(tasksRes.data.length);
-
+  
         const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
-        const userCompletions = completionRes.data;
-        const today = new Date().toISOString().split("T")[0];
-
-        const todayCompletions = userCompletions.filter(
-          (tc: any) => tc.careerDay === currentDay && tc.completionDate?.startsWith(today)
-        );
-        setCompletedToday(todayCompletions.length);
-
-        const perfRes = await api.get(`/PerformanceReviews/progress/daily?userId=${userID}&day=${currentDay}`);
-        setPerformanceScore(perfRes.data?.performanceScore || 0);
-
-        const pathRes = await api.get(`/CareerPaths/${careerPathID}`);
-        setCurrentPath(pathRes.data?.name || "Unknown Path");
-
+        const completions = completionRes.data;
+  
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
-        const progressArr: { day: number; completed: number; total: number }[] = [];
-
-        const taskPromises = [];
-        for (let day = weekStart; day < weekStart + 7; day++) {
-          taskPromises.push(api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${day}`));
-        }
-        const taskResponses = await Promise.all(taskPromises);
-
-        for (let i = 0; i < 7; i++) {
-          const day = weekStart + i;
-          const tasks = taskResponses[i].data || [];
-          const total = tasks.length;
-          const completed = userCompletions.filter((c: any) => c.careerDay === day).length;
-          progressArr.push({ day, completed, total });
-        }
-
-
-        setWeeklyProgress(progressArr);
+  
+        // Parallel fetch for 7 days' tasks
+        const taskRequests = Array.from({ length: 7 }, (_, i) =>
+          api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${weekStart + i}`)
+        );
+        const taskResponses = await Promise.all(taskRequests);
+  
+        const data = taskResponses.map((res, i) => {
+          const dayNumber = weekStart + i;
+          const total = res.data.length;
+          const completed = completions.filter((c: any) => c.careerDay === dayNumber).length;
+  
+          return {
+            day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
+            completed,
+            total
+          };
+        });
+  
+        setWeeklyData(data);
       } catch (err) {
-        console.error("Error loading dashboard data:", err);
+        console.error('Error fetching weekly progress:', err);
       }
     };
-
-    fetchDashboardData();
+  
+    fetchWeeklyProgress();
   }, []);
+  
 
   useEffect(() => {
     const updateCountdown = () => {
