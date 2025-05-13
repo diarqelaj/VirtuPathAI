@@ -21,72 +21,85 @@ const Page = () => {
   const [userID, setUserID] = useState<number | null>(null);
   const [weeklyData, setWeeklyData] = useState<{ day: string; tasks: number }[]>([]);
   const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
-  const [circleStats, setCircleStats] = useState({ completed: 0, total: 1 }); // prevent division by 0
- 
+  const [circleStats, setCircleStats] = useState({ completed: 0, total: 1 }); // prevent divide-by-zero
 
+  // Fetch user
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get('/users/me');
+        setUserID(res.data.userID);
+      } catch (err) {
+        console.error('User not logged in');
+      }
+    };
+    fetchUser();
+  }, []);
 
+  useEffect(() => {
+    if (!userID) return;
 
-    useEffect(() => {
-      if (!userID) return;
+    const fetchWeekly = async () => {
+      try {
+        const userRes = await api.get('/users/me');
+        const { careerPathID, currentDay } = userRes.data;
 
-      const fetchWeekly = async () => {
-        try {
-          const userRes = await api.get('/users/me');
-          const { careerPathID, currentDay } = userRes.data;
+        const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
+        const completions = completionRes.data;
 
-          const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
-          const completions = completionRes.data;
+        const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
+        const weekData: { day: string; tasks: number }[] = [];
 
-          const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
-          const weekData: { day: string; tasks: number }[] = [];
-
-          for (let i = 0; i < 7; i++) {
-            const dayNumber = weekStart + i;
-            const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
-            const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
-            const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
-            weekData.push({ day: dayLabel, tasks: completedCount });
-          }
-
-          setWeeklyData(weekData);
-
-          const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}`);
-          setCircleStats({
-            completed: weeklyCircleRes.data.tasksCompleted,
-            total: weeklyCircleRes.data.tasksAssigned,
-          });
-        } catch (err) {
-          console.error('Error fetching weekly data:', err);
+        for (let i = 0; i < 7; i++) {
+          const dayNumber = weekStart + i;
+          const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
+          const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
+          const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+          weekData.push({ day: dayLabel, tasks: completedCount });
         }
-      };
 
-      const fetchMonthly = async () => {
-        try {
-          const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
-          const formatted = (res.data?.weeklyProgress || []).map((week: any, i: number) => ({
-            week: `Week ${i + 1}`,
-            completed: week.completed,
-            total: week.total,
-          }));
-          setMonthlyData(formatted);
+        setWeeklyData(weekData);
 
-          // Calculate total completed and assigned for the circle
-          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
+        const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}`);
+        setCircleStats({
+          completed: weeklyCircleRes.data.tasksCompleted,
+          total: weeklyCircleRes.data.tasksAssigned,
+        });
+      } catch (err) {
+        console.error('Error fetching weekly data:', err);
+      }
+    };
+
+    const fetchMonthly = async () => {
+      try {
+        const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}`);
+        const progress = res.data?.weeklyProgress || [];
+
+        const formatted = progress.map((week: any, i: number) => ({
+          week: `Week ${i + 1}`,
+          completed: week.completed,
+          total: week.total,
+        }));
+
+        setMonthlyData(formatted);
+
+        if (timeRange === 'month') {
           const totalCompleted = formatted.reduce((sum: number, w: { completed: number }) => sum + w.completed, 0);
-
-          setCircleStats({
-            completed: totalCompleted,
-            total: totalAssigned || 1, // prevent div by 0
-          });
-        } catch (err) {
-          console.error('Error fetching monthly data:', err);
+          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
+          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+        } else if (timeRange === 'all') {
+          const totalCompleted = formatted.reduce((sum: number, w: { completed: number }) => sum + w.completed, 0);
+          const totalAssigned = formatted.reduce((sum: number, w: { total: number }) => sum + w.total, 0);
+          setCircleStats({ completed: totalCompleted, total: totalAssigned });
         }
-      };
+      } catch (err) {
+        console.error('Error fetching monthly data:', err);
+      }
+    };
 
-      if (timeRange === 'week') fetchWeekly();
-      if (timeRange === 'month') fetchMonthly();
-    }, [timeRange, userID]);
-
+    if (timeRange === 'week') fetchWeekly();
+    else fetchMonthly();
+  }, [timeRange, userID]);
 
   const progressPercent = Math.round((circleStats.completed / circleStats.total) * 100);
 
@@ -120,8 +133,7 @@ const Page = () => {
     ) : (
       <BarChart data={monthlyData}>
         <XAxis dataKey="week" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]}
- />
+        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]} />
         <Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
@@ -177,7 +189,6 @@ const Page = () => {
             </div>
 
             <div className="flex flex-wrap md:flex-nowrap gap-12 justify-between items-center">
-
               <div className="flex-1 max-w-full h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   {chartContent}
@@ -227,10 +238,7 @@ const Page = () => {
               <div className="flex justify-center">
                 <DatePicker
                   selected={selectedDate}
-                  onChange={(date) => {
-                    if (date) setSelectedDate(date);
-                  }}
-                  
+                  onChange={(date) => date && setSelectedDate(date)}
                   inline
                   className="!bg-white/5 !border !border-white/10 rounded-xl overflow-hidden"
                   wrapperClassName="react-datepicker-wrapper"
