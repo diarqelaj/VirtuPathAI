@@ -76,12 +76,20 @@ export default function VirtuPathDashboard() {
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
         const progressArr: { day: number; completed: number; total: number }[] = [];
 
+        const taskPromises = [];
         for (let day = weekStart; day < weekStart + 7; day++) {
-          const tasks = (await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${day}`)).data || [];
+          taskPromises.push(api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${day}`));
+        }
+        const taskResponses = await Promise.all(taskPromises);
+
+        for (let i = 0; i < 7; i++) {
+          const day = weekStart + i;
+          const tasks = taskResponses[i].data || [];
           const total = tasks.length;
           const completed = userCompletions.filter((c: any) => c.careerDay === day).length;
           progressArr.push({ day, completed, total });
         }
+
 
         setWeeklyProgress(progressArr);
       } catch (err) {
@@ -214,18 +222,20 @@ export default function VirtuPathDashboard() {
                 <XAxis dataKey="day" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
                 <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
                 <Tooltip
-                formatter={(_, __, payload: any) => {
-                  const item = payload?.[0]?.payload;
-                  return item ? `${item.completed} / ${item.total} tasks` : null;
-                }}
-                contentStyle={{
-                  background: '#111113',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '12px',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-                }}
-                itemStyle={{ color: '#e5e7eb' }}
-              />
+                  formatter={(_, __, payload: any) => {
+                    const item = payload?.[0]?.payload;
+                    return item ? `${item.completed} / ${item.total} tasks` : null;
+                  }}
+                  labelFormatter={(label) => `Day: ${label}`}
+                  contentStyle={{
+                    background: '#111113',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+                  }}
+                  itemStyle={{ color: '#e5e7eb' }}
+                />
+
 
                 <Bar dataKey="completed" fill="url(#progressGradient)" radius={[8, 8, 0, 0]} />
                 <defs>
