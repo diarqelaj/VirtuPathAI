@@ -59,7 +59,6 @@ const Page = () => {
         const completions = completionRes.data;
 
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
-        const weekData: { day: string; tasks: number }[] = [];
 
         const dayNumbers = Array.from({ length: 7 }, (_, i) => weekStart + i);
         const taskRequests = dayNumbers.map(dayNumber =>
