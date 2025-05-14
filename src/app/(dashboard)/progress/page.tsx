@@ -54,38 +54,38 @@ const Page = () => {
       try {
         const userRes = await api.get('/users/me');
         const { careerPathID, currentDay } = userRes.data;
-
+    
         const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
         const completions = completionRes.data;
-
+    
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
-
         const dayNumbers = Array.from({ length: 7 }, (_, i) => weekStart + i);
-        const taskRequests = dayNumbers.map(dayNumber =>
-          api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`)
-        );
-
-        const taskResponses = await Promise.all(taskRequests);
-
-        const weekData = taskResponses.map((res, i) => {
-          const dayNumber = dayNumbers[i];
+    
+        // ✅ Fetch all 7 days in a single fast API call
+        const taskRes = await api.get(`/DailyTasks/bycareerweek?careerPathId=${careerPathID}&startDay=${weekStart}`);
+        const taskList = taskRes.data;
+    
+        // ✅ Map task completions into day slots
+        const weekData: { day: string; tasks: number }[] = dayNumbers.map((dayNumber, i) => {
           const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
           const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
           return { day: dayLabel, tasks: completedCount };
         });
-
-
+    
         setWeeklyData(weekData);
-
+    
+        // ✅ Circle progress (score bar)
         const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}`);
         setCircleStats({
           completed: weeklyCircleRes.data.tasksCompleted,
           total: weeklyCircleRes.data.tasksAssigned,
         });
+    
       } catch (err) {
         console.error('Error fetching weekly data:', err);
       }
     };
+    
 
     const fetchMonthly = async () => {
       try {
