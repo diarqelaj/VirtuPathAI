@@ -30,7 +30,7 @@ const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&c
 export default function Sidebar() {
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
@@ -60,26 +60,20 @@ export default function Sidebar() {
     { name: "Daily Missions", link: "/tasks", icon: <FaTasks /> },
     { name: "Progress", link: "/progress", icon: <FaChartBar /> },
     { name: "Opportunities", link: "/virtupathcareers", icon: <FaBook /> },
-    { name: "Tribe", link: "/community", icon: <FaUsers /> },
+    { name: "VirtuCrew", link: "/community", icon: <FaUsers /> },
     { name: "Control Room", link: "/settings", icon: <FaCog /> },
     { name: "Feedback", link: "/bug", icon: <FaBug /> },
   ];
 
-  const SidebarContent = ({
-    mobile = false,
-    dropdownOpen,
-    setDropdownOpen,
-  }: {
-    mobile?: boolean;
-    dropdownOpen: boolean;
-    setDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }) => (
+  const SidebarContent = () => (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-2 mb-6">
         <Image src="/virtupathai.png" alt="VirtuPath Logo" width={40} height={40} />
-        <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-          VirtuPath AI
-        </span>
+        {isOpen && (
+          <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            VirtuPath AI
+          </span>
+        )}
       </div>
 
       <nav className="flex-1 space-y-2">
@@ -89,15 +83,12 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={item.link}
-              onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg w-full text-left transition ${
-                isActive
-                  ? "bg-purple-700 text-white font-semibold"
-                  : "hover:bg-white/10 text-white/80"
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition w-full text-left ${
+                isActive ? "bg-purple-700 text-white font-semibold" : "hover:bg-white/10 text-white/80"
               }`}
             >
               {item.icon}
-              {item.name}
+              {isOpen && <span>{item.name}</span>}
             </Link>
           );
         })}
@@ -105,7 +96,7 @@ export default function Sidebar() {
 
       <div className="mt-6 px-2 relative">
         <div
-          className="bg-white/5 rounded-xl p-3 flex w-54 items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
+          className="bg-white/5 rounded-xl p-3 flex items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <div className="flex items-center gap-3">
@@ -123,64 +114,66 @@ export default function Sidebar() {
               unoptimized
             />
 
-            <div>
-              <p className="text-sm font-medium text-white">
-                {user?.fullName?.split(" ")[0] || "Guest"}
-              </p>
-              <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
-            </div>
+            {isOpen && (
+              <div>
+                <p className="text-sm font-medium text-white">
+                  {user?.fullName?.split(" ")[0] || "Guest"}
+                </p>
+                <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
+              </div>
+            )}
           </div>
-          {dropdownOpen ? (
+          {isOpen && (dropdownOpen ? (
             <IoChevronDown className="w-4 h-4 text-white/50" />
           ) : (
             <IoChevronUp className="w-4 h-4 text-white/50" />
-          )}
+          ))}
         </div>
-      </div>
 
-      {dropdownOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          className="absolute bottom-24 left-7 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-xl z-50"
-        >
-          {user ? (
-            <>
+        {dropdownOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            className="absolute bottom-24 left-0 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-xl z-50"
+          >
+            {user ? (
+              <>
+                <Link
+                  href="/settings"
+                  className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <FaUserCircle size={16} />
+                  View Profile
+                </Link>
+                <Link
+                  href="/settings"
+                  className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <FaCog size={16} />
+                  Settings
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-2 px-4 py-3 hover:bg-red-600/30 text-sm text-red-400"
+                >
+                  <FaSignOutAlt size={16} />
+                  Logout
+                </button>
+              </>
+            ) : (
               <Link
-                href="/settings"
-                className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
-                onClick={() => setDropdownOpen(false)}
+                href="/login"
+                className="block px-4 py-3 text-sm hover:bg-white/10"
               >
-                <FaUserCircle size={16} />
-                View Profile
+                Sign In
               </Link>
-              <Link
-                href="/settings"
-                className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
-                onClick={() => setDropdownOpen(false)}
-              >
-                <FaCog size={16} />
-                Settings
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-4 py-3 hover:bg-red-600/30 text-sm text-red-400"
-              >
-                <FaSignOutAlt size={16} />
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="block px-4 py-3 text-sm hover:bg-white/10"
-            >
-              Sign In
-            </Link>
-          )}
-        </motion.div>
-      )}
+            )}
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 
@@ -193,44 +186,18 @@ export default function Sidebar() {
         <FaBars />
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-[9998] bg-black/50 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-            <motion.div
-              initial={{ x: -300 }}
-              animate={{ x: 0 }}
-              exit={{ x: -300 }}
-              transition={{ type: "tween", duration: 0.3 }}
-              className="fixed z-[9999] top-0 left-0 h-full w-64 bg-[#0a0a1f] border-r border-white/10 py-6 px-4"
-            >
-              <button
-                className="absolute top-4 right-4 text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                <FaTimes size={18} />
-              </button>
-              <SidebarContent
-                mobile
-                dropdownOpen={dropdownOpen}
-                setDropdownOpen={setDropdownOpen}
-              />
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      <aside className="hidden md:flex w-64 h-screen sticky top-0 bg-[#0a0a1f] border-r border-white/10 flex-col justify-between py-6 px-4">
-        <SidebarContent
-          dropdownOpen={dropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
+      <aside
+        className={`hidden md:flex ${
+          isOpen ? "w-64" : "w-20"
+        } h-screen sticky top-0 bg-[#0a0a1f] border-r border-white/10 flex-col justify-between py-6 px-4 transition-all duration-300`}
+      >
+        <SidebarContent />
+        <button
+          className="absolute bottom-4 left-4 text-white bg-white/5 p-2 rounded-full hover:bg-white/10"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </aside>
     </>
   );

@@ -259,7 +259,7 @@ const Page = () => {
               inline
               minDate={startDate ?? undefined}
               maxDate={new Date()}
-              calendarClassName="!bg-gradient-to-b from-[#1e1b2e] to-[#11101a] text-white border border-purple-800 rounded-xl shadow-xl"
+              calendarClassName="!bg-gradient-to-b from-[#1e1b2e] to-[#11101a] text-black border border-purple-800 rounded-xl shadow-xl"
               dayClassName={(date) => {
                 const day = getCareerDayFromDate(date);
                 return dailyTasks.length > 0 &&
