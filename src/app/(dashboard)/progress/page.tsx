@@ -49,90 +49,97 @@ const Page = () => {
 
   useEffect(() => {
     if (!userID) return;
-
+  
     const fetchWeekly = async () => {
       try {
         const userRes = await api.get('/users/me');
         const { careerPathID, currentDay } = userRes.data;
-
+  
         const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
         const completions = completionRes.data;
-
+  
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
         const dayNumbers = Array.from({ length: 7 }, (_, i) => weekStart + i);
-
+  
         const taskRes = await api.get(`/DailyTasks/bycareerweek?careerPathId=${careerPathID}&startDay=${weekStart}`);
         const taskList = taskRes.data;
-
+  
         const weekData = dayNumbers.map((dayNumber, i) => {
           const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
           const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
           return { day: dayLabel, tasks: completedCount };
         });
-
+  
         setWeeklyData(weekData);
-
-        const weeklyCircleRes = await api.get(`/PerformanceReviews/progress/weekly?userId=${userID}&day=${currentDay}`);
-        setCircleStats({
-          completed: weeklyCircleRes.data.tasksCompleted,
-          total: weeklyCircleRes.data.tasksAssigned,
-        });
+  
+        // ✅ Use chart data for progress calculation
+        const totalCompleted = weekData.reduce((sum, d) => sum + d.tasks, 0);
+        const totalAssigned = taskList.length;
+  
+        if (timeRange === 'week') {
+          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+        }
       } catch (err) {
         console.error('Error fetching weekly data:', err);
       }
     };
-
+  
     const fetchMonthly = async () => {
       try {
         const userRes = await api.get('/users/me');
         const { currentDay } = userRes.data;
-
+  
         const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}&day=${currentDay}`);
         const data = res.data;
-
+  
         const formatted = data.weeklyProgress.map((week: any) => ({
           week: week.week,
           completed: week.completed,
           total: week.total,
         }));
-
+  
         setMonthlyData(formatted);
-
-        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
-        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
-
-        setCircleStats({ completed: totalCompleted, total: totalAssigned });
+  
+        const totalCompleted = formatted.reduce((sum, m) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum, m) => sum + m.total, 0);
+  
+        if (timeRange === 'month') {
+          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+        }
       } catch (err) {
         console.error('Error fetching monthly data:', err);
       }
     };
-
+  
     const fetchAllTime = async () => {
       try {
         const res = await api.get(`/PerformanceReviews/progress/alltime?userId=${userID}`);
         const data = res.data;
-
+  
         const formatted = data.monthlyProgress.map((m: any) => ({
           month: m.month,
           completed: m.completed,
           total: m.total,
         }));
-
+  
         setAllTimeData(formatted);
-
-        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
-        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
-
-        setCircleStats({ completed: totalCompleted, total: totalAssigned });
+  
+        const totalCompleted = formatted.reduce((sum, m) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum, m) => sum + m.total, 0);
+  
+        if (timeRange === 'all') {
+          setCircleStats({ completed: totalCompleted, total: totalAssigned });
+        }
       } catch (err) {
         console.error('Error fetching all-time data:', err);
       }
     };
-
+  
     if (timeRange === 'week') fetchWeekly();
     else if (timeRange === 'month') fetchMonthly();
     else if (timeRange === 'all') fetchAllTime();
   }, [timeRange, userID]);
+  
 
   const progressPercent = Math.round((circleStats.completed / circleStats.total) * 100);
 
