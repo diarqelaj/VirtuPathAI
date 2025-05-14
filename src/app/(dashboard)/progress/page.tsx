@@ -61,13 +61,20 @@ const Page = () => {
         const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
         const weekData: { day: string; tasks: number }[] = [];
 
-        for (let i = 0; i < 7; i++) {
-          const dayNumber = weekStart + i;
-          const tasksRes = await api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`);
+        const dayNumbers = Array.from({ length: 7 }, (_, i) => weekStart + i);
+        const taskRequests = dayNumbers.map(dayNumber =>
+          api.get(`/DailyTasks/bycareerandday?careerPathId=${careerPathID}&day=${dayNumber}`)
+        );
+
+        const taskResponses = await Promise.all(taskRequests);
+
+        const weekData = taskResponses.map((res, i) => {
+          const dayNumber = dayNumbers[i];
           const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
           const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
-          weekData.push({ day: dayLabel, tasks: completedCount });
-        }
+          return { day: dayLabel, tasks: completedCount };
+        });
+
 
         setWeeklyData(weekData);
 
