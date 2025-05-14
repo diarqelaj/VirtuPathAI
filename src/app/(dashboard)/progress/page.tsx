@@ -2,12 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
 } from 'recharts';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import api from '@/lib/api';
-import { motion, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useSpring, useTransform } from 'framer-motion';
 
 const Page = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -15,7 +20,6 @@ const Page = () => {
   const [userID, setUserID] = useState<number | null>(null);
   const [careerPathID, setCareerPathID] = useState<number | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(null);
-  const [highlightedDates, setHighlightedDates] = useState<Date[]>([]);
 
   const [weeklyData, setWeeklyData] = useState<{ day: string; tasks: number }[]>([]);
   const [monthlyData, setMonthlyData] = useState<{ week: string; completed: number; total: number }[]>([]);
@@ -65,16 +69,7 @@ const Page = () => {
         const tasks = taskRes.data;
 
         const completedRes = await api.get(`/taskcompletion/byuser/${userID}`);
-        const completions = completedRes.data;
-        const completedIDs = completions.map((c: any) => c.taskID);
-
-        const completedDates = completions.map((c: any) => {
-          const d = new Date(startDate);
-          d.setDate(d.getDate() + c.careerDay - 1);
-          return d;
-        });
-
-        setHighlightedDates(completedDates);
+        const completedIDs = completedRes.data.map((c: any) => c.taskID);
 
         const mapped = tasks.map((t: any) => ({
           content: t.content,
@@ -89,6 +84,74 @@ const Page = () => {
 
     fetchDaily();
   }, [selectedDate, userID, careerPathID, startDate]);
+
+  useEffect(() => {
+    if (!userID) return;
+
+    const fetchWeekly = async () => {
+      const userRes = await api.get('/users/me');
+      const { careerPathID, currentDay } = userRes.data;
+      const completionRes = await api.get(`/taskcompletion/byuser/${userID}`);
+      const completions = completionRes.data;
+
+      const weekStart = Math.floor((currentDay - 1) / 7) * 7 + 1;
+      const dayNumbers = Array.from({ length: 7 }, (_, i) => weekStart + i);
+      const taskRes = await api.get(`/DailyTasks/bycareerweek?careerPathId=${careerPathID}&startDay=${weekStart}`);
+      const taskList = taskRes.data;
+
+      const weekData = dayNumbers.map((dayNumber, i) => {
+        const completedCount = completions.filter((c: any) => c.careerDay === dayNumber).length;
+        const dayLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+        return { day: dayLabel, tasks: completedCount };
+      });
+
+      setWeeklyData(weekData);
+      const totalCompleted = weekData.reduce((sum, d) => sum + d.tasks, 0);
+      const totalAssigned = taskList.length;
+      if (timeRange === 'week') {
+        setCircleStats({ completed: totalCompleted, total: totalAssigned });
+      }
+    };
+
+    const fetchMonthly = async () => {
+      const userRes = await api.get('/users/me');
+      const { currentDay } = userRes.data;
+      const res = await api.get(`/PerformanceReviews/progress/monthly?userId=${userID}&day=${currentDay}`);
+      const data = res.data;
+      const formatted = data.weeklyProgress.map((week: any) => ({
+        week: week.week,
+        completed: week.completed,
+        total: week.total,
+      }));
+
+      setMonthlyData(formatted);
+      const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+      const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+      if (timeRange === 'month') {
+        setCircleStats({ completed: totalCompleted, total: totalAssigned });
+      }
+    };
+
+    const fetchAllTime = async () => {
+      const res = await api.get(`/PerformanceReviews/progress/alltime?userId=${userID}`);
+      const data = res.data;
+      const formatted = data.monthlyProgress.map((m: any) => ({
+        month: m.month,
+        completed: m.completed,
+        total: m.total,
+      }));
+      setAllTimeData(formatted);
+      const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+      const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+      if (timeRange === 'all') {
+        setCircleStats({ completed: totalCompleted, total: totalAssigned });
+      }
+    };
+
+    if (timeRange === 'week') fetchWeekly();
+    else if (timeRange === 'month') fetchMonthly();
+    else if (timeRange === 'all') fetchAllTime();
+  }, [timeRange, userID]);
 
   const progressChart = timeRange === 'week' ? weeklyData : timeRange === 'month' ? monthlyData : allTimeData;
   const dataKey = timeRange === 'week' ? 'tasks' : 'completed';
@@ -196,55 +259,37 @@ const Page = () => {
               inline
               minDate={startDate ?? undefined}
               maxDate={new Date()}
-              highlightDates={highlightedDates}
               calendarClassName="!bg-white/5 !text-white"
             />
 
             <div className="flex-1 space-y-4">
-              <AnimatePresence>
-                {dailyTasks.length === 0 ? (
-                  <motion.p
-                    className="text-gray-400"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    No tasks assigned for this day.
-                  </motion.p>
-                ) : (
-                  <motion.ul
-                    className="space-y-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {dailyTasks.map((task, index) => (
-                      <motion.li
-                        key={index}
-                        className={`flex items-center justify-between px-4 py-3 rounded-xl border transition-all duration-300 hover:ring-2 hover:ring-purple-500/50 ${
+              {dailyTasks.length === 0 ? (
+                <p className="text-gray-400">No tasks assigned for this day.</p>
+              ) : (
+                <ul className="space-y-4">
+                  {dailyTasks.map((task, index) => (
+                    <li
+                      key={index}
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl border ${
+                        task.isCompleted
+                          ? 'border-green-400 bg-green-500/10'
+                          : 'border-gray-500 bg-gray-700/10'
+                      }`}
+                    >
+                      <span className="text-white">{task.content}</span>
+                      <span
+                        className={`text-xs font-semibold px-3 py-1 rounded-full ${
                           task.isCompleted
-                            ? 'border-green-400 bg-green-500/10'
-                            : 'border-gray-500 bg-gray-700/10'
+                            ? 'bg-green-500 text-white'
+                            : 'bg-gray-500 text-white'
                         }`}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
                       >
-                        <span className="text-white">{task.content}</span>
-                        <span
-                          className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                            task.isCompleted
-                              ? 'bg-green-500 text-white'
-                              : 'bg-gray-500 text-white'
-                          }`}
-                        >
-                          {task.isCompleted ? 'Completed' : 'Not Done'}
-                        </span>
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
+                        {task.isCompleted ? 'Completed' : 'Not Done'}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>
