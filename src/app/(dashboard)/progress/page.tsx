@@ -100,8 +100,9 @@ const Page = () => {
   
         setMonthlyData(formatted);
   
-        const totalCompleted = formatted.reduce((sum, m) => sum + m.completed, 0);
-        const totalAssigned = formatted.reduce((sum, m) => sum + m.total, 0);
+        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+        
   
         if (timeRange === 'month') {
           setCircleStats({ completed: totalCompleted, total: totalAssigned });
@@ -124,8 +125,9 @@ const Page = () => {
   
         setAllTimeData(formatted);
   
-        const totalCompleted = formatted.reduce((sum, m) => sum + m.completed, 0);
-        const totalAssigned = formatted.reduce((sum, m) => sum + m.total, 0);
+        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+
   
         if (timeRange === 'all') {
           setCircleStats({ completed: totalCompleted, total: totalAssigned });
