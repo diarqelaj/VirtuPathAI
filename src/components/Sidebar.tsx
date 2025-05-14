@@ -21,14 +21,11 @@ import Image from "next/image";
 import api from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation"; // if not already imported
+import { useRouter } from "next/navigation";
 import { IoChevronUp, IoChevronDown } from "react-icons/io5";
-
-
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
-
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -44,6 +41,7 @@ export default function Sidebar() {
     await signOut({ redirect: false });
     router.push("/login");
   };
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -57,14 +55,14 @@ export default function Sidebar() {
   }, []);
 
   const navItems = [
-    { name: "Home", link: "/", icon: <FaHome /> },
-    { name: "My Path", link: "/pathhub", icon: <FaUser /> },
-    { name: "My Tasks", link: "/tasks", icon: <FaTasks /> },
+    { name: "Dashboard", link: "/", icon: <FaHome /> },
+    { name: "Pathway", link: "/pathhub", icon: <FaUser /> },
+    { name: "Daily Missions", link: "/tasks", icon: <FaTasks /> },
     { name: "Progress", link: "/progress", icon: <FaChartBar /> },
-    { name: "Explore Careers", link: "/virtupathcareers", icon: <FaBook /> },
-    { name: "Community", link: "/community", icon: <FaUsers /> },
-    { name: "Settings", link: "/settings", icon: <FaCog /> },
-    { name: "Report a bug", link: "/bug", icon: <FaBug /> },
+    { name: "Opportunities", link: "/virtupathcareers", icon: <FaBook /> },
+    { name: "Tribe", link: "/community", icon: <FaUsers /> },
+    { name: "Control Room", link: "/settings", icon: <FaCog /> },
+    { name: "Feedback", link: "/bug", icon: <FaBug /> },
   ];
 
   const SidebarContent = ({
@@ -77,13 +75,13 @@ export default function Sidebar() {
     setDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }) => (
     <div className="flex flex-col h-full">
-      {/* Logo Section */}
       <div className="flex items-center gap-3 px-2 mb-6">
         <Image src="/virtupathai.png" alt="VirtuPath Logo" width={40} height={40} />
-        <span className="font-bold text-xl text-white">VirtuPath AI</span>
+        <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          VirtuPath AI
+        </span>
       </div>
 
-      {/* Nav Links */}
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => {
           const isActive = pathname === item.link;
@@ -105,86 +103,89 @@ export default function Sidebar() {
         })}
       </nav>
 
-        <div className="mt-6 px-2 relative">
-          <div
-            className="bg-white/5 rounded-xl p-3 flex w-54 items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            <div className="flex items-center gap-3">
-              <Image
-                src={
-                  user?.profilePictureUrl
-                    ? `${API_HOST}${user.profilePictureUrl}`
-                    : defaultAvatar
-                }
-                alt="User"
-                width={40}
-                height={40}
-                quality={100}
-                className="rounded-full object-cover aspect-square"
-                unoptimized
-              />
+      <div className="mt-6 px-2 relative">
+        <div
+          className="bg-white/5 rounded-xl p-3 flex w-54 items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          <div className="flex items-center gap-3">
+            <Image
+              src={
+                user?.profilePictureUrl
+                  ? `${API_HOST}${user.profilePictureUrl}`
+                  : defaultAvatar
+              }
+              alt="User"
+              width={40}
+              height={40}
+              quality={100}
+              className="rounded-full object-cover aspect-square"
+              unoptimized
+            />
 
-              <div>
-                <p className="text-sm font-medium text-white">
-                  {user?.fullName?.split(" ")[0] || "User"}
-                </p>
-                <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
-              </div>
+            <div>
+              <p className="text-sm font-medium text-white">
+                {user?.fullName?.split(" ")[0] || "Guest"}
+              </p>
+              <p className="text-xs text-white/60">{user?.email || "VirtuPath Account"}</p>
             </div>
-            {/* Arrow Icon */}
-            {dropdownOpen ? (
-              <IoChevronDown className="w-4 h-4 text-white/50" />
-            ) : (
-              <IoChevronUp className="w-4 h-4 text-white/50" />
-            )}
-
-            
           </div>
+          {dropdownOpen ? (
+            <IoChevronDown className="w-4 h-4 text-white/50" />
+          ) : (
+            <IoChevronUp className="w-4 h-4 text-white/50" />
+          )}
         </div>
-
-        {/* Dropdown */}
-        {dropdownOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            className="absolute bottom-24 left-7 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-lg z-50"
-          >
-            <Link
-              href="/settings"
-              className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
-              onClick={() => setDropdownOpen(false)}
-            >
-              <FaUserCircle size={16} />
-              View Profile
-            </Link>
-            <Link
-              href="/settings"
-              className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
-              onClick={() => setDropdownOpen(false)}
-            >
-              <FaCog size={16} />
-              Settings
-            </Link>
-            <button
-             onClick={handleLogout}
-
-              className="w-full flex items-center gap-2 px-4 py-3 hover:bg-red-600/30 text-sm text-red-400"
-            >
-              <FaSignOutAlt size={16} />
-              Logout
-            </button>
-            
-          </motion.div>
-        )}
       </div>
-    
+
+      {dropdownOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -5 }}
+          className="absolute bottom-24 left-7 w-48 bg-[#15152d] text-white border border-white/10 rounded-xl shadow-xl z-50"
+        >
+          {user ? (
+            <>
+              <Link
+                href="/settings"
+                className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
+                onClick={() => setDropdownOpen(false)}
+              >
+                <FaUserCircle size={16} />
+                View Profile
+              </Link>
+              <Link
+                href="/settings"
+                className="flex items-center gap-2 px-4 py-3 hover:bg-white/10 text-sm"
+                onClick={() => setDropdownOpen(false)}
+              >
+                <FaCog size={16} />
+                Settings
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2 px-4 py-3 hover:bg-red-600/30 text-sm text-red-400"
+              >
+                <FaSignOutAlt size={16} />
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="block px-4 py-3 text-sm hover:bg-white/10"
+            >
+              Sign In
+            </Link>
+          )}
+        </motion.div>
+      )}
+    </div>
   );
 
   return (
     <>
-      {/* Mobile Toggle Button */}
       <button
         className="md:hidden fixed top-4 left-4 z-[9999] bg-white/10 text-white p-2 rounded-md backdrop-blur-sm hover:bg-white/20 transition"
         onClick={() => setIsOpen(true)}
@@ -192,7 +193,6 @@ export default function Sidebar() {
         <FaBars />
       </button>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -226,7 +226,6 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-64 h-screen sticky top-0 bg-[#0a0a1f] border-r border-white/10 flex-col justify-between py-6 px-4">
         <SidebarContent
           dropdownOpen={dropdownOpen}
