@@ -98,8 +98,9 @@ const Page = () => {
 
         setMonthlyData(formatted);
 
-        const totalCompleted = formatted.reduce((sum, w) => sum + w.completed, 0);
-        const totalAssigned = formatted.reduce((sum, w) => sum + w.total, 0);
+        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+
         setCircleStats({ completed: totalCompleted, total: totalAssigned });
       } catch (err) {
         console.error('Error fetching monthly data:', err);
@@ -119,8 +120,9 @@ const Page = () => {
 
         setAllTimeData(formatted);
 
-        const totalCompleted = formatted.reduce((sum, m) => sum + m.completed, 0);
-        const totalAssigned = formatted.reduce((sum, m) => sum + m.total, 0);
+        const totalCompleted = formatted.reduce((sum: number, m: { completed: number }) => sum + m.completed, 0);
+        const totalAssigned = formatted.reduce((sum: number, m: { total: number }) => sum + m.total, 0);
+
         setCircleStats({ completed: totalCompleted, total: totalAssigned });
       } catch (err) {
         console.error('Error fetching all-time data:', err);
@@ -162,7 +164,8 @@ const Page = () => {
     ) : timeRange === 'month' ? (
       <BarChart data={monthlyData}>
         <XAxis dataKey="week" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, dataMax => Math.max(1, dataMax)]} />
+        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]}
+        />
         <Tooltip content={({ active, payload, label }) => {
           if (active && payload && payload.length) {
             const item = payload[0].payload;
@@ -186,7 +189,8 @@ const Page = () => {
     ) : (
       <BarChart data={allTimeData}>
         <XAxis dataKey="month" stroke="#6b7280" tick={{ fill: '#9CA3AF' }} />
-        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, dataMax => Math.max(1, dataMax)]} />
+        <YAxis stroke="#6b7280" tick={{ fill: '#9CA3AF' }} domain={[0, (dataMax: number) => Math.max(1, dataMax)]}
+ />
         <Tooltip content={({ active, payload, label }) => {
           if (active && payload && payload.length) {
             const item = payload[0].payload;
