@@ -158,7 +158,7 @@ const Page = () => {
   const labelKey = timeRange === 'week' ? 'day' : timeRange === 'month' ? 'week' : 'month';
 
   return (
-    <div className="bg-black text-white min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 pt-16 pb-24">
+    <div className="bg-black-100 text-white min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 pt-16 pb-24">
       <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
@@ -194,7 +194,7 @@ const Page = () => {
                     if (active && payload && payload.length) {
                       const item = payload[0].payload;
                       return (
-                        <div className="text-sm bg-black rounded-xl border border-white/10 px-4 py-3 shadow-xl text-white">
+                        <div className="text-sm bg-black-100 rounded-xl border border-white/10 px-4 py-3 shadow-xl text-white">
                           <div><strong>{label}</strong></div>
                           <div><strong>Completed:</strong> {item.completed ?? item.tasks} / {item.total ?? ''}</div>
                         </div>
