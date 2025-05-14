@@ -259,8 +259,19 @@ const Page = () => {
               inline
               minDate={startDate ?? undefined}
               maxDate={new Date()}
-              calendarClassName="!bg-white/5 !text-white"
+              calendarClassName="!bg-gradient-to-b from-[#1e1b2e] to-[#11101a] text-white border border-purple-800 rounded-xl shadow-xl"
+              dayClassName={(date) => {
+                const day = getCareerDayFromDate(date);
+                return dailyTasks.length > 0 &&
+                  date.toDateString() === selectedDate.toDateString()
+                  ? '!bg-purple-600 !text-white rounded-full'
+                  : getCareerDayFromDate(date) <= getCareerDayFromDate(new Date()) &&
+                    getCareerDayFromDate(date) > 0
+                  ? '!bg-green-600/60 text-white rounded-md'
+                  : '';
+              }}
             />
+
 
             <div className="flex-1 space-y-4">
               {dailyTasks.length === 0 ? (
@@ -270,10 +281,10 @@ const Page = () => {
                   {dailyTasks.map((task, index) => (
                     <li
                       key={index}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl border ${
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl border backdrop-blur-md transition-all ${
                         task.isCompleted
-                          ? 'border-green-400 bg-green-500/10'
-                          : 'border-gray-500 bg-gray-700/10'
+                          ? 'border-purple-500 bg-purple-900/10 shadow-md shadow-purple-700/30'
+                          : 'border-purple-700/40 bg-purple-800/10 shadow-inner shadow-purple-900/10'
                       }`}
                     >
                       <span className="text-white">{task.content}</span>
@@ -281,12 +292,13 @@ const Page = () => {
                         className={`text-xs font-semibold px-3 py-1 rounded-full ${
                           task.isCompleted
                             ? 'bg-green-500 text-white'
-                            : 'bg-gray-500 text-white'
+                            : 'bg-gray-700 text-white'
                         }`}
                       >
                         {task.isCompleted ? 'Completed' : 'Not Done'}
                       </span>
                     </li>
+
                   ))}
                 </ul>
               )}
