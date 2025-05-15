@@ -72,13 +72,18 @@ export default function Topbar() {
         const sorted = res.data.sort((a: any, b: any) =>
           b.fullName.toLowerCase().startsWith(search.toLowerCase()) ? -1 : 1
         );
+        console.log("Search API results:", sorted);
+
         setResults({ users: sorted, careers: [] });
         setHighlightIndex(0);
       } catch {
         setResults({ users: [], careers: [] });
       }
     }, 200);
+    
   }, [search]);
+
+
 
   useEffect(() => {
     const activeItem = resultsRef.current?.querySelector('li.bg-zinc-700');
@@ -146,6 +151,8 @@ export default function Topbar() {
         <span className="text-white font-semibold text-lg hidden sm:inline">VirtuPath</span>
       </div>
 
+
+
       {/* Search */}
       <div className="flex-1 px-6 max-w-xl w-full relative hidden md:block">
         <input
@@ -157,7 +164,7 @@ export default function Topbar() {
           placeholder="Search careers, friends..."
           className="w-full px-4 py-2 bg-white/10 text-white rounded-xl border border-white/10 focus:outline-none"
         />
-        {(results.users.length > 0 || results.careers.length > 0) && (
+        {search.length > 0 && (
           <ul
             ref={resultsRef}
             className="absolute top-full left-0 w-full bg-zinc-900 text-white rounded-lg shadow-lg z-50 mt-1 max-h-64 overflow-y-auto"
