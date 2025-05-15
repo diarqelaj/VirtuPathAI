@@ -67,6 +67,7 @@ export default function UserProfilePage() {
     try {
       await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
       setIsFollowing(true);
+      fetchUsers(); // 👈 refresh data
     } catch {
       alert('Failed to follow user.');
     }
@@ -77,10 +78,12 @@ export default function UserProfilePage() {
       await api.delete(`/userfriends/remove?followerId=${currentUser.userID}&followedId=${id}`);
       setIsFollowing(false);
       setShowUnfollowOptions(false);
+      fetchUsers(); // 👈 refresh data
     } catch {
       alert('Failed to unfollow user.');
     }
   };
+  
   
 
   const handleBlock = async () => {
