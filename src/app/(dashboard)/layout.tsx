@@ -169,7 +169,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           key={item.name}
           href={item.link}
           className={`flex items-center gap-3 px-4 py-3 rounded-lg transition w-full text-left ${
-            isActive ? 'bg-purple-700 text-white font-semibold' : 'hover:bg-white/10 text-white/80'
+            isActive
+              ? 'bg-black-100 shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] text-white font-semibold'
+              : 'hover:bg-black-100 hover:shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] text-white/80'
           }`}
         >
           <div className="w-6 h-6 flex items-center justify-center">{item.icon}</div>
@@ -178,11 +180,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       );
     });
   
+  
 
   return (
     <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-[rgba(19,19,54,0.62)] bg-[rgba(20,20,53,0.8)] backdrop-blur-md backdrop-saturate-150 shadow-md">
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between bg-black-100 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border-b border-white/10">
+
         <div className="flex items-center gap-4">
           <FaBars
             onClick={() =>
@@ -288,7 +292,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {showDropdown && (
-          <div className="absolute right-0 top-[2.5rem] bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
+          <div className="absolute right-0 top-[2.5rem] bg-black-100 border border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] rounded-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
 
             {requests.length === 0 ? (
               <div className="text-center text-sm text-neutral-400 py-4">No friend requests</div>
@@ -354,7 +358,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {dropdownOpen && (
-            <div className="absolute right-0 top-14 bg-[#15152d] border border-white/10 w-48 rounded-xl shadow-xl z-50">
+            <div className="absolute right-0 top-14 bg-black-100 border border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] w-48 rounded-xl z-50">
+
               {user ? (
                 <>
                   {user && (
@@ -386,18 +391,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* BODY */}
       <div className="flex pt-16 flex-1 overflow-hidden">
         {/* SIDEBAR DESKTOP */}
-        <aside
-          className={`hidden sm:flex ${
-            isOpen ? 'w-64' : 'w-20'
-          } h-full border-r border-[rgba(11,11,34,0.6)] bg-[rgba(11,11,34,0.6)] backdrop-saturate-150 shadow-md flex flex-col justify-between py-6 px-4 transition-all duration-300`}
-        >
+        <aside className={`hidden sm:flex ${
+          isOpen ? 'w-64' : 'w-20'
+        } h-full border-r border-[rgba(11,11,34,0.6)] bg-[rgba(11,11,34,0.6)] backdrop-saturate-150 shadow-md flex flex-col justify-between py-6 px-4 transition-all duration-300`}>
+
           <nav className="flex-1 space-y-2">{renderNavItems()}</nav>
           <Link
             href="/settings"
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition w-full text-left mb-4 ${
-              pathname === '/settings' ? 'bg-purple-700 text-white font-semibold' : 'hover:bg-white/10 text-white/80'
+              pathname === '/settings'
+                ? 'bg-black-100 shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] text-white font-semibold'
+                : 'hover:bg-black-100 hover:shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] text-white/80'
             }`}
           >
+
             <div className="w-6 h-6 flex items-center justify-center">
               <FaCog size={20} />
             </div>
@@ -421,9 +428,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <Link
                 href="/settings"
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition text-white ${
-                  pathname === '/settings' ? 'bg-purple-700 font-semibold' : 'hover:bg-white/10 text-white/80'
+                  pathname === '/settings'
+                    ? 'bg-black-100 shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] font-semibold'
+                    : 'hover:bg-black-100 hover:shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] text-white/80'
                 }`}
               >
+
                 <div className="w-6 h-6 flex items-center justify-center">
                   <FaCog size={20} />
                 </div>
