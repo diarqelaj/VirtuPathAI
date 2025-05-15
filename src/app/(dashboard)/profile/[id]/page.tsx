@@ -52,10 +52,7 @@ export default function UserProfilePage() {
 
   const handleFollow = async () => {
     try {
-      await api.post('/userfriends/follow', {
-        followerId: currentUser.userID,
-        followedId: parseInt(id),
-      });
+      await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
       setIsFollowing(true);
       setFollowersCount(prev => prev + 1);
     } catch {
