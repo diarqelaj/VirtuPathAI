@@ -236,26 +236,30 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {search.length > 0 && (
             <ul
               ref={resultsRef}
-              className="absolute top-full left-0 w-full bg-zinc-900 text-white rounded-lg shadow-lg z-50 mt-1 max-h-64 overflow-y-auto"
+              className="absolute top-full left-0 w-full bg-black-100 text-white rounded-xl z-50 mt-1 max-h-64 overflow-y-auto shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] border border-white/10"
             >
+
               <li className="px-4 py-1 text-xs text-neutral-400">
                 {search.trim() ? 'Matching Users' : 'Recent & Suggested Users'}
               </li>
               {results.users.map((u: any, idx: number) => (
                 <li
-                  key={u.userID}
-                  onClick={() => handleSelect(u)}
-                  className={`px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-zinc-700 ${
-                    highlightIndex === idx ? 'bg-zinc-700' : ''
-                  }`}
-                >
-                  <img
-                    src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
-                    alt={u.fullName}
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
-                  <span>{u.fullName}</span>
-                </li>
+                key={u.userID}
+                onClick={() => handleSelect(u)}
+                className={`px-4 py-2 flex items-center gap-3 cursor-pointer rounded-lg transition ${
+                  highlightIndex === idx
+                    ? 'bg-white/10'
+                    : 'hover:bg-white/5'
+                }`}
+              >
+                <img
+                  src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                  alt={u.fullName}
+                  className="w-6 h-6 rounded-full object-cover"
+                />
+                <span>{u.fullName}</span>
+              </li>
+              
               ))}
               <li className="px-4 py-1 text-xs text-neutral-400">Trending Careers</li>
               {results.careers.map((c: any, idx: number) => (
