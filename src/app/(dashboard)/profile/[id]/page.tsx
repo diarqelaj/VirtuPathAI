@@ -11,11 +11,6 @@ const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
 const defaultBanner = 'https://images.unsplash.com/photo-1522199670076-2852f80289c3?fit=crop&w=1600&q=80';
 
-const resolveImageUrl = (url?: string | null, fallback = ''): string => {
-  if (!url) return fallback;
-  return url.startsWith('http') ? url : `${API_HOST}${url}`;
-};
-
 export default function UserProfilePage() {
   const params = useParams();
   const id = params?.id as string;
@@ -44,7 +39,6 @@ export default function UserProfilePage() {
         const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
         setIsFollowing(followRes.data === true);
 
-        // Load full user details for friends/followers
         const [allUsersRes, followersRes, followingRes, friendsRes] = await Promise.all([
           api.get('/users'),
           api.get(`/userfriends/followers/${id}`),
@@ -88,8 +82,8 @@ export default function UserProfilePage() {
   };
 
   const isSelf = currentUser?.userID === user?.userID;
-  const bannerUrl = resolveImageUrl(user?.coverImageUrl, defaultBanner);
-  const profileImg = resolveImageUrl(user?.profilePictureUrl, defaultAvatar);
+  const bannerUrl = user?.coverImageUrl ? `${API_HOST}${user.coverImageUrl}` : defaultBanner;
+  const profileImg = user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar;
   const isPrivate = user?.isProfilePrivate && !isSelf;
 
   return (

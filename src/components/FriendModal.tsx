@@ -13,16 +13,13 @@ interface User {
 interface FriendModalProps {
   title: string;
   type: 'followers' | 'following' | 'mutual';
-  userIds: User[]; // now it's full objects, not just numbers
+  userIds: User[];
   currentUserId: number;
   onClose: () => void;
 }
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
-
-const resolveImageUrl = (url?: string | null): string =>
-  url ? (url.startsWith('http') ? url : `${API_HOST}${url}`) : defaultAvatar;
 
 export default function FriendModal({
   title,
@@ -66,7 +63,7 @@ export default function FriendModal({
               <li key={u.userID} className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <img
-                    src={resolveImageUrl(u.profilePictureUrl)}
+                    src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
                     className="w-10 h-10 rounded-full object-cover border border-white/10"
                     alt="avatar"
                   />
