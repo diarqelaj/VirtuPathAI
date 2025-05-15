@@ -288,38 +288,55 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {showDropdown && (
-            <div className="absolute right-0 mt-12 bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
-              {requests.length === 0 ? (
-                <div className="text-center text-sm text-neutral-400 py-4">No friend requests</div>
-              ) : (
-                requests.map((req) => (
-                  <div
-                    key={req.followerId}
-                    className="flex items-center gap-3 bg-[rgba(11,11,34,0.6)]  p-3 rounded-lg"
+          <div className="absolute right-0 mt-12 bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
+            {requests.length === 0 ? (
+              <div className="text-center text-sm text-neutral-400 py-4">No friend requests</div>
+            ) : (
+              requests.map((req) => (
+                <div
+                  key={req.followerId}
+                  className="flex items-center gap-3 bg-[rgba(11,11,34,0.6)] p-3 rounded-lg"
+                >
+                  <img
+                    src={req.profilePictureUrl ? `${API_HOST}${req.profilePictureUrl}` : defaultAvatar}
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <div className="flex-1 text-sm text-white">{req.fullName}</div>
+                  <button
+                    onClick={async () => {
+                      try {
+                        await api.post(`/userfriends/accept?followerId=${req.followerId}&followedId=${user.userID}`);
+                        setRequests((prev) => prev.filter((r) => r.followerId !== req.followerId));
+                      } catch (err) {
+                        console.error("Failed to accept friend:", err);
+                        alert("Failed to accept the request.");
+                      }
+                    }}
+                    className="text-xs px-2 py-1 bg-green-600 hover:bg-green-700 text-white rounded"
                   >
-                    <img
-                      src={req.profilePictureUrl ? `${API_HOST}${req.profilePictureUrl}` : defaultAvatar}
-                      alt="avatar"
-                      className="w-8 h-8 rounded-full object-cover"
-                    />
-                    <div className="flex-1 text-sm text-white">{req.fullName}</div>
-                    <button
-                      onClick={() => api.post(`/userfriends/accept?followerId=${req.followerId}&followedId=${user.userID}`).then(() => setRequests((r) => r.filter(x => x.followerId !== req.followerId)))}
-                      className="text-xs px-2 py-1 bg-[rgba(11,11,34,0.6)]  hover:bg-[rgba(11,15,34,0.6)]  text-white rounded"
-                    >
-                      Accept
-                    </button>
-                    <button
-                      onClick={() => api.delete(`/userfriends/remove?followerId=${req.followerId}&followedId=${user.userID}`).then(() => setRequests((r) => r.filter(x => x.followerId !== req.followerId)))}
-                      className="text-xs px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
-                    >
-                      Decline
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
+                    Accept
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        await api.delete(`/userfriends/remove?followerId=${req.followerId}&followedId=${user.userID}`);
+                        setRequests((prev) => prev.filter((r) => r.followerId !== req.followerId));
+                      } catch (err) {
+                        console.error("Failed to decline:", err);
+                        alert("Failed to decline the request.");
+                      }
+                    }}
+                    className="text-xs px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
+                  >
+                    Decline
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
 
           <div className="cursor-pointer flex items-center gap-2" onClick={() => setDropdownOpen(!dropdownOpen)}>
             <Image
