@@ -393,7 +393,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* SIDEBAR DESKTOP */}
         <aside className={`hidden sm:flex ${
           isOpen ? 'w-64' : 'w-20'
-        } h-full border-r border-[rgba(11,11,34,0.6)] bg-[rgba(11,11,34,0.6)] backdrop-saturate-150 shadow-md flex flex-col justify-between py-6 px-4 transition-all duration-300`}>
+        } h-full bg-black-100 border-r border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] flex flex-col justify-between py-6 px-4 transition-all duration-300`}>
 
           <nav className="flex-1 space-y-2">{renderNavItems()}</nav>
           <Link
