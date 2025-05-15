@@ -3,40 +3,47 @@
 import { useEffect, useState } from 'react';
 import api from '@/lib/api';
 
-interface FriendRequest {
+interface FollowRequest {
   id: number;
-  senderId: number;
-  receiverId: number;
+  followerId: number;
+  followedId: number;
   isAccepted: boolean;
-  sentAt: string;
+  requestedAt: string;
 }
 
 export default function FriendRequests() {
-  const [requests, setRequests] = useState<FriendRequest[]>([]);
+  const [requests, setRequests] = useState<FollowRequest[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<number | null>(null);
 
   const fetchRequests = async () => {
     try {
       const me = await api.get('/users/me');
-      const userId = me.data.userID;
+      const currentUserId = me.data.userID;
+      setUserId(currentUserId);
 
-      const res = await api.get(`/friendrequest/requests/incoming/${userId}`);
-      setRequests(res.data);
+      const res = await api.get('/userfriends'); // get all
+      const filtered = res.data.filter(
+        (req: FollowRequest) =>
+          req.followedId === currentUserId && !req.isAccepted
+      );
+      setRequests(filtered);
     } catch (error) {
-      console.error('Error loading requests:', error);
+      console.error('Error loading follow requests:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAccept = async (id: number, senderId: number) => {
-    await api.post(`/friendrequest/accept?requestId=${id}`);
-    await api.post(`/userfriends/add?userId=${senderId}&friendId=${requests.find(r => r.id === id)?.receiverId}`);
+  const handleAccept = async (followerId: number) => {
+    if (!userId) return;
+    await api.post(`/userfriends/accept?followerId=${followerId}&followedId=${userId}`);
     await fetchRequests();
   };
 
-  const handleDecline = async (id: number) => {
-    await api.delete(`/friendrequest/remove/${id}`);
+  const handleDecline = async (followerId: number) => {
+    if (!userId) return;
+    await api.delete(`/userfriends/remove?followerId=${followerId}&followedId=${userId}`);
     await fetchRequests();
   };
 
@@ -46,7 +53,7 @@ export default function FriendRequests() {
 
   return (
     <div className="p-4 mt-4 rounded bg-zinc-900 text-white shadow">
-      <h2 className="text-lg font-bold mb-2">Incoming Friend Requests</h2>
+      <h2 className="text-lg font-bold mb-2">Incoming Follow Requests</h2>
       {loading ? (
         <p>Loading...</p>
       ) : requests.length === 0 ? (
@@ -55,16 +62,16 @@ export default function FriendRequests() {
         <ul className="space-y-2">
           {requests.map((req) => (
             <li key={req.id} className="flex justify-between items-center bg-zinc-800 p-2 rounded">
-              <div>From User ID: {req.senderId}</div>
+              <div>From User ID: {req.followerId}</div>
               <div className="space-x-2">
                 <button
-                  onClick={() => handleAccept(req.id, req.senderId)}
+                  onClick={() => handleAccept(req.followerId)}
                   className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white"
                 >
                   Accept
                 </button>
                 <button
-                  onClick={() => handleDecline(req.id)}
+                  onClick={() => handleDecline(req.followerId)}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white"
                 >
                   Decline

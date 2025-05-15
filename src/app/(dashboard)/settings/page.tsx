@@ -17,7 +17,9 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({ name: "" });
   const [showNotification, setShowNotification] = useState(false);
   const [error, setError] = useState("");
-  const [friendCount, setFriendCount] = useState(0);
+  const [followers, setFollowers] = useState(0);
+  const [following, setFollowing] = useState(0);
+  const [mutual, setMutual] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,8 +30,15 @@ const ProfilePage = () => {
         setUser(sessionUser);
         setFormData({ name: sessionUser.fullName || "" });
 
-        const friendsRes = await api.get(`/userfriends/${sessionUser.userID}`);
-        setFriendCount(friendsRes.data.length);
+        const [followersRes, followingRes, mutualRes] = await Promise.all([
+          api.get(`/userfriends/followers/${sessionUser.userID}`),
+          api.get(`/userfriends/following/${sessionUser.userID}`),
+          api.get(`/userfriends/mutual/${sessionUser.userID}`)
+        ]);
+
+        setFollowers(followersRes.data.length);
+        setFollowing(followingRes.data.length);
+        setMutual(mutualRes.data.length);
       } catch {
         alert("Session expired. Please log in again.");
         router.push("/login");
@@ -143,11 +152,10 @@ const ProfilePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          {/* Top Profile Info */}
-          <section className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-6 items-center md:items-start mb-10">
-            {/* Avatar + Counters */}
+          {/* Top Section */}
+          <section className="bg-[rgba(17,25,40,0.9)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-8 items-center md:items-start mb-12">
             <div className="flex flex-col items-center md:items-start gap-4">
-              <div className="relative group w-32 h-32 rounded-full overflow-hidden">
+              <div className="relative group w-32 h-32 rounded-full overflow-hidden shadow-xl">
                 <img
                   src={
                     user?.profilePictureUrl
@@ -173,18 +181,12 @@ const ProfilePage = () => {
               </div>
 
               <div className="flex gap-6 text-center text-sm text-white">
-                <div className="flex flex-col items-center">
-                  <span className="text-lg font-semibold">{friendCount}</span>
-                  <span className="text-neutral-400">Followers</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span className="text-lg font-semibold">{friendCount}</span>
-                  <span className="text-neutral-400">Following</span>
-                </div>
+                <StatCard label="Followers" count={followers} />
+                <StatCard label="Following" count={following} />
+                <StatCard label="Friends" count={mutual} />
               </div>
             </div>
 
-            {/* Profile Form */}
             <div className="flex-1 space-y-4 w-full">
               {error && (
                 <div className="p-3 bg-red-500/20 text-red-300 rounded-lg text-sm">{error}</div>
@@ -241,7 +243,7 @@ const ProfilePage = () => {
               </div>
 
               <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
-                <h2 className="text-xl font-bold mb-4 text-white">Add New Friends</h2>
+                <h2 className="text-xl font-bold mb-4 text-white">Find & Follow</h2>
                 <UserSearch />
               </div>
             </div>
@@ -252,7 +254,7 @@ const ProfilePage = () => {
   );
 };
 
-// Reusable input field
+// Reusable input
 const InputField = ({
   label,
   type,
@@ -277,6 +279,14 @@ const InputField = ({
         disabled ? "bg-gray-800 text-gray-400 cursor-not-allowed" : "bg-black-100"
       } border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20`}
     />
+  </div>
+);
+
+// Reusable stat display
+const StatCard = ({ label, count }: { label: string; count: number }) => (
+  <div className="flex flex-col items-center">
+    <span className="text-lg font-semibold">{count}</span>
+    <span className="text-neutral-400">{label}</span>
   </div>
 );
 
