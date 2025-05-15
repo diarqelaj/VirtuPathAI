@@ -4,7 +4,7 @@ export default {
   },
   serverExternalPackages: ['fs', 'path'], // Updated key
   images: {
-    domains: ['ui-avatars.com', 'localhost'], // fix your domain format here
+    domains: ['ui-avatars.com', 'virtupathapi-54vt.onrender.com'], // fix your domain format here
   },
   async headers() {
     return [

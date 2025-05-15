@@ -39,19 +39,16 @@ export default function UserProfilePage() {
         const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
         setIsFollowing(followRes.data === true);
 
-        const [allUsersRes, followersRes, followingRes, friendsRes] = await Promise.all([
-          api.get('/users'),
+        const [followersRes, followingRes, friendsRes] = await Promise.all([
           api.get(`/userfriends/followers/${id}`),
           api.get(`/userfriends/following/${id}`),
           api.get(`/userfriends/mutual/${id}`)
         ]);
-
-        const allUsers = allUsersRes.data;
-        const findUsers = (ids: number[]) => allUsers.filter((u: any) => ids.includes(u.userID));
-
-        setFollowers(findUsers(followersRes.data));
-        setFollowing(findUsers(followingRes.data));
-        setFriends(findUsers(friendsRes.data));
+        
+        setFollowers(followersRes.data || []);
+        setFollowing(followingRes.data || []);
+        setFriends(friendsRes.data || []);
+        
       } catch (err) {
         console.error(err);
       }
@@ -92,13 +89,14 @@ export default function UserProfilePage() {
         {/* Banner */}
         <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
           <div className="absolute bottom-0 left-0 p-4">
-            <Image
+            <img
               src={profileImg}
               alt="Avatar"
               width={80}
               height={80}
               className="rounded-full border-4 border-white shadow-md object-cover"
             />
+
           </div>
         </div>
 
