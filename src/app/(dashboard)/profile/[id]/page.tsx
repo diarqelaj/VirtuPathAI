@@ -25,35 +25,23 @@ export default function UserProfilePage() {
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  const bannerUrl = user?.coverImageUrl ? `${API_HOST}${user.coverImageUrl}` : defaultBanner;
-  const profileImg = user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar;
   const isSelf = currentUser?.userID === user?.userID;
   const isPrivate = user?.isProfilePrivate && !isSelf;
+  const profileImg = user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar;
+  const bannerUrl = user?.coverImageUrl ? `${API_HOST}${user.coverImageUrl}` : defaultBanner;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const current = await api.get('/users/me');
-        setCurrentUser(current.data);
-
-        const target = await api.get(`/users/${id}`);
-        setUser(target.data);
-
-        const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
-        setIsFollowing(followRes.data === true);
-
-        await loadStats();
-      } catch (err) {
-        console.error('Failed to load user profile', err);
-      }
-    };
-
-    if (id) fetchData();
-  }, [id]);
-
-  const loadStats = async () => {
+  const fetchAll = async () => {
     try {
-      const [followersRes, followingRes, friendsRes] = await Promise.all([
+      const current = await api.get('/users/me');
+      setCurrentUser(current.data);
+
+      const target = await api.get(`/users/${id}`);
+      setUser(target.data);
+
+      const isFollowingRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
+      setIsFollowing(isFollowingRes.data === true);
+
+      const [followersRes, followingRes, mutualsRes] = await Promise.all([
         api.get(`/userfriends/followers/${id}`),
         api.get(`/userfriends/following/${id}`),
         api.get(`/userfriends/mutual/${id}`)
@@ -61,11 +49,15 @@ export default function UserProfilePage() {
 
       setFollowers(followersRes.data || []);
       setFollowing(followingRes.data || []);
-      setFriends(friendsRes.data || []);
+      setFriends(mutualsRes.data || []);
     } catch (err) {
-      console.error('Failed to load stats', err);
+      console.error('Load error', err);
     }
   };
+
+  useEffect(() => {
+    if (id) fetchAll();
+  }, [id]);
 
   const handleFollow = async () => {
     try {
@@ -92,10 +84,7 @@ export default function UserProfilePage() {
     <>
       <div className="text-white max-w-4xl mx-auto mt-4 rounded-xl overflow-hidden shadow-xl border border-white/10 bg-black-100">
         {/* Banner */}
-        <div
-          className="h-48 w-full bg-cover bg-center relative"
-          style={{ backgroundImage: `url(${bannerUrl})` }}
-        >
+        <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
           <div className="absolute bottom-0 left-0 p-4">
             <img
               src={profileImg}
@@ -150,31 +139,13 @@ export default function UserProfilePage() {
             <>
               {/* Stats */}
               <div className="flex gap-6 mt-2 text-sm text-gray-300">
-                <span
-                  className="cursor-pointer hover:text-purple-400"
-                  onClick={() => {
-                    setModalType('followers');
-                    setShowModal(true);
-                  }}
-                >
+                <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('followers'); setShowModal(true); }}>
                   <strong>{followers.length}</strong> Followers
                 </span>
-                <span
-                  className="cursor-pointer hover:text-purple-400"
-                  onClick={() => {
-                    setModalType('following');
-                    setShowModal(true);
-                  }}
-                >
+                <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('following'); setShowModal(true); }}>
                   <strong>{following.length}</strong> Following
                 </span>
-                <span
-                  className="cursor-pointer hover:text-purple-400"
-                  onClick={() => {
-                    setModalType('mutual');
-                    setShowModal(true);
-                  }}
-                >
+                <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('mutual'); setShowModal(true); }}>
                   <strong>{friends.length}</strong> Friends
                 </span>
               </div>
@@ -182,17 +153,13 @@ export default function UserProfilePage() {
               {/* Bio */}
               <div>
                 <h3 className="text-lg font-semibold">Bio</h3>
-                <p className="text-sm text-white/80">
-                  {user?.bio || 'This user hasn’t written a bio yet.'}
-                </p>
+                <p className="text-sm text-white/80">{user?.bio || 'This user hasn’t written a bio yet.'}</p>
               </div>
 
               {/* About */}
               <div>
                 <h3 className="text-lg font-semibold">About</h3>
-                <p className="text-sm text-white/80">
-                  {user?.about || 'Interests, goals, achievements — coming soon...'}
-                </p>
+                <p className="text-sm text-white/80">{user?.about || 'Interests, goals, achievements — coming soon...'}</p>
               </div>
             </>
           )}
@@ -212,9 +179,9 @@ export default function UserProfilePage() {
           }
           currentUserId={currentUser?.userID}
           onClose={async () => {
-            setModalType(null);
             setShowModal(false);
-            await loadStats(); // ✅ Refresh stats when modal closes
+            setModalType(null);
+            await fetchAll(); // 🔁 Refresh data after modal closes
           }}
         />
       )}
