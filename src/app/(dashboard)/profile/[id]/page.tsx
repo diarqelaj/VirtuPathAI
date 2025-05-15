@@ -108,7 +108,8 @@ export default function UserProfilePage() {
 
   return (
     <>
-      <div className="text-white max-w-4xl mx-auto mt-4 rounded-xl overflow-hidden shadow-xl border border-white/10 bg-black-100">
+      <div className="text-white max-w-4xl mx-auto mt-4 rounded-xl overflow-visible shadow-xl border border-white/10 bg-black-100">
+
         {/* Banner */}
         <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
           <div className="absolute bottom-0 left-0 p-4">
