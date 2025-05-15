@@ -16,8 +16,12 @@ export default function Topbar() {
   const [requests, setRequests] = useState<any[]>([]);
   const [recent, setRecent] = useState<any[]>([]);
   const [highlightIndex, setHighlightIndex] = useState(0);
+  const [seenRequests, setSeenRequests] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -32,11 +36,16 @@ export default function Topbar() {
     fetchUser();
   }, []);
 
+  const loadRequests = async (userId: number) => {
+    try {
+      const res = await api.get(`/userfriends/requests/incoming/${userId}`);
+      setRequests(res.data || []);
+    } catch {}
+  };
+
   useEffect(() => {
     if (user?.userID) {
-      api.get(`/userfriends/requests/incoming/${user.userID}`)
-        .then((res) => setRequests(res.data || []))
-        .catch(() => {});
+      loadRequests(user.userID);
     }
   }, [user?.userID]);
 
@@ -51,8 +60,8 @@ export default function Topbar() {
             { title: 'MMA Fighter' },
             { title: 'Fashion Designer' },
             { title: 'Software Developer' },
-            { title: 'Data Scientist' }
-          ]
+            { title: 'Data Scientist' },
+          ],
         });
         setHighlightIndex(0);
         return;
@@ -61,7 +70,7 @@ export default function Topbar() {
       try {
         const res = await api.get(`/users/search?name=${search}`);
         const sorted = res.data.sort((a: any, b: any) =>
-          b.fullName.toLowerCase().startsWith(search.toLowerCase()) ? 1 : -1
+          b.fullName.toLowerCase().startsWith(search.toLowerCase()) ? -1 : 1
         );
         setResults({ users: sorted, careers: [] });
         setHighlightIndex(0);
@@ -76,6 +85,16 @@ export default function Topbar() {
     if (activeItem) activeItem.scrollIntoView({ block: 'nearest' });
   }, [highlightIndex]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (!dropdownRef.current?.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleSelect = (entry: any) => {
     if ('userID' in entry) {
       updateRecent(entry);
@@ -87,7 +106,7 @@ export default function Topbar() {
 
   const updateRecent = (userEntry: any) => {
     setRecent((prev: any[]) => {
-      const filtered = prev.filter(u => u.userID !== userEntry.userID);
+      const filtered = prev.filter((u) => u.userID !== userEntry.userID);
       return [userEntry, ...filtered].slice(0, 5);
     });
   };
@@ -105,6 +124,18 @@ export default function Topbar() {
       const selected = allItems[highlightIndex];
       if (selected) handleSelect(selected);
     }
+  };
+
+  const handleAccept = async (followerId: number) => {
+    if (!user) return;
+    await api.post(`/userfriends/accept?followerId=${followerId}&followedId=${user.userID}`);
+    await loadRequests(user.userID);
+  };
+
+  const handleDecline = async (followerId: number) => {
+    if (!user) return;
+    await api.delete(`/userfriends/remove?followerId=${followerId}&followedId=${user.userID}`);
+    await loadRequests(user.userID);
   };
 
   return (
@@ -167,15 +198,58 @@ export default function Topbar() {
       </div>
 
       {/* Right Side */}
-      <div className="flex items-center gap-4">
-        <div className="relative cursor-pointer">
+      <div className="flex items-center gap-4 relative" ref={dropdownRef}>
+        <div
+          className="relative cursor-pointer"
+          onClick={() => {
+            setSeenRequests(true);
+            setShowDropdown((prev) => !prev);
+          }}
+        >
           <FaBell className="text-white text-xl" />
-          {requests.length > 0 && (
+          {!seenRequests && requests.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5">
               {requests.length}
             </span>
           )}
         </div>
+
+        {showDropdown && (
+          <div className="absolute right-0 mt-12 bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
+            {requests.length === 0 ? (
+              <div className="text-center text-sm text-neutral-400 py-4">No friend requests</div>
+            ) : (
+              requests.map((req) => (
+                <div
+                  key={req.followerId}
+                  className="flex items-center gap-3 bg-zinc-900 p-3 rounded-lg"
+                >
+                  <img
+                    src={req.profilePictureUrl ? `${API_HOST}${req.profilePictureUrl}` : defaultAvatar}
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-white">{req.fullName || `User #${req.followerId}`}</div>
+                  </div>
+                  <button
+                    onClick={() => handleAccept(req.followerId)}
+                    className="text-xs px-2 py-1 bg-green-600 hover:bg-green-700 text-white rounded"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleDecline(req.followerId)}
+                    className="text-xs px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
+                  >
+                    Decline
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
         {user ? (
           <Image
             src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
