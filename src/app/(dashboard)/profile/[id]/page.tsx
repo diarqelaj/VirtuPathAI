@@ -19,16 +19,14 @@ export default function UserProfilePage() {
 
   const [user, setUser] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [isFollowing, setIsFollowing] = useState(false);
-
   const [followers, setFollowers] = useState<any[]>([]);
   const [following, setFollowing] = useState<any[]>([]);
   const [friends, setFriends] = useState<any[]>([]);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [showUnfollowOptions, setShowUnfollowOptions] = useState(false);
-
 
   const fetchUsers = async () => {
     try {
@@ -38,24 +36,24 @@ export default function UserProfilePage() {
       const target = await api.get(`/users/${id}`);
       setUser(target.data);
 
-      try {
-        const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
-        setIsFollowing(followRes.data === true);
-      } catch {
-        setIsFollowing(false);
-      }
-
-      const [followersRes, followingRes, friendsRes] = await Promise.all([
+      const [followersRes, followingRes, mutualRes] = await Promise.all([
         api.get(`/userfriends/followers/${id}`),
         api.get(`/userfriends/following/${id}`),
-        api.get(`/userfriends/mutual/${id}`)
+        api.get(`/userfriends/mutual/${id}`),
       ]);
 
-      setFollowers(followersRes.data || []);
-      setFollowing(followingRes.data || []);
-      setFriends(friendsRes.data || []);
+      const allFollowers = followersRes.data || [];
+      const allFollowing = followingRes.data || [];
+      const allMutuals = mutualRes.data || [];
+
+      setFollowers(allFollowers);
+      setFollowing(allFollowing);
+      setFriends(allMutuals);
+
+      const isCurrentFollowing = allFollowers.some((f: any) => f.userID === current.data.userID);
+      setIsFollowing(isCurrentFollowing);
     } catch (err) {
-      console.error('Error loading user profile:', err);
+      console.error('Error loading profile:', err);
     }
   };
 
@@ -66,25 +64,21 @@ export default function UserProfilePage() {
   const handleFollow = async () => {
     try {
       await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
-      setIsFollowing(true);
-      fetchUsers(); // 👈 refresh data
+      await fetchUsers(); // Refresh to show updated follow state
     } catch {
       alert('Failed to follow user.');
     }
   };
-  
+
   const handleUnfollow = async () => {
     try {
       await api.delete(`/userfriends/remove?followerId=${currentUser.userID}&followedId=${id}`);
-      setIsFollowing(false);
       setShowUnfollowOptions(false);
-      fetchUsers(); // 👈 refresh data
+      await fetchUsers(); // Refresh state
     } catch {
       alert('Failed to unfollow user.');
     }
   };
-  
-  
 
   const handleBlock = async () => {
     try {
@@ -124,9 +118,7 @@ export default function UserProfilePage() {
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-2xl font-bold">{user?.fullName}</h2>
-              <p className="text-sm text-gray-400">
-                Joined {new Date(user?.registrationDate).toLocaleDateString()}
-              </p>
+              <p className="text-sm text-gray-400">Joined {new Date(user?.registrationDate).toLocaleDateString()}</p>
             </div>
 
             {isSelf ? (
@@ -150,16 +142,10 @@ export default function UserProfilePage() {
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
                         <div className="flex gap-2">
-                          <button
-                            onClick={handleUnfollow}
-                            className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm w-full"
-                          >
+                          <button onClick={handleUnfollow} className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm w-full">
                             Unfollow
                           </button>
-                          <button
-                            onClick={() => setShowUnfollowOptions(false)}
-                            className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full"
-                          >
+                          <button onClick={() => setShowUnfollowOptions(false)} className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full">
                             Cancel
                           </button>
                         </div>
@@ -167,10 +153,7 @@ export default function UserProfilePage() {
                     )}
                   </div>
                 ) : (
-                  <button
-                    onClick={handleFollow}
-                    className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white"
-                  >
+                  <button onClick={handleFollow} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white">
                     Follow
                   </button>
                 )}
