@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zebrHmFunMVGVYV9sL0RlReCvj998qRESsp7gO83PGk=",
+  "Hash": "URextyaSJWkrSAgeJxgvW5ZraxD76u21KpJqoYEG0cE=",
   "Source": "VirtuPathAPI",
   "BasePath": "_content/VirtuPathAPI",
   "Mode": "Default",
@@ -8,98 +8,530 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "VirtuPathAPI\\wwwroot",
+      "Name": "VirtuPathAPI/wwwroot",
       "Source": "VirtuPathAPI",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\profile-pictures\\0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
       "SourceId": "VirtuPathAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
-      "RelativePath": "profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "RelativePath": "profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "hae0r1f5ys",
+      "Integrity": "WReKh0KJ9mEx6A0UIQJkHqu66wATxal4zoMOHBA+0/k=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\profile-pictures\\0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg"
+      "OriginalItemSpec": "wwwroot/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg"
     },
     {
-      "Identity": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\profile-pictures\\55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
       "SourceId": "VirtuPathAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
-      "RelativePath": "profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "RelativePath": "profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "420t35ma00",
+      "Integrity": "dGMPNpQn3jHIOmEoo2frYGATbmhfOgS1+nCvScCHiEo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\profile-pictures\\55d067d0-9101-4c21-bfc1-26fdeba58251.jpg"
+      "OriginalItemSpec": "wwwroot/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg"
     },
     {
-      "Identity": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\profile-pictures\\b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
       "SourceId": "VirtuPathAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
-      "RelativePath": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "RelativePath": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "35j6g7hhec",
+      "Integrity": "mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\profile-pictures\\b1768b1b-06c4-4103-bd50-52ecfe728733.jpg"
+      "OriginalItemSpec": "wwwroot/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg"
     },
     {
-      "Identity": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\uploads\\screenshots\\305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
       "SourceId": "VirtuPathAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
-      "RelativePath": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "RelativePath": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "gdijcu7zq7",
+      "Integrity": "PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\screenshots\\305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png"
+      "OriginalItemSpec": "wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png"
     },
     {
-      "Identity": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\uploads\\screenshots\\d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "Identity": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
       "SourceId": "VirtuPathAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\taula\\OneDrive\\Documents\\GitHub\\VirtuPathAI\\VirtuPathAPI\\VirtuPathAPI\\wwwroot\\",
+      "ContentRoot": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/",
       "BasePath": "_content/VirtuPathAPI",
-      "RelativePath": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "RelativePath": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "gdijcu7zq7",
+      "Integrity": "PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\screenshots\\d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png"
+      "OriginalItemSpec": "wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.hae0r1f5ys.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "276875"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WReKh0KJ9mEx6A0UIQJkHqu66wATxal4zoMOHBA+0/k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 05 May 2025 13:09:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hae0r1f5ys"
+        },
+        {
+          "Name": "label",
+          "Value": "profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WReKh0KJ9mEx6A0UIQJkHqu66wATxal4zoMOHBA+0/k="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/0178dbca-881d-4d29-8d5c-5f73ba6ad6cd.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "276875"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WReKh0KJ9mEx6A0UIQJkHqu66wATxal4zoMOHBA+0/k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 05 May 2025 13:09:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WReKh0KJ9mEx6A0UIQJkHqu66wATxal4zoMOHBA+0/k="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.420t35ma00.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "306125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dGMPNpQn3jHIOmEoo2frYGATbmhfOgS1+nCvScCHiEo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 05 May 2025 15:11:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "420t35ma00"
+        },
+        {
+          "Name": "label",
+          "Value": "profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dGMPNpQn3jHIOmEoo2frYGATbmhfOgS1+nCvScCHiEo="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/55d067d0-9101-4c21-bfc1-26fdeba58251.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "306125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dGMPNpQn3jHIOmEoo2frYGATbmhfOgS1+nCvScCHiEo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 05 May 2025 15:11:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dGMPNpQn3jHIOmEoo2frYGATbmhfOgS1+nCvScCHiEo="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.35j6g7hhec.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 23:54:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "35j6g7hhec"
+        },
+        {
+          "Name": "label",
+          "Value": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo="
+        }
+      ]
+    },
+    {
+      "Route": "profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/profile-pictures/b1768b1b-06c4-4103-bd50-52ecfe728733.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 23:54:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mX3WxtkwwIz6CGUME4nv6dZeWDlTuUdUHXnjNQ7sOGo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.gdijcu7zq7.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:35:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gdijcu7zq7"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/305ae05f-87c3-4982-ba4f-87a0b292ab46_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:35:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.gdijcu7zq7.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:34:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gdijcu7zq7"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "AssetFile": "/home/pluto/Desktop/virtupathai/VirtuPathAPI/VirtuPathAPI/wwwroot/uploads/screenshots/d3d47098-e72b-4483-b666-83aa3a8cf66d_test.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29022"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 03 May 2025 15:34:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCgdFZ07/si8NmRKCr9kDCpsQmEuqWhrrNJUygoEAzM="
+        }
+      ]
     }
   ]
 }

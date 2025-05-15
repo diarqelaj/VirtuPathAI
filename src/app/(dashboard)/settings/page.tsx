@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import api from "@/lib/api";
+import FriendList from '@/components/FriendList';
+import FriendRequests from '@/components/FriendRequests';
+import UserSearch from '@/components/UserSearch';
+
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
@@ -222,6 +226,35 @@ const ProfilePage = () => {
 
 
             </div>
+            <section className="mt-10 bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl">
+            <h2 className="text-xl font-bold text-white mb-4">Friends</h2>
+
+            {/* IG-style follower counts */}
+            <div className="flex items-center gap-6 mb-6 text-white">
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-semibold">10</span>
+                <span className="text-sm text-neutral-400">Followers</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-lg font-semibold">20</span>
+                <span className="text-sm text-neutral-400">Following</span>
+              </div>
+            </div>
+
+            {/* Friend list */}
+            <FriendList />
+
+            {/* Friend request inbox */}
+            <div className="mt-8">
+              <FriendRequests />
+            </div>
+
+            {/* Friend search */}
+            <div className="mt-8">
+              <UserSearch />
+            </div>
+          </section>
+
 
             {/* Form */}
             <div className="flex-1 w-full space-y-4">
