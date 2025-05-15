@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import api from '@/lib/api';
 
@@ -31,6 +32,7 @@ export default function FriendModal({
   const [users, setUsers] = useState<User[]>(userIds);
   const [confirmId, setConfirmId] = useState<number | null>(null);
   const [followingMap, setFollowingMap] = useState<Record<number, boolean>>({});
+  const router = useRouter();
 
   useEffect(() => {
     const fetchFollowing = async () => {
@@ -77,6 +79,13 @@ export default function FriendModal({
     }
   };
 
+  const navigateToProfile = (userId: number) => {
+    if (userId !== currentUserId) {
+      router.push(`/profile/${userId}`);
+      onClose();
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="bg-zinc-900 border border-white/10 w-full max-w-md rounded-2xl shadow-xl p-6 relative">
@@ -98,7 +107,12 @@ export default function FriendModal({
 
               return (
                 <li key={u.userID} className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
+                  <div
+                    className={`flex items-center gap-3 cursor-pointer ${
+                      !isSelf ? 'hover:opacity-80' : ''
+                    }`}
+                    onClick={() => navigateToProfile(u.userID)}
+                  >
                     <img
                       src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
                       className="w-10 h-10 rounded-full object-cover border border-white/10"

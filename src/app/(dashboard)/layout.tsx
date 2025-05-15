@@ -288,7 +288,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {showDropdown && (
-          <div className="absolute right-0 mt-12 bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
+          <div className="absolute right-0 top-[2.5rem] bg-zinc-800 border border-white/10 rounded-lg shadow-xl w-72 z-50 p-2 space-y-2 max-h-96 overflow-y-auto">
+
             {requests.length === 0 ? (
               <div className="text-center text-sm text-neutral-400 py-4">No friend requests</div>
             ) : (

@@ -23,6 +23,7 @@ export default function UserProfilePage() {
   const [following, setFollowing] = useState<any[]>([]);
   const [friends, setFriends] = useState<any[]>([]);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isAccepted, setIsAccepted] = useState(false);
 
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -36,15 +37,17 @@ export default function UserProfilePage() {
       const target = await api.get(`/users/${id}`);
       setUser(target.data);
 
-      const [followersRes, followingRes, mutualRes] = await Promise.all([
+      const [followersRes, followingRes, mutualRes, currentUserFollowingRes] = await Promise.all([
         api.get(`/userfriends/followers/${id}`),
         api.get(`/userfriends/following/${id}`),
         api.get(`/userfriends/mutual/${id}`),
+        api.get(`/userfriends/following/${current.data.userID}`)
       ]);
 
       const allFollowers = followersRes.data || [];
       const allFollowing = followingRes.data || [];
       const allMutuals = mutualRes.data || [];
+      const currentUserFollowing = currentUserFollowingRes.data || [];
 
       setFollowers(allFollowers);
       setFollowing(allFollowing);
@@ -52,6 +55,9 @@ export default function UserProfilePage() {
 
       const isCurrentFollowing = allFollowers.some((f: any) => f.userID === current.data.userID);
       setIsFollowing(isCurrentFollowing);
+
+      const isFollowAccepted = currentUserFollowing.some((f: any) => f.userID === parseInt(id));
+      setIsAccepted(isFollowAccepted);
     } catch (err) {
       console.error('Error loading profile:', err);
     }
@@ -64,7 +70,7 @@ export default function UserProfilePage() {
   const handleFollow = async () => {
     try {
       await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
-      await fetchUsers(); // Refresh to show updated follow state
+      await fetchUsers();
     } catch {
       alert('Failed to follow user.');
     }
@@ -74,7 +80,7 @@ export default function UserProfilePage() {
     try {
       await api.delete(`/userfriends/remove?followerId=${currentUser.userID}&followedId=${id}`);
       setShowUnfollowOptions(false);
-      await fetchUsers(); // Refresh state
+      await fetchUsers();
     } catch {
       alert('Failed to unfollow user.');
     }
@@ -95,7 +101,7 @@ export default function UserProfilePage() {
   const isSelf = currentUser?.userID === user?.userID;
   const bannerUrl = resolveImageUrl(user?.coverImageUrl, defaultBanner);
   const profileImg = resolveImageUrl(user?.profilePictureUrl, defaultAvatar);
-  const isPrivate = user?.isProfilePrivate && !isSelf;
+  const isPrivate = user?.isProfilePrivate && !isSelf && !isAccepted;
 
   return (
     <>
