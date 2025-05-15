@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-b bg-black-100/10  bg-black-100/10 backdrop-saturate-150">
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-b border-[rgba(11,11,34,0.6)] bg-[rgba(11,11,34,0.6)] backdrop-blur-md backdrop-saturate-150 shadow-sm">
 
         <div className="flex items-center gap-4">
           <FaBars
@@ -150,7 +150,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <aside
           className={`hidden sm:flex ${
             isOpen ? 'w-64' : 'w-20'
-          } h-full border-r border-white/10 bg-black-100/10 backdrop-saturate-150 shadow-md flex flex-col justify-between py-6 px-4 transition-all duration-300`}
+          } h-full border-r border-white/10 bg-[rgba(11,11,34,0.6)] backdrop-blur-md backdrop-saturate-150 shadow-sm`}
           >
           <nav className="flex-1 space-y-2">{renderNavItems()}</nav>
 
@@ -167,7 +167,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* SIDEBAR MOBILE OVERLAY */}
         {showMobileSidebar && (
-          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex">
+        
+        <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.5)] backdrop-blur-sm">
+
+
             <div className="w-64 bg-[#0a0a1f] border-r border-white/10 py-6 px-4 flex flex-col justify-between">
               <div>
                 <div className="flex justify-end mb-4">
