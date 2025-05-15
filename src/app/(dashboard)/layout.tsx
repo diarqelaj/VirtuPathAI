@@ -2,17 +2,21 @@
 
 import { ReactNode } from 'react';
 import Sidebar from '@/components/Sidebar';
-import Topbar from '@/components/Topbar'; // new component we’ll build
+import Topbar from '@/components/Topbar';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-[#0b0b22] text-white overflow-hidden">
+    <div className="flex h-screen bg-[#0b0b22] text-white overflow-hidden">
+      {/* Sidebar is fixed */}
       <Sidebar />
 
-      <div className="flex flex-col flex-1 overflow-hidden">
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Topbar is always full width, fixed at top */}
         <Topbar />
 
-        <main className="flex-1 overflow-y-auto p-6">
+        {/* Page content */}
+        <main className="flex-1 overflow-y-auto p-6 pt-20 md:pt-24">
           {children}
         </main>
       </div>
