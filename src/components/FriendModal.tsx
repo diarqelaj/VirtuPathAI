@@ -93,8 +93,7 @@ export default function FriendModal({
         ) : (
           <ul className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
             {users.map((u) => {
-              if (u.userID === currentUserId) return null; // ⛔ hide yourself
-
+              const isSelf = u.userID === currentUserId;
               const isFollowing = followingMap[u.userID];
 
               return (
@@ -105,10 +104,12 @@ export default function FriendModal({
                       className="w-10 h-10 rounded-full object-cover border border-white/10"
                       alt="avatar"
                     />
-                    <span className="text-white text-sm font-medium">{u.fullName}</span>
+                    <span className="text-white text-sm font-medium">
+                      {u.fullName} {isSelf && <span className="text-xs text-white/50">(You)</span>}
+                    </span>
                   </div>
                   <div>
-                    {confirmId === u.userID ? (
+                    {isSelf ? null : confirmId === u.userID ? (
                       <div className="flex items-center gap-2 text-sm">
                         <button
                           onClick={() => handleRemove(u.userID)}
