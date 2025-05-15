@@ -33,15 +33,27 @@ export default function FriendModal({
 
   const handleRemove = async (targetId: number) => {
     try {
-      const isFollower = type === 'followers';
-      await api.delete(
-        `/userfriends/remove?followerId=${isFollower ? targetId : currentUserId}&followedId=${isFollower ? currentUserId : targetId}`
-      );
+      let followerId = currentUserId;
+      let followedId = targetId;
+
+      if (type === 'followers') {
+        // They follow us
+        followerId = targetId;
+        followedId = currentUserId;
+      }
+
+      await api.delete(`/userfriends/remove?followerId=${followerId}&followedId=${followedId}`);
       setUsers((prev) => prev.filter((u) => u.userID !== targetId));
       setConfirmId(null);
     } catch (err) {
       console.error('Failed to remove relationship:', err);
     }
+  };
+
+  const getButtonLabel = () => {
+    if (type === 'followers') return 'Remove';
+    if (type === 'following') return 'Unfollow';
+    return 'Remove Friend';
   };
 
   return (
@@ -90,7 +102,7 @@ export default function FriendModal({
                       onClick={() => setConfirmId(u.userID)}
                       className="px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-sm"
                     >
-                      {type === 'followers' ? 'Remove' : 'Unfollow'}
+                      {getButtonLabel()}
                     </button>
                   )}
                 </div>
