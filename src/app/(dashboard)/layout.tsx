@@ -399,7 +399,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             }`}
           >
             <FaCog size={20} />
-            {isOpen && <span>Settings</span>}
+            <span>Settings</span>
           </Link>
         </aside>
 
