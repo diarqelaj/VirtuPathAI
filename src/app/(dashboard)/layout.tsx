@@ -398,9 +398,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               pathname === '/settings' ? 'bg-purple-700 text-white font-semibold' : 'hover:bg-white/10 text-white/80'
             }`}
           >
-            <FaCog size={20} />
-            <span>Settings</span>
+            <div className="w-6 h-6 flex items-center justify-center">
+              <FaCog size={20} />
+            </div>
+            {isOpen && <span>Settings</span>}
           </Link>
+
         </aside>
 
         {/* SIDEBAR MOBILE */}
@@ -421,9 +424,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   pathname === '/settings' ? 'bg-purple-700 font-semibold' : 'hover:bg-white/10 text-white/80'
                 }`}
               >
-                <FaCog size={20} />
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <FaCog size={20} />
+                </div>
                 <span>Settings</span>
               </Link>
+
             </div>
             <div className="flex-1" onClick={() => setShowMobileSidebar(false)}></div>
           </div>

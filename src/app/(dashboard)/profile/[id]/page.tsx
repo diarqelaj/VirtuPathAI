@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/lib/api';
 import FriendModal from '@/components/FriendModal';
+import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -128,18 +129,20 @@ export default function UserProfilePage() {
             </div>
 
             {isSelf ? (
-              <Link href="/settings" className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
+              <Link href="/settings" className="bg-purple-950 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
                 Edit Profile
               </Link>
             ) : (
               <div className="flex gap-2">
                 {isFollowing ? (
                   <div className="relative">
+                    
                     <button
                       onClick={() => setShowUnfollowOptions((prev) => !prev)}
-                      className="bg-green-700 hover:bg-green-800 px-4 py-2 rounded-lg text-sm text-white"
+                      className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm text-white flex items-center gap-1"
                     >
-                      Following ⌄
+                      Following
+                      {showUnfollowOptions ? <IoChevronUp size={14} /> : <IoChevronDown size={14} />}
                     </button>
 
                     {showUnfollowOptions && (
@@ -148,7 +151,7 @@ export default function UserProfilePage() {
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
                         <div className="flex gap-2">
-                          <button onClick={handleUnfollow} className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm w-full">
+                          <button onClick={handleUnfollow} className="bg-gray-500 hover:bg-gray-600 px-3 py-1 rounded text-sm w-full">
                             Unfollow
                           </button>
                           <button onClick={() => setShowUnfollowOptions(false)} className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full">
