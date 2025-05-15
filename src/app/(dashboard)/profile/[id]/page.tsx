@@ -10,6 +10,11 @@ const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
 const defaultBanner = 'https://images.unsplash.com/photo-1522199670076-2852f80289c3?fit=crop&w=1600&q=80';
 
+const resolveImageUrl = (url?: string | null, fallback = ''): string => {
+  if (!url) return fallback;
+  return url.startsWith('http') ? url : `${API_HOST}${url}`;
+};
+
 export default function UserProfilePage() {
   const params = useParams();
   const id = params?.id as string;
@@ -40,9 +45,13 @@ export default function UserProfilePage() {
           api.get(`/userfriends/mutual/${id}`)
         ]);
 
-        setFollowersCount(followers.data.length);
-        setFollowingCount(following.data.length);
-        setFriendsCount(friends.data.length);
+        console.log('followers:', followers.data);
+        console.log('following:', following.data);
+        console.log('friends:', friends.data);
+
+        setFollowersCount(Array.isArray(followers.data) ? followers.data.length : 0);
+        setFollowingCount(Array.isArray(following.data) ? following.data.length : 0);
+        setFriendsCount(Array.isArray(friends.data) ? friends.data.length : 0);
       } catch (err) {
         console.error(err);
       }
@@ -78,8 +87,8 @@ export default function UserProfilePage() {
   }
 
   const isSelf = currentUser?.userID === user.userID;
-  const bannerUrl = user.coverImageUrl?.startsWith('http') ? user.coverImageUrl : user.coverImageUrl ? API_HOST + user.coverImageUrl : defaultBanner;
-  const profileImg = user.profilePictureUrl?.startsWith('http') ? user.profilePictureUrl : user.profilePictureUrl ? API_HOST + user.profilePictureUrl : defaultAvatar;
+  const bannerUrl = resolveImageUrl(user.coverImageUrl, defaultBanner);
+  const profileImg = resolveImageUrl(user.profilePictureUrl, defaultAvatar);
   const isPrivate = user.isProfilePrivate && !isSelf;
 
   return (
