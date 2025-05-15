@@ -27,6 +27,8 @@ export default function UserProfilePage() {
 
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showUnfollowOptions, setShowUnfollowOptions] = useState(false);
+
 
   const fetchUsers = async () => {
     try {
@@ -65,11 +67,21 @@ export default function UserProfilePage() {
     try {
       await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
       setIsFollowing(true);
-      fetchUsers(); // refresh after follow
     } catch {
       alert('Failed to follow user.');
     }
   };
+  
+  const handleUnfollow = async () => {
+    try {
+      await api.delete(`/userfriends/remove?followerId=${currentUser.userID}&followedId=${id}`);
+      setIsFollowing(false);
+      setShowUnfollowOptions(false);
+    } catch {
+      alert('Failed to unfollow user.');
+    }
+  };
+  
 
   const handleBlock = async () => {
     try {
@@ -120,9 +132,46 @@ export default function UserProfilePage() {
               </Link>
             ) : (
               <div className="flex gap-2">
-                <button onClick={handleFollow} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm">
-                  {isFollowing ? 'Following' : 'Follow'}
-                </button>
+                {isFollowing ? (
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowUnfollowOptions((prev) => !prev)}
+                      className="bg-green-700 hover:bg-green-800 px-4 py-2 rounded-lg text-sm text-white"
+                    >
+                      Following ⌄
+                    </button>
+
+                    {showUnfollowOptions && (
+                      <div className="absolute right-0 mt-2 bg-zinc-800 text-white text-sm rounded shadow-lg p-3 w-60 border border-white/10 z-50">
+                        <p className="text-xs text-white/70 mb-2">
+                          Are you sure? You’ll need to request again if the profile is private.
+                        </p>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={handleUnfollow}
+                            className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm w-full"
+                          >
+                            Unfollow
+                          </button>
+                          <button
+                            onClick={() => setShowUnfollowOptions(false)}
+                            className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleFollow}
+                    className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white"
+                  >
+                    Follow
+                  </button>
+                )}
+
                 <button onClick={handleBlock} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
                   Block
                 </button>
