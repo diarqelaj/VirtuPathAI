@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const settingsNav = [
-  { name: "Profile", href: "/settings" },
-  { name: "Settings", href: "/settings/security" },
+  { name: "Settings", href: "/settings" },
   { name: "Billing", href: "/settings/billing" },
 ];
 

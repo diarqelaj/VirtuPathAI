@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import api from '@/lib/api';
+import { useState } from 'react';
 import { X } from 'lucide-react';
+import api from '@/lib/api';
 
 interface User {
   userID: number;
@@ -13,12 +13,16 @@ interface User {
 interface FriendModalProps {
   title: string;
   type: 'followers' | 'following' | 'mutual';
-  userIds: number[];
+  userIds: User[]; // now it's full objects, not just numbers
   currentUserId: number;
   onClose: () => void;
 }
 
+const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
+
+const resolveImageUrl = (url?: string | null): string =>
+  url ? (url.startsWith('http') ? url : `${API_HOST}${url}`) : defaultAvatar;
 
 export default function FriendModal({
   title,
@@ -27,26 +31,15 @@ export default function FriendModal({
   currentUserId,
   onClose,
 }: FriendModalProps) {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>(userIds);
   const [confirmId, setConfirmId] = useState<number | null>(null);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await api.get('/users');
-        const relevant = res.data.filter((u: User) => userIds.includes(u.userID));
-        setUsers(relevant);
-      } catch (err) {
-        console.error('Failed to load user details', err);
-      }
-    };
-    fetchUsers();
-  }, [userIds]);
 
   const handleRemove = async (targetId: number) => {
     try {
       const isFollower = type === 'followers';
-      await api.delete(`/userfriends/remove?followerId=${isFollower ? targetId : currentUserId}&followedId=${isFollower ? currentUserId : targetId}`);
+      await api.delete(
+        `/userfriends/remove?followerId=${isFollower ? targetId : currentUserId}&followedId=${isFollower ? currentUserId : targetId}`
+      );
       setUsers((prev) => prev.filter((u) => u.userID !== targetId));
       setConfirmId(null);
     } catch (err) {
@@ -73,7 +66,7 @@ export default function FriendModal({
               <li key={u.userID} className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <img
-                    src={u.profilePictureUrl ? api.defaults.baseURL?.replace(/\/api\/?$/, '') + u.profilePictureUrl : defaultAvatar}
+                    src={resolveImageUrl(u.profilePictureUrl)}
                     className="w-10 h-10 rounded-full object-cover border border-white/10"
                     alt="avatar"
                   />
