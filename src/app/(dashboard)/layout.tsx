@@ -54,9 +54,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ];
 
   return (
-    <div className="flex flex-col h-screen text-white bg-[#0b0b22]">
+    <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-4 md:px-6 flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-[#0b0b22]/60">
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-[#0b0b22]/60">
         <div className="flex items-center gap-4">
           <FaBars onClick={() => setIsOpen(!isOpen)} className="text-white cursor-pointer text-xl" />
           <div className="flex items-center gap-2">
@@ -67,7 +67,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
 
-        <div className="hidden md:block w-1/3">
+        <div className="w-1/3">
           <input
             type="text"
             placeholder="Search"
@@ -77,16 +77,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         <div className="flex items-center gap-3 relative">
           <FaBell className="text-white text-xl cursor-pointer" />
-          <div className="cursor-pointer flex items-center gap-2" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <Image
-              src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
-              alt="User"
-              width={36}
-              height={36}
-              className="rounded-full object-cover"
-            />
-            <span className="hidden md:block text-sm">{user?.fullName?.split(" ")[0] || "User"}</span>
-            {dropdownOpen ? <IoChevronUp /> : <IoChevronDown />}
+          <div
+            className="cursor-pointer flex items-center gap-2"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+             <Image
+                src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
+                alt="User"
+                width={40}
+                height={40}
+                quality={100}
+                className="rounded-full object-cover aspect-square"
+                unoptimized
+                          />
+            {dropdownOpen ? <IoChevronUp/> :  <IoChevronDown  />}
           </div>
 
           {dropdownOpen && (
@@ -121,8 +125,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* SIDEBAR */}
         <aside
           className={`${
-            isOpen ? 'w-64' : 'w-16'
-          } h-full bg-[#0a0a1f] border-r border-white/10 flex flex-col justify-between py-6 px-2 md:px-4 transition-all duration-300`}
+            isOpen ? 'w-64' : 'w-20'
+          } h-full bg-[#0a0a1f] border-r border-white/10 flex flex-col justify-between py-6 px-4 transition-all duration-300`}
         >
           <nav className="flex-1 space-y-2">
             {navItems.map((item) => {
@@ -144,7 +148,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </aside>
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-6 bg-black-100">{children}</main>
       </div>
     </div>
   );
