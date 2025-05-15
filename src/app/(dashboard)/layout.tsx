@@ -11,6 +11,8 @@ import {
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import { signOut } from 'next-auth/react';
 import api from '@/lib/api';
+import { FiX } from 'react-icons/fi';
+
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -95,6 +97,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (
+        !inputRef.current?.contains(e.target) &&
+        !resultsRef.current?.contains(e.target)
+      ) {
+        setSearch('');
+        setResults({ users: [], careers: [] });
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+  
 
   const handleSelect = (entry: any) => {
     if ('userID' in entry) {
@@ -156,11 +172,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             isActive ? 'bg-purple-700 text-white font-semibold' : 'hover:bg-white/10 text-white/80'
           }`}
         >
-          {item.icon}
+          <div className="w-6 h-6 flex items-center justify-center">{item.icon}</div>
           {isOpen && <span>{item.name}</span>}
         </Link>
       );
     });
+  
 
   return (
     <div className="flex flex-col h-screen text-white">
@@ -184,12 +201,34 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="relative w-1/2 sm:w-1/3">
           <input
             type="text"
+            ref={inputRef}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setSearch('');
+                setResults({ users: [], careers: [] });
+              } else {
+                handleKeyDown(e);
+              }
+            }}
             placeholder="Search careers, friends..."
-            className="w-full px-4 py-2 bg-[rgba(11,11,34,0.6)]  text-white rounded-xl border border-bg-[rgba(11,11,34,0.6)] focus:outline-none text-sm"
+            className="w-full pr-10 px-4 py-2 bg-white/10 text-white rounded-xl border border-white/10 focus:outline-none text-sm"
           />
+
+          {search && (
+            <button
+              onClick={() => {
+                setSearch('');
+                setResults({ users: [], careers: [] });
+              }}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white"
+              aria-label="Clear search"
+            >
+              <FiX size={18} />
+            </button>
+          )}
+
           {search.length > 0 && (
             <ul
               ref={resultsRef}
@@ -229,6 +268,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </ul>
           )}
         </div>
+
+
 
         <div className="flex items-center gap-3 relative" ref={dropdownRef}>
           <div
@@ -298,9 +339,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="absolute right-0 top-14 bg-[#15152d] border border-white/10 w-48 rounded-xl shadow-xl z-50">
               {user ? (
                 <>
-                  <Link href="/settings" className="block px-4 py-3 hover:bg-white/10 text-sm">
-                    View Profile
-                  </Link>
+                  {user && (
+                    <Link href={`/profile/${user.userID}`} className="block px-4 py-3 hover:bg-white/10 text-sm">
+                      View Profile
+                    </Link>
+                  )}
+
                   <Link href="/settings" className="block px-4 py-3 hover:bg-white/10 text-sm">
                     Settings
                   </Link>

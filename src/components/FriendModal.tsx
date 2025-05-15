@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import api from '@/lib/api';
 
@@ -30,6 +30,25 @@ export default function FriendModal({
 }: FriendModalProps) {
   const [users, setUsers] = useState<User[]>(userIds);
   const [confirmId, setConfirmId] = useState<number | null>(null);
+  const [followingMap, setFollowingMap] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      try {
+        const res = await api.get(`/userfriends/following/${currentUserId}`);
+        const followingList: User[] = res.data || [];
+        const map: Record<number, boolean> = {};
+        followingList.forEach(u => {
+          map[u.userID] = true;
+        });
+        setFollowingMap(map);
+      } catch (err) {
+        console.error("Failed to fetch following:", err);
+      }
+    };
+
+    fetchFollowing();
+  }, [currentUserId]);
 
   const handleRemove = async (targetId: number) => {
     try {
@@ -37,7 +56,6 @@ export default function FriendModal({
       let followedId = targetId;
 
       if (type === 'followers') {
-        // They follow us
         followerId = targetId;
         followedId = currentUserId;
       }
@@ -50,10 +68,13 @@ export default function FriendModal({
     }
   };
 
-  const getButtonLabel = () => {
-    if (type === 'followers') return 'Remove';
-    if (type === 'following') return 'Unfollow';
-    return 'Remove Friend';
+  const handleFollow = async (targetId: number) => {
+    try {
+      await api.post(`/userfriends/follow?followerId=${currentUserId}&followedId=${targetId}`);
+      setFollowingMap(prev => ({ ...prev, [targetId]: true }));
+    } catch {
+      alert('Failed to follow user.');
+    }
   };
 
   return (
@@ -71,43 +92,56 @@ export default function FriendModal({
           <p className="text-neutral-400 text-sm">No users to display.</p>
         ) : (
           <ul className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-            {users.map((u) => (
-              <li key={u.userID} className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
-                    className="w-10 h-10 rounded-full object-cover border border-white/10"
-                    alt="avatar"
-                  />
-                  <span className="text-white text-sm font-medium">{u.fullName}</span>
-                </div>
-                <div>
-                  {confirmId === u.userID ? (
-                    <div className="flex items-center gap-2 text-sm">
+            {users.map((u) => {
+              if (u.userID === currentUserId) return null; // ⛔ hide yourself
+
+              const isFollowing = followingMap[u.userID];
+
+              return (
+                <li key={u.userID} className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                      className="w-10 h-10 rounded-full object-cover border border-white/10"
+                      alt="avatar"
+                    />
+                    <span className="text-white text-sm font-medium">{u.fullName}</span>
+                  </div>
+                  <div>
+                    {confirmId === u.userID ? (
+                      <div className="flex items-center gap-2 text-sm">
+                        <button
+                          onClick={() => handleRemove(u.userID)}
+                          className="px-2 py-1 rounded bg-red-600 hover:bg-red-700 text-white"
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={() => setConfirmId(null)}
+                          className="px-2 py-1 rounded border border-white/10 text-white hover:bg-white/5"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : isFollowing ? (
                       <button
-                        onClick={() => handleRemove(u.userID)}
-                        className="px-2 py-1 rounded bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => setConfirmId(u.userID)}
+                        className="px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-sm"
                       >
-                        Confirm
+                        {type === 'followers' ? 'Remove' : type === 'mutual' ? 'Unfriend' : 'Unfollow'}
                       </button>
+                    ) : (
                       <button
-                        onClick={() => setConfirmId(null)}
-                        className="px-2 py-1 rounded border border-white/10 text-white hover:bg-white/5"
+                        onClick={() => handleFollow(u.userID)}
+                        className="px-3 py-1 rounded bg-green-600 hover:bg-green-700 text-white text-sm"
                       >
-                        Cancel
+                        Follow
                       </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setConfirmId(u.userID)}
-                      className="px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-sm"
-                    >
-                      {getButtonLabel()}
-                    </button>
-                  )}
-                </div>
-              </li>
-            ))}
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

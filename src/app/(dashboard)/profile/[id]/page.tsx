@@ -122,7 +122,7 @@ export default function UserProfilePage() {
             </div>
 
             {isSelf ? (
-              <Link href="/settings/security" className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
+              <Link href="/settings" className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
                 Edit Profile
               </Link>
             ) : (
