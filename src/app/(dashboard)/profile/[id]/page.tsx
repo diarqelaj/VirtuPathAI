@@ -30,13 +30,13 @@ export default function UserProfilePage() {
         const target = await api.get(`/users/${id}`);
         setUser(target.data);
 
-        const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
-        setIsFollowing(followRes.data === true);
+        const isFollowingRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
+        setIsFollowing(isFollowingRes.data === true);
 
         const [followers, following, friends] = await Promise.all([
           api.get(`/userfriends/followers/${id}`),
           api.get(`/userfriends/following/${id}`),
-          api.get(`/userfriends/friends/${id}`)
+          api.get(`/userfriends/mutual/${id}`)
         ]);
 
         setFollowersCount(followers.data.length);
@@ -77,11 +77,13 @@ export default function UserProfilePage() {
   }
 
   const isSelf = currentUser?.userID === user.userID;
+  const bannerUrl = user.coverImageUrl ? API_HOST + user.coverImageUrl : defaultBanner;
+  const isPrivate = user.isProfilePrivate && !isSelf;
 
   return (
     <div className="text-white max-w-4xl mx-auto mt-4 rounded-xl overflow-hidden shadow-xl border border-white/10 bg-black-100">
       {/* Banner */}
-      <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${defaultBanner})` }}>
+      <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
         <div className="absolute bottom-0 left-0 p-4">
           <Image
             src={user.profilePictureUrl ? API_HOST + user.profilePictureUrl : defaultAvatar}
@@ -117,24 +119,32 @@ export default function UserProfilePage() {
           )}
         </div>
 
-        {/* Stats */}
-        <div className="flex gap-6 mt-2 text-sm text-gray-300">
-          <span><strong>{followersCount}</strong> Followers</span>
-          <span><strong>{followingCount}</strong> Following</span>
-          <span><strong>{friendsCount}</strong> Friends</span>
-        </div>
+        {isPrivate ? (
+          <div className="text-center text-white/50 italic mt-10">
+            This profile is private.
+          </div>
+        ) : (
+          <>
+            {/* Stats */}
+            <div className="flex gap-6 mt-2 text-sm text-gray-300">
+              <span><strong>{followersCount}</strong> Followers</span>
+              <span><strong>{followingCount}</strong> Following</span>
+              <span><strong>{friendsCount}</strong> Friends</span>
+            </div>
 
-        {/* Bio */}
-        <div>
-          <h3 className="text-lg font-semibold">Bio</h3>
-          <p className="text-sm text-white/80">{user.bio || "This user hasn’t written a bio yet."}</p>
-        </div>
+            {/* Bio */}
+            <div>
+              <h3 className="text-lg font-semibold">Bio</h3>
+              <p className="text-sm text-white/80">{user.bio || "This user hasn’t written a bio yet."}</p>
+            </div>
 
-        {/* About */}
-        <div>
-          <h3 className="text-lg font-semibold">About</h3>
-          <p className="text-sm text-white/80">{user.about || "Interests, goals, achievements — coming soon..."}</p>
-        </div>
+            {/* About */}
+            <div>
+              <h3 className="text-lg font-semibold">About</h3>
+              <p className="text-sm text-white/80">{user.about || "Interests, goals, achievements — coming soon..."}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
