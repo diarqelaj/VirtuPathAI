@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,6 @@ import FriendList from '@/components/FriendList';
 import FriendRequests from '@/components/FriendRequests';
 import UserSearch from '@/components/UserSearch';
 
-
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
 
@@ -18,6 +17,7 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({ name: "" });
   const [showNotification, setShowNotification] = useState(false);
   const [error, setError] = useState("");
+  const [friendCount, setFriendCount] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +27,9 @@ const ProfilePage = () => {
         const sessionUser = res.data;
         setUser(sessionUser);
         setFormData({ name: sessionUser.fullName || "" });
+
+        const friendsRes = await api.get(`/userfriends/${sessionUser.userID}`);
+        setFriendCount(friendsRes.data.length);
       } catch {
         alert("Session expired. Please log in again.");
         router.push("/login");
@@ -119,7 +122,6 @@ const ProfilePage = () => {
 
   return (
     <div className="relative bg-black-100 text-white flex flex-col">
-      {/* Notification */}
       <AnimatePresence>
         {showNotification && (
           <motion.div
@@ -135,19 +137,17 @@ const ProfilePage = () => {
       </AnimatePresence>
 
       <main className="w-full pt-10 px-0 sm:px-4 md:px-8">
-      <motion.div
-      className="w-full max-w-none sm:max-w-2xl md:max-w-3xl mx-auto px-4"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-
-
-        <section className="w-full bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center gap-6">
-
-            {/* Avatar + Actions */}
-            <div className="flex flex-col items-center gap-3">
-              <div className="relative group w-28 h-28 rounded-full overflow-hidden">
+        <motion.div
+          className="w-full max-w-5xl mx-auto px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* Top Profile Info */}
+          <section className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-6 items-center md:items-start mb-10">
+            {/* Avatar + Counters */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <div className="relative group w-32 h-32 rounded-full overflow-hidden">
                 <img
                   src={
                     user?.profilePictureUrl
@@ -155,109 +155,37 @@ const ProfilePage = () => {
                       : defaultAvatar
                   }
                   alt="User Avatar"
-                  className="w-28 h-28 object-cover transition duration-300 group-hover:brightness-75"
+                  className="w-full h-full object-cover transition duration-300 group-hover:brightness-75"
                 />
-
-                {/* Desktop hover overlay */}
-                {user?.profilePictureUrl ? (
-                  <div className="absolute inset-0 hidden md:flex opacity-0 group-hover:opacity-100 transition duration-300">
-                    <label
-                      htmlFor="profile-upload"
-                      className="w-1/2 flex items-center justify-center bg-black/50 text-white text-xs cursor-pointer"
-                    >
-                      Change
-                      <input
-                        type="file"
-                        accept="image/*"
-                        id="profile-upload"
-                        className="hidden"
-                        onChange={handleImageUpload}
-                      />
-                    </label>
-                    <div
-                      onClick={handleImageDelete}
-                      className="w-1/2 flex items-center justify-center bg-black/50 text-red-500 text-xs cursor-pointer"
-                    >
-                      Delete
-                    </div>
-                  </div>
-                ) : (
-                  <label
-                    htmlFor="profile-upload"
-                    className="absolute inset-0 hidden md:flex items-center justify-center bg-black/60 text-white text-xs cursor-pointer opacity-0 group-hover:opacity-100 transition duration-300"
-                  >
-                    Change
-                    <input
-                      type="file"
-                      accept="image/*"
-                      id="profile-upload"
-                      className="hidden"
-                      onChange={handleImageUpload}
-                    />
-                  </label>
-                )}
-              </div>
-
-              {/* Mobile-only action buttons */}
-              <div className="mt-3 md:hidden flex gap-3 w-full">
-              <label
-                htmlFor="profile-upload"
-                className="flex-1 bg-white/10 text-white text-center py-2 rounded-md text-sm font-medium cursor-pointer hover:bg-white/20 transition"
-              >
-                Change
-                <input
-                  type="file"
-                  accept="image/*"
-                  id="profile-upload"
-                  className="hidden"
-                  onChange={handleImageUpload}
-                />
-              </label>
-
-              {user?.profilePictureUrl && (
-                <button
-                  onClick={handleImageDelete}
-                  className="flex-1 bg-red-500/20 text-red-400 py-2 rounded-md text-sm font-medium hover:bg-red-500/30 transition"
+                <label
+                  htmlFor="profile-upload"
+                  className="absolute inset-0 hidden md:flex items-center justify-center bg-black/60 text-white text-xs cursor-pointer opacity-0 group-hover:opacity-100 transition duration-300"
                 >
-                  Delete
-                </button>
-              )}
-            </div>
-
-
-            </div>
-            <section className="mt-10 bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl">
-            <h2 className="text-xl font-bold text-white mb-4">Friends</h2>
-
-            {/* IG-style follower counts */}
-            <div className="flex items-center gap-6 mb-6 text-white">
-              <div className="flex flex-col items-center">
-                <span className="text-lg font-semibold">10</span>
-                <span className="text-sm text-neutral-400">Followers</span>
+                  Change
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="profile-upload"
+                    className="hidden"
+                    onChange={handleImageUpload}
+                  />
+                </label>
               </div>
-              <div className="flex flex-col items-center">
-                <span className="text-lg font-semibold">20</span>
-                <span className="text-sm text-neutral-400">Following</span>
+
+              <div className="flex gap-6 text-center text-sm text-white">
+                <div className="flex flex-col items-center">
+                  <span className="text-lg font-semibold">{friendCount}</span>
+                  <span className="text-neutral-400">Followers</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-lg font-semibold">{friendCount}</span>
+                  <span className="text-neutral-400">Following</span>
+                </div>
               </div>
             </div>
 
-            {/* Friend list */}
-            <FriendList />
-
-            {/* Friend request inbox */}
-            <div className="mt-8">
-              <FriendRequests />
-            </div>
-
-            {/* Friend search */}
-            <div className="mt-8">
-              <UserSearch />
-            </div>
-          </section>
-
-
-            {/* Form */}
-            <div className="flex-1 w-full space-y-4">
+            {/* Profile Form */}
+            <div className="flex-1 space-y-4 w-full">
               {error && (
                 <div className="p-3 bg-red-500/20 text-red-300 rounded-lg text-sm">{error}</div>
               )}
@@ -297,21 +225,26 @@ const ProfilePage = () => {
             </div>
           </section>
 
-          <section className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card title="Account Overview">
-              You’ve been a member since{" "}
-              {user.registrationDate
-                ? new Date(user.registrationDate).toLocaleDateString()
-                : "N/A"}
-              .
-            </Card>
-            <Card title="Security">
-              Manage your sessions and password in the{" "}
-              <a href="/settings/security" className="text-purple-400 hover:underline">
-                security tab
-              </a>
-              .
-            </Card>
+          {/* Friends Section */}
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-1">
+              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
+                <h2 className="text-xl font-bold mb-4 text-white">Your Friends</h2>
+                <FriendList />
+              </div>
+            </div>
+
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
+                <h2 className="text-xl font-bold mb-4 text-white">Friend Requests</h2>
+                <FriendRequests />
+              </div>
+
+              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
+                <h2 className="text-xl font-bold mb-4 text-white">Add New Friends</h2>
+                <UserSearch />
+              </div>
+            </div>
           </section>
         </motion.div>
       </main>
@@ -319,7 +252,7 @@ const ProfilePage = () => {
   );
 };
 
-// Reusable input component
+// Reusable input field
 const InputField = ({
   label,
   type,
@@ -344,14 +277,6 @@ const InputField = ({
         disabled ? "bg-gray-800 text-gray-400 cursor-not-allowed" : "bg-black-100"
       } border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20`}
     />
-  </div>
-);
-
-// Reusable card component
-const Card = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="bg-[rgba(17,25,40,0.75)] border border-white/10 p-5 rounded-xl shadow-lg">
-    <h3 className="text-lg font-medium mb-2">{title}</h3>
-    <p className="text-neutral-400 text-sm">{children}</p>
   </div>
 );
 
