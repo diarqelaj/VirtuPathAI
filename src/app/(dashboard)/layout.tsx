@@ -81,13 +81,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             className="cursor-pointer flex items-center gap-2"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <Image
-              src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
-              alt="User"
-              width={35}
-              height={35}
-              className="rounded-full object-cover"
-            />
+             <Image
+                            src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
+                            alt="User"
+                            width={40}
+                            height={40}
+                            quality={100}
+                            className="rounded-full object-cover aspect-square"
+                            unoptimized
+                          />
             {dropdownOpen ? <IoChevronDown /> : <IoChevronUp />}
           </div>
 
