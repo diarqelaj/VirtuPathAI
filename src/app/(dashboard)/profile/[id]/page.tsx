@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import api from '@/lib/api';
 import FriendModal from '@/components/FriendModal';
 
@@ -11,10 +10,12 @@ const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
 const defaultBanner = 'https://images.unsplash.com/photo-1522199670076-2852f80289c3?fit=crop&w=1600&q=80';
 
+const resolveImageUrl = (url?: string | null, fallback = ''): string =>
+  url ? (url.startsWith('http') ? url : `${API_HOST}${url}`) : fallback;
+
 export default function UserProfilePage() {
   const params = useParams();
   const id = params?.id as string;
-  const router = useRouter();
 
   const [user, setUser] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -27,33 +28,36 @@ export default function UserProfilePage() {
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
+  const fetchUsers = async () => {
+    try {
+      const current = await api.get('/users/me');
+      setCurrentUser(current.data);
+
+      const target = await api.get(`/users/${id}`);
+      setUser(target.data);
+
       try {
-        const current = await api.get('/users/me');
-        setCurrentUser(current.data);
-
-        const target = await api.get(`/users/${id}`);
-        setUser(target.data);
-
         const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
         setIsFollowing(followRes.data === true);
-
-        const [followersRes, followingRes, friendsRes] = await Promise.all([
-          api.get(`/userfriends/followers/${id}`),
-          api.get(`/userfriends/following/${id}`),
-          api.get(`/userfriends/mutual/${id}`)
-        ]);
-        
-        setFollowers(followersRes.data || []);
-        setFollowing(followingRes.data || []);
-        setFriends(friendsRes.data || []);
-        
-      } catch (err) {
-        console.error(err);
+      } catch {
+        setIsFollowing(false);
       }
-    };
 
+      const [followersRes, followingRes, friendsRes] = await Promise.all([
+        api.get(`/userfriends/followers/${id}`),
+        api.get(`/userfriends/following/${id}`),
+        api.get(`/userfriends/mutual/${id}`)
+      ]);
+
+      setFollowers(followersRes.data || []);
+      setFollowing(followingRes.data || []);
+      setFriends(friendsRes.data || []);
+    } catch (err) {
+      console.error('Error loading user profile:', err);
+    }
+  };
+
+  useEffect(() => {
     if (id) fetchUsers();
   }, [id]);
 
@@ -61,6 +65,7 @@ export default function UserProfilePage() {
     try {
       await api.post(`/userfriends/follow?followerId=${currentUser.userID}&followedId=${id}`);
       setIsFollowing(true);
+      fetchUsers(); // refresh after follow
     } catch {
       alert('Failed to follow user.');
     }
@@ -79,8 +84,8 @@ export default function UserProfilePage() {
   };
 
   const isSelf = currentUser?.userID === user?.userID;
-  const bannerUrl = user?.coverImageUrl ? `${API_HOST}${user.coverImageUrl}` : defaultBanner;
-  const profileImg = user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar;
+  const bannerUrl = resolveImageUrl(user?.coverImageUrl, defaultBanner);
+  const profileImg = resolveImageUrl(user?.profilePictureUrl, defaultAvatar);
   const isPrivate = user?.isProfilePrivate && !isSelf;
 
   return (
@@ -96,7 +101,6 @@ export default function UserProfilePage() {
               height={80}
               className="rounded-full border-4 border-white shadow-md object-cover"
             />
-
           </div>
         </div>
 
