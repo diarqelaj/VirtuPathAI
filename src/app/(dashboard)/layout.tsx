@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-4 sm:px-6 flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-[#0b0b22]/60">
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-4 sm:px-6 flex items-center justify-between border-b border-white/10 backdrop-blur-lg bg-black/30 shadow-md">
         <div className="flex items-center gap-4">
           <FaBars
             onClick={() =>
@@ -149,7 +149,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <aside
           className={`hidden sm:flex ${
             isOpen ? 'w-64' : 'w-20'
-          } h-full bg-[#0a0a1f] border-r border-white/10 flex-col justify-between py-6 px-2 transition-all duration-300`}
+          } h-full border-r border-white/10 bg-black/30 backdrop-blur-lg shadow-md flex flex-col justify-between py-6 px-4 transition-all duration-300`}
         >
           <nav className="flex-1 space-y-2">{renderNavItems()}</nav>
 
