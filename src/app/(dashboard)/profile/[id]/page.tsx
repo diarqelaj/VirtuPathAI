@@ -211,7 +211,7 @@ export default function UserProfilePage() {
                     )}
                   </div>
                 ) : (
-                  <button onClick={handleFollow} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white">
+                  <button onClick={handleFollow} className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm text-white">
                     Follow
                   </button>
                 )}
