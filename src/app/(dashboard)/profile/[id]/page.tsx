@@ -142,43 +142,46 @@ export default function UserProfilePage() {
                 </button>
 
                 {/* 3-Dot Options */}
-                <button
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full"
-                  onClick={() => setShowActionsDropdown(prev => !prev)}
-                  title="More options"
-                >
-                  <FiMoreHorizontal size={18} />
-                </button>
+                <div className="relative inline-block text-left">
+                  <button
+                    className="p-2 bg-white/10 hover:bg-white/20 rounded-full"
+                    onClick={() => setShowActionsDropdown(prev => !prev)}
+                    title="More options"
+                  >
+                    <FiMoreHorizontal size={18} />
+                  </button>
 
-                {showActionsDropdown && (
-                  <div className="fixed top-[150px] right-[50px] w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
-                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
-                      <FiUserPlus size={16} />
-                      Add to Favorites
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
-                      <FiVolumeX size={16} />
-                      Mute
-                    </button>
-                    <button onClick={handleBlock} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-red-400 text-left">
-                      <FiUserX size={16} />
-                      Block
-                    </button>
-                    <hr className="border-white/10" />
-                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
-                      <FiShare2 size={16} />
-                      Share profile
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
-                      <FiLink size={16} />
-                      Copy link to profile
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
-                      <FiAlertCircle size={16} />
-                      Report
-                    </button>
-                  </div>
-                )}
+                  {showActionsDropdown && (
+                    <div className="absolute right-0 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                        <FiUserPlus size={16} />
+                        Add to Favorites
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                        <FiVolumeX size={16} />
+                        Mute
+                      </button>
+                      <button onClick={handleBlock} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-red-400 text-left">
+                        <FiUserX size={16} />
+                        Block
+                      </button>
+                      <hr className="border-white/10" />
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                        <FiShare2 size={16} />
+                        Share profile
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                        <FiLink size={16} />
+                        Copy link to profile
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                        <FiAlertCircle size={16} />
+                        Report
+                      </button>
+                    </div>
+                  )}
+                </div>
+
 
                 {/* Follow/Unfollow */}
                 {isFollowing ? (
