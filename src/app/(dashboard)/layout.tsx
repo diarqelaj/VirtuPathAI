@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: 'Progress', link: '/progress', icon: <FaChartBar size={20} /> },
     { name: 'Opportunities', link: '/virtupathcareers', icon: <FaBook size={20} /> },
     { name: 'VirtuCrew', link: '/community', icon: <FaUsers size={20} /> },
-    { name: 'Control Room', link: '/settings', icon: <FaUserCircle size={20} /> },
+    { name: 'Settings', link: '/settings', icon: <FaCog size={20} /> },
     { name: 'Feedback', link: '/bug', icon: <FaBug size={20} /> },
   ];
 
@@ -82,13 +82,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
              <Image
-                            src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
-                            alt="User"
-                            width={40}
-                            height={40}
-                            quality={100}
-                            className="rounded-full object-cover aspect-square"
-                            unoptimized
+                src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
+                alt="User"
+                width={40}
+                height={40}
+                quality={100}
+                className="rounded-full object-cover aspect-square"
+                unoptimized
                           />
             {dropdownOpen ? <IoChevronDown /> : <IoChevronUp />}
           </div>
