@@ -8,6 +8,7 @@ import api from "@/lib/api";
 import FriendList from '@/components/FriendList';
 import FriendRequests from '@/components/FriendRequests';
 import UserSearch from '@/components/UserSearch';
+import FriendModal from '@/components/FriendModal';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
@@ -17,9 +18,14 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({ name: "" });
   const [showNotification, setShowNotification] = useState(false);
   const [error, setError] = useState("");
-  const [followers, setFollowers] = useState(0);
-  const [following, setFollowing] = useState(0);
-  const [mutual, setMutual] = useState(0);
+
+  const [followersList, setFollowersList] = useState<number[]>([]);
+  const [followingList, setFollowingList] = useState<number[]>([]);
+  const [mutualList, setMutualList] = useState<number[]>([]);
+
+  const [modalType, setModalType] = useState<"followers" | "following" | "mutual" | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -36,9 +42,9 @@ const ProfilePage = () => {
           api.get(`/userfriends/mutual/${sessionUser.userID}`)
         ]);
 
-        setFollowers(followersRes.data.length);
-        setFollowing(followingRes.data.length);
-        setMutual(mutualRes.data.length);
+        setFollowersList(followersRes.data);
+        setFollowingList(followingRes.data);
+        setMutualList(mutualRes.data);
       } catch {
         alert("Session expired. Please log in again.");
         router.push("/login");
@@ -60,11 +66,7 @@ const ProfilePage = () => {
       };
 
       const response = await api.put(`/Users/${user.userID}`, updateData);
-      const updatedUser = {
-        ...user,
-        fullName: response.data.fullName,
-      };
-
+      const updatedUser = { ...user, fullName: response.data.fullName };
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
       setShowNotification(true);
@@ -88,11 +90,7 @@ const ProfilePage = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      const updatedUser = {
-        ...user,
-        profilePictureUrl: res.data.profilePictureUrl,
-      };
-
+      const updatedUser = { ...user, profilePictureUrl: res.data.profilePictureUrl };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
     } catch (err) {
@@ -104,15 +102,8 @@ const ProfilePage = () => {
   const handleImageDelete = async () => {
     if (!user) return;
     try {
-      await api.delete(`/users/delete-profile-picture`, {
-        params: { userId: user.userID },
-      });
-
-      const updatedUser = {
-        ...user,
-        profilePictureUrl: null,
-      };
-
+      await api.delete(`/users/delete-profile-picture`, { params: { userId: user.userID } });
+      const updatedUser = { ...user, profilePictureUrl: null };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
     } catch (err) {
@@ -152,7 +143,6 @@ const ProfilePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          {/* Top Section */}
           <section className="bg-[rgba(17,25,40,0.9)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-8 items-center md:items-start mb-12">
             <div className="flex flex-col items-center md:items-start gap-4">
               <div className="relative group w-32 h-32 rounded-full overflow-hidden shadow-xl">
@@ -181,9 +171,18 @@ const ProfilePage = () => {
               </div>
 
               <div className="flex gap-6 text-center text-sm text-white">
-                <StatCard label="Followers" count={followers} />
-                <StatCard label="Following" count={following} />
-                <StatCard label="Friends" count={mutual} />
+                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("followers"); setShowModal(true); }}>
+                  <span className="text-lg font-semibold">{followersList.length}</span>
+                  <span className="text-neutral-400">Followers</span>
+                </div>
+                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("following"); setShowModal(true); }}>
+                  <span className="text-lg font-semibold">{followingList.length}</span>
+                  <span className="text-neutral-400">Following</span>
+                </div>
+                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("mutual"); setShowModal(true); }}>
+                  <span className="text-lg font-semibold">{mutualList.length}</span>
+                  <span className="text-neutral-400">Friends</span>
+                </div>
               </div>
             </div>
 
@@ -227,7 +226,6 @@ const ProfilePage = () => {
             </div>
           </section>
 
-          {/* Friends Section */}
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-1">
               <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
@@ -250,11 +248,26 @@ const ProfilePage = () => {
           </section>
         </motion.div>
       </main>
+
+      {showModal && modalType && (
+        <FriendModal
+          title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
+          type={modalType}
+          userIds={
+            modalType === "followers"
+              ? followersList
+              : modalType === "following"
+              ? followingList
+              : mutualList
+          }
+          currentUserId={user.userID}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
 
-// Reusable input
 const InputField = ({
   label,
   type,
@@ -279,14 +292,6 @@ const InputField = ({
         disabled ? "bg-gray-800 text-gray-400 cursor-not-allowed" : "bg-black-100"
       } border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20`}
     />
-  </div>
-);
-
-// Reusable stat display
-const StatCard = ({ label, count }: { label: string; count: number }) => (
-  <div className="flex flex-col items-center">
-    <span className="text-lg font-semibold">{count}</span>
-    <span className="text-neutral-400">{label}</span>
   </div>
 );
 
