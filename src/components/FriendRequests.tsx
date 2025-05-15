@@ -8,7 +8,6 @@ interface FollowRequest {
   followerId: number;
   followedId: number;
   isAccepted: boolean;
-  requestedAt: string;
 }
 
 export default function FriendRequests() {
@@ -22,12 +21,8 @@ export default function FriendRequests() {
       const currentUserId = me.data.userID;
       setUserId(currentUserId);
 
-      const res = await api.get('/userfriends'); // get all
-      const filtered = res.data.filter(
-        (req: FollowRequest) =>
-          req.followedId === currentUserId && !req.isAccepted
-      );
-      setRequests(filtered);
+      const res = await api.get(`/userfriends/requests/incoming/${currentUserId}`);
+      setRequests(res.data);
     } catch (error) {
       console.error('Error loading follow requests:', error);
     } finally {
@@ -37,14 +32,22 @@ export default function FriendRequests() {
 
   const handleAccept = async (followerId: number) => {
     if (!userId) return;
-    await api.post(`/userfriends/accept?followerId=${followerId}&followedId=${userId}`);
-    await fetchRequests();
+    try {
+      await api.post(`/userfriends/accept?followerId=${followerId}&followedId=${userId}`);
+      await fetchRequests();
+    } catch (err) {
+      console.error('Failed to accept request:', err);
+    }
   };
 
   const handleDecline = async (followerId: number) => {
     if (!userId) return;
-    await api.delete(`/userfriends/remove?followerId=${followerId}&followedId=${userId}`);
-    await fetchRequests();
+    try {
+      await api.delete(`/userfriends/remove?followerId=${followerId}&followedId=${userId}`);
+      await fetchRequests();
+    } catch (err) {
+      console.error('Failed to decline request:', err);
+    }
   };
 
   useEffect(() => {
@@ -55,24 +58,24 @@ export default function FriendRequests() {
     <div className="p-4 mt-4 rounded bg-zinc-900 text-white shadow">
       <h2 className="text-lg font-bold mb-2">Incoming Follow Requests</h2>
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-sm text-neutral-400">Loading...</p>
       ) : requests.length === 0 ? (
-        <p>No incoming requests.</p>
+        <p className="text-sm text-neutral-400">No incoming requests.</p>
       ) : (
         <ul className="space-y-2">
           {requests.map((req) => (
-            <li key={req.id} className="flex justify-between items-center bg-zinc-800 p-2 rounded">
-              <div>From User ID: {req.followerId}</div>
+            <li key={req.id} className="flex justify-between items-center bg-zinc-800 p-3 rounded">
+              <span className="text-sm text-white">From User ID: {req.followerId}</span>
               <div className="space-x-2">
                 <button
                   onClick={() => handleAccept(req.followerId)}
-                  className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white"
+                  className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm"
                 >
                   Accept
                 </button>
                 <button
                   onClick={() => handleDecline(req.followerId)}
-                  className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white"
+                  className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm"
                 >
                   Decline
                 </button>
