@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import api from "@/lib/api";
 import FriendModal from '@/components/FriendModal';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
 const defaultAvatar = "https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff";
@@ -112,7 +114,11 @@ const ProfilePage = () => {
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black-100 text-white">
-        <span className="text-lg text-neutral-400 animate-pulse">Loading profile...</span>
+        <div className="flex flex-col items-center gap-2">
+          <Skeleton circle height={64} width={64} />
+          <Skeleton height={20} width={120} />
+          <Skeleton height={40} width={240} />
+        </div>
       </div>
     );
   }
@@ -143,12 +149,11 @@ const ProfilePage = () => {
           <section className="bg-[rgba(17,25,40,0.9)] border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-8 items-center md:items-start mb-12">
             <div className="flex flex-col items-center md:items-start gap-4">
               <div className="relative group w-32 h-32 rounded-full overflow-hidden shadow-xl">
-                <img
-                  src={
-                    user?.profilePictureUrl
-                      ? `${API_HOST}${user.profilePictureUrl}`
-                      : defaultAvatar
-                  }
+                <motion.img
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                  src={user?.profilePictureUrl ? `${API_HOST}${user.profilePictureUrl}` : defaultAvatar}
                   alt="User Avatar"
                   className="w-full h-full object-cover transition duration-300 group-hover:brightness-75"
                 />
@@ -168,9 +173,9 @@ const ProfilePage = () => {
               </div>
 
               <div className="flex gap-6 text-center text-sm text-white">
-                <StatCard label="Followers" count={followersList.length} onClick={() => setModalType("followers")} />
-                <StatCard label="Following" count={followingList.length} onClick={() => setModalType("following")} />
-                <StatCard label="Friends" count={mutualList.length} onClick={() => setModalType("mutual")} />
+                <StatCard label="Followers" count={followersList.length} onClick={() => { setModalType("followers"); setShowModal(true); }} />
+                <StatCard label="Following" count={followingList.length} onClick={() => { setModalType("following"); setShowModal(true); }} />
+                <StatCard label="Friends" count={mutualList.length} onClick={() => { setModalType("mutual"); setShowModal(true); }} />
               </div>
             </div>
 
@@ -203,13 +208,7 @@ const ProfilePage = () => {
         <FriendModal
           title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
           type={modalType}
-          userIds={
-            modalType === "followers"
-              ? followersList
-              : modalType === "following"
-              ? followingList
-              : mutualList
-          }
+          userIds={modalType === "followers" ? followersList : modalType === "following" ? followingList : mutualList}
           currentUserId={user.userID}
           onClose={() => {
             setShowModal(false);
