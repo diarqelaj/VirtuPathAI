@@ -46,8 +46,10 @@ export default function Topbar() {
         return;
       }
       try {
-        const res = await api.get(`/search?q=${search}`); // hypothetical endpoint
-        setResults(res.data);
+        const res = await api.get(`/users/search?name=${search}`);
+        setResults({ users: res.data, careers: [] }); // you can merge static careers too
+        
+
       } catch {}
     };
     fetchSearchResults();
