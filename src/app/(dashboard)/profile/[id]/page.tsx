@@ -151,7 +151,7 @@ export default function UserProfilePage() {
                 </button>
 
                 {showActionsDropdown && (
-                  <div className="absolute right-0 top-10 bg-zinc-900 border border-white/10 rounded-lg shadow-lg z-50 w-64 text-sm overflow-hidden">
+                  <div className="fixed top-[150px] right-[50px] w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
                     <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
                       <FiUserPlus size={16} />
                       Add to Favorites
