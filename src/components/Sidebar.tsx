@@ -106,7 +106,7 @@ export default function Sidebar() {
         {/* Profile */}
         <div className="mt-6 px-2 relative">
           <div
-            className="bg-white/5 rounded-xl p-3 flex items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
+            className="bg-black-100/5 rounded-xl p-3 flex items-center justify-between gap-3 cursor-pointer hover:bg-white/10 transition"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             <div className="flex items-center gap-3">
