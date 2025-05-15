@@ -5,9 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import api from "@/lib/api";
-import FriendList from '@/components/FriendList';
-import FriendRequests from '@/components/FriendRequests';
-import UserSearch from '@/components/UserSearch';
 import FriendModal from '@/components/FriendModal';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, "") || "";
@@ -171,18 +168,9 @@ const ProfilePage = () => {
               </div>
 
               <div className="flex gap-6 text-center text-sm text-white">
-                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("followers"); setShowModal(true); }}>
-                  <span className="text-lg font-semibold">{followersList.length}</span>
-                  <span className="text-neutral-400">Followers</span>
-                </div>
-                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("following"); setShowModal(true); }}>
-                  <span className="text-lg font-semibold">{followingList.length}</span>
-                  <span className="text-neutral-400">Following</span>
-                </div>
-                <div className="flex flex-col items-center cursor-pointer" onClick={() => { setModalType("mutual"); setShowModal(true); }}>
-                  <span className="text-lg font-semibold">{mutualList.length}</span>
-                  <span className="text-neutral-400">Friends</span>
-                </div>
+                <StatCard label="Followers" count={followersList.length} onClick={() => setModalType("followers")} />
+                <StatCard label="Following" count={followingList.length} onClick={() => setModalType("following")} />
+                <StatCard label="Friends" count={mutualList.length} onClick={() => setModalType("mutual")} />
               </div>
             </div>
 
@@ -191,30 +179,13 @@ const ProfilePage = () => {
                 <div className="p-3 bg-red-500/20 text-red-300 rounded-lg text-sm">{error}</div>
               )}
 
-              <InputField
-                label="Full Name"
-                type="text"
-                value={formData.name}
-                onChange={(val) => setFormData({ ...formData, name: val })}
-              />
-
+              <InputField label="Full Name" type="text" value={formData.name} onChange={(val) => setFormData({ ...formData, name: val })} />
               <InputField label="Email" type="email" value={user.email} disabled />
-              <InputField
-                label="Registration Date"
-                type="text"
-                value={
-                  user.registrationDate
-                    ? new Date(user.registrationDate).toLocaleDateString()
-                    : "N/A"
-                }
-                disabled
-              />
+              <InputField label="Registration Date" type="text" value={user.registrationDate ? new Date(user.registrationDate).toLocaleDateString() : "N/A"} disabled />
 
               <div className="text-sm text-neutral-400 pt-1">
                 Want to change your password?{" "}
-                <a href="/settings/security" className="text-purple-400 hover:underline">
-                  Go to Security Settings
-                </a>
+                <a href="/settings/security" className="text-purple-400 hover:underline">Go to Security Settings</a>
               </div>
 
               <button
@@ -223,27 +194,6 @@ const ProfilePage = () => {
               >
                 Save Changes
               </button>
-            </div>
-          </section>
-
-          <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1">
-              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
-                <h2 className="text-xl font-bold mb-4 text-white">Your Friends</h2>
-                <FriendList />
-              </div>
-            </div>
-
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
-                <h2 className="text-xl font-bold mb-4 text-white">Friend Requests</h2>
-                <FriendRequests />
-              </div>
-
-              <div className="bg-[rgba(17,25,40,0.85)] border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl">
-                <h2 className="text-xl font-bold mb-4 text-white">Find & Follow</h2>
-                <UserSearch />
-              </div>
             </div>
           </section>
         </motion.div>
@@ -261,7 +211,10 @@ const ProfilePage = () => {
               : mutualList
           }
           currentUserId={user.userID}
-          onClose={() => setShowModal(false)}
+          onClose={() => {
+            setShowModal(false);
+            setModalType(null);
+          }}
         />
       )}
     </div>
@@ -292,6 +245,21 @@ const InputField = ({
         disabled ? "bg-gray-800 text-gray-400 cursor-not-allowed" : "bg-black-100"
       } border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20`}
     />
+  </div>
+);
+
+const StatCard = ({
+  label,
+  count,
+  onClick,
+}: {
+  label: string;
+  count: number;
+  onClick: () => void;
+}) => (
+  <div onClick={onClick} className="flex flex-col items-center cursor-pointer hover:text-purple-400 transition">
+    <span className="text-lg font-semibold">{count}</span>
+    <span className="text-neutral-400">{label}</span>
   </div>
 );
 
