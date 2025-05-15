@@ -165,7 +165,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-[rgba(11,11,34,0.3)] bg-[rgba(11,11,34,0.3)] backdrop-blur-md backdrop-saturate-150 shadow-md">
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between border-[rgba(19,19,54,0.62)] bg-[rgba(20,20,53,0.8)] backdrop-blur-md backdrop-saturate-150 shadow-md">
         <div className="flex items-center gap-4">
           <FaBars
             onClick={() =>
@@ -188,7 +188,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search careers, friends..."
-            className="w-full px-4 py-2 bg-white/10 text-white rounded-xl border border-white/10 focus:outline-none text-sm"
+            className="w-full px-4 py-2 bg-[rgba(11,11,34,0.6)]  text-white rounded-xl border border-bg-[rgba(11,11,34,0.6)] focus:outline-none text-sm"
           />
           {search.length > 0 && (
             <ul
@@ -254,7 +254,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 requests.map((req) => (
                   <div
                     key={req.followerId}
-                    className="flex items-center gap-3 bg-zinc-900 p-3 rounded-lg"
+                    className="flex items-center gap-3 bg-[rgba(11,11,34,0.6)]  p-3 rounded-lg"
                   >
                     <img
                       src={req.profilePictureUrl ? `${API_HOST}${req.profilePictureUrl}` : defaultAvatar}
@@ -264,7 +264,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className="flex-1 text-sm text-white">{req.fullName}</div>
                     <button
                       onClick={() => api.post(`/userfriends/accept?followerId=${req.followerId}&followedId=${user.userID}`).then(() => setRequests((r) => r.filter(x => x.followerId !== req.followerId)))}
-                      className="text-xs px-2 py-1 bg-green-600 hover:bg-green-700 text-white rounded"
+                      className="text-xs px-2 py-1 bg-[rgba(11,11,34,0.6)]  hover:bg-[rgba(11,15,34,0.6)]  text-white rounded"
                     >
                       Accept
                     </button>

@@ -14,6 +14,7 @@ export default function UserProfilePage() {
   const params = useParams();
   const id = params?.id as string;
   const router = useRouter();
+
   const [user, setUser] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -30,8 +31,8 @@ export default function UserProfilePage() {
         const target = await api.get(`/users/${id}`);
         setUser(target.data);
 
-        const isFollowingRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
-        setIsFollowing(isFollowingRes.data === true);
+        const followRes = await api.get(`/userfriends/isfollowing?followerId=${current.data.userID}&followedId=${id}`);
+        setIsFollowing(followRes.data === true);
 
         const [followers, following, friends] = await Promise.all([
           api.get(`/userfriends/followers/${id}`),
@@ -77,7 +78,8 @@ export default function UserProfilePage() {
   }
 
   const isSelf = currentUser?.userID === user.userID;
-  const bannerUrl = user.coverImageUrl ? API_HOST + user.coverImageUrl : defaultBanner;
+  const bannerUrl = user.coverImageUrl?.startsWith('http') ? user.coverImageUrl : user.coverImageUrl ? API_HOST + user.coverImageUrl : defaultBanner;
+  const profileImg = user.profilePictureUrl?.startsWith('http') ? user.profilePictureUrl : user.profilePictureUrl ? API_HOST + user.profilePictureUrl : defaultAvatar;
   const isPrivate = user.isProfilePrivate && !isSelf;
 
   return (
@@ -86,11 +88,11 @@ export default function UserProfilePage() {
       <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
         <div className="absolute bottom-0 left-0 p-4">
           <Image
-            src={user.profilePictureUrl ? API_HOST + user.profilePictureUrl : defaultAvatar}
+            src={profileImg}
             alt="Avatar"
             width={80}
             height={80}
-            className="rounded-full border-4 border-white shadow-md"
+            className="rounded-full border-4 border-white shadow-md object-cover"
           />
         </div>
       </div>
