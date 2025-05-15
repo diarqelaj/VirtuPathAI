@@ -6,6 +6,7 @@ import Link from 'next/link';
 import api from '@/lib/api';
 import FriendModal from '@/components/FriendModal';
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
+import { FiMoreHorizontal, FiMessageCircle, FiUserPlus, FiUserX, FiVolumeX, FiShare2, FiLink, FiAlertCircle } from 'react-icons/fi';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -29,6 +30,7 @@ export default function UserProfilePage() {
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [showUnfollowOptions, setShowUnfollowOptions] = useState(false);
+  const [showActionsDropdown, setShowActionsDropdown] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -133,25 +135,68 @@ export default function UserProfilePage() {
                 Edit Profile
               </Link>
             ) : (
-              <div className="flex gap-2">
+              <div className="flex gap-2 relative">
+                {/* Message Icon */}
+                <button className="p-2 bg-white/10 hover:bg-white/20 rounded-full" title="Message">
+                  <FiMessageCircle size={18} />
+                </button>
+
+                {/* 3-Dot Options */}
+                <button
+                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full"
+                  onClick={() => setShowActionsDropdown(prev => !prev)}
+                  title="More options"
+                >
+                  <FiMoreHorizontal size={18} />
+                </button>
+
+                {showActionsDropdown && (
+                  <div className="absolute right-0 top-10 bg-zinc-900 border border-white/10 rounded-lg shadow-lg z-50 w-64 text-sm overflow-hidden">
+                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <FiUserPlus size={16} />
+                      Add to Favorites
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <FiVolumeX size={16} />
+                      Mute
+                    </button>
+                    <button onClick={handleBlock} className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-red-400 text-left">
+                      <FiUserX size={16} />
+                      Block
+                    </button>
+                    <hr className="border-white/10" />
+                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <FiShare2 size={16} />
+                      Share profile
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <FiLink size={16} />
+                      Copy link to profile
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <FiAlertCircle size={16} />
+                      Report
+                    </button>
+                  </div>
+                )}
+
+                {/* Follow/Unfollow */}
                 {isFollowing ? (
                   <div className="relative">
-                    
                     <button
-                      onClick={() => setShowUnfollowOptions((prev) => !prev)}
+                      onClick={() => setShowUnfollowOptions(prev => !prev)}
                       className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm text-white flex items-center gap-1"
                     >
                       Following
                       {showUnfollowOptions ? <IoChevronUp size={14} /> : <IoChevronDown size={14} />}
                     </button>
-
                     {showUnfollowOptions && (
                       <div className="absolute right-0 mt-2 bg-zinc-800 text-white text-sm rounded shadow-lg p-3 w-60 border border-white/10 z-50">
                         <p className="text-xs text-white/70 mb-2">
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
                         <div className="flex gap-2">
-                          <button onClick={handleUnfollow} className="bg-gray-500 hover:bg-gray-600 px-3 py-1 rounded text-sm w-full">
+                          <button onClick={handleUnfollow} className="bg-purple-900 hover:bg-purple-950 px-3 py-1 rounded text-sm w-full">
                             Unfollow
                           </button>
                           <button onClick={() => setShowUnfollowOptions(false)} className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full">
@@ -166,10 +211,6 @@ export default function UserProfilePage() {
                     Follow
                   </button>
                 )}
-
-                <button onClick={handleBlock} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
-                  Block
-                </button>
               </div>
             )}
           </div>
