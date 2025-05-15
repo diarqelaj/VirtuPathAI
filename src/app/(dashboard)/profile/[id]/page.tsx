@@ -195,7 +195,7 @@ export default function UserProfilePage() {
                       {showUnfollowOptions ? <IoChevronUp size={14} /> : <IoChevronDown size={14} />}
                     </button>
                     {showUnfollowOptions && (
-                      <div className="absolute right-0 mt-2 bg-zinc-800 text-white text-sm rounded shadow-lg p-3 w-60 border border-white/10 z-50">
+                      <div className="absolute right-0 mt-2 bg-black-100 text-white text-sm rounded-xl p-3 w-60 border border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] z-50">
                         <p className="text-xs text-white/70 mb-2">
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
