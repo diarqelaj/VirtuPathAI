@@ -234,43 +234,48 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               ref={resultsRef}
               className="absolute top-full left-0 w-full bg-black-100 text-white rounded-xl z-50 mt-1 max-h-64 overflow-y-auto shadow-[0_0_8px_2px_rgba(255,255,255,0.08)] border border-white/10"
             >
-
+              {/* Header */}
               <li className="px-4 py-1 text-xs text-neutral-400">
                 {search.trim() ? 'Matching Users' : 'Recent & Suggested Users'}
               </li>
+
+              {/* User Results */}
               {results.users.map((u: any, idx: number) => (
                 <li
-                key={u.userID}
-                className={`px-4 py-2 cursor-pointer rounded-lg transition ${
-                  highlightIndex === idx ? 'bg-white/10' : 'hover:bg-white/5'
-                }`}
-              >
-                <button
-                  onClick={() => handleSelect(u)}
-                  className="w-full flex items-center gap-3 text-left"
+                  key={u.userID}
+                  className={`px-4 py-2 rounded-lg transition ${
+                    highlightIndex === idx ? 'bg-white/10' : 'hover:bg-white/5'
+                  }`}
                 >
-                  <img
-                    src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
-                    alt={u.fullName}
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
-                  <div className="flex items-center gap-1">
-                    <span>{u.fullName}</span>
-                    {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
-                    {u.isOfficial && <OfficialBadge />}
-                  </div>
-                </button>
-              </li>
-              
-              
+                  <Link
+                    href={`/${u.username}`}
+                    onClick={() => updateRecent(u)}
+                    className="flex items-center gap-3"
+                  >
+                    <img
+                      src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                      alt={u.fullName}
+                      className="w-6 h-6 rounded-full object-cover"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <span>{u.fullName}</span>
+                      {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
+                      {u.isOfficial && <OfficialBadge />}
+                    </div>
+                  </Link>
+                </li>
               ))}
+
+              {/* Career Header */}
               <li className="px-4 py-1 text-xs text-neutral-400">Trending Careers</li>
+
+              {/* Career Results */}
               {results.careers.map((c: any, idx: number) => (
                 <li
                   key={c.title}
                   onClick={() => handleSelect(c)}
-                  className={`px-4 py-2 cursor-pointer hover:bg-zinc-700 ${
-                    highlightIndex === idx + results.users.length ? 'bg-zinc-700' : ''
+                  className={`px-4 py-2 cursor-pointer rounded-lg transition ${
+                    highlightIndex === idx + results.users.length ? 'bg-zinc-700' : 'hover:bg-zinc-700'
                   }`}
                 >
                   🔥 {c.title}
@@ -278,6 +283,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               ))}
             </ul>
           )}
+
         </div>
 
 
