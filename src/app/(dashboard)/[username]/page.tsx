@@ -144,7 +144,26 @@ export default function UserProfilePage() {
         <div className="p-6 pt-16 sm:pt-20 space-y-4">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-2xl font-bold">{user?.fullName}</h2>
+            <h2 className="text-2xl font-bold flex items-center gap-2">
+              {user?.fullName}
+              {user?.isVerified && (
+                <div className="group relative inline-block">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="#1DA1F2"
+                    className="w-5 h-5"
+                  >
+                    <path d="M22.5 12l-2.121 2.121.707 2.829-2.829-.707L12 22.5l-2.121-2.121-2.829.707.707-2.829L1.5 12l2.121-2.121-.707-2.829 2.829.707L12 1.5l2.121 2.121 2.829-.707-.707 2.829L22.5 12zm-13.5.75l3 3 6-6-1.5-1.5-4.5 4.5-1.5-1.5-1.5 1.5z" />
+                  </svg>
+
+                  <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 hidden group-hover:block bg-zinc-800 text-xs text-white rounded-md px-3 py-1 whitespace-nowrap shadow-md z-10">
+                    Verified account
+                  </div>
+                </div>
+              )}
+            </h2>
+
             <p className="text-sm text-gray-500">@{user?.username}</p>
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
               <FiCalendar size={14} />
