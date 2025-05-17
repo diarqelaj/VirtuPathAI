@@ -70,9 +70,27 @@ export default function UserProfilePage() {
       const allMutuals = mutualRes.data || [];
       const currentUserFollowing = currentUserFollowingRes.data || [];
 
-      setFollowers(allFollowers);
-      setFollowing(allFollowing);
-      setFriends(allMutuals);
+      const enrichUsers = async (users: any[]) => {
+        return await Promise.all(
+          users.map(async (u) => {
+            try {
+              const full = await api.get(`/users/${u.userID}`);
+              return full.data;
+            } catch {
+              return u; // fallback if user not found
+            }
+          })
+        );
+      };
+      
+      const enrichedFollowers = await enrichUsers(allFollowers);
+      const enrichedFollowing = await enrichUsers(allFollowing);
+      const enrichedFriends = await enrichUsers(allMutuals);
+      
+      setFollowers(enrichedFollowers);
+      setFollowing(enrichedFollowing);
+      setFriends(enrichedFriends);
+      
 
       const isCurrentFollowing = allFollowers.some((f: any) => f.userID === current.data.userID);
       setIsFollowing(isCurrentFollowing);

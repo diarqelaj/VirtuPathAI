@@ -241,27 +241,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               {results.users.map((u: any, idx: number) => (
                 <li
                 key={u.userID}
-                onClick={() => handleSelect(u)}
-                className={`px-4 py-2 flex items-center gap-3 cursor-pointer rounded-lg transition ${
-                  highlightIndex === idx
-                    ? 'bg-white/10'
-                    : 'hover:bg-white/5'
+                className={`px-4 py-2 cursor-pointer rounded-lg transition ${
+                  highlightIndex === idx ? 'bg-white/10' : 'hover:bg-white/5'
                 }`}
               >
-                <img
-                  src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
-                  alt={u.fullName}
-                  className="w-6 h-6 rounded-full object-cover"
-                />
-             
+                <button
+                  onClick={() => handleSelect(u)}
+                  className="w-full flex items-center gap-3 text-left"
+                >
+                  <img
+                    src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                    alt={u.fullName}
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
                   <div className="flex items-center gap-1">
                     <span>{u.fullName}</span>
                     {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
                     {u.isOfficial && <OfficialBadge />}
                   </div>
-
-
+                </button>
               </li>
+              
               
               ))}
               <li className="px-4 py-1 text-xs text-neutral-400">Trending Careers</li>
