@@ -228,7 +228,7 @@ const AuthPage = () => {
         
         await api.post("/users", newUser);
         await api.post("/users/login", {
-          identifier: session?.user?.email ?? "",
+          identifier: email,
           password: "",
           rememberMe: false,
           isGoogleLogin: true
