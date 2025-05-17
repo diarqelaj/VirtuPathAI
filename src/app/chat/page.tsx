@@ -13,7 +13,7 @@ export default function ChatPage() {
   const [friends, setFriends] = useState<string[]>([]);
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const hubUrl = `${chathubApi.defaults.baseURL}/chathub`;
+  const hubUrl = `${chathubApi.defaults.baseURL}chathub`;
 
   useEffect(() => {
     const fetchFriends = async () => {

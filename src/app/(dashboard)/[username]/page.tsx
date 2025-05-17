@@ -157,19 +157,21 @@ export default function UserProfilePage() {
             <h2 className="text-2xl font-bold">{user?.fullName}</h2>
             <p className="text-sm text-gray-500">@{user?.username}</p>
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
-            <FiCalendar size={14} />
-            <span>
-              {user?.registrationDate
-                ? (() => {
-                    const cleaned = user.registrationDate.split('.')[0];
-                    const date = new Date(cleaned);
-                    return !isNaN(date.getTime())
-                      ? date.toLocaleDateString(undefined, { year: 'numeric', month: 'long' })
-                      : 'Unknown';
-                  })()
-                : 'Unknown'}
-            </span>
-          </div>
+              <FiCalendar size={14} />
+              <span>
+                {user?.registrationDate
+                  ? (() => {
+                      const raw = user.registrationDate;
+                      const isoSafe = raw.includes('.') ? raw.split('.')[0] + 'Z' : raw + 'Z';
+                      const date = new Date(isoSafe);
+                      return !isNaN(date.getTime())
+                        ? date.toLocaleString('en-US', { year: 'numeric', month: 'long' })
+                        : 'Unknown';
+                    })()
+                  : 'Unknown'}
+              </span>
+            </div>
+
 
 
           </div>
