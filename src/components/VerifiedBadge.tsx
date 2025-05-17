@@ -23,7 +23,8 @@ export const VerifiedBadge = ({ date }: { date?: string }) => {
       </svg>
 
       {showTooltip && (
-        <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow border border-white/10 text-sm px-4 py-3">
+       <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10 text-sm px-4 py-3">
+
           <div className="font-semibold text-white">Verified Account</div>
           {formattedDate && (
             <div className="text-white/70 text-xs mt-1">Verified on {formattedDate}</div>
