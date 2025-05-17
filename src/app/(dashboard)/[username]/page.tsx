@@ -20,6 +20,8 @@ import {
   FiLink,
   FiAlertCircle
 } from 'react-icons/fi';
+import { VerifiedBadge } from '@/components/VerifiedBadge';
+
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -121,6 +123,7 @@ export default function UserProfilePage() {
     }
   };
 
+
   const isSelf = currentUser?.userID === user?.userID;
   const bannerUrl = resolveImageUrl(user?.coverImageUrl, defaultBanner);
   const profileImg = resolveImageUrl(user?.profilePictureUrl, defaultAvatar);
@@ -144,26 +147,11 @@ export default function UserProfilePage() {
         <div className="p-6 pt-16 sm:pt-20 space-y-4">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              {user?.fullName}
-              {user?.isVerified && (
-                <div className="group relative inline-block">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="w-[18px] h-[18px] text-[#1D9BF0] fill-current"
-                  >
-                    <path d="M22.5 12.003l-2.13 2.11.707 2.83-2.829-.708L12 22.5l-2.248-2.255-2.829.708.708-2.83L1.5 12.003l2.13-2.11-.707-2.83 2.828.708L12 1.5l2.248 2.255 2.829-.708-.708 2.83 5.131 2.117zm-13.03.75l3 3 6-6-1.5-1.5-4.5 4.5-1.5-1.5-1.5 1.5z"/>
-                  </svg>
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            {user?.fullName}
+            {user?.isVerified && <VerifiedBadge />}
+          </h2>
 
-
-
-                  <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 hidden group-hover:block bg-zinc-800 text-xs text-white rounded-md px-3 py-1 whitespace-nowrap shadow-md z-10">
-                    Verified account
-                  </div>
-                </div>
-              )}
-            </h2>
 
             <p className="text-sm text-gray-500">@{user?.username}</p>
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
