@@ -38,7 +38,7 @@ export default function ChatPage() {
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://your-backend-url.com/chathub') // Replace with your actual ChatHub URL
+      .withUrl('https://virtupathapi-54vt.onrender.com/chathub') // Replace with your actual ChatHub URL
       .withAutomaticReconnect()
       .build();
 
