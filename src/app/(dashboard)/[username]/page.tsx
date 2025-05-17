@@ -146,14 +146,15 @@ export default function UserProfilePage() {
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
               <FiCalendar size={14} />
               <span>
-                {user?.registrationDate
-                  ? new Date(user.registrationDate + 'Z').toLocaleDateString(undefined, {
+                {user?.registrationDate && !isNaN(new Date(user.registrationDate).getTime())
+                  ? new Date(user.registrationDate).toLocaleDateString(undefined, {
                       year: 'numeric',
                       month: 'long',
                     })
                   : 'Unknown'}
               </span>
             </div>
+
           </div>
 
 
