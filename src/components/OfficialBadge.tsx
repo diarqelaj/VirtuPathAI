@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { FiCalendar } from 'react-icons/fi';
 
 export const OfficialBadge = ({ date }: { date?: string }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -25,28 +26,13 @@ export const OfficialBadge = ({ date }: { date?: string }) => {
         className="w-[18px] h-[18px]"
       >
         <defs>
-          <linearGradient
-            id="paint0_linear"
-            x1="4"
-            y1="1.5"
-            x2="19.5"
-            y2="22"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="paint0_linear" x1="4" y1="1.5" x2="19.5" y2="22" gradientUnits="userSpaceOnUse">
             <stop stopColor="#F4E72A" />
             <stop offset=".539" stopColor="#CD8105" />
             <stop offset=".68" stopColor="#CB7B00" />
             <stop offset="1" stopColor="#F4EC26" />
-            <stop offset="1" stopColor="#F4E72A" />
           </linearGradient>
-          <linearGradient
-            id="paint1_linear"
-            x1="5"
-            y1="2.5"
-            x2="17.5"
-            y2="19.5"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="paint1_linear" x1="5" y1="2.5" x2="17.5" y2="19.5" gradientUnits="userSpaceOnUse">
             <stop stopColor="#F9E87F" />
             <stop offset=".406" stopColor="#E2B719" />
             <stop offset=".989" stopColor="#E2B719" />
@@ -76,14 +62,30 @@ export const OfficialBadge = ({ date }: { date?: string }) => {
 
       {/* Tooltip */}
       {showTooltip && (
-       <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10 text-sm px-4 py-3">
-
-          <div className="font-semibold text-white">Verified Account</div>
-          <div className="text-white/70 text-xs mt-1">
-            This account is verified because it’s the official VirtuPath account
+        <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-72 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10 px-4 py-3 text-sm space-y-2">
+          <div className="flex items-center gap-2">
+            <svg
+              viewBox="0 0 22 22"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[18px] h-[18px]"
+            >
+              <path
+                clipRule="evenodd"
+                fill="url(#paint0_linear)"
+                fillRule="evenodd"
+                d="M13.596 3.011L11 .5 8.404 3.011l-3.576-.506-.624 3.558-3.19 1.692L2.6 11l-1.586 3.245 3.19 1.692.624 3.558 3.576-.506L11 21.5l2.596-2.511 3.576.506.624-3.558 3.19-1.692L19.4 11l1.586-3.245-3.19-1.692-.624-3.558-3.576.506zM6 11.39l3.74 3.74 6.2-6.77L14.47 7l-4.8 5.23-2.26-2.26L6 11.39z"
+              />
+            </svg>
+            <div className="font-semibold text-white">Verified Account</div>
+          </div>
+          <div className="text-white/70 text-xs">
+            This account is verified because it’s the official VirtuPath account.
           </div>
           {formattedDate && (
-            <div className="text-white/60 text-xs mt-1">Verified on {formattedDate}</div>
+            <div className="flex items-center gap-2 text-white/60 text-xs pt-1">
+              <FiCalendar className="text-white/40" size={14} />
+              Verified on {formattedDate}
+            </div>
           )}
         </div>
       )}
