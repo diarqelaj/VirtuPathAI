@@ -216,6 +216,7 @@ const AuthPage = () => {
       try {
         const newUser = {
           fullName: name,
+          username,
           email,
           passwordHash: password,
           registrationDate: new Date().toISOString(),
@@ -307,6 +308,7 @@ const AuthPage = () => {
       if (!foundUser) {
         const newUser = {
           fullName: "Phone User",
+          username,
           email: `${phone}@virtupath.ai`,
           phone,
           passwordHash: "",
