@@ -21,7 +21,7 @@ import {
   FiAlertCircle
 } from 'react-icons/fi';
 import { VerifiedBadge } from '@/components/VerifiedBadge';
-
+import { OfficialBadge } from '@/components/OfficialBadge';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -149,8 +149,9 @@ export default function UserProfilePage() {
           <div>
           <h2 className="text-2xl font-bold flex items-center gap-2">
             {user?.fullName}
-            {user?.isVerified && <VerifiedBadge />}
+            {user?.isOfficial ? <OfficialBadge /> : user?.isVerified ? <VerifiedBadge /> : null}
           </h2>
+
 
 
             <p className="text-sm text-gray-500">@{user?.username}</p>
