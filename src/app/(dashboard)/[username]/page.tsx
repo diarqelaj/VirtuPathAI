@@ -271,9 +271,7 @@ export default function UserProfilePage() {
                 <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('following'); setShowModal(true); }}>
                   <strong>{following.length}</strong> Following
                 </span>
-                <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('mutual'); setShowModal(true); }}>
-                  <strong>{friends.length}</strong> Friends
-                </span>
+                
               </div>
 
               {/* Bio */}

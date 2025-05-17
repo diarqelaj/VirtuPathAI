@@ -12,6 +12,8 @@ import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import { signOut } from 'next-auth/react';
 import api from '@/lib/api';
 import { FiX } from 'react-icons/fi';
+import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { OfficialBadge } from "@/components/OfficialBadge";
 
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
@@ -90,21 +92,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
-      if (!dropdownRef.current?.contains(e.target)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
       if (
         !inputRef.current?.contains(e.target) &&
         !resultsRef.current?.contains(e.target)
       ) {
-        setSearch('');
-        setResults({ users: [], careers: [] });
+        setTimeout(() => {
+          setSearch('');
+          setResults({ users: [], careers: [] });
+        }, 100); // ⚠️ Slight delay
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -258,7 +253,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   alt={u.fullName}
                   className="w-6 h-6 rounded-full object-cover"
                 />
-                <span>{u.fullName}</span>
+             
+                  <div className="flex items-center gap-1">
+                    <span>{u.fullName}</span>
+                    {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
+                    {u.isOfficial && <OfficialBadge />}
+                  </div>
+
+
               </li>
               
               ))}

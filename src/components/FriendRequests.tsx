@@ -2,13 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import api from '@/lib/api';
+import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { OfficialBadge } from "@/components/OfficialBadge";
 
 interface FollowRequest {
   id: number;
   followerId: number;
   followedId: number;
   isAccepted: boolean;
+  follower: {
+    userID: number;
+    fullName: string;
+    username: string;
+    profilePictureUrl?: string;
+    isVerified?: boolean;
+    isOfficial?: boolean;
+    
+  };
 }
+
 
 export default function FriendRequests() {
   const [requests, setRequests] = useState<FollowRequest[]>([]);
@@ -65,7 +77,26 @@ export default function FriendRequests() {
         <ul className="space-y-2">
           {requests.map((req) => (
             <li key={req.id} className="flex justify-between items-center bg-zinc-800 p-3 rounded">
-              <span className="text-sm text-white">From User ID: {req.followerId}</span>
+             <div className="flex items-center gap-2">
+                <img
+                  src={
+                    req.follower.profilePictureUrl
+                      ? `${api.defaults.baseURL?.replace(/\/api\/?$/, '')}${req.follower.profilePictureUrl}`
+                      : 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff'
+                  }
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full object-cover border border-white/10"
+                />
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1">
+                    <span className="text-white text-sm font-medium">{req.follower.fullName}</span>
+                    {req.follower.isVerified && <VerifiedBadge />}
+                    {req.follower.isOfficial && <OfficialBadge />}
+                  </div>
+                  <span className="text-xs text-white/50">@{req.follower.username}</span>
+                </div>
+              </div>
+
               <div className="space-x-2">
                 <button
                   onClick={() => handleAccept(req.followerId)}

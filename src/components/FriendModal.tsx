@@ -4,13 +4,20 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { X } from 'lucide-react';
 import api from '@/lib/api';
+import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { OfficialBadge } from "@/components/OfficialBadge";
+
 
 interface User {
   userID: number;
   fullName: string;
-  username: string; 
+  username: string;
   profilePictureUrl?: string;
+  isVerified?: boolean;
+  isOfficial?: boolean;
+  verifiedDate?: string;
 }
+
 
 
 interface FriendModalProps {
@@ -122,9 +129,13 @@ export default function FriendModal({
                       className="w-10 h-10 rounded-full object-cover border border-white/10"
                       alt="avatar"
                     />
-                    <span className="text-white text-sm font-medium">
-                      {u.fullName} {isSelf && <span className="text-xs text-white/50">(You)</span>}
-                    </span>
+                   <div className="flex items-center gap-1 text-white text-sm font-medium">
+                    <span>{u.fullName}</span>
+                    {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
+                    {u.isOfficial && <OfficialBadge date={u.verifiedDate} />}
+                    {isSelf && <span className="text-xs text-white/50 ml-1">(You)</span>}
+                  </div>
+
                   </div>
                   <div>
                     {isSelf ? null : confirmId === u.userID ? (
