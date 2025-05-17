@@ -367,9 +367,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               {user ? (
                 <>
                   {user && (
-                    <Link href={`/profile/${user.userID}`} className="block px-4 py-3 hover:bg-white/10 text-sm">
-                      View Profile
-                    </Link>
+                    <Link href={`/${user.username}`} className="block px-4 py-3 hover:bg-white/10 text-sm">
+                    View Profile
+                  </Link>
                   )}
 
                   <Link href="/settings" className="block px-4 py-3 hover:bg-white/10 text-sm">

@@ -12,6 +12,7 @@ import { auth } from "@/lib/firebase";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { navItems } from "@/data";
 
+
 declare global {
   interface Window {
     recaptchaVerifier?: RecaptchaVerifier;
@@ -21,6 +22,8 @@ declare global {
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
@@ -74,12 +77,17 @@ const AuthPage = () => {
   
           if (!foundUser) {
             const newUser = {
-              fullName: session.user.name || "",
-              email: session.user.email,
-              passwordHash: "",
+              fullName: name,
+              email,
+              username, 
+              passwordHash: password,
               registrationDate: new Date().toISOString(),
-              subscribedToNews: subscribedToNews,
+              productUpdates: subscribedToNews,
+              careerTips: subscribedToNews,
+              newCareerPathAlerts: subscribedToNews,
+              promotions: subscribedToNews
             };
+            
             await api.post("/Users", newUser);
           }
           
@@ -164,7 +172,7 @@ const AuthPage = () => {
       try {
         // STEP 1: Log in WITHOUT rememberMe
         const response = await api.post("/Users/login", {
-          email,
+          identifier: email,
           password,
           rememberMe: false, // force false initially
         });
@@ -188,7 +196,7 @@ const AuthPage = () => {
           } else {
             // No 2FA → apply rememberMe now if requested
             if (rememberMe) {
-              await api.post("/Users/login", { email, password, rememberMe: true });
+              await api.post("/Users/login", {identifier: email, password, rememberMe: true });
             }
             router.push(pending ? "/payment" : "/");
           }
@@ -219,9 +227,11 @@ const AuthPage = () => {
         await api.post("/Users", newUser);
         await api.post("/Users/login", { email, password });
         router.push(pending ? "/payment" : "/");
-      } catch {
-        setError("Registration failed. Email might already exist.");
+      } catch (err: any) {
+        const message = err?.response?.data?.error;
+        setError(message || "Registration failed. Please try again.");
       }
+      
     }
     
   };
@@ -233,7 +243,8 @@ const AuthPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // ✅ this ensures cookies are handled properly
-        body: JSON.stringify({ email, code: twoFACode, rememberMe }),
+        body: JSON.stringify({ identifier: email, code: twoFACode, rememberMe }),
+
       });
   
       if (!res.ok) {
@@ -330,18 +341,31 @@ const AuthPage = () => {
 
           <div className="space-y-6">
             <div className="space-y-4">
-              {!isLogin && (
-                <div className="group relative">
-                  <UserCircleIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Full Name"
-                    className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800"
-                  />
-                </div>
+                {!isLogin && (
+                <>
+                  <div className="group relative">
+                    <UserCircleIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Full Name"
+                      className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800"
+                    />
+                  </div>
+                  <div className="group relative">
+                    <UserCircleIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="Username"
+                      className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800"
+                    />
+                  </div>
+                </>
               )}
+
               <div className="group relative">
                 <EnvelopeIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input

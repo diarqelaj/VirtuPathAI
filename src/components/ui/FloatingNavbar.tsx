@@ -135,7 +135,7 @@ export const FloatingNav = ({
                   className="absolute left-full top-0 ml-2 w-52 rounded-xl bg-[rgba(17,25,40,0.9)] border border-white/10 shadow-2xl backdrop-blur-md overflow-hidden z-50"
                 >
                   <Link
-                    href="/settings"
+                    href="{`/${user.username}`}"
                     className="flex items-center gap-2 px-5 py-3 text-sm text-white hover:bg-white/10 transition-colors duration-200"
                     onClick={() => setMenuOpen(false)}
                   >
