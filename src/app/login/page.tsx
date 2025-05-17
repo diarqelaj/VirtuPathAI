@@ -225,7 +225,7 @@ const AuthPage = () => {
           promotions: subscribedToNews
         };
         
-        await api.post("/sers", newUser);
+        await api.post("/users", newUser);
         await api.post("/users/login", {
           identifier: session?.user?.email ?? "",
           password: "",
