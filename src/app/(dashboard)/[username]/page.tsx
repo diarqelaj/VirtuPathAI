@@ -51,6 +51,8 @@ export default function UserProfilePage() {
 
       const target = await api.get(`/users/by-username/${username}`);
       setUser(target.data);
+ 
+
 
       const targetId = target.data.userID;
 
@@ -83,19 +85,7 @@ export default function UserProfilePage() {
   useEffect(() => {
     if (username) fetchUsers();
   }, [username]);
-  useEffect(() => {
-    if (user?.registrationDate) {
-      const rawDate = user.registrationDate;
-      const cleanedDate = rawDate.split('.')[0];
-      const parsedDate = new Date(cleanedDate);
-  
-      console.log('Raw:', rawDate);
-      console.log('Cleaned:', cleanedDate);
-      console.log('Parsed:', parsedDate);
-      console.log('Valid?', !isNaN(parsedDate.getTime()));
-    }
-  }, [user]);
-  
+
 
   const handleFollow = async () => {
     if (!user || !currentUser) return;
@@ -159,17 +149,18 @@ export default function UserProfilePage() {
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
               <FiCalendar size={14} />
               <span>
-                {user?.registrationDate
-                  ? (() => {
-                      const raw = user.registrationDate;
-                      const isoSafe = raw.includes('.') ? raw.split('.')[0] + 'Z' : raw + 'Z';
-                      const date = new Date(isoSafe);
-                      return !isNaN(date.getTime())
-                        ? date.toLocaleString('en-US', { year: 'numeric', month: 'long' })
-                        : 'Unknown';
-                    })()
-                  : 'Unknown'}
+                {(() => {
+                  if (!user?.registrationDate) return 'Unknown';
+                  const raw = user.registrationDate;
+      
+                  const safe = raw.includes('.') ? raw.split('.')[0] + 'Z' : raw + 'Z';
+                  const date = new Date(safe);
+                 return !isNaN(date.getTime())
+                  ? `Joined ${date.toLocaleString('en-US', { month: 'long', year: 'numeric' })}`
+                  : 'Joined date unknown';
+                })()}
               </span>
+
             </div>
 
 
