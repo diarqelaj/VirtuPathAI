@@ -229,7 +229,7 @@ const AuthPage = () => {
         await api.post("/users", newUser);
         await api.post("/users/login", {
           identifier: email,
-          password: "",
+          password: password,
           rememberMe: false,
           isGoogleLogin: true
         });
