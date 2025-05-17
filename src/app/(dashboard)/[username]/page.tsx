@@ -16,6 +16,7 @@ import {
   FiUserX,
   FiVolumeX,
   FiShare2,
+  FiCalendar,
   FiLink,
   FiAlertCircle
 } from 'react-icons/fi';
@@ -138,11 +139,23 @@ export default function UserProfilePage() {
 
         {/* Main Section */}
         <div className="p-6 pt-16 sm:pt-20 space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-2xl font-bold">{user?.fullName}</h2>
-              <p className="text-sm text-gray-500">@{user?.username}</p>
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl font-bold">{user?.fullName}</h2>
+            <p className="text-sm text-gray-500">@{user?.username}</p>
+            <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
+              <FiCalendar size={14} />
+              <span>
+                {user?.registrationDate
+                  ? new Date(user.registrationDate + 'Z').toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'long',
+                    })
+                  : 'Unknown'}
+              </span>
             </div>
+          </div>
+
 
             {isSelf ? (
               <Link href="/settings" className="bg-purple-950 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
@@ -255,7 +268,15 @@ export default function UserProfilePage() {
 
               {/* Join Date */}
               <p className="text-xs text-white/40 text-right">
-                Joined on {new Date(user?.registrationDate).toLocaleDateString()}
+              Joined on {
+              user?.registrationDate
+                ? new Date(user.registrationDate + 'Z').toLocaleDateString(undefined, {
+                    year: 'numeric',
+                    month: 'long'
+                  })
+                : 'Unknown'
+            }
+
               </p>
             </>
           )}
