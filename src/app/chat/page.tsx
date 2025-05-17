@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import * as signalR from '@microsoft/signalr';
 import api from '@/lib/api';
+import chathubApi from '@/lib/api';
 
 export default function ChatPage() {
   const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
@@ -12,6 +13,7 @@ export default function ChatPage() {
   const [friends, setFriends] = useState<string[]>([]);
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const hubUrl = `${chathubApi.defaults.baseURL}/chathub`;
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -38,10 +40,12 @@ export default function ChatPage() {
 
   useEffect(() => {
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://virtupathapi-54vt.onrender.com/chathub') // Replace with your actual ChatHub URL
+    .withUrl(hubUrl, {
+        withCredentials: true, // if needed
+      })
       .withAutomaticReconnect()
+      .configureLogging(signalR.LogLevel.Information)
       .build();
-
     setConnection(newConnection);
   }, []);
 

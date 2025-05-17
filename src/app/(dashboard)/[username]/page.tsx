@@ -283,19 +283,7 @@ export default function UserProfilePage() {
                 <h3 className="text-lg font-semibold mb-1">About</h3>
                 <p className="text-sm text-white/80">{user?.about || 'Interests, goals, achievements — coming soon...'}</p>
               </div>
-
-              {/* Join Date */}
-              <p className="text-xs text-white/40 text-right">
-              Joined on {
-              user?.registrationDate
-                ? new Date(user.registrationDate + 'Z').toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'long'
-                  })
-                : 'Unknown'
-            }
-
-              </p>
+              
             </>
           )}
         </div>
