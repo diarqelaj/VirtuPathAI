@@ -8,8 +8,10 @@ import api from '@/lib/api';
 interface User {
   userID: number;
   fullName: string;
+  username: string; 
   profilePictureUrl?: string;
 }
+
 
 interface FriendModalProps {
   title: string;
@@ -79,12 +81,13 @@ export default function FriendModal({
     }
   };
 
-  const navigateToProfile = (userId: number) => {
-    if (userId !== currentUserId) {
-      router.push(`/profile/${userId}`);
+  const navigateToProfile = (user: User) => {
+    if (user.userID !== currentUserId) {
+      router.push(`/${user.username}`);
       onClose();
     }
   };
+  
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -111,7 +114,8 @@ export default function FriendModal({
                     className={`flex items-center gap-3 cursor-pointer ${
                       !isSelf ? 'hover:opacity-80' : ''
                     }`}
-                    onClick={() => navigateToProfile(u.userID)}
+                    onClick={() => navigateToProfile(u)}
+
                   >
                     <img
                       src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}

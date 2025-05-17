@@ -113,13 +113,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   
 
   const handleSelect = (entry: any) => {
-    if ('userID' in entry) {
+    if ('username' in entry) {
       updateRecent(entry);
-      router.push(`/profile/${entry.userID}`);
+      router.push(`/${entry.username}`);
     } else {
       router.push(`/career/${entry.title.replace(/\s+/g, '-').toLowerCase()}`);
     }
   };
+  
 
   const updateRecent = (userEntry: any) => {
     setRecent((prev: any[]) => {

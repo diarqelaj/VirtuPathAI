@@ -5,8 +5,20 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/lib/api';
 import FriendModal from '@/components/FriendModal';
-import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
-import { FiMoreHorizontal, FiMessageCircle, FiUserPlus, FiUserX, FiVolumeX, FiShare2, FiLink, FiAlertCircle } from 'react-icons/fi';
+import {
+  IoChevronDown,
+  IoChevronUp
+} from 'react-icons/io5';
+import {
+  FiMoreHorizontal,
+  FiMessageCircle,
+  FiUserPlus,
+  FiUserX,
+  FiVolumeX,
+  FiShare2,
+  FiLink,
+  FiAlertCircle
+} from 'react-icons/fi';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -26,7 +38,6 @@ export default function UserProfilePage() {
   const [friends, setFriends] = useState<any[]>([]);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isAccepted, setIsAccepted] = useState(false);
-
   const [modalType, setModalType] = useState<'followers' | 'following' | 'mutual' | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [showUnfollowOptions, setShowUnfollowOptions] = useState(false);
@@ -98,7 +109,7 @@ export default function UserProfilePage() {
     try {
       await api.post('/userfriends/block', {
         blockerId: currentUser.userID,
-        blockedId: user.userID,
+        blockedId: user.userID
       });
       alert('User blocked.');
     } catch {
@@ -114,26 +125,23 @@ export default function UserProfilePage() {
   return (
     <>
       <div className="text-white max-w-4xl mx-auto mt-4 rounded-xl overflow-visible shadow-xl border border-white/10 bg-black-100">
-
         {/* Banner */}
         <div className="h-48 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${bannerUrl})` }}>
-          <div className="absolute bottom-0 left-0 p-4">
+          <div className="absolute bottom-0 left-4 translate-y-1/2">
             <img
               src={profileImg}
               alt="Avatar"
-              width={80}
-              height={80}
-              className="rounded-full border-4 border-white shadow-md object-cover"
+              className="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover"
             />
           </div>
         </div>
 
         {/* Main Section */}
-        <div className="p-6 pt-10 sm:pt-6 space-y-4">
+        <div className="p-6 pt-16 sm:pt-20 space-y-4">
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-2xl font-bold">{user?.fullName}</h2>
-              <p className="text-sm text-gray-400">Joined {new Date(user?.registrationDate).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">@{user?.username}</p>
             </div>
 
             {isSelf ? (
@@ -142,12 +150,9 @@ export default function UserProfilePage() {
               </Link>
             ) : (
               <div className="flex gap-2 relative">
-                {/* Message Icon */}
                 <button className="p-2 bg-white/10 hover:bg-white/20 rounded-full" title="Message">
                   <FiMessageCircle size={18} />
                 </button>
-
-                {/* 3-Dot Options */}
                 <div className="relative inline-block text-left">
                   <button
                     className="p-2 bg-white/10 hover:bg-white/20 rounded-full"
@@ -156,14 +161,13 @@ export default function UserProfilePage() {
                   >
                     <FiMoreHorizontal size={18} />
                   </button>
-
                   {showActionsDropdown && (
-                    <div className="absolute right-0 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
-                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                    <div className="absolute right-0 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow border border-white/10">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiUserPlus size={16} />
                         Add to Favorites
                       </button>
-                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiVolumeX size={16} />
                         Mute
                       </button>
@@ -172,43 +176,40 @@ export default function UserProfilePage() {
                         Block
                       </button>
                       <hr className="border-white/10" />
-                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiShare2 size={16} />
                         Share profile
                       </button>
-                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiLink size={16} />
                         Copy link to profile
                       </button>
-                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white text-left">
+                      <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiAlertCircle size={16} />
                         Report
                       </button>
                     </div>
                   )}
                 </div>
-
-
-                {/* Follow/Unfollow */}
                 {isFollowing ? (
                   <div className="relative">
                     <button
                       onClick={() => setShowUnfollowOptions(prev => !prev)}
-                      className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm text-white flex items-center gap-1"
+                      className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm flex items-center gap-1"
                     >
                       Following
                       {showUnfollowOptions ? <IoChevronUp size={14} /> : <IoChevronDown size={14} />}
                     </button>
                     {showUnfollowOptions && (
-                      <div className="absolute right-0 mt-2 bg-black-100 text-white text-sm rounded-xl p-3 w-60 border border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] z-50">
+                      <div className="absolute right-0 mt-2 bg-black-100 text-sm rounded-xl p-3 w-60 border border-white/10 shadow z-50">
                         <p className="text-xs text-white/70 mb-2">
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
                         <div className="flex gap-2">
-                          <button onClick={handleUnfollow} className="bg-purple-900 hover:bg-purple-950 px-3 py-1 rounded text-sm w-full">
+                          <button onClick={handleUnfollow} className="bg-purple-900 hover:bg-purple-950 px-3 py-1 rounded w-full">
                             Unfollow
                           </button>
-                          <button onClick={() => setShowUnfollowOptions(false)} className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded text-sm w-full">
+                          <button onClick={() => setShowUnfollowOptions(false)} className="bg-white/10 hover:bg-white/20 px-3 py-1 rounded w-full">
                             Cancel
                           </button>
                         </div>
@@ -216,7 +217,7 @@ export default function UserProfilePage() {
                     )}
                   </div>
                 ) : (
-                  <button onClick={handleFollow} className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm text-white">
+                  <button onClick={handleFollow} className="bg-purple-900 hover:bg-purple-950 px-4 py-2 rounded-lg text-sm">
                     Follow
                   </button>
                 )}
@@ -225,12 +226,9 @@ export default function UserProfilePage() {
           </div>
 
           {isPrivate ? (
-            <div className="text-center text-white/50 italic mt-10">
-              This profile is private.
-            </div>
+            <div className="text-center text-white/50 italic mt-10">This profile is private.</div>
           ) : (
             <>
-              {/* Stats */}
               <div className="flex gap-6 mt-2 text-sm text-gray-300">
                 <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('followers'); setShowModal(true); }}>
                   <strong>{followers.length}</strong> Followers
@@ -244,16 +242,21 @@ export default function UserProfilePage() {
               </div>
 
               {/* Bio */}
-              <div>
-                <h3 className="text-lg font-semibold">Bio</h3>
+              <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                <h3 className="text-lg font-semibold mb-1">Bio</h3>
                 <p className="text-sm text-white/80">{user?.bio || 'This user hasn’t written a bio yet.'}</p>
               </div>
 
               {/* About */}
-              <div>
-                <h3 className="text-lg font-semibold">About</h3>
+              <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                <h3 className="text-lg font-semibold mb-1">About</h3>
                 <p className="text-sm text-white/80">{user?.about || 'Interests, goals, achievements — coming soon...'}</p>
               </div>
+
+              {/* Join Date */}
+              <p className="text-xs text-white/40 text-right">
+                Joined on {new Date(user?.registrationDate).toLocaleDateString()}
+              </p>
             </>
           )}
         </div>
@@ -264,11 +267,9 @@ export default function UserProfilePage() {
           title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
           type={modalType}
           userIds={
-            modalType === 'followers'
-              ? followers
-              : modalType === 'following'
-              ? following
-              : friends
+            modalType === 'followers' ? followers :
+            modalType === 'following' ? following :
+            friends
           }
           currentUserId={currentUser?.userID}
           onClose={() => {
