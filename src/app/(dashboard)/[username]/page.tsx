@@ -151,11 +151,12 @@ export default function UserProfilePage() {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
-                    fill="#1DA1F2"
-                    className="w-5 h-5"
+                    className="w-[18px] h-[18px] text-[#1D9BF0] fill-current"
                   >
-                    <path d="M22.5 12l-2.121 2.121.707 2.829-2.829-.707L12 22.5l-2.121-2.121-2.829.707.707-2.829L1.5 12l2.121-2.121-.707-2.829 2.829.707L12 1.5l2.121 2.121 2.829-.707-.707 2.829L22.5 12zm-13.5.75l3 3 6-6-1.5-1.5-4.5 4.5-1.5-1.5-1.5 1.5z" />
+                    <path d="M22.5 12.003l-2.13 2.11.707 2.83-2.829-.708L12 22.5l-2.248-2.255-2.829.708.708-2.83L1.5 12.003l2.13-2.11-.707-2.83 2.828.708L12 1.5l2.248 2.255 2.829-.708-.708 2.83 5.131 2.117zm-13.03.75l3 3 6-6-1.5-1.5-4.5 4.5-1.5-1.5-1.5 1.5z"/>
                   </svg>
+
+
 
                   <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 hidden group-hover:block bg-zinc-800 text-xs text-white rounded-md px-3 py-1 whitespace-nowrap shadow-md z-10">
                     Verified account
