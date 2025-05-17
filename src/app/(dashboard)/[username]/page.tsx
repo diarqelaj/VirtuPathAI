@@ -149,10 +149,12 @@ export default function UserProfilePage() {
           <div>
           <h2 className="text-2xl font-bold flex items-center gap-2">
             {user?.fullName}
-            {user?.isOfficial ? <OfficialBadge /> : user?.isVerified ? <VerifiedBadge /> : null}
+            {user?.isOfficial ? (
+              <OfficialBadge date={user?.verifiedDate} />
+            ) : user?.isVerified ? (
+              <VerifiedBadge date={user?.verifiedDate} />
+            ) : null}
           </h2>
-
-
 
             <p className="text-sm text-gray-500">@{user?.username}</p>
             <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
