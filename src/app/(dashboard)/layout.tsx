@@ -247,22 +247,37 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     highlightIndex === idx ? 'bg-white/10' : 'hover:bg-white/5'
                   }`}
                 >
-                  <Link
-                    href={`/${u.username}`}
-                    onClick={() => updateRecent(u)}
-                    className="flex items-center gap-3"
-                  >
-                    <img
-                      src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
-                      alt={u.fullName}
-                      className="w-6 h-6 rounded-full object-cover"
-                    />
-                    <div className="flex items-center gap-1 text-sm">
-                      <span>{u.fullName}</span>
-                      {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
-                      {u.isOfficial && <OfficialBadge />}
+                  {u.username ? (
+                    <Link
+                      href={`/${u.username}`}
+                      onClick={() => updateRecent(u)}
+                      className="flex items-center gap-3"
+                    >
+                      <img
+                        src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                        alt={u.fullName}
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                      <div className="flex items-center gap-1 text-sm">
+                        <span>{u.fullName}</span>
+                        {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
+                        {u.isOfficial && <OfficialBadge />}
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-3 opacity-50 cursor-not-allowed">
+                      <img
+                        src={u.profilePictureUrl ? `${API_HOST}${u.profilePictureUrl}` : defaultAvatar}
+                        alt={u.fullName}
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                      <div className="flex items-center gap-1 text-sm">
+                        <span>{u.fullName}</span>
+                        <span className="text-xs text-red-500">(no username)</span>
+                      </div>
                     </div>
-                  </Link>
+                  )}
+
                 </li>
               ))}
 
