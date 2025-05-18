@@ -23,6 +23,7 @@ interface ChatMessage {
   isEdited?: boolean;
   isDeletedForSender?: boolean;
   isDeletedForEveryone?: boolean;
+  repliedMessage?: ChatMessage;
 }
 
 interface RawFriendDto {
@@ -185,14 +186,12 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                 return (
                   <div
                     key={m.id}
-                    className="relative group flex items-start pl-12"
+                    className="relative flex group items-start pl-14"
                     onMouseEnter={() => setHoveredMsgId(m.id)}
                     onMouseLeave={() => setHoveredMsgId(null)}
                   >
-
                     {isHovered && (
-                      <div className="absolute left-1 top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-md p-1 shadow-md">
-
+                      <div className="absolute left-0 top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-md p-1 shadow-md">
                         <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => setShowEmoji(true)} title="React"><HiOutlineEmojiHappy className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => deleteForMe(m.id)} title="Delete"><HiOutlineTrash className="w-4 h-4 text-gray-300 hover:text-white" /></button>
@@ -201,7 +200,11 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                       </div>
                     )}
                     <div className={`max-w-[80%] md:max-w-[60%] px-4 py-2 rounded-2xl text-sm break-words whitespace-pre-wrap ${isSelf ? 'self-end bg-indigo-600 text-white ml-auto' : 'self-start bg-gray-700 text-gray-100'}`}>
-                      {m.replyToId && <div className="text-xs italic mb-1 text-gray-400">Replying to #{m.replyToId}</div>}
+                      {m.replyToId && m.repliedMessage && (
+                        <div className="text-xs italic mb-1 text-gray-300 border-l-2 border-indigo-500 pl-2">
+                          <span className="font-semibold">{m.repliedMessage.senderId === active?.id ? active.username : 'You'}:</span> {m.repliedMessage.message.slice(0, 100)}
+                        </div>
+                      )}
                       {editingId === m.id ? (
                         <div className="flex gap-2">
                           <input
