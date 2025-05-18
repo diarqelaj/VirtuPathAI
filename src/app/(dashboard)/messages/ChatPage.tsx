@@ -185,12 +185,13 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                 return (
                   <div
                     key={m.id}
-                    className="relative flex items-center group"
+                    className="relative group flex items-start pl-12"
                     onMouseEnter={() => setHoveredMsgId(m.id)}
                     onMouseLeave={() => setHoveredMsgId(null)}
                   >
+
                     {isHovered && (
-                     <div className="absolute left-[-2.5rem] top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-lg p-1 shadow-md pointer-events-auto">
+                      <div className="absolute left-1 top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-md p-1 shadow-md">
 
                         <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => setShowEmoji(true)} title="React"><HiOutlineEmojiHappy className="w-4 h-4 text-gray-300 hover:text-white" /></button>
