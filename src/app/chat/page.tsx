@@ -3,17 +3,26 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '@/lib/api';
 
-/* ─── Types ─── */
+/* ───── Data shapes ───── */
+interface ChatMessage {
+  id: number;
+  senderId: number;
+  receiverId: number;
+  message: string;
+  sentAt: string; // ISO string from API
+}
+
+/** Raw DTO coming from `/UserFriends/mutual/{meId}` */
 interface RawFriendDto {
-  // we don’t know exact shape, so mark everything optional
-  userID?: number;
   id?: number;
+  userID?: number;
   friendId?: number;
   username: string;
   fullName?: string;
   profilePictureUrl?: string | null;
 }
 
+/** Normalised shape we use in state/UI */
 interface Friend {
   id: number;
   username: string;
@@ -21,7 +30,7 @@ interface Friend {
   profilePictureUrl?: string | null;
 }
 
-/* ─── Component ─── */
+/* ───── Component ───── */
 export default function ChatPage() {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [friendSearch, setFriendSearch] = useState('');
@@ -33,25 +42,20 @@ export default function ChatPage() {
   const [error, setError] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  /* fetch mutual friends once */
+  /* Fetch mutual friends once */
   useEffect(() => {
-    async function loadFriends() {
+    (async () => {
       try {
-        const me = await api.get<{ userID: number }>('/users/me');
+        const meRes = await api.get<{ userID: number }>('/users/me');
 
-        // raw list, unknown property names
-        const res = await api.get<RawFriendDto[]>(
-          `/UserFriends/mutual/${me.data.userID}`
+        const raw = await api.get<RawFriendDto[]>(
+          `/UserFriends/mutual/${meRes.data.userID}`
         );
 
-        // map to the uniform Friend shape
-        const mapped: Friend[] = res.data
+        const mapped: Friend[] = raw.data
           .map(f => {
-            const id =
-              f.id ?? f.userID ?? f.friendId ?? undefined;
-
-            if (!id) return null; // skip invalid entries
-
+            const id = f.id ?? f.userID ?? f.friendId;
+            if (!id) return null; // skip malformed entry
             return {
               id,
               username: f.username,
@@ -66,11 +70,10 @@ export default function ChatPage() {
       } catch {
         setError('Failed to load friends.');
       }
-    }
-    loadFriends();
+    })();
   }, []);
 
-  /* fetch chat every 2 s */
+  /* Poll active chat every 2 s */
   useEffect(() => {
     if (!activeFriend) return;
 
@@ -81,11 +84,12 @@ export default function ChatPage() {
         );
         setMessages(res.data);
         setError('');
+        // scroll to bottom smoothly
         setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 0);
       } catch (err: any) {
-        if (err.response?.status === 403) setError('You are not friends.');
-        else if (err.response?.status === 401) setError('Please log in.');
-        else setError('Error loading messages.');
+        if (err.response?.status === 403)       setError('You are not friends.');
+        else if (err.response?.status === 401)  setError('Please log in.');
+        else                                    setError('Error loading messages.');
         setMessages([]);
       }
     };
@@ -95,7 +99,7 @@ export default function ChatPage() {
     return () => clearInterval(id);
   }, [activeFriend]);
 
-  /* send */
+  /* Send */
   const sendMessage = async () => {
     if (!message.trim() || !activeFriend) return;
     try {
@@ -110,11 +114,10 @@ export default function ChatPage() {
     }
   };
 
-  /* helpers */
-  const filteredFriends = friends.filter(
-    f =>
-      f.username.toLowerCase().includes(friendSearch.toLowerCase()) ||
-      f.id.toString().includes(friendSearch)
+  /* Filter list */
+  const filteredFriends = friends.filter(f =>
+    f.username.toLowerCase().includes(friendSearch.toLowerCase()) ||
+    f.id.toString().includes(friendSearch)
   );
 
   /* ───── JSX ───── */
@@ -123,6 +126,7 @@ export default function ChatPage() {
       {/* Sidebar */}
       <aside className="w-64 border-r border-gray-200 p-4 flex flex-col gap-4">
         <h3 className="text-lg font-semibold">Friends</h3>
+
         <input
           type="text"
           placeholder="Search by username or ID"
@@ -130,12 +134,13 @@ export default function ChatPage() {
           onChange={e => setFriendSearch(e.target.value)}
           className="px-3 py-2 border rounded-md text-sm"
         />
+
         <div className="flex flex-col gap-2 overflow-y-auto">
           {filteredFriends.map(friend => (
             <button
               key={friend.id}
               onClick={() => setActiveFriend(friend)}
-              className={`flex items-center gap-3 p-2 rounded-md text-left hover:bg-gray-100 transition ${
+              className={`flex items-center gap-3 p-2 rounded-md text-left transition hover:bg-gray-100 ${
                 activeFriend?.id === friend.id ? 'bg-gray-100' : ''
               }`}
             >
@@ -143,7 +148,7 @@ export default function ChatPage() {
                 src={
                   friend.profilePictureUrl ??
                   `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                    friend.fullName || friend.username
+                    friend.fullName
                   )}&background=5e17eb&color=fff`
                 }
                 alt={friend.username}
@@ -158,17 +163,17 @@ export default function ChatPage() {
         </div>
       </aside>
 
-      {/* Chat Pane */}
+      {/* Chat pane */}
       <main className="flex-1 flex flex-col relative">
         {activeFriend ? (
           <>
-            {/* Header */}
+            {/* header */}
             <header className="px-4 py-3 border-b flex justify-between items-center">
               <span className="font-semibold">{activeFriend.username}</span>
               <span className="text-xs text-gray-500">ID {activeFriend.id}</span>
             </header>
 
-            {/* Messages */}
+            {/* messages */}
             <div className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto bg-gray-50">
               {messages.map(m => (
                 <div
@@ -188,7 +193,7 @@ export default function ChatPage() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Input */}
+            {/* input */}
             <div className="flex gap-3 p-4 border-t">
               <input
                 value={message}
@@ -206,7 +211,9 @@ export default function ChatPage() {
             </div>
           </>
         ) : (
-          <div className="m-auto text-gray-500">Select a friend to start chatting</div>
+          <div className="m-auto text-gray-500">
+            Select a friend to start chatting
+          </div>
         )}
 
         {error && (
