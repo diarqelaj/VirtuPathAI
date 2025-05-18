@@ -16,8 +16,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
-        <Chatbot />
         <FloatingChat />
+        <Chatbot />
+        
       </ThemeProvider>
     </SessionProvider>
   );

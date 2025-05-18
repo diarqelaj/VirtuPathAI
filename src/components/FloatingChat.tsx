@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { HiOutlineChat, HiOutlineX } from 'react-icons/hi';
 import dynamic from 'next/dynamic';
 
-// Lazy-load the chat drawer
 const ChatDrawer = dynamic(
   () => import('@/app/(dashboard)/messages/page'),
   { ssr: false }
@@ -15,27 +14,26 @@ export default function FloatingChat() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // ✅ Auto-hide if already in full messages view
-  if (pathname.startsWith('/dashboard/messages')) return null;
+  // ❌ Hide if inside full /messages route
+  if (pathname?.startsWith('/messages')) return null;
 
   return (
     <>
-      {/* ── launcher ── */}
+      {/* ── Launcher Button ── */}
       <button
         onClick={() => setOpen(!open)}
         className="
-          fixed bottom-[100px]   /* 20px above chatbot */
-          right-6
-          z-40
-          flex items-center gap-3
+          fixed bottom-[108px] right-6
+          z-30
+          flex items-center gap-2
           px-4 py-2
-          bg-black-100
           text-sm font-medium text-white
+          bg-black-100
           rounded-xl
           ring-1 ring-white/20
-          shadow-lg
           hover:bg-white/10
           transition
+          backdrop-blur
         "
       >
         {open ? (
@@ -51,18 +49,21 @@ export default function FloatingChat() {
         )}
       </button>
 
-      {/* ── floating drawer ── */}
+      {/* ── Drawer ── */}
       {open && (
         <div
           className="
             fixed bottom-[180px] right-4 md:right-6
-            w-[90vw] md:w-[420px] h-[70vh]
-            z-40
+            w-[92vw] sm:w-[460px] md:w-[500px]
+            h-[72vh]
+            z-30
             bg-black-100
+            rounded-3xl
             ring-1 ring-white/15
             shadow-2xl
-            rounded-2xl
             overflow-hidden
+            backdrop-blur-lg
+            transition-all
           "
         >
           <ChatDrawer />
