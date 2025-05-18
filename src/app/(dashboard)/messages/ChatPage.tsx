@@ -23,7 +23,6 @@ interface ChatMessage {
   isEdited?: boolean;
   isDeletedForSender?: boolean;
   isDeletedForEveryone?: boolean;
-  repliedMessage?: ChatMessage;
 }
 
 interface RawFriendDto {
@@ -88,7 +87,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
       }
     };
     pull();
-    const id = setInterval(pull, 2_000);
+    const id = setInterval(pull, 2000);
     return () => clearInterval(id);
   }, [active]);
 
@@ -132,6 +131,11 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
     f.username.toLowerCase().includes(search.toLowerCase()) || f.id.toString().includes(search)
   );
 
+  const getRepliedMessage = (replyToId: number | null) => {
+    if (!replyToId) return null;
+    return msgs.find(x => x.id === replyToId);
+  };
+
   return (
     <div className={`flex ${compact ? 'flex-col' : 'md:flex-row'} h-full bg-black-100 text-white`}>
       <aside className={`${compact ? 'w-full border-b' : 'md:w-72 md:border-r'} border-gray-800 p-4 flex flex-col gap-4`}>
@@ -170,6 +174,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
       </aside>
+
       <main className="flex-1 flex flex-col relative">
         {active ? (
           <>
@@ -177,21 +182,24 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
               <span className="font-semibold">{active.username}</span>
               <span className="text-xs text-gray-400">ID {active.id}</span>
             </header>
+
             <div className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
               {msgs.map((m, idx) => {
                 const isLast = idx === msgs.length - 1 || msgs[idx + 1].senderId !== m.senderId;
                 if (m.isDeletedForSender) return null;
                 const isSelf = m.senderId !== active.id;
                 const isHovered = hoveredMsgId === m.id;
+                const replied = getRepliedMessage(m.replyToId || null);
+
                 return (
                   <div
                     key={m.id}
-                    className="relative flex group items-start pl-14"
+                    className="relative group flex items-start gap-2"
                     onMouseEnter={() => setHoveredMsgId(m.id)}
                     onMouseLeave={() => setHoveredMsgId(null)}
                   >
                     {isHovered && (
-                      <div className="absolute left-0 top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-md p-1 shadow-md">
+                      <div className="absolute right-full mr-2 top-2 flex flex-col gap-1 z-10 bg-gray-800 rounded-md p-1 shadow-md">
                         <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => setShowEmoji(true)} title="React"><HiOutlineEmojiHappy className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => deleteForMe(m.id)} title="Delete"><HiOutlineTrash className="w-4 h-4 text-gray-300 hover:text-white" /></button>
@@ -199,10 +207,11 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                         {isSelf && <button onClick={() => deleteForEveryone(m.id)} title="Delete for Everyone" className="text-xs text-red-400 hover:text-red-600">All</button>}
                       </div>
                     )}
+
                     <div className={`max-w-[80%] md:max-w-[60%] px-4 py-2 rounded-2xl text-sm break-words whitespace-pre-wrap ${isSelf ? 'self-end bg-indigo-600 text-white ml-auto' : 'self-start bg-gray-700 text-gray-100'}`}>
-                      {m.replyToId && m.repliedMessage && (
-                        <div className="text-xs italic mb-1 text-gray-300 border-l-2 border-indigo-500 pl-2">
-                          <span className="font-semibold">{m.repliedMessage.senderId === active?.id ? active.username : 'You'}:</span> {m.repliedMessage.message.slice(0, 100)}
+                      {replied && (
+                        <div className="mb-1 p-2 rounded bg-black-200 text-gray-400 text-xs italic border-l-2 border-indigo-500">
+                          {replied.message}
                         </div>
                       )}
                       {editingId === m.id ? (
@@ -231,6 +240,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
               })}
               <div ref={bottomRef} />
             </div>
+
             <div className="flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/80 backdrop-blur">
               {replyTo && (
                 <div className="text-xs text-gray-400 mb-1">
