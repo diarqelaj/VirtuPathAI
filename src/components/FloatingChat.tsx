@@ -6,9 +6,9 @@ import { HiOutlineChat, HiOutlineX } from 'react-icons/hi';
 import dynamic from 'next/dynamic';
 
 const ChatDrawer = dynamic(
-  () => import('@/app/(dashboard)/messages/page'),
-  { ssr: false }
-);
+    () => import('@/app/(dashboard)/messages/FloatingDrawer'),
+    { ssr: false }
+  );
 
 export default function FloatingChat() {
   const [open, setOpen] = useState(false);
