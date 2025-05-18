@@ -55,7 +55,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
 
   const [replyTo, setReplyTo] = useState<number | null>(null);
 
-  /** id of message currently being reacted to           */
   const [reactingToId, setReactingToId] = useState<number | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -70,7 +69,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
   const getMsgById = (id: number | null) =>
     id ? msgs.find(m => m.id === id) ?? null : null;
 
-  /** Builds reply chain (max 2 ancestors) oldest → newest */
   const buildChain = (m: ChatMessage) => {
     const chain: ChatMessage[] = [];
     let cur = getMsgById(m.replyToId ?? null);
@@ -262,10 +260,9 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                   idx === msgs.length - 1 ||
                   msgs[idx + 1].senderId !== m.senderId;
 
-                /* correct side-aware menu positioning */
                 const menuPos = isSelf
-                  ? 'right-full mr-2' // bubble on right, menu to its left
-                  : 'left-full ml-2'; // bubble on left, menu to its right
+                  ? 'right-full mr-1'
+                  : 'left-full ml-1';
 
                 return (
                   <div
