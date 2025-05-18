@@ -260,7 +260,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       />
                       <div className="flex items-center gap-1 text-sm">
                         <span>{u.fullName}</span>
-                        {u.isVerified && <VerifiedBadge date={u.verifiedDate} />}
+                        {u.isVerified && <VerifiedBadge  />}
                         {u.isOfficial && <OfficialBadge />}
                       </div>
                     </Link>
