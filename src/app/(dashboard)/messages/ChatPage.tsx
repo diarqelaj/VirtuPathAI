@@ -37,8 +37,12 @@ interface Friend {
   fullName: string;
   profilePictureUrl?: string | null;
 }
+interface ChatPageProps {
+  compact?: boolean;
+}
 
-export default function ChatPage() {
+export default function ChatPage({ compact = false }: ChatPageProps) {
+
   const [friends, setFriends] = useState<Friend[]>([]);
   const [search, setSearch] = useState('');
   const [active, setActive] = useState<Friend | null>(null);
