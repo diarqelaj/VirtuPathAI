@@ -168,7 +168,7 @@ export default function Chatbot() {
       {!open && (
         <button
           onClick={toggleChat}
-          className="fixed bottom-4 right-4 p-4 bg-gradient-to-br from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all z-50 ring-2 ring-white/20 focus:ring-4 focus:ring-blue-300"
+          className="fixed bottom-6 right-4 p-4 bg-gradient-to-br from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all z-50 ring-2 ring-white/20 focus:ring-4 focus:ring-blue-300"
         >
           <Bot size={24} />
         </button>

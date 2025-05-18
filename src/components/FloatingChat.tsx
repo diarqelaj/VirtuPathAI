@@ -14,17 +14,38 @@ export default function FloatingChat() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // ❌ Hide if inside full /messages route
+  // ✅ Auto-hide when on full messages page
   if (pathname?.startsWith('/messages')) return null;
 
   return (
     <>
-      {/* ── Launcher Button ── */}
+      {/* ── Drawer (opens below chatbot) ── */}
+      {open && (
+        <div
+          className="
+            fixed bottom-[96px] right-4 md:right-6
+            w-[92vw] sm:w-[460px] md:w-[500px]
+            h-[72vh]
+            z-30
+            bg-black-100
+            rounded-3xl
+            ring-1 ring-white/15
+            shadow-2xl
+            overflow-hidden
+            backdrop-blur-lg
+            transition-all
+          "
+        >
+          <ChatDrawer />
+        </div>
+      )}
+
+      {/* ── Launcher button (above drawer, below chatbot) ── */}
       <button
         onClick={() => setOpen(!open)}
         className="
-          fixed bottom-[108px] right-6
-          z-30
+          fixed bottom-[24px] right-6
+          z-20
           flex items-center gap-2
           px-4 py-2
           text-sm font-medium text-white
@@ -48,27 +69,6 @@ export default function FloatingChat() {
           </>
         )}
       </button>
-
-      {/* ── Drawer ── */}
-      {open && (
-        <div
-          className="
-            fixed bottom-[180px] right-4 md:right-6
-            w-[92vw] sm:w-[460px] md:w-[500px]
-            h-[72vh]
-            z-30
-            bg-black-100
-            rounded-3xl
-            ring-1 ring-white/15
-            shadow-2xl
-            overflow-hidden
-            backdrop-blur-lg
-            transition-all
-          "
-        >
-          <ChatDrawer />
-        </div>
-      )}
     </>
   );
 }
