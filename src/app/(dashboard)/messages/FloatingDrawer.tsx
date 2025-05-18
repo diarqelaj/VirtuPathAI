@@ -10,7 +10,13 @@ interface ChatMessage {
   receiverId: number;
   message: string;
   sentAt: string;
+  replyToId?: number | null;
+  emoji?: string | null;
+  isEdited?: boolean;
+  isDeletedForSender?: boolean;
+  isDeletedForEveryone?: boolean;
 }
+
 interface Friend {
   id: number;
   username: string;
@@ -120,21 +126,31 @@ export default function FloatingDrawer() {
           </div>
 
           <div className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
-            {msgs.map(m => (
-              <div
-                key={m.id}
-                className={`max-w-[80%] px-4 py-2 rounded-2xl text-sm break-words ${
-                  m.senderId === active.id
-                    ? 'self-start bg-gray-700 text-white'
-                    : 'self-end bg-indigo-600 text-white'
-                }`}
-              >
-                {m.message}
-                <div className="text-[10px] opacity-70 mt-1">
-                  {new Date(m.sentAt).toLocaleTimeString()}
+            {msgs.map((m, idx) => {
+              const isLast = idx === msgs.length - 1 || msgs[idx + 1].senderId !== m.senderId;
+              if (m.isDeletedForSender) return null;
+              return (
+                <div
+                  key={m.id}
+                  className={`max-w-[80%] md:max-w-[60%] px-4 py-2 rounded-2xl text-sm break-words whitespace-pre-wrap ${
+                    m.senderId === active?.id
+                      ? 'self-start bg-gray-700 text-gray-100'
+                      : 'self-end bg-indigo-600 text-white'
+                  }`}
+                >
+                  {m.replyToId && (
+                    <div className="text-xs italic mb-1 text-gray-400">Replying to #{m.replyToId}</div>
+                  )}
+                  {m.message}
+                  {m.emoji && <div className="mt-1">{m.emoji}</div>}
+                  {isLast && (
+                    <div className="text-[10px] opacity-70 mt-1 text-right">
+                      {new Date(m.sentAt).toLocaleTimeString()}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
             <div ref={bottomRef} />
           </div>
 
