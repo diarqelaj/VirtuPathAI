@@ -4,6 +4,7 @@
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "./provider";
 import Chatbot from "@/components/chatbot";
+import FloatingChat from '@/components/FloatingChat';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -16,6 +17,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       >
         {children}
         <Chatbot />
+        <FloatingChat />
       </ThemeProvider>
     </SessionProvider>
   );

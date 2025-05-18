@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   FaBars, FaHome, FaUser, FaTasks, FaChartBar, FaBook, FaUsers,
-  FaBug, FaCog, FaBell
+  FaBug, FaCog, FaBell, FaEnvelope
 } from 'react-icons/fa';
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import { signOut } from 'next-auth/react';
@@ -152,6 +152,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: 'Pathway', link: '/pathhub', icon: <FaUser size={20} /> },
     { name: 'Daily Missions', link: '/tasks', icon: <FaTasks size={20} /> },
     { name: 'Progress', link: '/progress', icon: <FaChartBar size={20} /> },
+    { name: 'Messages', link: '/messages', icon: <FaEnvelope size={20} /> },
     { name: 'Opportunities', link: '/virtupathcareers', icon: <FaBook size={20} /> },
     { name: 'VirtuCrew', link: '/community', icon: <FaUsers size={20} /> },
     { name: 'Feedback', link: '/bug', icon: <FaBug size={20} /> },
