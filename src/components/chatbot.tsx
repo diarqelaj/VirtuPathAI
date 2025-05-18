@@ -168,14 +168,14 @@ export default function Chatbot() {
       {!open && (
         <button
           onClick={toggleChat}
-          className="fixed bottom-6 right-4 p-4 bg-gradient-to-br from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all z-50 ring-2 ring-white/20 focus:ring-4 focus:ring-blue-300"
+          className="fixed bottom-6 md:bottom-[100px] right-4 p-4 bg-gradient-to-br from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all z-50 ring-2 ring-white/20 focus:ring-4 focus:ring-blue-300"
         >
           <Bot size={24} />
         </button>
       )}
 
       {open && (
-        <div className="fixed bottom-6 right-6 w-96 h-[580px] bg-[#040720] border border-[#2a2a3b] rounded-2xl flex flex-col z-50 shadow-2xl overflow-hidden">
+        <div className="fixed bottom-[100px] right-6 w-96 h-[580px] bg-[#040720] border border-[#2a2a3b] rounded-2xl flex flex-col z-50 shadow-2xl overflow-hidden">
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-[#33374d] bg-[#0a0c1c]">
             <div className="flex items-center gap-2 text-white font-semibold text-base">
