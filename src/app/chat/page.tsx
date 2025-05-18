@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '@/lib/api';
 
-/* ───────────── Types ───────────── */
-
+/* ───── Types ───── */
 interface ChatMessage {
   id: number;
   senderId: number;
@@ -20,46 +19,51 @@ interface Friend {
   profilePictureUrl?: string | null;
 }
 
-/* ───────────── Component ───────────── */
-
+/* ───── Component ───── */
 export default function ChatPage() {
-  /* friends */
-  const [friends, setFriends]     = useState<Friend[]>([]);
-  const [filter, setFilter]       = useState('');
+  const [friends, setFriends] = useState<Friend[]>([]);
+  const [friendSearch, setFriendSearch] = useState('');
 
-  /* active chat */
-  const [active, setActive]       = useState<Friend | null>(null);
-  const [messages, setMessages]   = useState<ChatMessage[]>([]);
-  const [draft, setDraft]         = useState('');
+  const [activeFriend, setActiveFriend] = useState<Friend | null>(null);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [message, setMessage] = useState('');
 
-  const [error, setError]         = useState('');
-  const bottom = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState('');
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-  /* ── load friends once ── */
+  /* fetch mutual friends once */
   useEffect(() => {
-    (async () => {
+    async function loadFriends() {
       try {
-        const res = await api.get<Friend[]>('/userfriends/accepted');
+        const me = await api.get<{ userID: number }>('/users/me');
+        const res = await api.get<Friend[]>(
+          `/UserFriends/mutual/${me.data.userID}`
+        );
         setFriends(res.data);
-      } catch {
+        setError('');
+      } catch (err) {
         setError('Failed to load friends.');
       }
-    })();
+    }
+    loadFriends();
   }, []);
 
-  /* ── load + poll chat ── */
+  /* fetch chat every 2 s */
   useEffect(() => {
-    if (!active) return;
+    if (!activeFriend) return;
 
     const fetchMessages = async () => {
       try {
-        const res = await api.get<ChatMessage[]>(`/chat/messages/${active.id}`);
+        const res = await api.get<ChatMessage[]>(
+          `/chat/messages/${activeFriend.id}`
+        );
         setMessages(res.data);
-        setTimeout(() => bottom.current?.scrollIntoView({ behavior: 'smooth' }), 0);
+        setError('');
+        setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 0);
       } catch (err: any) {
         if (err.response?.status === 403) setError('You are not friends.');
-        else if (err.response?.status === 401) setError('Log in first.');
-        else setError('Error loading chat.');
+        else if (err.response?.status === 401) setError('Please log in.');
+        else setError('Error loading messages.');
         setMessages([]);
       }
     };
@@ -67,113 +71,113 @@ export default function ChatPage() {
     fetchMessages();
     const id = setInterval(fetchMessages, 2_000);
     return () => clearInterval(id);
-  }, [active]);
+  }, [activeFriend]);
 
-  /* ── send ── */
-  const send = async () => {
-    if (!draft.trim() || !active) return;
+  /* send */
+  const sendMessage = async () => {
+    if (!message.trim() || !activeFriend) return;
     try {
       await api.post('/chat/send', {
-        receiverId: active.id,
-        message: draft.trim(),
+        receiverId: activeFriend.id,
+        message: message.trim(),
       });
-      setDraft('');
+      setMessage('');
     } catch (err: any) {
-      setError(err.response?.status === 403 ? "Can't message this user." : 'Send failed.');
+      if (err.response?.status === 403) setError("You can't message this user.");
+      else setError('Failed to send.');
     }
   };
 
-  /* ── filtering ── */
-  const visibleFriends = friends.filter(
+  /* helpers */
+  const filteredFriends = friends.filter(
     f =>
-      f.username.toLowerCase().includes(filter.toLowerCase()) ||
-      f.id.toString().includes(filter)
+      f.username.toLowerCase().includes(friendSearch.toLowerCase()) ||
+      f.id.toString().includes(friendSearch)
   );
 
+  /* ───── JSX ───── */
   return (
-    <div className="flex h-[calc(100vh-60px)]">  {/* adjust if you have a topbar */}
-      {/* ───────── Sidebar ───────── */}
-      <aside className="w-64 shrink-0 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-4 overflow-y-auto">
+    <div className="flex h-[calc(100vh-60px)]">
+      {/* Sidebar */}
+      <aside className="w-64 border-r border-gray-200 p-4 flex flex-col gap-4">
         <h3 className="text-lg font-semibold">Friends</h3>
-
         <input
-          value={filter}
-          onChange={e => setFilter(e.target.value)}
-          placeholder="Search username or ID"
-          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:border-gray-600"
+          type="text"
+          placeholder="Search by username or ID"
+          value={friendSearch}
+          onChange={e => setFriendSearch(e.target.value)}
+          className="px-3 py-2 border rounded-md text-sm"
         />
-
-        <div className="flex flex-col gap-2">
-          {visibleFriends.map(f => (
+        <div className="flex flex-col gap-2 overflow-y-auto">
+          {filteredFriends.map(friend => (
             <button
-              key={f.id}
-              className={`flex items-center gap-3 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-left ${
-                active?.id === f.id ? 'bg-gray-100 dark:bg-gray-700' : ''
+              key={friend.id}
+              onClick={() => setActiveFriend(friend)}
+              className={`flex items-center gap-3 p-2 rounded-md text-left hover:bg-gray-100 transition ${
+                activeFriend?.id === friend.id ? 'bg-gray-100' : ''
               }`}
-              onClick={() => setActive(f)}
             >
               <img
                 src={
-                  f.profilePictureUrl ??
+                  friend.profilePictureUrl ??
                   `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                    f.fullName || f.username
+                    friend.fullName || friend.username
                   )}&background=5e17eb&color=fff`
                 }
-                alt={f.username}
+                alt={friend.username}
                 className="w-10 h-10 rounded-full object-cover"
               />
               <div>
-                <div className="font-medium">{f.username}</div>
-                <div className="text-xs text-gray-500">#{f.id}</div>
+                <div className="font-medium">{friend.username}</div>
+                <div className="text-xs text-gray-500">#{friend.id}</div>
               </div>
             </button>
           ))}
         </div>
       </aside>
 
-      {/* ───────── Chat pane ───────── */}
-      <main className="flex-1 flex flex-col h-full relative">
-        {active ? (
+      {/* Chat Pane */}
+      <main className="flex-1 flex flex-col relative">
+        {activeFriend ? (
           <>
-            {/* header */}
-            <header className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              <span className="font-semibold">{active.username}</span>
-              <span className="text-xs text-gray-500">ID {active.id}</span>
+            {/* Header */}
+            <header className="px-4 py-3 border-b flex justify-between items-center">
+              <span className="font-semibold">{activeFriend.username}</span>
+              <span className="text-xs text-gray-500">ID {activeFriend.id}</span>
             </header>
 
-            {/* messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-3 bg-gray-50 dark:bg-gray-900">
+            {/* Messages */}
+            <div className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto bg-gray-50">
               {messages.map(m => (
                 <div
                   key={m.id}
-                  className={`max-w-[70%] px-3 py-2 rounded-lg text-sm break-words ${
-                    m.senderId === active.id
-                      ? 'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100'
-                      : 'bg-indigo-600 text-white ml-auto'
+                  className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm ${
+                    m.senderId === activeFriend.id
+                      ? 'self-start bg-gray-200 text-gray-900'
+                      : 'self-end bg-indigo-600 text-white'
                   }`}
                 >
                   {m.message}
-                  <div className="mt-1 text-[10px] opacity-70">
+                  <div className="text-[10px] opacity-70 mt-1">
                     {new Date(m.sentAt).toLocaleTimeString()}
                   </div>
                 </div>
               ))}
-              <div ref={bottom} />
+              <div ref={bottomRef} />
             </div>
 
-            {/* input */}
-            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex gap-4">
+            {/* Input */}
+            <div className="flex gap-3 p-4 border-t">
               <input
-                value={draft}
-                onChange={e => setDraft(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && send()}
-                placeholder="Type a message…"
-                className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:border-gray-600"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && sendMessage()}
+                placeholder="Type a message..."
+                className="flex-1 px-4 py-2 border rounded-full text-sm"
               />
               <button
-                onClick={send}
-                className="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:opacity-50"
-                disabled={!draft.trim()}
+                onClick={sendMessage}
+                className="px-6 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition"
               >
                 Send
               </button>
@@ -184,7 +188,7 @@ export default function ChatPage() {
         )}
 
         {error && (
-          <div className="absolute bottom-20 left-0 right-0 text-center text-red-600">
+          <div className="absolute bottom-20 left-0 right-0 text-center text-red-500 text-sm">
             {error}
           </div>
         )}
