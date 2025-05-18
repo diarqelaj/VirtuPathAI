@@ -44,19 +44,23 @@ export default function FloatingChat() {
       <button
         onClick={() => setOpen(!open)}
         className="
-          fixed bottom-[24px] right-6
-          z-20
-          flex items-center gap-2
-          px-4 py-2
-          text-sm font-medium text-white
-          bg-black-100
-          rounded-xl
-          ring-1 ring-white/20
-          hover:bg-white/10
-          transition
-          backdrop-blur
+            fixed bottom-6 right-6
+            z-20
+            flex items-center gap-2
+            px-4 py-2
+            bg-black-100
+            text-white
+            text-sm font-medium
+            rounded-xl
+            ring-1 ring-white/20
+            shadow-md
+            hover:bg-white/10
+            transition backdrop-blur
+            border border-white/10
         "
-      >
+        >
+ 
+
         {open ? (
           <>
             <HiOutlineX className="w-5 h-5" />
