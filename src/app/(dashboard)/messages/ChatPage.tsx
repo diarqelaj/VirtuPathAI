@@ -11,6 +11,7 @@ import {
 } from 'react-icons/hi';
 import Picker from 'emoji-picker-react';
 import api from '@/lib/api';
+import { JSX } from 'react/jsx-runtime';
 
 interface ChatMessage {
   id: number;
