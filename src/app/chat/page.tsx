@@ -3,13 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '@/lib/api';
 
-/* ───── Types ───── */
-interface ChatMessage {
-  id: number;
-  senderId: number;
-  receiverId: number;
-  message: string;
-  sentAt: string;
+/* ─── Types ─── */
+interface RawFriendDto {
+  // we don’t know exact shape, so mark everything optional
+  userID?: number;
+  id?: number;
+  friendId?: number;
+  username: string;
+  fullName?: string;
+  profilePictureUrl?: string | null;
 }
 
 interface Friend {
@@ -19,7 +21,7 @@ interface Friend {
   profilePictureUrl?: string | null;
 }
 
-/* ───── Component ───── */
+/* ─── Component ─── */
 export default function ChatPage() {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [friendSearch, setFriendSearch] = useState('');
@@ -36,12 +38,32 @@ export default function ChatPage() {
     async function loadFriends() {
       try {
         const me = await api.get<{ userID: number }>('/users/me');
-        const res = await api.get<Friend[]>(
+
+        // raw list, unknown property names
+        const res = await api.get<RawFriendDto[]>(
           `/UserFriends/mutual/${me.data.userID}`
         );
-        setFriends(res.data);
+
+        // map to the uniform Friend shape
+        const mapped: Friend[] = res.data
+          .map(f => {
+            const id =
+              f.id ?? f.userID ?? f.friendId ?? undefined;
+
+            if (!id) return null; // skip invalid entries
+
+            return {
+              id,
+              username: f.username,
+              fullName: f.fullName ?? f.username,
+              profilePictureUrl: f.profilePictureUrl ?? null,
+            };
+          })
+          .filter(Boolean) as Friend[];
+
+        setFriends(mapped);
         setError('');
-      } catch (err) {
+      } catch {
         setError('Failed to load friends.');
       }
     }
