@@ -1,104 +1,89 @@
-"use client";
+'use client';
 
-import Footer from "@/components/Footer";
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import { Spotlight } from "@/components/ui/Spotlight";
-import { navItems } from "@/data";
-import { EnvelopeIcon, UserIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState, useRef } from 'react';
+import * as signalR from '@microsoft/signalr';
 
-const ContactPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+export default function ChatPage() {
+  const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
+  const [messages, setMessages] = useState<{ user: string; message: string }[]>([]);
+  const [user, setUser] = useState('');
+  const [message, setMessage] = useState('');
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
+  useEffect(() => {
+    const newConnection = new signalR.HubConnectionBuilder()
+      .withUrl('https://virtupathapi-54vt.onrender.com/chathub') // ✅ Your backend SignalR endpoint
+      .withAutomaticReconnect()
+      .build();
 
-    if (!name || !email || !message) {
-      setError("Please fill out all fields.");
-      return;
+    setConnection(newConnection);
+  }, []);
+
+  useEffect(() => {
+    if (connection) {
+      connection
+        .start()
+        .then(() => {
+          console.log('Connected to SignalR hub');
+
+          connection.on('ReceiveMessage', (user: string, message: string) => {
+            setMessages((prev) => [...prev, { user, message }]);
+          });
+        })
+        .catch((err) => console.error('SignalR connection failed:', err));
     }
+  }, [connection]);
 
-    console.log({ name, email, message });
-    setSuccess("Message sent successfully!");
-    setName("");
-    setEmail("");
-    setMessage("");
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleSend = async () => {
+    if (connection && message.trim()) {
+      await connection.invoke('SendMessage', user || 'Anonymous', message.trim());
+      setMessage('');
+    }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black-100 text-white relative">
-      <FloatingNav navItems={navItems} />
-      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
+    <div className="max-w-3xl mx-auto p-4 bg-black-100 text-white min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">💬 VirtuPath Chat</h1>
 
-      <main className="flex-1 pt-28 pb-12 px-4">
-        <div className="max-w-2xl mx-auto">
-          <div className="relative bg-gradient-to-br from-purple-500/10 to-blue-500/10 backdrop-blur-lg rounded-2xl p-10 border border-white/10 shadow-2xl">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Contact Us
-              </h1>
-              <p className="mt-2 text-gray-400">We would love to hear from you !</p>
-            </div>
+      <div className="flex gap-2 mb-4">
+        <input
+          type="text"
+          placeholder="Your name"
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
+          className="flex-1 bg-white/10 px-3 py-2 rounded-lg border border-white/10 text-sm"
+        />
+      </div>
 
-            {(error || success) && (
-              <div className={`mb-6 p-3 rounded-lg text-sm ${error ? "bg-red-500/20 text-red-300" : "bg-green-500/20 text-green-300"}`}>
-                {error || success}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="group relative">
-                <UserIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name"
-                  className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-
-              <div className="group relative">
-                <EnvelopeIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your Email"
-                  className="w-full pl-10 pr-4 py-3 bg-black/30 rounded-lg border border-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-
-              <div className="group relative">
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Your Message"
-                  rows={5}
-                  className="w-full pl-4 pr-4 pt-3 pb-3 bg-black/30 rounded-lg border border-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium hover:opacity-90 transition"
-              >
-                Send Message
-              </button>
-            </form>
+      <div className="bg-zinc-900 border border-white/10 rounded-xl p-4 h-96 overflow-y-auto">
+        {messages.map((msg, index) => (
+          <div key={index} className="mb-2">
+            <span className="font-semibold text-purple-400">{msg.user}:</span> {msg.message}
           </div>
-        </div>
-      </main>
+        ))}
+        <div ref={messagesEndRef}></div>
+      </div>
 
-      <Footer />
+      <div className="mt-4 flex gap-2">
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          className="flex-1 bg-white/10 px-3 py-2 rounded-lg border border-white/10 text-sm"
+        />
+        <button
+          onClick={handleSend}
+          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm"
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
-};
-
-export default ContactPage;
+}
