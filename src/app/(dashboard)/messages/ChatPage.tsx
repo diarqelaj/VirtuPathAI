@@ -1,7 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { HiOutlineArrowLeft, HiOutlineTrash, HiOutlinePencil, HiOutlineReply, HiCheck } from 'react-icons/hi';
+import {
+  HiOutlineArrowLeft,
+  HiOutlineTrash,
+  HiOutlinePencil,
+  HiOutlineReply,
+  HiCheck,
+  HiOutlineEmojiHappy
+} from 'react-icons/hi';
 import Picker from 'emoji-picker-react';
 import api from '@/lib/api';
 
@@ -40,6 +47,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
   const [replyTo, setReplyTo] = useState<number | null>(null);
   const [showEmoji, setShowEmoji] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState<string | null>(null);
+  const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
   const [error, setError] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -101,7 +109,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
       setReplyTo(null);
       setSelectedEmoji(null);
       setShowEmoji(false);
-    } catch (e: any) {
+    } catch {
       setError('Failed to send message.');
     }
   };
@@ -113,6 +121,10 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
 
   const deleteForMe = async (id: number) => {
     await api.post(`/chat/delete/${id}/sender`);
+  };
+
+  const deleteForEveryone = async (id: number) => {
+    await api.post(`/chat/delete-for-everyone/${id}`);
   };
 
   const list = friends.filter(f =>
@@ -130,7 +142,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
             <HiOutlineArrowLeft className="h-5 w-5" /> Back
           </button>
         )}
-
         <h3 className="text-lg font-semibold">Friends</h3>
         <input
           placeholder="Search by username or ID"
@@ -138,7 +149,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
           onChange={e => setSearch(e.target.value)}
           className="px-3 py-2 bg-black-100 border border-gray-700 rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-600"
         />
-
         <div className={`flex flex-col gap-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 ${compact ? 'max-h-[240px]' : ''}`}>
           {list.map(f => (
             <button
@@ -159,7 +169,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
       </aside>
-
       <main className="flex-1 flex flex-col relative">
         {active ? (
           <>
@@ -167,48 +176,61 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
               <span className="font-semibold">{active.username}</span>
               <span className="text-xs text-gray-400">ID {active.id}</span>
             </header>
-
             <div className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
               {msgs.map((m, idx) => {
                 const isLast = idx === msgs.length - 1 || msgs[idx + 1].senderId !== m.senderId;
                 if (m.isDeletedForSender) return null;
                 const isSelf = m.senderId !== active.id;
+                const isHovered = hoveredMsgId === m.id;
                 return (
                   <div
                     key={m.id}
-                    className={`group relative max-w-[80%] md:max-w-[60%] px-4 py-2 rounded-2xl text-sm break-words whitespace-pre-wrap ${isSelf ? 'self-end bg-indigo-600 text-white' : 'self-start bg-gray-700 text-gray-100'}`}
+                    className="relative flex items-center group"
+                    onMouseEnter={() => setHoveredMsgId(m.id)}
+                    onMouseLeave={() => setHoveredMsgId(null)}
                   >
-                    {m.replyToId && <div className="text-xs italic mb-1 text-gray-400">Replying to #{m.replyToId}</div>}
-                    {editingId === m.id ? (
-                      <div className="flex gap-2">
-                        <input
-                          value={msg}
-                          onChange={e => setMsg(e.target.value)}
-                          className="flex-1 px-2 py-1 rounded text-black"
-                        />
-                        <button onClick={send}><HiCheck className="text-white" /></button>
+                    {isHovered && (
+                      <div className="absolute -left-10 flex flex-col gap-1 z-10 bg-black-200 rounded p-1">
+                        <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
+                        <button onClick={() => setShowEmoji(true)} title="React"><HiOutlineEmojiHappy className="w-4 h-4 text-gray-300 hover:text-white" /></button>
+                        <button onClick={() => deleteForMe(m.id)} title="Delete"><HiOutlineTrash className="w-4 h-4 text-gray-300 hover:text-white" /></button>
+                        {isSelf && <button onClick={() => { setMsg(m.message); setEditingId(m.id); }} title="Edit"><HiOutlinePencil className="w-4 h-4 text-gray-300 hover:text-white" /></button>}
+                        {isSelf && <button onClick={() => deleteForEveryone(m.id)} title="Delete for Everyone" className="text-xs text-red-400 hover:text-red-600">All</button>}
                       </div>
-                    ) : (
-                      <>
-                        {m.message} {m.isEdited && <span className="text-[10px] italic">(edited)</span>}
-                        {m.emoji && <div className="mt-1">{m.emoji}</div>}
-                        {isLast && <div className="text-[10px] opacity-70 mt-1 text-right">{new Date(m.sentAt).toLocaleTimeString()}</div>}
-                        <div className="absolute -top-5 right-0 hidden group-hover:flex gap-1">
-                          <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
-                          {isSelf && <button onClick={() => { setMsg(m.message); setEditingId(m.id); }} title="Edit"><HiOutlinePencil className="w-4 h-4 text-gray-300 hover:text-white" /></button>}
-                          <button onClick={() => deleteForMe(m.id)} title="Delete"><HiOutlineTrash className="w-4 h-4 text-gray-300 hover:text-white" /></button>
-                        </div>
-                      </>
                     )}
+                    <div className={`max-w-[80%] md:max-w-[60%] px-4 py-2 rounded-2xl text-sm break-words whitespace-pre-wrap ${isSelf ? 'self-end bg-indigo-600 text-white ml-auto' : 'self-start bg-gray-700 text-gray-100'}`}>
+                      {m.replyToId && <div className="text-xs italic mb-1 text-gray-400">Replying to #{m.replyToId}</div>}
+                      {editingId === m.id ? (
+                        <div className="flex gap-2">
+                          <input
+                            value={msg}
+                            onChange={e => setMsg(e.target.value)}
+                            className="flex-1 px-2 py-1 rounded text-black"
+                          />
+                          <button onClick={send}><HiCheck className="text-white" /></button>
+                        </div>
+                      ) : (
+                        <>
+                          {m.message} {m.isEdited && <span className="text-[10px] italic">(edited)</span>}
+                          {m.emoji && <div className="mt-1">{m.emoji}</div>}
+                          {isLast && (
+                            <div className="text-[10px] opacity-70 mt-1 text-right">
+                              {new Date(m.sentAt).toLocaleTimeString()}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 );
               })}
               <div ref={bottomRef} />
             </div>
-
             <div className="flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/80 backdrop-blur">
               {replyTo && (
-                <div className="text-xs text-gray-400 mb-1">Replying to message #{replyTo} <button onClick={() => setReplyTo(null)} className="ml-2 text-red-500">Cancel</button></div>
+                <div className="text-xs text-gray-400 mb-1">
+                  Replying to message #{replyTo} <button onClick={() => setReplyTo(null)} className="ml-2 text-red-500">Cancel</button>
+                </div>
               )}
               {showEmoji && <Picker onEmojiClick={handleEmojiClick} height={350} width={300} />}
               <div className="flex items-center gap-2">
@@ -232,7 +254,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
         ) : (
           <div className="m-auto text-gray-500">Select a friend to start chatting</div>
         )}
-
         {error && (
           <div className="absolute bottom-24 left-0 right-0 text-center text-red-500 text-sm">{error}</div>
         )}
