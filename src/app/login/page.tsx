@@ -78,31 +78,33 @@ const AuthPage = () => {
           if (!foundUser) {
             const newUser = {
               fullName: name,
-              email,
-              username, 
-              passwordHash: password,
+              email: session.user.email,
+              username,
+              passwordHash: "",
               registrationDate: new Date().toISOString(),
               productUpdates: subscribedToNews,
               careerTips: subscribedToNews,
               newCareerPathAlerts: subscribedToNews,
               promotions: subscribedToNews
             };
-            
+  
             await api.post("/Users", newUser);
           }
-          
-          // ✅ Always call set-career if pending enrollment exists
+  
           const pending = JSON.parse(localStorage.getItem("pendingEnrollment") || "null");
           if (pending?.careerPathID) {
             await api.post("/Users/set-career", {
-              email: session.user.email,
+              email: session?.user?.email ?? "",
+
               careerPathId: pending.careerPathID
             });
           }
   
           await api.post("/Users/login", {
-            email: session.user.email,
-            password: ""
+            identifier: session?.user?.email ?? "",
+            password: "",
+            rememberMe: false,
+            isGoogleLogin: true
           });
   
           const redirect = pending?.careerPathID ? "/payment" : "/";
@@ -113,7 +115,6 @@ const AuthPage = () => {
         }
       }
     };
-    
   
     handleGoogleAuth();
   }, [session]);
@@ -215,6 +216,7 @@ const AuthPage = () => {
       try {
         const newUser = {
           fullName: name,
+          username,
           email,
           passwordHash: password,
           registrationDate: new Date().toISOString(),
@@ -224,8 +226,14 @@ const AuthPage = () => {
           promotions: subscribedToNews
         };
         
-        await api.post("/Users", newUser);
-        await api.post("/Users/login", { email, password });
+        await api.post("/users", newUser);
+        await api.post("/users/login", {
+          identifier: email,
+          password: password,
+          rememberMe: false,
+          isGoogleLogin: true
+        });
+        
         router.push(pending ? "/payment" : "/");
       } catch (err: any) {
         const message = err?.response?.data?.error;
@@ -300,6 +308,7 @@ const AuthPage = () => {
       if (!foundUser) {
         const newUser = {
           fullName: "Phone User",
+          username,
           email: `${phone}@virtupath.ai`,
           phone,
           passwordHash: "",

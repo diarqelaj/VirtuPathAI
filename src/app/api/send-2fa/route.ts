@@ -30,7 +30,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // 3. ✅ Save code via PATCH endpoint
     await api.patch("/Users/2fa", {
-      email,
+      identifier: email,
       code,
       expiresAt,
     });

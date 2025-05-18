@@ -16,9 +16,12 @@ import {
   FiUserX,
   FiVolumeX,
   FiShare2,
+  FiCalendar,
   FiLink,
   FiAlertCircle
 } from 'react-icons/fi';
+import { VerifiedBadge } from '@/components/VerifiedBadge';
+import { OfficialBadge } from '@/components/OfficialBadge';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
@@ -50,6 +53,8 @@ export default function UserProfilePage() {
 
       const target = await api.get(`/users/by-username/${username}`);
       setUser(target.data);
+ 
+
 
       const targetId = target.data.userID;
 
@@ -65,9 +70,27 @@ export default function UserProfilePage() {
       const allMutuals = mutualRes.data || [];
       const currentUserFollowing = currentUserFollowingRes.data || [];
 
-      setFollowers(allFollowers);
-      setFollowing(allFollowing);
-      setFriends(allMutuals);
+      const enrichUsers = async (users: any[]) => {
+        return await Promise.all(
+          users.map(async (u) => {
+            try {
+              const full = await api.get(`/users/${u.userID}`);
+              return full.data;
+            } catch {
+              return u; // fallback if user not found
+            }
+          })
+        );
+      };
+      
+      const enrichedFollowers = await enrichUsers(allFollowers);
+      const enrichedFollowing = await enrichUsers(allFollowing);
+      const enrichedFriends = await enrichUsers(allMutuals);
+      
+      setFollowers(enrichedFollowers);
+      setFollowing(enrichedFollowing);
+      setFriends(enrichedFriends);
+      
 
       const isCurrentFollowing = allFollowers.some((f: any) => f.userID === current.data.userID);
       setIsFollowing(isCurrentFollowing);
@@ -82,6 +105,7 @@ export default function UserProfilePage() {
   useEffect(() => {
     if (username) fetchUsers();
   }, [username]);
+
 
   const handleFollow = async () => {
     if (!user || !currentUser) return;
@@ -117,6 +141,7 @@ export default function UserProfilePage() {
     }
   };
 
+
   const isSelf = currentUser?.userID === user?.userID;
   const bannerUrl = resolveImageUrl(user?.coverImageUrl, defaultBanner);
   const profileImg = resolveImageUrl(user?.profilePictureUrl, defaultAvatar);
@@ -138,11 +163,39 @@ export default function UserProfilePage() {
 
         {/* Main Section */}
         <div className="p-6 pt-16 sm:pt-20 space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-2xl font-bold">{user?.fullName}</h2>
-              <p className="text-sm text-gray-500">@{user?.username}</p>
+        <div className="flex justify-between items-center">
+          <div>
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            {user?.fullName}
+            {user?.isOfficial ? (
+              <OfficialBadge date={user?.verifiedDate} />
+            ) : user?.isVerified ? (
+              <VerifiedBadge date={user?.verifiedDate} />
+            ) : null}
+          </h2>
+
+            <p className="text-sm text-gray-500">@{user?.username}</p>
+            <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
+              <FiCalendar size={14} />
+              <span>
+                {(() => {
+                  if (!user?.registrationDate) return 'Unknown';
+                  const raw = user.registrationDate;
+      
+                  const safe = raw.includes('.') ? raw.split('.')[0] + 'Z' : raw + 'Z';
+                  const date = new Date(safe);
+                 return !isNaN(date.getTime())
+                  ? `Joined ${date.toLocaleString('en-US', { month: 'long', year: 'numeric' })}`
+                  : 'Joined date unknown';
+                })()}
+              </span>
+
             </div>
+
+
+
+          </div>
+
 
             {isSelf ? (
               <Link href="/settings" className="bg-purple-950 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">
@@ -162,7 +215,7 @@ export default function UserProfilePage() {
                     <FiMoreHorizontal size={18} />
                   </button>
                   {showActionsDropdown && (
-                    <div className="absolute right-0 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow border border-white/10">
+                     <div className="absolute right-0 mt-2 w-64 z-50 rounded-xl bg-black-100 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
                       <button className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-left">
                         <FiUserPlus size={16} />
                         Add to Favorites
@@ -201,7 +254,7 @@ export default function UserProfilePage() {
                       {showUnfollowOptions ? <IoChevronUp size={14} /> : <IoChevronDown size={14} />}
                     </button>
                     {showUnfollowOptions && (
-                      <div className="absolute right-0 mt-2 bg-black-100 text-sm rounded-xl p-3 w-60 border border-white/10 shadow z-50">
+                      <div className="absolute right-0 mt-2 bg-black-100 text-sm rounded-xl p-3 w-60 text-white shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border border-white/10">
                         <p className="text-xs text-white/70 mb-2">
                           Are you sure? You’ll need to request again if the profile is private.
                         </p>
@@ -236,9 +289,7 @@ export default function UserProfilePage() {
                 <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('following'); setShowModal(true); }}>
                   <strong>{following.length}</strong> Following
                 </span>
-                <span className="cursor-pointer hover:text-purple-400" onClick={() => { setModalType('mutual'); setShowModal(true); }}>
-                  <strong>{friends.length}</strong> Friends
-                </span>
+                
               </div>
 
               {/* Bio */}
@@ -252,11 +303,7 @@ export default function UserProfilePage() {
                 <h3 className="text-lg font-semibold mb-1">About</h3>
                 <p className="text-sm text-white/80">{user?.about || 'Interests, goals, achievements — coming soon...'}</p>
               </div>
-
-              {/* Join Date */}
-              <p className="text-xs text-white/40 text-right">
-                Joined on {new Date(user?.registrationDate).toLocaleDateString()}
-              </p>
+              
             </>
           )}
         </div>
