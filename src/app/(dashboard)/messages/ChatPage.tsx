@@ -190,7 +190,8 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                     onMouseLeave={() => setHoveredMsgId(null)}
                   >
                     {isHovered && (
-                      <div className="absolute -left-10 flex flex-col gap-1 z-10 bg-black-200 rounded p-1">
+                     <div className="absolute left-[-2.5rem] top-1 flex flex-col gap-1 z-10 bg-gray-800 rounded-lg p-1 shadow-md pointer-events-auto">
+
                         <button onClick={() => setReplyTo(m.id)} title="Reply"><HiOutlineReply className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => setShowEmoji(true)} title="React"><HiOutlineEmojiHappy className="w-4 h-4 text-gray-300 hover:text-white" /></button>
                         <button onClick={() => deleteForMe(m.id)} title="Delete"><HiOutlineTrash className="w-4 h-4 text-gray-300 hover:text-white" /></button>
