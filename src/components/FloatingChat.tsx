@@ -22,20 +22,21 @@ export default function FloatingChat() {
       {/* ── Drawer (opens below chatbot) ── */}
       {open && (
         <div
-          className="
-            fixed bottom-[96px] right-4 md:right-6
-            w-[92vw] sm:w-[460px] md:w-[500px]
-            h-[72vh]
-            z-30
-            bg-black-100
-            rounded-3xl
-            ring-1 ring-white/15
-            shadow-2xl
-            overflow-hidden
-            backdrop-blur-lg
-            transition-all
-          "
-        >
+        className="
+          fixed bottom-[100px] right-4 md:right-6
+          w-[360px] max-w-[92vw]
+          h-[520px] max-h-[80vh]
+          z-30
+          bg-black-100
+          rounded-2xl
+          ring-1 ring-white/15
+          shadow-xl
+          overflow-hidden
+          backdrop-blur-lg
+          transition-all
+        "
+      >
+      
           <ChatDrawer />
         </div>
       )}
