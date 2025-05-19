@@ -79,12 +79,23 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
       r.data.map(async (m) => {
         try {
           const emojiRes = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
-          return { ...m, emojis: emojiRes.data };
+          return {
+            ...m,
+            emojis: emojiRes.data,
+            emoji: null,
+            replyToId: (m as any).replyToId ?? (m as any).replyToMessageId ?? null,
+          };
         } catch {
-          return { ...m, emojis: [] };
+          return {
+            ...m,
+            emojis: [],
+            emoji: null,
+            replyToId: (m as any).replyToId ?? (m as any).replyToMessageId ?? null,
+          };
         }
       })
     );
+    
 
     // ensure replied messages exist
     const replyIds = enriched.map(m => m.replyToId).filter(Boolean) as number[];
@@ -92,7 +103,13 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
     for (const id of missing) {
       try {
         const reply = await api.get<ChatMessage>(`/chat/message/${id}`);
-        enriched.push(reply.data);
+        enriched.push({
+          ...reply.data,
+          emoji: null,
+          emojis: [],
+          replyToId: (reply.data as any).replyToId ?? (reply.data as any).replyToMessageId ?? null,
+        });
+        
       } catch {}
     }
 
@@ -142,8 +159,9 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
         await api.post('/chat/send', {
           receiverId: active.id,
           message: msg.trim(),
-          replyToId: replyTo,
+          ReplyToMessageId: replyTo // 👈 this must match the backend
         });
+        
       }
       setMsg('');
       setReplyTo(null);
