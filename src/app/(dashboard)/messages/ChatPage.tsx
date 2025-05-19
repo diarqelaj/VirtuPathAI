@@ -61,6 +61,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
   const [error, setError] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
+  const justSentRef = useRef(false);
 
   const byId = (id: number | null) =>
     id ? msgs.find((m) => m.id === id) ?? null : null;
@@ -95,9 +96,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
         }
       })
     );
-    
 
-    // ensure replied messages exist
     const replyIds = enriched.map(m => m.replyToId).filter(Boolean) as number[];
     const missing = replyIds.filter(id => !enriched.some(m => m.id === id));
     for (const id of missing) {
@@ -109,12 +108,15 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
           emojis: [],
           replyToId: (reply.data as any).replyToId ?? (reply.data as any).replyToMessageId ?? null,
         });
-        
       } catch {}
     }
 
     setMsgs(enriched);
-    setTimeout(() => bottomRef.current?.scrollIntoView(), 0);
+
+    if (justSentRef.current) {
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 0);
+      justSentRef.current = false;
+    }
   };
 
   useEffect(() => {
@@ -144,6 +146,7 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
 
   useEffect(() => {
     if (!active) return;
+    justSentRef.current = true;
     fetchMessages(active.id);
     const interval = setInterval(() => fetchMessages(active.id), 2000);
     return () => clearInterval(interval);
@@ -159,9 +162,9 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
         await api.post('/chat/send', {
           receiverId: active.id,
           message: msg.trim(),
-          ReplyToMessageId: replyTo // 👈 this must match the backend
+          ReplyToMessageId: replyTo
         });
-        
+        justSentRef.current = true;
       }
       setMsg('');
       setReplyTo(null);
@@ -253,20 +256,15 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                 return (
                   <div
                     key={m.id}
-                    className={`relative group flex flex-col gap-1 w-fit ${
-                      self ? 'ml-auto items-end' : 'items-start'
-                    }`}
+                    className={`relative group flex flex-col gap-1 w-fit ${self ? 'ml-auto items-end' : 'items-start'}`}
                     onMouseEnter={() => setHoveredMsgId(m.id)}
                     onMouseLeave={() => setHoveredMsgId(null)}
                   >
-                    {/* Reply preview */}
                     {m.replyToId && (
                       <div className="text-xs text-indigo-300 italic border-l-2 border-indigo-400 pl-2 max-w-[80%] bg-black-200 px-3 py-1 rounded">
                         ↪ {byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}
                       </div>
                     )}
-
-                    {/* Message */}
                     <div className={`block px-4 py-2 rounded-2xl text-sm break-words max-w-[48ch] min-w-[4rem] ${
                       self ? 'bg-indigo-600 text-white ml-auto' : 'bg-gray-700 text-gray-100 mr-auto'}`}>
                       {editingId === m.id ? (
@@ -281,24 +279,15 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                         </>
                       )}
                     </div>
-
-                    {/* Emoji Reactions */}
                     {m.emojis?.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1 text-xl">
                         {m.emojis.map((e, i) => (
-                          <div
-                            key={i}
-                            className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80 transition"
-                            title={e.fullName}
-                            onClick={() => unreact(m.id)}
-                          >
+                          <div key={i} className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80 transition" title={e.fullName} onClick={() => unreact(m.id)}>
                             {e.emoji}
                           </div>
                         ))}
                       </div>
                     )}
-
-                    {/* Hover actions */}
                     {hovered && (
                       <div className={`absolute top-1/2 -translate-y-1/2 z-10 flex gap-2 ${self ? 'right-full pr-2' : 'left-full pl-2'}`}>
                         <button onClick={() => setReplyTo(m.id)} className="p-2 rounded-full bg-gray-800 hover:bg-gray-700"><HiOutlineReply className="w-3 h-3 text-white" /></button>
@@ -319,7 +308,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
                         </div>
                       </div>
                     )}
-
                     {last && <div className="text-[10px] opacity-70">{new Date(m.sentAt).toLocaleTimeString()}</div>}
                   </div>
                 );
@@ -327,7 +315,6 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
               <div ref={bottomRef} />
             </div>
 
-            {/* Input */}
             <div className="flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/80 backdrop-blur">
               {replyTo && (
                 <div className="text-xs text-gray-400 mb-1 flex items-start gap-1">
