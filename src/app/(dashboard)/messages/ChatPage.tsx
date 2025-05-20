@@ -8,6 +8,8 @@ import {
   HiOutlineDotsHorizontal,
   HiCheck
 } from 'react-icons/hi';
+import { FiSmile } from 'react-icons/fi';
+
 import Picker, { Theme } from 'emoji-picker-react';
 import api from '@/lib/api';
 
@@ -370,7 +372,7 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky top-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className="sticky top-0 x-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div className="flex items-center gap-2">
               {compact && (
                 <button
@@ -491,13 +493,16 @@ export default function ChatPage() {
                         : 'none'
                     }}
                   >
-                    {/* reply preview (optional row) */}
-                    {m.replyToId && (
-                      <div className="text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
-                        ↪
-                        {byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}
-                      </div>
-                    )}
+                    
+                  {m.replyToId && (
+                    <div className="flex items-center text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
+                      {/* reply ICON */}
+                      <HiOutlineReply className="w-4 h-4 mr-1" />
+                      {/* preview text */}
+                      <span className="truncate">{byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}</span>
+                    </div>
+                  )}
+
 
                     {/* ------------- bubble row (relative) ------------- */}
                     <div className="relative flex items-center">
@@ -726,15 +731,13 @@ export default function ChatPage() {
               </div>
             )}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => {
-                  setShowPicker(!showPicker);
-                  setReactingToId(null);
-                }}
-                className="text-white px-2"
-              >
-                😀
-              </button>
+            <button
+              onClick={() => { setShowPicker(!showPicker); setReactingToId(null); }}
+              className="p-2 rounded-full hover:bg-gray-800/60"
+            >
+              <FiSmile className="w-5 h-5 text-gray-400" />
+            </button>
+
               <input
                 ref={inputRef}
                 value={msg}

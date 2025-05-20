@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Bot, Smile } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import ReactMarkdown from 'react-markdown';
+import { usePathname } from 'next/navigation';
 
 
 export default function Chatbot() {
@@ -14,39 +15,36 @@ export default function Chatbot() {
   const [showScrollNote, setShowScrollNote] = useState(false);
   const [hasShownScrollNote, setHasShownScrollNote] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname()
+  const hide = pathname?.startsWith('/messages')
+
+  // ───── all of your useState / useRef / useEffect calls go here ─────
+
+ 
 
   useEffect(() => {
-    const fetchWebsiteContent = async () => {
+    if (pathname?.startsWith('/messages')) return;
+    let aborted = false;
+  
+    async function fetchWebsiteContent() {
       try {
         const res = await fetch('/api/website-content');
+        if (aborted) return;
         const data = await res.json();
-        setMessages([
-          {
-            role: 'system',
-            content: `You are a helpful assistant. Here is some context about the website: ${data.content}`,
-          },
-          {
-            role: 'assistant',
-            content: `👋 Hi there! I'm **VirtuPath AI**, your smart assistant.\n\nI can help you explore career paths, answer questions, and guide you through our platform.\n\nHow can I help you today?`,
-          },
-        ]);
-      } catch (error) {
-        console.error('❌ Failed to fetch website content:', error);
-        setMessages([
-          {
-            role: 'system',
-            content: 'I could not fetch the website content. Please try again later.',
-          },
-          {
-            role: 'assistant',
-            content: `👋 Hi! I'm **VirtuPath AI**. Let me know how I can help you get started.`,
-          },
-        ]);
+        setMessages([ /* … */ ]);
+      } catch (err) {
+        if (aborted) return;
+        console.error(err);
+        setMessages([ /* fallback… */ ]);
       }
-    };
-    fetchWebsiteContent();
-  }, []);
+    }
   
+    fetchWebsiteContent();
+  
+    return () => {
+      aborted = true;
+    }
+  }, [pathname]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -156,6 +154,10 @@ export default function Chatbot() {
       }
     });
   };
+   // now gate the render
+  if (hide) return null
+
+  
 
   return (
     <>
