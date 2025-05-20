@@ -115,9 +115,15 @@ export default function ChatPage({ compact = false }: { compact?: boolean }) {
   }, [active]);
 
   /* focus tricks */
-  useEffect(() => { if (replyTo  !== null) setTimeout(() => inputRef.current?.focus(), 0); }, [replyTo]);
-  useEffect(() => { if (editingId !== null) setTimeout(() => inputRef.current?.focus(), 0); }, [editingId]);
-
+ 
+  useEffect(() => {
+    if (editingId !== null) setTimeout(() => inputRef.current?.focus(), 0);
+  }, [editingId]);
+  
+  useEffect(() => {
+    if (replyTo   !== null) setTimeout(() => inputRef.current?.focus(), 0);
+  }, [replyTo]);
+  
   /* picker close on outside-click / esc */
   useEffect(() => {
     if (!showPicker) return;
