@@ -2,5 +2,5 @@
 import ChatPage from './ChatPage';
 
 export default function MessagesPage() {
-  return <ChatPage compact={false} />;
+  return <ChatPage  />;
 }
