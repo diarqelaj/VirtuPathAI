@@ -15,13 +15,15 @@ import { FiX } from 'react-icons/fi';
 import { VerifiedBadge } from "@/components/VerifiedBadge";
 import { OfficialBadge } from "@/components/OfficialBadge";
 
-
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=5e17eb&color=fff';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+
+  // <-- ADD THIS FLAG
+  const isMessagesRoute = pathname?.startsWith('/messages');
 
   const [user, setUser] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(true);
@@ -475,7 +477,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         )}
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-black-100">{children}</main>
+        <main
+          className={`flex-1 bg-black-100 overflow-y-auto` +
+            (isMessagesRoute
+              ? ''                              // let ChatPage handle its own scrolling
+              : 'p-4 sm:p-6'
+            )
+          }
+          style={
+            isMessagesRoute
+              ? { WebkitOverflowScrolling: 'touch' }
+              : {}
+          }
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

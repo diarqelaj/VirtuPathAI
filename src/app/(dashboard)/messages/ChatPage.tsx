@@ -1,17 +1,24 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   HiOutlineArrowLeft,
   HiOutlineReply,
   HiOutlineEmojiHappy,
   HiOutlineDotsHorizontal,
-  HiCheck
+  HiCheck,
+  HiOutlinePencilAlt,
+  HiOutlineTrash,
+  HiOutlineInformationCircle,
 } from 'react-icons/hi';
 import { FiSmile } from 'react-icons/fi';
-
 import Picker, { Theme } from 'emoji-picker-react';
 import api from '@/lib/api';
+import { VerifiedBadge } from '@/components/VerifiedBadge';
+import { OfficialBadge } from '@/components/OfficialBadge';
+
+const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 
 /* ---------- types ---------- */
 interface EmojiReaction {
@@ -45,10 +52,15 @@ interface Friend {
   username: string;
   fullName: string;
   profilePictureUrl?: string | null;
+  isVerified?: boolean;
+  isOfficial?: boolean;
+  verifiedDate?: string;
 }
 
 /* ---------- component ---------- */
 export default function ChatPage() {
+  const router = useRouter();
+
   /* detect screen */
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -57,7 +69,7 @@ export default function ChatPage() {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
-  const compact = isMobile; // synonym used later
+  const compact = isMobile;
 
   /* state */
   const [myId, setMyId] = useState<number | null>(null);
@@ -69,7 +81,7 @@ export default function ChatPage() {
   const [msg, setMsg] = useState('');
   const [editingId, setEditingId] = useState<number | null>(null);
   const [replyTo, setReplyTo] = useState<number | null>(null);
-  const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 }); 
+  const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 });
   const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
 
   /* swipe (mobile) */
@@ -78,10 +90,10 @@ export default function ChatPage() {
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const longPressTimeout = useRef<number | null>(null);
-  const MENU_MARGIN  = 2;
-  const MENU_V_GAP   = 2;     // vertical gap between bubble and menu
-  const MENU_WIDTH   = 180;
-  const MENU_HEIGHT  = 160; 
+  const MENU_MARGIN = 2;
+  const MENU_V_GAP = 2;
+  const MENU_WIDTH = 180;
+  const MENU_HEIGHT = 160;
 
   /* context-menu */
   const [menuMsgId, setMenuMsgId] = useState<number | null>(null);
@@ -115,9 +127,11 @@ export default function ChatPage() {
   useEffect(() => {
     (async () => {
       try {
+        // 1) who am I?
         const me = await api.get<{ userID: number }>('/users/me');
         setMyId(me.data.userID);
 
+        // 2) mutual friends raw
         const raw = await api.get<RawFriendDto[]>(
           `/UserFriends/mutual/${me.data.userID}`
         );
@@ -134,7 +148,29 @@ export default function ChatPage() {
               : null;
           })
           .filter(Boolean) as Friend[];
-        setFriends(list);
+
+        // 3) enrich each friend with their user info (for badges)
+        const enriched = await Promise.all(
+          list.map(async (fr) => {
+            try {
+              const full = await api.get<{
+                isVerified?: boolean;
+                isOfficial?: boolean;
+                verifiedDate?: string;
+              }>(`/users/by-username/${fr.username}`);
+              return {
+                ...fr,
+                isVerified: full.data.isVerified,
+                isOfficial: full.data.isOfficial,
+                verifiedDate: full.data.verifiedDate
+              };
+            } catch {
+              return fr;
+            }
+          })
+        );
+
+        setFriends(enriched);
       } catch {
         setError('Failed to load friends.');
       }
@@ -152,16 +188,14 @@ export default function ChatPage() {
             ...m,
             emojis: res.data,
             replyToId:
-              m.replyToId ?? (m as unknown as { replyToMessageId?: number })
-                .replyToMessageId ?? null
+              m.replyToId ?? (m as any).replyToMessageId ?? null
           };
         } catch {
           return {
             ...m,
             emojis: [],
             replyToId:
-              m.replyToId ?? (m as unknown as { replyToMessageId?: number })
-                .replyToMessageId ?? null
+              m.replyToId ?? (m as any).replyToMessageId ?? null
           };
         }
       })
@@ -175,7 +209,6 @@ export default function ChatPage() {
       scrollAfterSend.current = false;
     }
   };
-
   useEffect(() => {
     if (!active) return;
     scrollAfterSend.current = true;
@@ -211,7 +244,6 @@ export default function ChatPage() {
       window.removeEventListener('keydown', esc);
     };
   }, [showPicker]);
-
   useEffect(() => {
     if (!menuMsgId) return;
     const close = (e: MouseEvent | TouchEvent) => {
@@ -226,25 +258,19 @@ export default function ChatPage() {
     };
   }, [menuMsgId]);
 
-  /* -------- positioning helpers -------- */
+  /* -------- positioning helper -------- */
   const openMenuMsg = (id: number, rect: DOMRect) => {
-    /* -------- horizontal (center on bubble, then clamp) -------- */
     let left = rect.left + rect.width / 2 - MENU_WIDTH / 2;
     if (left < MENU_MARGIN) left = MENU_MARGIN;
     if (left + MENU_WIDTH > window.innerWidth - MENU_MARGIN) {
       left = window.innerWidth - MENU_MARGIN - MENU_WIDTH;
     }
-  
-    /* -------- vertical (prefer above, else below) -------- */
     let top = rect.top - MENU_HEIGHT - MENU_V_GAP;
     if (top < MENU_MARGIN) {
-      // not enough space above ➜ put it below the bubble
       top = rect.bottom + MENU_V_GAP;
-      // still overflowing bottom? clamp to bottom edge
       const maxTop = window.innerHeight - MENU_MARGIN - MENU_HEIGHT;
       if (top > maxTop) top = maxTop;
     }
-  
     setMenuPos({ top: top + window.scrollY, left });
     setMenuMsgId(id);
   };
@@ -263,7 +289,7 @@ export default function ChatPage() {
     setShowPicker(true);
   };
 
-  /* -------- basic actions -------- */
+  /* -------- actions -------- */
   const send = async () => {
     if (!msg.trim() || !active || myId === null) return;
     try {
@@ -286,36 +312,28 @@ export default function ChatPage() {
   };
 
   const react = (id: number, emoji: string) =>
-    api
-      .patch(`/Chat/react/${id}`, { Emoji: emoji })
-      .catch(() => setError('React failed'));
-
+    api.patch(`/Chat/react/${id}`, { Emoji: emoji }).catch(() => setError('React failed'));
   const unreact = (id: number) =>
     api.delete(`/Chat/react/${id}`).catch(() => setError('Unreact failed'));
-
   const rmMe = (id: number) =>
     api.post(`/chat/delete/${id}/sender`).catch(() => setError('Delete failed'));
-
   const rmAll = (id: number) =>
-    api
-      .post(`/chat/delete-for-everyone/${id}`)
-      .catch(() => setError('Delete-all failed'));
-
+    api.post(`/chat/delete-for-everyone/${id}`).catch(() => setError('Delete-all failed'));
   const addEmojiToInput = (e: any) => setMsg((p) => p + e.emoji);
 
   /* -------- friend filter -------- */
   const filtered = friends.filter(
     (f) =>
       f.username.toLowerCase().includes(search.toLowerCase()) ||
-      f.id.toString().includes(search)
+      f.fullName.toLowerCase().includes(search.toLowerCase())
   );
 
   /* -------- sidebar -------- */
   const Sidebar = (
     <aside
-      className={`${
+      className={`h-full ${
         compact ? 'w-full border-b' : 'md:w-72 md:border-r'
-      } border-gray-800 p-4 flex flex-col gap-4`}
+      } border-gray-800 p-4 flex flex-col`}
     >
       {active && compact && (
         <button
@@ -326,38 +344,56 @@ export default function ChatPage() {
           Back
         </button>
       )}
-      <h3 className="text-lg font-semibold">Friends</h3>
+      <h3 className="text-lg font-semibold mb-2">Friends</h3>
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search…"
-        className="px-3 py-2 bg-black-100 border border-gray-700 rounded-md text-sm"
+        className="px-3 py-2 bg-black-100 border border-gray-700 rounded-md text-sm mb-4"
       />
-      <div className="flex flex-col gap-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
-        {filtered.map((f) => (
-          <button
-            key={f.id}
-            onClick={() => setActive(f)}
-            className={`flex items-center gap-3 p-2 rounded-md transition ${
-              active?.id === f.id ? 'bg-gray-800' : 'hover:bg-gray-800/60'
-            }`}
-          >
-            <img
-              src={
-                f.profilePictureUrl ??
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                  f.fullName
-                )}&background=5e17eb&color=fff`
-              }
-              className="w-10 h-10 rounded-full object-cover"
-              alt={f.username}
-            />
-            <div className="text-left">
-              <div className="font-medium">{f.username}</div>
-              <div className="text-xs text-gray-400">#{f.id}</div>
-            </div>
-          </button>
-        ))}
+      {/* scroll only this list */}
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
+        <ul className="space-y-2 pr-2">
+          {filtered.map((f) => {
+            const isActive = active?.id === f.id;
+            return (
+              <li key={f.id}>
+                <button
+                  onClick={() => setActive(f)}
+                  className={`w-full flex items-center justify-between gap-3 p-2 rounded-lg ${
+                    isActive ? 'bg-gray-800' : 'hover:bg-gray-800/60'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={
+                        f.profilePictureUrl
+                          ? `${API_HOST}${f.profilePictureUrl}`
+                          : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                              f.fullName
+                            )}&background=5e17eb&color=fff`
+                      }
+                      className="w-10 h-10 rounded-full object-cover border border-white/10"
+                      alt={f.username}
+                    />
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1 text-white font-medium">
+                        {f.fullName}
+                        {f.isOfficial ? (
+                          <OfficialBadge date={f.verifiedDate} />
+                        ) : f.isVerified ? (
+                          <VerifiedBadge date={f.verifiedDate} />
+                        ) : null}
+                      </div>
+                      <div className="text-xs text-gray-400">@{f.username}</div>
+                    </div>
+                  </div>
+                  <span className="text-indigo-400 text-sm">Chat</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </aside>
   );
@@ -372,300 +408,294 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky top-0 x-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
-            <div className="flex items-center gap-2">
+          <header className="sticky top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => router.push(`/${active.username}`)}
+            >
               {compact && (
-                <button
+                <HiOutlineArrowLeft
                   onClick={() => setActive(null)}
-                  className="p-1 rounded hover:bg-gray-800/60"
-                >
-                  <HiOutlineArrowLeft className="h-5 w-5 text-white" />
-                </button>
+                  className="h-5 w-5 text-white"
+                />
               )}
-              <span className="font-semibold">{active.username}</span>
+              <img
+                src={
+                  active.profilePictureUrl
+                    ? `${API_HOST}${active.profilePictureUrl}`
+                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        active.fullName
+                      )}&background=5e17eb&color=fff`
+                }
+                className="w-8 h-8 rounded-full object-cover"
+                alt={active.username}
+              />
+              <span className="font-semibold">{active.fullName}</span>
+              {active.isOfficial ? (
+                <OfficialBadge date={active.verifiedDate} />
+              ) : active.isVerified ? (
+                <VerifiedBadge date={active.verifiedDate} />
+              ) : null}
             </div>
-            <span className="text-xs text-gray-400">ID {active.id}</span>
+            <button
+              onClick={() => console.log('User options for', active.id)}
+              className="p-1 rounded-full hover:bg-gray-800/60"
+              title="User options"
+            >
+              <HiOutlineInformationCircle className="w-5 h-5 text-gray-400" />
+            </button>
           </header>
 
           {/* message list */}
-          <div className="flex-1 flex flex-col gap-4 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4">
-            {msgs.map((m, idx) => {
-              if (myId === null || m.isDeletedForSender) return null;
-              const isOutgoing = m.senderId === myId;
-              const hovered = hoveredMsgId === m.id;
-              const last =
-                idx === msgs.length - 1 ||
-                msgs[idx + 1].senderId !== m.senderId;
+          <div className="flex-1 flex flex-col space-y-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4">
+            {(() => {
+              const GAP = 1000 * 60 * 30;
+              let lastTime = 0;
+              const nodes: React.ReactNode[] = [];
+              msgs.forEach((m, idx) => {
+                if (myId === null || m.isDeletedForSender) return;
+                const t = new Date(m.sentAt).getTime();
+                if (idx === 0 || t - lastTime > GAP) {
+                  nodes.push(
+                    <div key={`divider-${m.id}`} className="self-center my-2">
+                      <span className="text-gray-400 text-xs px-3 py-1 rounded-full">
+                        {new Date(m.sentAt).toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </span>
+                    </div>
+                  );
+                }
+                lastTime = t;
 
-              /* touch (mobile) */
-              const onTouchStart = (e: React.TouchEvent) => {
-                if (!compact) return;
-              
-                touchStartX.current = e.touches[0].clientX;
-                touchStartY.current = e.touches[0].clientY;
-                setSwipeState({ id: m.id, offset: 0, releasing: false });
-              
-                /** ➜ FIX: cache the rect BEFORE the timeout */
-                const targetRect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-              
-                longPressTimeout.current = window.setTimeout(() => {
-                  openMenuMsg(m.id, targetRect);   // use the cached rect
-                }, 600);
-              };
-              const onTouchMove = (e: React.TouchEvent) => {
-                if (
-                  !compact ||
-                  !swipeState ||
-                  swipeState.id !== m.id
-                )
-                  return;
-                const dx = e.touches[0].clientX - touchStartX.current;
-                const offset = isOutgoing ? Math.min(0, dx) : Math.max(0, dx);
-                setSwipeState({ id: m.id, offset, releasing: false });
-                if (longPressTimeout.current) {
-                  clearTimeout(longPressTimeout.current);
-                  longPressTimeout.current = null;
-                }
-              };
-              const onTouchEnd = (e: React.TouchEvent) => {
-                if (!compact || !swipeState || swipeState.id !== m.id) return;
-              
-                /* ─── cancel pending long-press timer ─── */
-                if (longPressTimeout.current) {
-                  clearTimeout(longPressTimeout.current);
-                  longPressTimeout.current = null;
-                }
-              
-                const dx = e.changedTouches[0].clientX - touchStartX.current;
-                const dy = e.changedTouches[0].clientY - touchStartY.current;
-              
-                /* ─── double-tap (❤️ / un-❤️) ─── */
-                const now  = Date.now();
-                const tap  = Math.abs(dx) < 8 && Math.abs(dy) < 8;          // basically no movement
-                if (tap) {
-                  const last = lastTapRef.current;                          // { id, t } ref you added earlier
-                  if (now - last.t < 300 && last.id === m.id) {             // second tap ≤300 ms on same msg
-                    const alreadyHearted = m.emojis.some(
-                      (e) => e.userId === myId && e.emoji === '❤️'
-                    );
-                    alreadyHearted ? unreact(m.id) : react(m.id, '❤️');     // toggle ❤️
-                    lastTapRef.current = { id: 0, t: 0 };                   // reset detector
-                  } else {
-                    lastTapRef.current = { id: m.id, t: now };              // first tap → start timer
-                  }
-                }
-              
-                /* ─── swipe-to-reply ─── */
-                const swiped = Math.abs(dx) > 50 && Math.abs(dy) < 50;
-                setSwipeState((s) => s && { ...s, offset: 0, releasing: true });
-                if (swiped) {
-                  if (!isOutgoing && dx > 0) setReplyTo(m.id);   // incoming → right swipe
-                  if (isOutgoing  && dx < 0) setReplyTo(m.id);   // outgoing → left swipe
-                }
-                setTimeout(() => setSwipeState(null), 200);
-              };
-              
-              /* ---------- JSX for a single message ---------- */
-              return (
-                <div
-                  key={m.id}
-                  className={`relative w-full flex items-start ${
-                    menuMsgId === m.id ? 'z-50' : ''
-                  }`}
-                  onMouseEnter={() => !compact && setHoveredMsgId(m.id)}
-                  onMouseLeave={() => !compact && setHoveredMsgId(null)}
-                  onTouchStart={onTouchStart}
-                  onTouchMove={onTouchMove}
-                  onTouchEnd={onTouchEnd}
-                >
-                  {/* wrapper (NOT relative) */}
+                const isOutgoing = m.senderId === myId;
+                const hovered = hoveredMsgId === m.id;
+
+                nodes.push(
                   <div
-                    className={`flex flex-col gap-1 max-w-[80%] ${
-                      isOutgoing ? 'ml-auto items-end' : 'mr-auto items-start'
+                    key={m.id}
+                    className={`relative w-full flex items-start ${
+                      menuMsgId === m.id ? 'z-50' : ''
                     }`}
-                    style={{
-                      transform:
-                        swipeState?.id === m.id
-                          ? `translateX(${swipeState.offset}px)`
-                          : undefined,
-                      transition: swipeState?.releasing
-                        ? 'transform 0.2s ease-out'
-                        : 'none'
+                    onMouseEnter={() => !compact && setHoveredMsgId(m.id)}
+                    onMouseLeave={() => !compact && setHoveredMsgId(null)}
+                    onTouchStart={(e) => {
+                      if (!compact) return;
+                      touchStartX.current = e.touches[0].clientX;
+                      touchStartY.current = e.touches[0].clientY;
+                      setSwipeState({ id: m.id, offset: 0, releasing: false });
+                      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                      longPressTimeout.current = window.setTimeout(() => {
+                        openMenuMsg(m.id, rect);
+                      }, 600);
+                    }}
+                    onTouchMove={(e) => {
+                      if (!compact || !swipeState || swipeState.id !== m.id) return;
+                      const dx = e.touches[0].clientX - touchStartX.current;
+                      const offset = isOutgoing ? Math.min(0, dx) : Math.max(0, dx);
+                      setSwipeState({ id: m.id, offset, releasing: false });
+                      if (longPressTimeout.current) {
+                        clearTimeout(longPressTimeout.current);
+                        longPressTimeout.current = null;
+                      }
+                    }}
+                    onTouchEnd={(e) => {
+                      if (!compact || !swipeState || swipeState.id !== m.id) return;
+                      if (longPressTimeout.current) {
+                        clearTimeout(longPressTimeout.current);
+                        longPressTimeout.current = null;
+                      }
+                      const dx = e.changedTouches[0].clientX - touchStartX.current;
+                      const dy = e.changedTouches[0].clientY - touchStartY.current;
+                      const now = Date.now();
+                      const tap = Math.abs(dx) < 8 && Math.abs(dy) < 8;
+                      if (tap) {
+                        const last = lastTapRef.current;
+                        if (now - last.t < 300 && last.id === m.id) {
+                          const hearted = m.emojis.some(
+                            (r) => r.userId === myId && r.emoji === '❤️'
+                          );
+                          hearted ? unreact(m.id) : react(m.id, '❤️');
+                          lastTapRef.current = { id: 0, t: 0 };
+                        } else {
+                          lastTapRef.current = { id: m.id, t: now };
+                        }
+                      }
+                      const swiped = Math.abs(dx) > 50 && Math.abs(dy) < 50;
+                      setSwipeState((s) =>
+                        s ? { ...s, offset: 0, releasing: true } : null
+                      );
+                      if (swiped) {
+                        if (!isOutgoing && dx > 0) setReplyTo(m.id);
+                        if (isOutgoing && dx < 0) setReplyTo(m.id);
+                      }
+                      setTimeout(() => setSwipeState(null), 200);
                     }}
                   >
-                    
-                  {m.replyToId && (
-                    <div className="flex items-center text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
-                      {/* reply ICON */}
-                      <HiOutlineReply className="w-4 h-4 mr-1" />
-                      {/* preview text */}
-                      <span className="truncate">{byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}</span>
-                    </div>
-                  )}
-
-
-                    {/* ------------- bubble row (relative) ------------- */}
-                    <div className="relative flex items-center">
-                      {/* bubble itself */}
-                      <div
-                        onDoubleClick={() => react(m.id, "❤️")} 
-                        className={`px-4 py-2 rounded-2xl text-sm break-words max-w-[48ch] min-w-[4rem] ${
-                          isOutgoing
-                            ? 'bg-indigo-600 text-white'
-                            : 'bg-gray-700 text-gray-100'
-                        }`}
-                      >
-                        {editingId === m.id ? (
-                          <div className="flex gap-2">
-                            <input
-                              ref={inputRef}
-                              value={msg}
-                              onChange={(e) => setMsg(e.target.value)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter') send();
-                                if (e.key === 'Escape') cancelEdit();
-                              }}
-                              className="flex-1 px-2 py-1 rounded text-black"
-                            />
-                            <button onClick={send}>
-                              <HiCheck className="text-white" />
-                            </button>
-                            <button
-                              onClick={cancelEdit}
-                              className="text-gray-300 hover:text-white"
-                            >
-                              ×
-                            </button>
-                          </div>
-                        ) : (
-                          <>
-                            {m.message}
-                            {m.isEdited && (
-                              <span className="text-[10px] italic ml-1">
-                                (edited)
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </div>
-
-                      {/* hover bar (inside bubble row) */}
-                      {hovered && !compact && (
+                    <div
+                      className={`flex flex-col gap-1 max-w-[80%] ${
+                        isOutgoing ? 'ml-auto items-end' : 'mr-auto items-start'
+                      }`}
+                      style={{
+                        transform:
+                          swipeState?.id === m.id
+                            ? `translateX(${swipeState.offset}px)`
+                            : undefined,
+                        transition: swipeState?.releasing
+                          ? 'transform 0.2s ease-out'
+                          : 'none'
+                      }}
+                    >
+                      {m.replyToId && (
+                        <div className="flex items-center text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
+                          <HiOutlineReply className="w-4 h-4 mr-1" />
+                          <span className="truncate">
+                            {byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}
+                          </span>
+                        </div>
+                      )}
+                      <div className="relative flex items-center">
                         <div
-                          className={`absolute top-1/2 -translate-y-1/2 flex gap-2 ${
+                          onDoubleClick={() => react(m.id, '❤️')}
+                          className={`px-4 py-2 rounded-2xl text-sm break-words max-w-[48ch] min-w-[4rem] ${
                             isOutgoing
-                              ? 'right-[calc(100%+0.4rem)]'
-                              : 'left-[calc(100%+0.4rem)]'
+                              ? 'bg-indigo-600 text-white'
+                              : 'bg-gray-700 text-gray-100'
                           }`}
                         >
-                          <button
-                            onClick={() => setReplyTo(m.id)}
-                            className="p-1 rounded-full hover:bg-gray-800"
+                          {editingId === m.id ? (
+                            <div className="flex gap-2">
+                              <input
+                                ref={inputRef}
+                                value={msg}
+                                onChange={(e) => setMsg(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') send();
+                                  if (e.key === 'Escape') cancelEdit();
+                                }}
+                                className="flex-1 px-2 py-1 rounded text-black"
+                              />
+                              <button onClick={send}>
+                                <HiCheck className="text-white" />
+                              </button>
+                              <button
+                                onClick={cancelEdit}
+                                className="text-gray-300 hover:text-white"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              {m.message}
+                              {m.isEdited && (
+                                <span className="text-[10px] italic ml-1">(edited)</span>
+                              )}
+                            </>
+                          )}
+                        </div>
+                        {!compact && hovered && (
+                          <div
+                            className={`absolute top-1/2 -translate-y-1/2 flex gap-2 ${
+                              isOutgoing
+                                ? 'right-[calc(100%+0.4rem)]'
+                                : 'left-[calc(100%+0.4rem)]'
+                            }`}
                           >
-                            <HiOutlineReply className="w-4 h-4 text-white" />
-                          </button>
-                          <button
-                            onClick={(e) => openPicker(e, m.id)}
-                            className="p-1 rounded-full hover:bg-gray-800"
-                          >
-                            <HiOutlineEmojiHappy className="w-5 h-5 text-white" />
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openMenuMsg(
-                                m.id,
-                                (
-                                  e.currentTarget as HTMLElement
-                                ).getBoundingClientRect()
-                              );
-                            }}
-                            className="p-1 rounded-full hover:bg-gray-800"
-                          >
-                            <HiOutlineDotsHorizontal className="w-5 h-5 text-white" />
-                          </button>
+                            <button
+                              onClick={() => setReplyTo(m.id)}
+                              className="p-1 rounded-full hover:bg-gray-800"
+                            >
+                              <HiOutlineReply className="w-4 h-4 text-white" />
+                            </button>
+                            <button
+                              onClick={(e) => openPicker(e, m.id)}
+                              className="p-1 rounded-full hover:bg-gray-800"
+                            >
+                              <HiOutlineEmojiHappy className="w-5 h-5 text-white" />
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                                openMenuMsg(m.id, rect);
+                              }}
+                              className="p-1 rounded-full hover:bg-gray-800"
+                            >
+                              <HiOutlineDotsHorizontal className="w-5 h-5 text-white" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      {!!m.emojis.length && (
+                        <div className="flex flex-wrap gap-1 mt-1 text-xl">
+                          {m.emojis.map((e, i) => (
+                            <div
+                              key={i}
+                              title={e.fullName}
+                              onClick={() => unreact(m.id)}
+                              className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80"
+                            >
+                              {e.emoji}
+                            </div>
+                          ))}
                         </div>
                       )}
                     </div>
-                    {/* -------- end bubble row -------- */}
-
-                    {/* emoji strip (optional row) */}
-                    {!!m.emojis.length && (
-                      <div className="flex flex-wrap gap-1 mt-1 text-xl">
-                        {m.emojis.map((e, i) => (
-                          <div
-                            key={i}
-                            title={e.fullName}
-                            onClick={() => unreact(m.id)}
-                            className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80"
-                          >
-                            {e.emoji}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* timestamp (optional row) */}
-                    {last && (
-                      <div className="text-[10px] opacity-70">
-                        {new Date(m.sentAt).toLocaleTimeString()}
-                      </div>
-                    )}
                   </div>
-                </div>
-              );
-            })}
-            <div ref={bottomRef} />
+                );
+              });
+              nodes.push(<div ref={bottomRef} key="bottom" />);
+              return nodes;
+            })()}
           </div>
 
-          {/* -------- context menu -------- */}
+          {/* context-menu */}
           {menuMsgId && menuPos && (
             <div
               ref={menuRef}
               className="fixed z-50 bg-black-100 rounded border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-2"
-              style={{
-                top: menuPos.top,
-                left: menuPos.left,
-                width: 150
-              }}
+              style={{ top: menuPos.top, left: menuPos.left, width: 200 }}
             >
-              <div className="flex items-center gap-1 flex-wrap mb-2">
-                {msgs
-                  .find((m) => m.id === menuMsgId)
-                  ?.emojis.slice(0, 5)
-                  .map((e, i) => (
-                    <button
-                      key={i}
-                      onClick={() => react(menuMsgId, e.emoji)}
-                      className="p-1 text-xl"
-                    >
-                      {e.emoji}
-                    </button>
-                  ))}
-                <button
-                  onClick={(e) => openPicker(e as any, menuMsgId)}
-                  className="p-1"
-                >
-                  <HiOutlineEmojiHappy />
-                </button>
-              </div>
               <button
                 onClick={() => {
                   setReplyTo(menuMsgId!);
                   setMenuMsgId(null);
                 }}
-                className="w-full text-left px-2 py-1 hover:bg-gray-800 rounded"
+                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
               >
-                Reply
+                <HiOutlineReply className="w-5 h-5" /> Reply
+              </button>
+              {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
+                <button
+                  onClick={() => {
+                    setEditingId(menuMsgId!);
+                    setMenuMsgId(null);
+                  }}
+                  className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
+                >
+                  <HiOutlinePencilAlt className="w-5 h-5" /> Edit message
+                </button>
+              )}
+              <button
+                onClick={() => {
+                  setReactingToId(menuMsgId!);
+                  setShowPicker(true);
+                  setMenuMsgId(null);
+                }}
+                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
+              >
+                <HiOutlineEmojiHappy className="w-5 h-5" /> React to message
               </button>
               <button
                 onClick={() => {
                   rmMe(menuMsgId!);
                   setMenuMsgId(null);
                 }}
-                className="w-full text-left px-2 py-1 hover:bg-gray-800 rounded text-red-400"
+                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-red-400"
               >
-                Delete
+                <HiOutlineTrash className="w-5 h-5" /> Delete for you
               </button>
               {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
                 <button
@@ -673,15 +703,15 @@ export default function ChatPage() {
                     rmAll(menuMsgId!);
                     setMenuMsgId(null);
                   }}
-                  className="w-full text-left px-2 py-1 hover:bg-gray-800 rounded text-red-400"
+                  className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-red-400"
                 >
-                  Delete for All
+                  <HiOutlineTrash className="w-5 h-5" /> Delete for all
                 </button>
               )}
             </div>
           )}
 
-          {/* -------- floating emoji picker -------- */}
+          {/* emoji picker */}
           {showPicker && pickerPos && reactingToId && (
             <div
               className="fixed z-50"
@@ -714,8 +744,8 @@ export default function ChatPage() {
             </div>
           )}
 
-          {/* -------- composer -------- */}
-          <div className="sticky bottom-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
+          {/* composer */}
+          <div className="sticky bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
             {replyTo && (
               <div className="text-xs text-gray-400 mb-1 flex items-start gap-1">
                 <span className="font-semibold">Replying to:</span>
@@ -731,13 +761,15 @@ export default function ChatPage() {
               </div>
             )}
             <div className="flex items-center gap-2">
-            <button
-              onClick={() => { setShowPicker(!showPicker); setReactingToId(null); }}
-              className="p-2 rounded-full hover:bg-gray-800/60"
-            >
-              <FiSmile className="w-5 h-5 text-gray-400" />
-            </button>
-
+              <button
+                onClick={() => {
+                  setShowPicker(!showPicker);
+                  setReactingToId(null);
+                }}
+                className="p-2 rounded-full hover:bg-gray-800/60"
+              >
+                <FiSmile className="w-5 h-5 text-gray-400" />
+              </button>
               <input
                 ref={inputRef}
                 value={msg}
@@ -774,7 +806,6 @@ export default function ChatPage() {
     </main>
   );
 
-  /* -------- root layout -------- */
   return (
     <div className="h-full bg-black-100 text-white">
       {!compact ? (
