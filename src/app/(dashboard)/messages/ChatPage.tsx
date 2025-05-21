@@ -702,7 +702,7 @@ export default function ChatPage() {
             <div
               ref={menuRef}
               className="fixed z-50 bg-black-100 rounded border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-2"
-              style={{ top: menuPos.top, left: menuPos.left, width: 200 }}
+              style={{ top: menuPos.top, left: menuPos.left, width: 190 }}
             >
               <button
                 onClick={() => {
@@ -732,7 +732,7 @@ export default function ChatPage() {
                 }}
                 className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
               >
-                <HiOutlineEmojiHappy className="w-5 h-5" /> React to message
+                <HiOutlineEmojiHappy className="w-5 h-5" /> React
               </button>
               <button
                 onClick={() => {
@@ -814,9 +814,9 @@ export default function ChatPage() {
                 </span>
                 <button
                   onClick={() => setReplyTo(null)}
-                  className="ml-auto text-red-500"
+                  className="ml-auto text-red-300"
                 >
-                  ×
+                  Cancel
                 </button>
               </div>
             )}
