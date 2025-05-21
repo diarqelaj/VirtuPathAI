@@ -452,7 +452,7 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky md:fixed top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className="fixed md:fixed top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
@@ -773,7 +773,7 @@ export default function ChatPage() {
           )}
                   
           {editingId && (
-            <div className="text-xs text-yellow-400 mb-1 flex items-center gap-1">
+            <div className="text-xs text-purple-600 mb-1 flex items-center gap-1">
               <span className="font-semibold">Editing message:</span>
               <span className="truncate max-w-[60%]">
                 {byId(editingId)?.message ?? ''}
