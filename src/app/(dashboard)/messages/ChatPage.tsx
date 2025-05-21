@@ -17,6 +17,7 @@ import Picker, { Theme } from 'emoji-picker-react';
 import api from '@/lib/api';
 import { VerifiedBadge } from '@/components/VerifiedBadge';
 import { OfficialBadge } from '@/components/OfficialBadge';
+import { createPortal } from 'react-dom';
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 
@@ -702,7 +703,7 @@ export default function ChatPage() {
             <div
               ref={menuRef}
               className="fixed z-50 bg-black-100 rounded border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-2"
-              style={{ top: menuPos.top, left: menuPos.left, width: 190 }}
+              style={{ top: menuPos.top, left: menuPos.left, width: MENU_WIDTH }}
             >
               <button
                 onClick={() => {
@@ -756,21 +757,18 @@ export default function ChatPage() {
               )}
             </div>
           )}
-
-          {/* emoji picker */}
-          {showPicker && pickerPos && reactingToId && (
+{/* emoji picker portal */}
+          {showPicker && pickerPos && createPortal(
             <div
-              className="fixed z-50"
               style={{
+                position: 'fixed',
                 top: pickerPos.top,
                 left: pickerPos.left,
-                width: Math.min(320, window.innerWidth - 16)
+                zIndex: 9999,
+                width: Math.min(compact ? 200 : 250, window.innerWidth - 16),
               }}
             >
-              <div
-                ref={pickerRef}
-                className="relative bg-black rounded-xl shadow-lg border border-gray-700"
-              >
+              <div ref={pickerRef} className="rounded-xl bg-transparent relative">
                 <button
                   onClick={() => {
                     setShowPicker(false);
@@ -781,14 +779,19 @@ export default function ChatPage() {
                   ×
                 </button>
                 <Picker
-                  width={Math.min(320, window.innerWidth - 16)}
-                  height={350}
+                  width={Math.min(compact ? 300 : 350, window.innerWidth - 16)}
+                  height={compact ? 300 : 350}
                   theme={Theme.DARK}
-                  onEmojiClick={(e) => react(reactingToId!, e.emoji)}
+                  onEmojiClick={(e) => {
+                    react(reactingToId!, e.emoji);
+                    setShowPicker(false);
+                    setReactingToId(null);
+                  }}
                 />
               </div>
-            </div>
-          )}
+            </div>,
+            document.body
+          )}          
           {hasNewMessages && (
             <div className="absolute bottom-[4.5rem] w-full flex justify-center z-10">
               <button
