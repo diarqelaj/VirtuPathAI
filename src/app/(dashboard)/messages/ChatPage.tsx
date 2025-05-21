@@ -452,7 +452,7 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className="fixed md:sticky top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
@@ -497,9 +497,9 @@ export default function ChatPage() {
             className="
               flex-1 flex flex-col gap-2
               pt-[3.5rem]        /* make room for the 56px-tall header */
-              p-4
-              overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700
+              p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700
               pb-32 md:pb-4
+            
             "
           >
             {msgs.map((m, idx) => {
