@@ -13,11 +13,12 @@ import {
   HiOutlineInformationCircle,
 } from 'react-icons/hi';
 import { FiSmile } from 'react-icons/fi';
-import Picker, { Theme } from 'emoji-picker-react';
+import Picker, { Theme, EmojiClickData } from 'emoji-picker-react';
 import api from '@/lib/api';
 import { VerifiedBadge } from '@/components/VerifiedBadge';
 import { OfficialBadge } from '@/components/OfficialBadge';
 import { createPortal } from 'react-dom';
+
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 
@@ -58,7 +59,6 @@ interface Friend {
   verifiedDate?: string;
 }
 
-/* ---------- component ---------- */
 export default function ChatPage() {
   const router = useRouter();
 
@@ -84,6 +84,7 @@ export default function ChatPage() {
   const [replyTo, setReplyTo] = useState<number | null>(null);
   const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 });
   const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
+  const emojiButtonRef = useRef<HTMLButtonElement>(null);
 
   /* swipe (mobile) */
   const [swipeState, setSwipeState] =
@@ -102,11 +103,16 @@ export default function ChatPage() {
     useState<{ top: number; left: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  /* emoji picker */
+  /* reaction picker */
   const [reactingToId, setReactingToId] = useState<number | null>(null);
+  const [showReactionPicker, setShowReactionPicker] = useState(false);
+
+  /* composer picker */
+  const [showComposerPicker, setShowComposerPicker] = useState(false);
+
+  /* shared picker position */
   const [pickerPos, setPickerPos] =
     useState<{ top: number; left: number } | null>(null);
-  const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
   /* misc refs */
@@ -120,6 +126,13 @@ export default function ChatPage() {
   const [error, setError] = useState('');
   const SCROLL_THRESHOLD = 20; // px from bottom
 
+  /* helpers */
+  const byId = (id: number | null) =>
+    id ? msgs.find((m) => m.id === id) ?? null : null;
+  const cancelEdit = () => {
+    setEditingId(null);
+    setMsg('');
+  };
   const handleScroll = () => {
     const c = containerRef.current;
     if (!c) return;
@@ -127,37 +140,20 @@ export default function ChatPage() {
       setHasNewMessages(false);
     }
   };
-  
   const scrollToBottom = (smooth = true) => {
     bottomRef.current?.scrollIntoView({
       behavior: smooth ? 'smooth' : 'auto',
-      block:    'end',
+      block: 'end',
     });
   };
 
-  useEffect(() => {
-  // whenever you switch to a different chat thread:
-  prevMsgsCount.current = 0;
-  setHasNewMessages(false);
-  firstLoad.current = true;
-}, [active]);
-  /* helpers */
-  const cancelEdit = () => {
-    setEditingId(null);
-    setMsg('');
-  };
-  const byId = (id: number | null) =>
-    id ? msgs.find((m) => m.id === id) ?? null : null;
-
-  /* -------- initial load (me + friends) -------- */
+  /* load me + friends */
   useEffect(() => {
     (async () => {
       try {
-        // 1) who am I?
         const me = await api.get<{ userID: number }>('/users/me');
         setMyId(me.data.userID);
 
-        // 2) mutual friends raw
         const raw = await api.get<RawFriendDto[]>(
           `/UserFriends/mutual/${me.data.userID}`
         );
@@ -169,13 +165,12 @@ export default function ChatPage() {
                   id,
                   username: f.username,
                   fullName: f.fullName ?? f.username,
-                  profilePictureUrl: f.profilePictureUrl ?? null
+                  profilePictureUrl: f.profilePictureUrl ?? null,
                 }
               : null;
           })
           .filter(Boolean) as Friend[];
 
-        // 3) enrich each friend with their user info (for badges)
         const enriched = await Promise.all(
           list.map(async (fr) => {
             try {
@@ -188,14 +183,13 @@ export default function ChatPage() {
                 ...fr,
                 isVerified: full.data.isVerified,
                 isOfficial: full.data.isOfficial,
-                verifiedDate: full.data.verifiedDate
+                verifiedDate: full.data.verifiedDate,
               };
             } catch {
               return fr;
             }
           })
         );
-
         setFriends(enriched);
       } catch {
         setError('Failed to load friends.');
@@ -203,32 +197,38 @@ export default function ChatPage() {
     })();
   }, []);
 
-  /* -------- fetch + poll messages -------- */
+  /* fetch + poll messages */
+  const enrichMsg = async (m: any): Promise<ChatMessage> => {
+    try {
+      const res = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
+      return {
+        ...m,
+        emojis: res.data,
+        replyToId: m.replyToId ?? (m.replyToMessageId ?? null),
+      };
+    } catch {
+      return {
+        ...m,
+        emojis: [],
+        replyToId: m.replyToId ?? (m.replyToMessageId ?? null),
+      };
+    }
+  };
   const fetchMessages = async (uid: number) => {
     const r = await api.get<ChatMessage[]>(`/chat/messages/${uid}`);
-    const enriched = await Promise.all(
-      r.data.map(async (m) => {
-        try {
-          const res = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
-          return {
-            ...m,
-            emojis: res.data,
-            replyToId:
-              m.replyToId ?? (m as any).replyToMessageId ?? null
-          };
-        } catch {
-          return {
-            ...m,
-            emojis: [],
-            replyToId:
-              m.replyToId ?? (m as any).replyToMessageId ?? null
-          };
-        }
-      })
-    );
-    setMsgs(enriched);
-  
+    const data = await Promise.all(r.data.map(enrichMsg));
+    setMsgs(data);
   };
+  useEffect(() => {
+    if (!active) return;
+    prevMsgsCount.current = 0;
+    setHasNewMessages(false);
+    firstLoad.current = true;
+    scrollAfterSend.current = true;
+    fetchMessages(active.id);
+    const t = setInterval(() => fetchMessages(active.id), 2000);
+    return () => clearInterval(t);
+  }, [active]);
   useEffect(() => {
     if (firstLoad.current) {
       scrollToBottom(false);
@@ -237,54 +237,48 @@ export default function ChatPage() {
       scrollToBottom(true);
       scrollAfterSend.current = false;
     } else if (msgs.length > prevMsgsCount.current) {
-      // only show the banner if new messages arrived
       setHasNewMessages(true);
     }
-    // update our counter for next time
     prevMsgsCount.current = msgs.length;
   }, [msgs]);
 
- 
-  useEffect(() => {
-    if (!active) return;
-    scrollAfterSend.current = true;
-    fetchMessages(active.id);
-    const t = setInterval(() => fetchMessages(active.id), 2000);
-    return () => clearInterval(t);
-  }, [active]);
-
-  /* -------- focus tricks -------- */
+  /* focus hacks */
   useEffect(() => {
     if (editingId !== null || replyTo !== null) {
       setTimeout(() => inputRef.current?.focus(), 0);
     }
   }, [editingId, replyTo]);
 
-  /* -------- outside-click handlers -------- */
+  /* outside-click handlers */
   useEffect(() => {
-    if (!showPicker) return;
-    const close = () => {
-      setShowPicker(false);
-      setReactingToId(null);
-      setPickerPos(null);
-    };
-    const click = (e: MouseEvent) => {
-      if (pickerRef.current && !pickerRef.current.contains(e.target as Node))
-        close();
-    };
-    const esc = (e: KeyboardEvent) => e.key === 'Escape' && close();
-    document.addEventListener('mousedown', click);
-    window.addEventListener('keydown', esc);
-    return () => {
-      document.removeEventListener('mousedown', click);
-      window.removeEventListener('keydown', esc);
-    };
-  }, [showPicker]);
+    if (showReactionPicker) {
+      const close = (e: MouseEvent) => {
+        if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
+          setShowReactionPicker(false);
+          setReactingToId(null);
+        }
+      };
+      document.addEventListener('mousedown', close);
+      return () => document.removeEventListener('mousedown', close);
+    }
+  }, [showReactionPicker]);
+  useEffect(() => {
+    if (showComposerPicker) {
+      const close = (e: MouseEvent) => {
+        if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
+          setShowComposerPicker(false);
+        }
+      };
+      document.addEventListener('mousedown', close);
+      return () => document.removeEventListener('mousedown', close);
+    }
+  }, [showComposerPicker]);
   useEffect(() => {
     if (!menuMsgId) return;
     const close = (e: MouseEvent | TouchEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node))
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMenuMsgId(null);
+      }
     };
     document.addEventListener('mousedown', close);
     document.addEventListener('touchstart', close);
@@ -294,24 +288,21 @@ export default function ChatPage() {
     };
   }, [menuMsgId]);
 
-  /* -------- positioning helper -------- */
+  /* positioning helpers */
   const openMenuMsg = (id: number, rect: DOMRect) => {
-    let left = rect.left + rect.width / 2 - MENU_WIDTH / 2;
-    if (left < MENU_MARGIN) left = MENU_MARGIN;
+    let left = rect.left;
     if (left + MENU_WIDTH > window.innerWidth - MENU_MARGIN) {
       left = window.innerWidth - MENU_MARGIN - MENU_WIDTH;
     }
-    let top = rect.top - MENU_HEIGHT - MENU_V_GAP;
-    if (top < MENU_MARGIN) {
-      top = rect.bottom + MENU_V_GAP;
-      const maxTop = window.innerHeight - MENU_MARGIN - MENU_HEIGHT;
-      if (top > maxTop) top = maxTop;
+    let top = rect.bottom + MENU_V_GAP;
+    if (top + MENU_HEIGHT > window.innerHeight - MENU_MARGIN) {
+      top = rect.top - MENU_HEIGHT - MENU_V_GAP;
     }
-    setMenuPos({ top: top + window.scrollY, left });
+    setMenuPos({ top: top + window.scrollY, left: left + window.scrollX });
     setMenuMsgId(id);
   };
 
-  const openPicker = (e: React.MouseEvent, id: number) => {
+  const openReactionPicker = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const W = Math.min(320, window.innerWidth - 16),
@@ -322,10 +313,23 @@ export default function ChatPage() {
     if (left < 8) left = 8;
     setPickerPos({ top: top + window.scrollY, left });
     setReactingToId(id);
-    setShowPicker(true);
+    setShowReactionPicker(true);
   };
 
-  /* -------- actions -------- */
+  const openComposerPicker = () => {
+    if (!emojiButtonRef.current) return;
+    const rect = emojiButtonRef.current.getBoundingClientRect();
+    const W = Math.min(compact ? 200 : 320, window.innerWidth - 16);
+    const H = compact ? 240 : 350;
+    let left = rect.left + rect.width / 2 - W / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - W - 8));
+    let top = rect.top - H - 8;
+    if (top < 8) top = rect.bottom + 8;
+    setPickerPos({ top, left });
+    setShowComposerPicker(true);
+  };
+
+  /* actions */
   const send = async () => {
     if (!msg.trim() || !active || myId === null) return;
     try {
@@ -336,7 +340,7 @@ export default function ChatPage() {
         await api.post('/chat/send', {
           receiverId: active.id,
           message: msg.trim(),
-          ReplyToMessageId: replyTo
+          ReplyToMessageId: replyTo,
         });
         scrollAfterSend.current = true;
       }
@@ -346,7 +350,6 @@ export default function ChatPage() {
       setError('Failed to send.');
     }
   };
-
   const react = (id: number, emoji: string) =>
     api.patch(`/Chat/react/${id}`, { Emoji: emoji }).catch(() => setError('React failed'));
   const unreact = (id: number) =>
@@ -355,9 +358,9 @@ export default function ChatPage() {
     api.post(`/chat/delete/${id}/sender`).catch(() => setError('Delete failed'));
   const rmAll = (id: number) =>
     api.post(`/chat/delete-for-everyone/${id}`).catch(() => setError('Delete-all failed'));
-  const addEmojiToInput = (e: any) => setMsg((p) => p + e.emoji);
+  const addEmojiToInput = (e: EmojiClickData) => setMsg((p) => p + e.emoji);
 
-  /* -------- friend filter -------- */
+  /* friend filter */
   const filtered = friends.filter(
     (f) =>
       f.username.toLowerCase().includes(search.toLowerCase()) ||
@@ -387,7 +390,6 @@ export default function ChatPage() {
         placeholder="Search…"
         className="px-3 py-2 bg-black-100 border border-gray-700 rounded-md text-sm mb-4"
       />
-      {/* scroll only this list */}
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
         <ul className="space-y-2 pr-2">
           {filtered.map((f) => {
@@ -400,7 +402,6 @@ export default function ChatPage() {
                 }`}
                 onClick={() => setActive(f)}
               >
-                {/* left side: avatar + name/handle */}
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <img
                     src={
@@ -425,16 +426,13 @@ export default function ChatPage() {
                     <div className="text-xs text-gray-400 truncate">@{f.username}</div>
                   </div>
                 </div>
-
-                {/* right side: Chat button */}
                 <button
-                  onClick={(e) => { e.stopPropagation(); /* open chat */ }}
+                  onClick={(e) => { e.stopPropagation(); }}
                   className="flex-shrink-0 text-indigo-400 text-sm"
                 >
                   Chat
                 </button>
               </li>
-
             );
           })}
         </ul>
@@ -452,7 +450,7 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="fixed top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className="sticky md:sticky top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
@@ -490,212 +488,155 @@ export default function ChatPage() {
             </button>
           </header>
 
-          {/* message list */}
-          <div 
-          ref={containerRef}   
-          onScroll={handleScroll}
-          className="flex-1 flex flex-col space-y-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4">
-            {(() => {
-              const GAP = 1000 * 60 * 30;
-              let lastTime = 0;
-              const nodes: React.ReactNode[] = [];
-              msgs.forEach((m, idx) => {
-                if (myId === null || m.isDeletedForSender) return;
-                const t = new Date(m.sentAt).getTime();
-                if (idx === 0 || t - lastTime > GAP) {
-                  nodes.push(
-                    <div key={`divider-${m.id}`} className="self-center my-2">
-                      <span className="text-gray-400 text-xs px-3 py-1 rounded-full">
-                        {new Date(m.sentAt).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </span>
-                    </div>
-                  );
-                }
-                lastTime = t;
-
-                const isOutgoing = m.senderId === myId;
-                const hovered = hoveredMsgId === m.id;
-
-                nodes.push(
+          {/* messages */}
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4"
+          >
+            {msgs.map((m, idx) => {
+              if (myId === null || m.isDeletedForSender) return null;
+              const isOutgoing = m.senderId === myId;
+              const hovered = hoveredMsgId === m.id;
+              const lastOfGroup =
+                idx === msgs.length - 1 || msgs[idx + 1].senderId !== m.senderId;
+              return (
+                <div
+                  key={m.id}
+                  className={`relative w-full flex items-start ${menuMsgId === m.id ? 'z-50' : ''}`}
+                  onMouseEnter={() => !compact && setHoveredMsgId(m.id)}
+                  onMouseLeave={() => !compact && setHoveredMsgId(null)}
+                  onTouchStart={(e) => {
+                    if (!compact) return;
+                    touchStartX.current = e.touches[0].clientX;
+                    touchStartY.current = e.touches[0].clientY;
+                    setSwipeState({ id: m.id, offset: 0, releasing: false });
+                    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                    longPressTimeout.current = window.setTimeout(() => {
+                      openMenuMsg(m.id, rect);
+                    }, 600);
+                  }}
+                  onTouchMove={(e) => {
+                    if (!compact || !swipeState || swipeState.id !== m.id) return;
+                    const dx = e.touches[0].clientX - touchStartX.current;
+                    const offset = isOutgoing ? Math.min(0, dx) : Math.max(0, dx);
+                    setSwipeState({ id: m.id, offset, releasing: false });
+                    if (longPressTimeout.current) {
+                      clearTimeout(longPressTimeout.current);
+                      longPressTimeout.current = null;
+                    }
+                  }}
+                  onTouchEnd={(e) => {
+                    if (!compact || !swipeState || swipeState.id !== m.id) return;
+                    if (longPressTimeout.current) {
+                      clearTimeout(longPressTimeout.current);
+                      longPressTimeout.current = null;
+                    }
+                    const dx = e.changedTouches[0].clientX - touchStartX.current;
+                    const dy = e.changedTouches[0].clientY - touchStartY.current;
+                    const now = Date.now();
+                    const tap = Math.abs(dx) < 8 && Math.abs(dy) < 8;
+                    if (tap) {
+                      const last = lastTapRef.current;
+                      if (now - last.t < 300 && last.id === m.id) {
+                        const hearted = m.emojis.some(
+                          (r) => r.userId === myId && r.emoji === '❤️'
+                        );
+                        hearted ? unreact(m.id) : react(m.id, '❤️');
+                        lastTapRef.current = { id: 0, t: 0 };
+                      } else {
+                        lastTapRef.current = { id: m.id, t: now };
+                      }
+                    }
+                    const swiped = Math.abs(dx) > 50 && Math.abs(dy) < 50;
+                    setSwipeState((s) => (s ? { ...s, offset: 0, releasing: true } : null));
+                    if (swiped) {
+                      if (!isOutgoing && dx > 0) setReplyTo(m.id);
+                      if (isOutgoing && dx < 0) setReplyTo(m.id);
+                    }
+                    setTimeout(() => setSwipeState(null), 200);
+                  }}
+                >
                   <div
-                    key={m.id}
-                    className={`relative w-full flex items-start ${
-                      menuMsgId === m.id ? 'z-50' : ''
+                    className={`flex flex-col gap-1 max-w-[80%] ${
+                      isOutgoing ? 'ml-auto items-end' : 'mr-auto items-start'
                     }`}
-                    onMouseEnter={() => !compact && setHoveredMsgId(m.id)}
-                    onMouseLeave={() => !compact && setHoveredMsgId(null)}
-                    onTouchStart={(e) => {
-                      if (!compact) return;
-                      touchStartX.current = e.touches[0].clientX;
-                      touchStartY.current = e.touches[0].clientY;
-                      setSwipeState({ id: m.id, offset: 0, releasing: false });
-                      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-                      longPressTimeout.current = window.setTimeout(() => {
-                        openMenuMsg(m.id, rect);
-                      }, 600);
-                    }}
-                    onTouchMove={(e) => {
-                      if (!compact || !swipeState || swipeState.id !== m.id) return;
-                      const dx = e.touches[0].clientX - touchStartX.current;
-                      const offset = isOutgoing ? Math.min(0, dx) : Math.max(0, dx);
-                      setSwipeState({ id: m.id, offset, releasing: false });
-                      if (longPressTimeout.current) {
-                        clearTimeout(longPressTimeout.current);
-                        longPressTimeout.current = null;
-                      }
-                    }}
-                    onTouchEnd={(e) => {
-                      if (!compact || !swipeState || swipeState.id !== m.id) return;
-                      if (longPressTimeout.current) {
-                        clearTimeout(longPressTimeout.current);
-                        longPressTimeout.current = null;
-                      }
-                      const dx = e.changedTouches[0].clientX - touchStartX.current;
-                      const dy = e.changedTouches[0].clientY - touchStartY.current;
-                      const now = Date.now();
-                      const tap = Math.abs(dx) < 8 && Math.abs(dy) < 8;
-                      if (tap) {
-                        const last = lastTapRef.current;
-                        if (now - last.t < 300 && last.id === m.id) {
-                          const hearted = m.emojis.some(
-                            (r) => r.userId === myId && r.emoji === '❤️'
-                          );
-                          hearted ? unreact(m.id) : react(m.id, '❤️');
-                          lastTapRef.current = { id: 0, t: 0 };
-                        } else {
-                          lastTapRef.current = { id: m.id, t: now };
-                        }
-                      }
-                      const swiped = Math.abs(dx) > 50 && Math.abs(dy) < 50;
-                      setSwipeState((s) =>
-                        s ? { ...s, offset: 0, releasing: true } : null
-                      );
-                      if (swiped) {
-                        if (!isOutgoing && dx > 0) setReplyTo(m.id);
-                        if (isOutgoing && dx < 0) setReplyTo(m.id);
-                      }
-                      setTimeout(() => setSwipeState(null), 200);
+                    style={{
+                      transform:
+                        swipeState?.id === m.id
+                          ? `translateX(${swipeState.offset}px)`
+                          : undefined,
+                      transition: swipeState?.releasing ? 'transform 0.2s ease-out' : 'none',
                     }}
                   >
-                    <div
-                      className={`flex flex-col gap-1 max-w-[80%] ${
-                        isOutgoing ? 'ml-auto items-end' : 'mr-auto items-start'
-                      }`}
-                      style={{
-                        transform:
-                          swipeState?.id === m.id
-                            ? `translateX(${swipeState.offset}px)`
-                            : undefined,
-                        transition: swipeState?.releasing
-                          ? 'transform 0.2s ease-out'
-                          : 'none'
-                      }}
-                    >
-                      {m.replyToId && (
-                        <div className="flex items-center text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
-                          <HiOutlineReply className="w-4 h-4 mr-1" />
-                          <span className="truncate">
-                            {byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}
-                          </span>
-                        </div>
-                      )}
-                      <div className="relative flex items-center">
+                    {m.replyToId && (
+                      <div className="text-xs text-indigo-300 italic border-l-2 border-indigo-400 bg-black-200 rounded px-3 py-1">
+                        ↪ {byId(m.replyToId)?.message.slice(0, 60) ?? '[Deleted]'}
+                      </div>
+                    )}
+                    <div className="relative flex items-center">
+                      <div
+                        onDoubleClick={() => react(m.id, '❤️')}
+                        className={`px-4 py-2 rounded-2xl text-sm break-words ${
+                          isOutgoing ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-gray-100'
+                        }`}
+                      >
+                        {m.message}
+                        {m.isEdited && <span className="italic text-[10px] ml-1">(edited)</span>}
+                      </div>
+                      {!compact && hovered && (
                         <div
-                          onDoubleClick={() => react(m.id, '❤️')}
-                          className={`px-4 py-2 rounded-2xl text-sm break-words max-w-[48ch] min-w-[4rem] ${
+                          className={`absolute top-1/2 -translate-y-1/2 flex gap-2 ${
                             isOutgoing
-                              ? 'bg-indigo-600 text-white'
-                              : 'bg-gray-700 text-gray-100'
+                              ? 'right-[calc(100%+0.4rem)]'
+                              : 'left-[calc(100%+0.4rem)]'
                           }`}
                         >
-                          {editingId === m.id ? (
-                            <div className="flex gap-2">
-                              <input
-                                ref={inputRef}
-                                value={msg}
-                                onChange={(e) => setMsg(e.target.value)}
-                                onKeyDown={(e) => {
-                                  if (e.key === 'Enter') send();
-                                  if (e.key === 'Escape') cancelEdit();
-                                }}
-                                className="flex-1 px-2 py-1 rounded text-black"
-                              />
-                              <button onClick={send}>
-                                <HiCheck className="text-white" />
-                              </button>
-                              <button
-                                onClick={cancelEdit}
-                                className="text-gray-300 hover:text-white"
-                              >
-                                ×
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              {m.message}
-                              {m.isEdited && (
-                                <span className="text-[10px] italic ml-1">(edited)</span>
-                              )}
-                            </>
-                          )}
-                        </div>
-                        {!compact && hovered && (
-                          <div
-                            className={`absolute top-1/2 -translate-y-1/2 flex gap-2 ${
-                              isOutgoing
-                                ? 'right-[calc(100%+0.4rem)]'
-                                : 'left-[calc(100%+0.4rem)]'
-                            }`}
+                          <button onClick={() => setReplyTo(m.id)} className="p-1 rounded-full hover:bg-gray-800">
+                            <HiOutlineReply className="w-4 h-4 text-white" />
+                          </button>
+                          <button onClick={(e) => openReactionPicker(e, m.id)} className="p-1 rounded-full hover:bg-gray-800">
+                            <HiOutlineEmojiHappy className="w-5 h-5 text-white" />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openMenuMsg(m.id, (e.currentTarget as HTMLElement).getBoundingClientRect());
+                            }}
+                            className="p-1 rounded-full hover:bg-gray-800"
                           >
-                            <button
-                              onClick={() => setReplyTo(m.id)}
-                              className="p-1 rounded-full hover:bg-gray-800"
-                            >
-                              <HiOutlineReply className="w-4 h-4 text-white" />
-                            </button>
-                            <button
-                              onClick={(e) => openPicker(e, m.id)}
-                              className="p-1 rounded-full hover:bg-gray-800"
-                            >
-                              <HiOutlineEmojiHappy className="w-5 h-5 text-white" />
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-                                openMenuMsg(m.id, rect);
-                              }}
-                              className="p-1 rounded-full hover:bg-gray-800"
-                            >
-                              <HiOutlineDotsHorizontal className="w-5 h-5 text-white" />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                      {!!m.emojis.length && (
-                        <div className="flex flex-wrap gap-1 mt-1 text-xl">
-                          {m.emojis.map((e, i) => (
-                            <div
-                              key={i}
-                              title={e.fullName}
-                              onClick={() => unreact(m.id)}
-                              className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80"
-                            >
-                              {e.emoji}
-                            </div>
-                          ))}
+                            <HiOutlineDotsHorizontal className="w-5 h-5 text-white" />
+                          </button>
                         </div>
                       )}
                     </div>
+                    {!!m.emojis.length && (
+                      <div className="flex flex-wrap gap-1 mt-1 text-xl">
+                        {m.emojis.map((e, i) => (
+                          <div
+                            key={i}
+                            onClick={() => unreact(m.id)}
+                            className="bg-black-200 px-2 py-1 rounded-full cursor-pointer hover:opacity-80"
+                            title={e.fullName}
+                          >
+                            {e.emoji}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {lastOfGroup && (
+                      <div className="text-[10px] opacity-70">
+                        {new Date(m.sentAt).toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </div>
+                    )}
                   </div>
-                );
-              });
-              nodes.push(<div ref={bottomRef} key="bottom" />);
-              return nodes;
-            })()}
+                </div>
+              );
+            })}
+            <div ref={bottomRef} />
           </div>
 
           {/* context-menu */}
@@ -728,7 +669,7 @@ export default function ChatPage() {
               <button
                 onClick={() => {
                   setReactingToId(menuMsgId!);
-                  setShowPicker(true);
+                  setShowReactionPicker(true);
                   setMenuMsgId(null);
                 }}
                 className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
@@ -757,78 +698,74 @@ export default function ChatPage() {
               )}
             </div>
           )}
-{/* emoji picker portal */}
-          {showPicker && pickerPos && createPortal(
-            <div
-              style={{
-                position: 'fixed',
-                top: pickerPos.top,
-                left: pickerPos.left,
-                zIndex: 9999,
-                width: Math.min(compact ? 200 : 250, window.innerWidth - 16),
+
+       {/* reaction picker portal */}
+        {showReactionPicker && reactingToId !== null && pickerPos && createPortal(
+          <div
+            ref={pickerRef}
+            className={
+              compact
+                ? 'fixed inset-x-2 bottom-0 h-[35vh] bg-black-100/95 rounded-t-2xl border-t border-gray-700 z-50 relative'
+                : 'fixed bg-black-100 rounded-xl shadow-lg z-50 relative'
+            }
+            style={
+              compact
+                ? {}
+                : {
+                    top: pickerPos.top,
+                    left: pickerPos.left,
+                    width: Math.min(320, window.innerWidth - 16),
+                    height: 360,
+                  }
+            }
+          >
+            {/* Close button */}
+            <button
+              onClick={() => {
+                setShowReactionPicker(false);
+                setReactingToId(null);
               }}
+              className="absolute top-2 right-2 text-white text-2xl leading-none"
+              aria-label="Close emoji picker"
             >
-              <div ref={pickerRef} className="rounded-xl bg-transparent relative">
-                <button
-                  onClick={() => {
-                    setShowPicker(false);
-                    setReactingToId(null);
-                  }}
-                  className="absolute right-1 top-1 text-gray-400 hover:text-white"
-                >
-                  ×
-                </button>
-                <Picker
-                  width={Math.min(compact ? 300 : 350, window.innerWidth - 16)}
-                  height={compact ? 300 : 350}
-                  theme={Theme.DARK}
-                  onEmojiClick={(e) => {
-                    react(reactingToId!, e.emoji);
-                    setShowPicker(false);
-                    setReactingToId(null);
-                  }}
-                />
-              </div>
-            </div>,
-            document.body
-          )}          
-          {hasNewMessages && (
-            <div className="absolute bottom-[4.5rem] w-full flex justify-center z-10">
-              <button
-                onClick={() => {
-                  scrollToBottom(true);
-                  setHasNewMessages(false);
-                }}
-                className="px-4 py-1 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm text-white shadow"
-              >
-                New messages ↓
-              </button>
-            </div>
-          )}
+              ×
+            </button>
+
+            {/* Emoji picker */}
+            <Picker
+              width={compact ? window.innerWidth - 16 : Math.min(320, window.innerWidth - 16)}
+              height={compact ? window.innerHeight * 0.35 : 360}
+              theme={Theme.DARK}
+              onEmojiClick={(emojiData) => {
+                react(reactingToId!, emojiData.emoji);
+                setShowReactionPicker(false);
+                setReactingToId(null);
+              }}
+            />
+          </div>,
+          document.body
+        )}
+
+
 
 
           {/* composer */}
-          <div className="fixed bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
+          <div className="fixed md:sticky bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
             {replyTo && (
               <div className="text-xs text-gray-400 mb-1 flex items-start gap-1">
                 <span className="font-semibold">Replying to:</span>
                 <span className="truncate max-w-[60%]">
                   {byId(replyTo)?.message.slice(0, 60) ?? '[Deleted]'}
                 </span>
-                <button
-                  onClick={() => setReplyTo(null)}
-                  className="ml-auto text-red-300"
-                >
-                  Cancel
+                <button onClick={() => setReplyTo(null)} className="ml-auto text-red-300">
+                  ×
                 </button>
               </div>
             )}
             <div className="flex items-center gap-2">
               <button
-                onClick={() => {
-                  setShowPicker(!showPicker);
-                  setReactingToId(null);
-                }}
+                ref={emojiButtonRef}
+                onClick={openComposerPicker}
                 className="p-2 rounded-full hover:bg-gray-800/60"
               >
                 <FiSmile className="w-5 h-5 text-gray-400" />
@@ -848,23 +785,79 @@ export default function ChatPage() {
                 Send
               </button>
             </div>
-            {!reactingToId && showPicker && (
-              <div className="mt-2">
-                <Picker
-                  width={320}
-                  height={350}
-                  theme={Theme.DARK}
-                  onEmojiClick={addEmojiToInput}
-                />
-              </div>
-            )}
           </div>
+          {showComposerPicker && pickerPos && createPortal(
+            <div
+              ref={pickerRef}
+              style={{
+                position: 'fixed',
+                zIndex: 9999,
+                ...(compact
+                  ? {
+                      bottom: 60,
+                      left: 8,
+                      width: window.innerWidth - 16,
+                      height: '35vh',
+                    }
+                  : {
+                      top: pickerPos.top,
+                      left: pickerPos.left,
+                      width: Math.min(320, window.innerWidth - 16),
+                      height: 350,
+                    }),
+              }}
+              className={
+                compact
+                  ? 'bg-black-100/95 rounded-t-2xl border-t border-gray-700'
+                  : 'bg-black-100 rounded-xl shadow-lg'
+              }
+            >
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setShowComposerPicker(false)}
+                className="absolute top-2 right-2 text-white text-xl leading-none"
+                style={{ zIndex: 10000 }}
+                aria-label="Close emoji picker"
+              >
+                X
+              </button>
+
+              {/* THE EMOJI PICKER */}
+              <Picker
+                width={compact ? window.innerWidth - 16 : Math.min(320, window.innerWidth - 16)}
+                height={compact ? window.innerHeight * 0.35 : 350}
+                theme={Theme.DARK}
+                onEmojiClick={(emojiData) => {
+                  addEmojiToInput(emojiData);
+                  setShowComposerPicker(false);
+                }}
+              />
+            </div>,
+            document.body
+          )}
+
+          
+
+
+
+          {hasNewMessages && (
+            <div className="absolute bottom-[4.5rem] w-full flex justify-center z-10">
+              <button
+                onClick={() => {
+                  scrollToBottom(true);
+                  setHasNewMessages(false);
+                }}
+                className="px-4 py-1 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm text-white shadow"
+              >
+                New messages ↓
+              </button>
+            </div>
+          )}
+
+          {error && (
+            <div className="absolute bottom-24 left-0 right-0 text-center text-red-500 text-xs">{error}</div>
+          )}
         </>
-      )}
-      {error && (
-        <div className="absolute bottom-24 left-0 right-0 text-center text-red-500 text-sm">
-          {error}
-        </div>
       )}
     </main>
   );
