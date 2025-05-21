@@ -109,12 +109,37 @@ export default function ChatPage() {
   const pickerRef = useRef<HTMLDivElement>(null);
 
   /* misc refs */
+  const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const scrollAfterSend = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const [hasNewMessages, setHasNewMessages] = useState(false);
+  const firstLoad = useRef(true);
+  const prevMsgsCount = useRef(0);
   const [error, setError] = useState('');
+  const SCROLL_THRESHOLD = 20; // px from bottom
 
+  const handleScroll = () => {
+    const c = containerRef.current;
+    if (!c) return;
+    if (c.scrollTop + c.clientHeight >= c.scrollHeight - SCROLL_THRESHOLD) {
+      setHasNewMessages(false);
+    }
+  };
+  
+  const scrollToBottom = (smooth = true) => {
+    bottomRef.current?.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'auto',
+      block:    'end',
+    });
+  };
+
+  useEffect(() => {
+  // whenever you switch to a different chat thread:
+  prevMsgsCount.current = 0;
+  setHasNewMessages(false);
+  firstLoad.current = true;
+}, [active]);
   /* helpers */
   const cancelEdit = () => {
     setEditingId(null);
@@ -201,14 +226,24 @@ export default function ChatPage() {
       })
     );
     setMsgs(enriched);
-    if (scrollAfterSend.current) {
-      setTimeout(
-        () => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }),
-        0
-      );
-      scrollAfterSend.current = false;
-    }
+  
   };
+  useEffect(() => {
+    if (firstLoad.current) {
+      scrollToBottom(false);
+      firstLoad.current = false;
+    } else if (scrollAfterSend.current) {
+      scrollToBottom(true);
+      scrollAfterSend.current = false;
+    } else if (msgs.length > prevMsgsCount.current) {
+      // only show the banner if new messages arrived
+      setHasNewMessages(true);
+    }
+    // update our counter for next time
+    prevMsgsCount.current = msgs.length;
+  }, [msgs]);
+
+ 
   useEffect(() => {
     if (!active) return;
     scrollAfterSend.current = true;
@@ -357,40 +392,48 @@ export default function ChatPage() {
           {filtered.map((f) => {
             const isActive = active?.id === f.id;
             return (
-              <li key={f.id}>
-                <button
-                  onClick={() => setActive(f)}
-                  className={`w-full flex items-center justify-between gap-3 p-2 rounded-lg ${
-                    isActive ? 'bg-gray-800' : 'hover:bg-gray-800/60'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={
-                        f.profilePictureUrl
-                          ? `${API_HOST}${f.profilePictureUrl}`
-                          : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                              f.fullName
-                            )}&background=5e17eb&color=fff`
-                      }
-                      className="w-10 h-10 rounded-full object-cover border border-white/10"
-                      alt={f.username}
-                    />
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-1 text-white font-medium">
-                        {f.fullName}
-                        {f.isOfficial ? (
-                          <OfficialBadge date={f.verifiedDate} />
-                        ) : f.isVerified ? (
-                          <VerifiedBadge date={f.verifiedDate} />
-                        ) : null}
-                      </div>
-                      <div className="text-xs text-gray-400">@{f.username}</div>
+              <li
+                key={f.id}
+                className={`flex items-center justify-between gap-3 p-2 rounded-lg min-w-0 ${
+                  isActive ? 'bg-gray-800' : 'hover:bg-gray-800/60'
+                }`}
+                onClick={() => setActive(f)}
+              >
+                {/* left side: avatar + name/handle */}
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <img
+                    src={
+                      f.profilePictureUrl
+                        ? `${API_HOST}${f.profilePictureUrl}`
+                        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                            f.fullName
+                          )}&background=5e17eb&color=fff`
+                    }
+                    className="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0"
+                    alt={f.username}
+                  />
+                  <div className="flex flex-col overflow-hidden min-w-0">
+                    <div className="flex items-center gap-1 text-white font-medium truncate">
+                      {f.fullName}
+                      {f.isOfficial ? (
+                        <OfficialBadge date={f.verifiedDate} />
+                      ) : f.isVerified ? (
+                        <VerifiedBadge date={f.verifiedDate} />
+                      ) : null}
                     </div>
+                    <div className="text-xs text-gray-400 truncate">@{f.username}</div>
                   </div>
-                  <span className="text-indigo-400 text-sm">Chat</span>
+                </div>
+
+                {/* right side: Chat button */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); /* open chat */ }}
+                  className="flex-shrink-0 text-indigo-400 text-sm"
+                >
+                  Chat
                 </button>
               </li>
+
             );
           })}
         </ul>
@@ -400,7 +443,7 @@ export default function ChatPage() {
 
   /* -------- chat panel -------- */
   const ChatPanel = (
-    <main className="flex-1 flex flex-col relative">
+    <main className="flex-1 flex flex-col relative overflow-hidden">
       {!active ? (
         <div className="m-auto text-gray-500">
           Select a friend to start chatting
@@ -447,7 +490,10 @@ export default function ChatPage() {
           </header>
 
           {/* message list */}
-          <div className="flex-1 flex flex-col space-y-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4">
+          <div 
+          ref={containerRef}   
+          onScroll={handleScroll}
+          className="flex-1 flex flex-col space-y-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 pb-32 md:pb-4">
             {(() => {
               const GAP = 1000 * 60 * 30;
               let lastTime = 0;
@@ -743,6 +789,20 @@ export default function ChatPage() {
               </div>
             </div>
           )}
+          {hasNewMessages && (
+            <div className="absolute bottom-[4.5rem] w-full flex justify-center z-10">
+              <button
+                onClick={() => {
+                  scrollToBottom(true);
+                  setHasNewMessages(false);
+                }}
+                className="px-4 py-1 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm text-white shadow"
+              >
+                New messages ↓
+              </button>
+            </div>
+          )}
+
 
           {/* composer */}
           <div className="sticky bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
