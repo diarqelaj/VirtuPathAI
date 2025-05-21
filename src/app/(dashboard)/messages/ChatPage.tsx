@@ -11,6 +11,8 @@ import {
   HiOutlinePencilAlt,
   HiOutlineTrash,
   HiOutlineInformationCircle,
+  HiOutlineX ,
+
 } from 'react-icons/hi';
 import { FiSmile } from 'react-icons/fi';
 import Picker, { Theme, EmojiClickData } from 'emoji-picker-react';
@@ -450,7 +452,7 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky md:sticky top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className="sticky md:fixed top-0 left-0 right-0 z-20 px-4 py-3 border-b border-gray-800 flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
@@ -751,17 +753,40 @@ export default function ChatPage() {
 
           {/* composer */}
           <div className="fixed md:sticky bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-3 border-t border-gray-800 bg-black-100/90 backdrop-blur">
-            {replyTo && (
-              <div className="text-xs text-gray-400 mb-1 flex items-start gap-1">
-                <span className="font-semibold">Replying to:</span>
-                <span className="truncate max-w-[60%]">
-                  {byId(replyTo)?.message.slice(0, 60) ?? '[Deleted]'}
-                </span>
-                <button onClick={() => setReplyTo(null)} className="ml-auto text-red-300">
-                  ×
-                </button>
-              </div>
-            )}
+          {replyTo && (
+            <div className="text-xs text-gray-400 mb-1 flex items-center gap-1">
+              {/* rotated reply arrow */}
+              <HiOutlineReply className="w-4 h-4 text-gray-400 rotate-180" />
+              <span className="font-semibold">Replying to:</span>
+              <span className="truncate max-w-[60%]">
+                {byId(replyTo)?.message.slice(0, 60) ?? '[Deleted]'}
+              </span>
+              {/* cancel button */}
+              <button
+                onClick={() => setReplyTo(null)}
+                className="ml-auto text-red-300 p-1 rounded-full hover:bg-red-500/20"
+                aria-label="Cancel reply"
+              >
+                <HiOutlineX className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+                  
+          {editingId && (
+            <div className="text-xs text-yellow-400 mb-1 flex items-center gap-1">
+              <span className="font-semibold">Editing message:</span>
+              <span className="truncate max-w-[60%]">
+                {byId(editingId)?.message ?? ''}
+              </span>
+              <button
+                onClick={cancelEdit}
+                className="ml-auto p-1 rounded-full text-red-300 hover:bg-red-500/20"
+                aria-label="Cancel edit"
+              >
+                <HiOutlineX className="w-4 h-4" />
+              </button>
+            </div>
+          )}
             <div className="flex items-center gap-2">
               <button
                 ref={emojiButtonRef}
