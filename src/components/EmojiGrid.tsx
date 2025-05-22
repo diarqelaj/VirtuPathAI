@@ -11,7 +11,7 @@ import React, {
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import './hide-scrollbar.css'
 
-// your emoji JSON groups (filenames)
+// your emoji JSON groups (filenames in public/emojis)
 const GROUP_FILES = [
   'activities',
   'animals_&_nature',
@@ -25,7 +25,7 @@ const GROUP_FILES = [
   'travel_&_places',
 ]
 
-// force these two first in the tab bar & listing
+// force these two first
 const DISPLAY_ORDER = [
   'smileys_&_emotion',
   'people_&_body',
@@ -36,14 +36,14 @@ const DISPLAY_ORDER = [
 
 // Fitzpatrick skin-tone modifiers
 const FITZ_MODS = [
-  '\u{1F3FB}', // light
-  '\u{1F3FC}', // medium-light
-  '\u{1F3FD}', // medium
-  '\u{1F3FE}', // medium-dark
-  '\u{1F3FF}', // dark
+  '\u{1F3FB}',
+  '\u{1F3FC}',
+  '\u{1F3FD}',
+  '\u{1F3FE}',
+  '\u{1F3FF}',
 ]
 
-// detect if an emoji should show skin-tone variants
+// should we show skin variants?
 function isSkinnable(group: string, subgroup: string) {
   return (
     group === 'people_&_body' ||
@@ -82,32 +82,28 @@ export default function EmojiGrid({
   const containerRef = useRef<HTMLDivElement>(null)
   const tabsRef = useRef<HTMLDivElement>(null)
 
-  // track active tab
   const [activeTab, setActiveTab] = useState(DISPLAY_ORDER[0])
 
-  // compute number of columns (for capping recent to one row)
-  const CELL_SIZE = 40 // px (2.5rem)
+  // columns for “recent” cap
+  const CELL_SIZE = 40
   const cols = Math.floor(width / CELL_SIZE)
   const maxRecent = cols
 
-  // load & flatten JSON + inject `group`
+  // 1) fetch all group JSONs from public/emojis
   useEffect(() => {
     ;(async () => {
-      const modules = await Promise.all(
-        GROUP_FILES.map((g) =>
-          import(`@/data/emojis/${g}.json`).then((m) =>
-            (m.default as Omit<Emoji, 'group'>[]).map((e) => ({
-              ...e,
-              group: g,
-            }))
-          )
-        )
+      const all = await Promise.all(
+        GROUP_FILES.map(async (g) => {
+          const res = await fetch(`/emojis/${g}.json`)
+          const arr = (await res.json()) as Omit<Emoji, 'group'>[]
+          return arr.map((e) => ({ ...e, group: g }))
+        })
       )
-      setAllEmojis(modules.flat())
+      setAllEmojis(all.flat())
     })()
   }, [])
 
-  // filter on name or glyph
+  // 2) search filter
   const filtered = useMemo(() => {
     if (!search.trim()) return allEmojis
     const lc = search.toLowerCase()
@@ -116,7 +112,7 @@ export default function EmojiGrid({
     )
   }, [allEmojis, search])
 
-  // infinite-scroll “load more”
+  // 3) infinite scroll
   const onScroll = useCallback(() => {
     const c = containerRef.current
     if (!c) return
@@ -124,14 +120,13 @@ export default function EmojiGrid({
       setVisibleCount((v) => Math.min(v + 300, filtered.length))
     }
   }, [filtered.length])
-
   useEffect(() => {
     const c = containerRef.current
     c?.addEventListener('scroll', onScroll)
     return () => c?.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
-  // most-used emojis
+  // 4) recent usage
   const mostUsed: string[] = useMemo(() => {
     if (mostUsedOverride) return mostUsedOverride
     try {
@@ -141,7 +136,7 @@ export default function EmojiGrid({
     }
   }, [mostUsedOverride])
 
-  // track & call onSelect
+  // 5) pick & track
   function pick(glyph: string) {
     try {
       const prev = JSON.parse(localStorage.getItem('emoji-used') || '[]')
@@ -154,7 +149,7 @@ export default function EmojiGrid({
     onSelect(glyph)
   }
 
-  // group filtered emojis by their filename-group
+  // 6) group by filename-group
   const byGroup = useMemo(() => {
     const map: Record<string, Emoji[]> = {}
     filtered.forEach((e) => {
@@ -163,13 +158,10 @@ export default function EmojiGrid({
     return map
   }, [filtered])
 
-  // scroll tabs by delta
+  // 7) tab ⇒ scroll
   const scrollTabsBy = (delta: number) => {
-    if (!tabsRef.current) return
-    tabsRef.current.scrollBy({ left: delta, behavior: 'smooth' })
+    tabsRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
   }
-
-  // handle tab click
   const onTabClick = (grp: string) => {
     setActiveTab(grp)
     document
@@ -184,7 +176,7 @@ export default function EmojiGrid({
       className="flex flex-col bg-black-100 rounded-2xl border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-4"
       style={rootStyle}
     >
-      {/* Search bar */}
+      {/* Search */}
       <input
         type="text"
         value={search}
@@ -204,11 +196,7 @@ export default function EmojiGrid({
         >
           <HiChevronLeft className="text-white text-xl" />
         </button>
-
-        <div
-          ref={tabsRef}
-          className="flex-1 flex gap-2 hide-scrollbar px-10"
-        >
+        <div ref={tabsRef} className="flex-1 flex gap-2 hide-scrollbar px-10">
           {DISPLAY_ORDER.map((grp) => {
             const icon = byGroup[grp]?.[0]?.glyph || '▪️'
             const isActive = grp === activeTab
@@ -233,7 +221,6 @@ export default function EmojiGrid({
             )
           })}
         </div>
-
         <button
           onClick={() => scrollTabsBy(width * 0.5)}
           className="absolute right-0 z-10 p-1 bg-black-200 hover:bg-black-300 rounded-full"
@@ -297,8 +284,9 @@ export default function EmojiGrid({
                       >
                         {e.glyph}
                       </button>
+
                       {showSkinPicker && skinBase?.glyph === e.glyph && (
-                        <div className="absolute z-20 top-0 left-0 flex bg-black-100 border border-white/10 rounded shadow-lg ">
+                        <div className="absolute z-20 top-0 left-0 flex bg-black-100 border border-white/10 rounded shadow-lg p-1">
                           {FITZ_MODS.map((mod) => (
                             <button
                               key={mod}
