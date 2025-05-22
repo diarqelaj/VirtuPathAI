@@ -453,9 +453,9 @@ export default function ChatPage() {
          
           {/* header */}
           <header
-            className={`z-150 px-4 py-3 border-b border-gray-800
+            className={`z-20 px-3  border-b border-gray-800
                         flex items-center justify-between bg-black-100/90 backdrop-blur
-                        ${compact ? 'fixed inset-x-0 top-0' : 'sticky top-0'}`}
+                        ${compact ? 'fixed inset-x-0 mt-1 py-0 top-0' : 'sticky py-2 top-3'}`}
             style={
               compact
                 ? {
@@ -731,7 +731,7 @@ export default function ChatPage() {
             ref={pickerRef}
             className={
               compact
-                ? 'fixed inset-x-2 bottom-0 h-[35vh] bg-black-100/95 rounded-t-2xl border-t border-gray-700 z-50 relative'
+                ? 'fixed inset-x-2 bottom-10 h-[35vh] bg-black-100/95 rounded-t-2xl border-t border-gray-700 z-50 relative'
                 : 'fixed bg-black-100 rounded-xl shadow-lg z-50 relative'
             }
             style={
