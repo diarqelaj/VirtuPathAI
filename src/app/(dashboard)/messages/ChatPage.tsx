@@ -451,8 +451,10 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className="sticky top-0 z-20 px-4 py-3 border-b border-gray-800 
-                       flex items-center justify-between bg-black-100/90 backdrop-blur">
+          <header className={`z-20 h-14 px-4 py-3 border-b border-gray-800
+              flex items-center justify-between bg-black-100/90 backdrop-blur
+              ${compact ? 'fixed top-0 left-0 right-0' : 'sticky top-0'}`}
+          >
             <div
                className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
