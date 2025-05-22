@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef,useLayoutEffect , useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   HiOutlineArrowLeft,
@@ -65,20 +65,19 @@ interface Friend {
 export default function ChatPage() {
   const router = useRouter();
 
-  const isClient = typeof window !== 'undefined';
-  const [isMobile, setIsMobile] = useState(
-    // on the server we default to false; in the browser we read it immediately
-    isClient ? window.innerWidth < 768 : false
-  );
+  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    if (!isClient) return;
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [isClient]);
+  useLayoutEffect(() => {
+    const mql = window.matchMedia('(max-width: 767px)');
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    // initialize
+    setIsMobile(mql.matches);
+    // listen for changes
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
   const compact = isMobile;
-
   /* state */
   const [myId, setMyId] = useState<number | null>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
@@ -780,26 +779,24 @@ export default function ChatPage() {
 
 
     
+          
           {showReactionPicker &&
-          reactingToId !== null &&
-          reactionPickerPos &&
+          reactingToId != null &&
           createPortal(
             compact ? (
-              // MOBILE VERSION: bottom sheet
+              // always show bottom‐sheet on mobile—no position check
               <div
                 ref={reactionPickerRef}
-                className="fixed inset-x-2 bottom-1 h-[35vh] bg-black-100/95 rounded-t-2xl border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] z-50"
+                className="fixed inset-x-2 bottom-0 h-[35vh] bg-black-100/95 rounded-t-2xl border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] z-50"
                 style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-              
               >
-                {/* Close button */}
                 <button
                   onClick={() => {
-                    setShowReactionPicker(false)
-                    setReactingToId(null)
+                    setShowReactionPicker(false);
+                    setReactingToId(null);
                   }}
-                  className="absolute top-2 right-2 text-white text-2xl z-10"
-                  aria-label="Close emoji picker"
+                  className="absolute top-2 right-2 text-2xl text-white z-10"
+                  aria-label="Close"
                 >
                   ×
                 </button>
@@ -807,51 +804,52 @@ export default function ChatPage() {
                 <EmojiGrid
                   width={window.innerWidth - 16}
                   height={window.innerHeight * 0.35}
-                  mostUsedOverride={[]} // no “most used” for reactions
+                  mostUsedOverride={[]}
                   onSelect={(emoji) => {
-                    react(reactingToId!, emoji)
-                    setShowReactionPicker(false)
+                    react(reactingToId!, emoji);
+                    setShowReactionPicker(false);
                   }}
                 />
               </div>
             ) : (
-              // DESKTOP VERSION: floating popup
-              <div
-                ref={reactionPickerRef}
-                className="fixed bg-black-100 rounded-2xl shadow-lg z-50"
-                style={{
-                  top: reactionPickerPos.top,
-                  left: reactionPickerPos.left,
-                  width: Math.min(320, window.innerWidth - 16),
-                  height: 360,
-                }}
-              >
-                {/* Close button */}
-                <button
-                  onClick={() => {
-                    setShowReactionPicker(false)
-                    setReactingToId(null)
+              // desktop popup—*this* still needs reactionPickerPos
+              reactionPickerPos && (
+                <div
+                  ref={reactionPickerRef}
+                  className="fixed bg-black-100 rounded-2xl shadow-lg z-50"
+                  style={{
+                    top: reactionPickerPos.top,
+                    left: reactionPickerPos.left,
+                    width: Math.min(320, window.innerWidth - 16),
+                    height: 360,
                   }}
-                  className="absolute top-2 right-1 p-1 text-white text-xl z-10"
-                  aria-label="Close emoji picker"
                 >
-                  <HiOutlineX size={20} />
-                </button>
-              
+                  <button
+                    onClick={() => {
+                      setShowReactionPicker(false);
+                      setReactingToId(null);
+                    }}
+                    className="absolute top-2 right-1 p-1 text-white text-xl z-10"
+                    aria-label="Close"
+                  >
+                    <HiOutlineX size={20} />
+                  </button>
 
-                <EmojiGrid
-                  width={Math.min(320, window.innerWidth - 16)}
-                  height={360}
-                  mostUsedOverride={[]} // no “most used” for reactions
-                  onSelect={(emoji) => {
-                    react(reactingToId!, emoji)
-                    setShowReactionPicker(false)
-                  }}
-                />
-              </div>
+                  <EmojiGrid
+                    width={Math.min(320, window.innerWidth - 16)}
+                    height={360}
+                    mostUsedOverride={[]}
+                    onSelect={(emoji) => {
+                      react(reactingToId!, emoji);
+                      setShowReactionPicker(false);
+                    }}
+                  />
+                </div>
+              )
             ),
             document.body
           )}
+
 
 
 
