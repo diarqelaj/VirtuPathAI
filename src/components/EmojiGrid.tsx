@@ -90,16 +90,30 @@ export default function EmojiGrid({
   const maxRecent = cols
 
   // 1) fetch all group JSONs from public/emojis
+  
   useEffect(() => {
     ;(async () => {
       const all = await Promise.all(
-        GROUP_FILES.map(async (g) => {
-          const res = await fetch(`/emojis/${g}.json`)
-          const arr = (await res.json()) as Omit<Emoji, 'group'>[]
-          return arr.map((e) => ({ ...e, group: g }))
-        })
+        GROUP_FILES.map((g) =>
+          fetch(`/emojis/${g}.json`)
+            .then((r) => r.json() as Promise<Omit<Emoji, 'group'>[]>)
+            .then((arr) => arr.map((e) => ({ ...e, group: g })))
+        )
       )
-      setAllEmojis(all.flat())
+      const flat = all.flat()
+
+      // only fully-qualified
+      const fully = flat.filter((e) => e.status === 'fully-qualified')
+
+      // dedupe by glyph
+      const seen = new Set<string>()
+      const unique = fully.filter((e) => {
+        if (seen.has(e.glyph)) return false
+        seen.add(e.glyph)
+        return true
+      })
+
+      setAllEmojis(unique)
     })()
   }, [])
 
