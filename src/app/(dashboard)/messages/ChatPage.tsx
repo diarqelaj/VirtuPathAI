@@ -65,14 +65,18 @@ interface Friend {
 export default function ChatPage() {
   const router = useRouter();
 
-  /* detect screen */
-  const [isMobile, setIsMobile] = useState(false);
+  const isClient = typeof window !== 'undefined';
+  const [isMobile, setIsMobile] = useState(
+    // on the server we default to false; in the browser we read it immediately
+    isClient ? window.innerWidth < 768 : false
+  );
+
   useEffect(() => {
+    if (!isClient) return;
     const onResize = () => setIsMobile(window.innerWidth < 768);
-    onResize();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, []);
+  }, [isClient]);
   const compact = isMobile;
 
   /* state */
@@ -784,8 +788,9 @@ export default function ChatPage() {
               // MOBILE VERSION: bottom sheet
               <div
                 ref={reactionPickerRef}
-                className="fixed inset-x-2 bottom-2 border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] h-[35vh] bg-black-100/95 rounded-2xl z-50"
+                className="fixed inset-x-2 bottom-1 h-[35vh] bg-black-100/95 rounded-t-2xl border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] z-50"
                 style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+              
               >
                 {/* Close button */}
                 <button
