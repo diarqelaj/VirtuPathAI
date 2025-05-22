@@ -443,7 +443,7 @@ export default function ChatPage() {
   );
 
   const ChatPanel = (
-    <main className="flex-1 flex flex-col overflow-y-auto">
+    <main className="flex-1 flex flex-col overflow-hidden">
       {!active ? (
         <div className="m-auto text-gray-500">
           Select a friend to start chatting
@@ -451,10 +451,8 @@ export default function ChatPage() {
       ) : (
         <>
           {/* header */}
-          <header className={`${
-              compact ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
-            } z-20 flex items-center justify-between
-             px-4 py-3 border-b border-gray-800 bg-black-100/90 backdrop-blur`}>
+          <header className="sticky top-0 z-20 px-4 py-3 border-b border-gray-800 
+                       flex items-center justify-between bg-black-100/90 backdrop-blur">
             <div
                className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
@@ -496,9 +494,7 @@ export default function ChatPage() {
           <div
             ref={containerRef}
             onScroll={handleScroll}
-            className={`flex-1 p-4 space-y-2 overflow-y-auto ${
-              compact ? 'pt-14' : 'pt-14' /* 3.5 rem ≈ header height */
-            }`}
+            className="flex-1 overflow-y-auto p-4 pt-14 space-y-2"
           >
             {msgs.map((m, idx) => {
               if (myId === null || m.isDeletedForSender) return null;
