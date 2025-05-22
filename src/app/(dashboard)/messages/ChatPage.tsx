@@ -682,7 +682,7 @@ export default function ChatPage() {
                 className="fixed inset-x-0 z-50 bg-black-100 rounded-2xl border-t border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] overflow-y-auto p-2"
                 style={{
                   // try positioning right under the bubble…
-                  top: menuPos.top - 90,
+                  top: `calc(${menuPos.top}px - 16vh)`,
                   // …but if that would run off the bottom, flip above it:
                   ...(menuPos.top + menuHeight + 8 > window.innerHeight
                     ? { top: Math.max(8, menuPos.top - menuHeight - 8) }
@@ -784,7 +784,7 @@ export default function ChatPage() {
               // MOBILE VERSION: bottom sheet
               <div
                 ref={reactionPickerRef}
-                className="fixed inset-x-2 bottom-0 border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] h-[35vh] bg-black-100/95 rounded-2xl z-50"
+                className="fixed inset-x-2 bottom-2 border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] h-[35vh] bg-black-100/95 rounded-2xl z-50"
                 style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
               >
                 {/* Close button */}
