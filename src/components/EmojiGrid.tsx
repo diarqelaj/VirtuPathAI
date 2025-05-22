@@ -266,7 +266,7 @@ export default function EmojiGrid({
               <h3 className="text-sm font-semibold mb-2 text-white capitalize">
                 {groupName.replace(/_/g, ' ')}
               </h3>
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(2.5rem,1fr))] gap-1">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(2.5rem,1fr))] gap-3">
                 {list.slice(0, visibleCount).map((e, i) => {
                   const skinnable = isSkinnable(e.group, e.subgroup)
                   return (
