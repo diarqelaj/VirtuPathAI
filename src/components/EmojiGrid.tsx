@@ -298,7 +298,7 @@ export default function EmojiGrid({
                         {e.glyph}
                       </button>
                       {showSkinPicker && skinBase?.glyph === e.glyph && (
-                        <div className="absolute z-20 top-0 left-0 flex bg-black-100 border border-white/10 rounded shadow-lg p-1">
+                        <div className="absolute z-20 top-0 left-0 flex bg-black-100 border border-white/10 rounded shadow-lg ">
                           {FITZ_MODS.map((mod) => (
                             <button
                               key={mod}
