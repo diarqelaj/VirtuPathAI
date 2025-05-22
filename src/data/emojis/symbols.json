@@ -1,0 +1,2831 @@
+[
+  {
+    "codepoints": [
+      "1F3E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏧",
+    "name": "ATM sign",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6AE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚮",
+    "name": "litter in bin sign",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6B0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚰",
+    "name": "potable water",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "267F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♿",
+    "name": "wheelchair symbol",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6B9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚹",
+    "name": "men’s room",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6BA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚺",
+    "name": "women’s room",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6BB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚻",
+    "name": "restroom",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6BC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚼",
+    "name": "baby symbol",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6BE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚾",
+    "name": "water closet",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6C2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛂",
+    "name": "passport control",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6C3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛃",
+    "name": "customs",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6C4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛄",
+    "name": "baggage claim",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "1F6C5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛅",
+    "name": "left luggage",
+    "subgroup": "transport-sign"
+  },
+  {
+    "codepoints": [
+      "26A0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚠️",
+    "name": "warning",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "26A0"
+    ],
+    "status": "unqualified",
+    "glyph": "⚠",
+    "name": "warning",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6B8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚸",
+    "name": "children crossing",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "26D4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛔",
+    "name": "no entry",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚫",
+    "name": "prohibited",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6B3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚳",
+    "name": "no bicycles",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6AD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚭",
+    "name": "no smoking",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6AF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚯",
+    "name": "no littering",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6B1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚱",
+    "name": "non-potable water",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F6B7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚷",
+    "name": "no pedestrians",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F4F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📵",
+    "name": "no mobile phones",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "1F51E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔞",
+    "name": "no one under eighteen",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "2622",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☢️",
+    "name": "radioactive",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "2622"
+    ],
+    "status": "unqualified",
+    "glyph": "☢",
+    "name": "radioactive",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "2623",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☣️",
+    "name": "biohazard",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "2623"
+    ],
+    "status": "unqualified",
+    "glyph": "☣",
+    "name": "biohazard",
+    "subgroup": "warning"
+  },
+  {
+    "codepoints": [
+      "2B06",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⬆️",
+    "name": "up arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2B06"
+    ],
+    "status": "unqualified",
+    "glyph": "⬆",
+    "name": "up arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2197",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↗️",
+    "name": "up-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2197"
+    ],
+    "status": "unqualified",
+    "glyph": "↗",
+    "name": "up-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "27A1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➡️",
+    "name": "right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "27A1"
+    ],
+    "status": "unqualified",
+    "glyph": "➡",
+    "name": "right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2198",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↘️",
+    "name": "down-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2198"
+    ],
+    "status": "unqualified",
+    "glyph": "↘",
+    "name": "down-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2B07",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⬇️",
+    "name": "down arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2B07"
+    ],
+    "status": "unqualified",
+    "glyph": "⬇",
+    "name": "down arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2199",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↙️",
+    "name": "down-left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2199"
+    ],
+    "status": "unqualified",
+    "glyph": "↙",
+    "name": "down-left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2B05",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⬅️",
+    "name": "left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2B05"
+    ],
+    "status": "unqualified",
+    "glyph": "⬅",
+    "name": "left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2196",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↖️",
+    "name": "up-left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2196"
+    ],
+    "status": "unqualified",
+    "glyph": "↖",
+    "name": "up-left arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2195",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↕️",
+    "name": "up-down arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2195"
+    ],
+    "status": "unqualified",
+    "glyph": "↕",
+    "name": "up-down arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2194",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↔️",
+    "name": "left-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2194"
+    ],
+    "status": "unqualified",
+    "glyph": "↔",
+    "name": "left-right arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "21A9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↩️",
+    "name": "right arrow curving left",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "21A9"
+    ],
+    "status": "unqualified",
+    "glyph": "↩",
+    "name": "right arrow curving left",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "21AA",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "↪️",
+    "name": "left arrow curving right",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "21AA"
+    ],
+    "status": "unqualified",
+    "glyph": "↪",
+    "name": "left arrow curving right",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2934",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⤴️",
+    "name": "right arrow curving up",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2934"
+    ],
+    "status": "unqualified",
+    "glyph": "⤴",
+    "name": "right arrow curving up",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2935",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⤵️",
+    "name": "right arrow curving down",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "2935"
+    ],
+    "status": "unqualified",
+    "glyph": "⤵",
+    "name": "right arrow curving down",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F503"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔃",
+    "name": "clockwise vertical arrows",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F504"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔄",
+    "name": "counterclockwise arrows button",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F519"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔙",
+    "name": "BACK arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F51A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔚",
+    "name": "END arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F51B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔛",
+    "name": "ON! arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F51C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔜",
+    "name": "SOON arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F51D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔝",
+    "name": "TOP arrow",
+    "subgroup": "arrow"
+  },
+  {
+    "codepoints": [
+      "1F6D0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛐",
+    "name": "place of worship",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "269B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚛️",
+    "name": "atom symbol",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "269B"
+    ],
+    "status": "unqualified",
+    "glyph": "⚛",
+    "name": "atom symbol",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "1F549",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕉️",
+    "name": "om",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "1F549"
+    ],
+    "status": "unqualified",
+    "glyph": "🕉",
+    "name": "om",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2721",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✡️",
+    "name": "star of David",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2721"
+    ],
+    "status": "unqualified",
+    "glyph": "✡",
+    "name": "star of David",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2638",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☸️",
+    "name": "wheel of dharma",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2638"
+    ],
+    "status": "unqualified",
+    "glyph": "☸",
+    "name": "wheel of dharma",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☯️",
+    "name": "yin yang",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262F"
+    ],
+    "status": "unqualified",
+    "glyph": "☯",
+    "name": "yin yang",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "271D",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✝️",
+    "name": "latin cross",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "271D"
+    ],
+    "status": "unqualified",
+    "glyph": "✝",
+    "name": "latin cross",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2626",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☦️",
+    "name": "orthodox cross",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2626"
+    ],
+    "status": "unqualified",
+    "glyph": "☦",
+    "name": "orthodox cross",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☪️",
+    "name": "star and crescent",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262A"
+    ],
+    "status": "unqualified",
+    "glyph": "☪",
+    "name": "star and crescent",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262E",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☮️",
+    "name": "peace symbol",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "262E"
+    ],
+    "status": "unqualified",
+    "glyph": "☮",
+    "name": "peace symbol",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "1F54E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕎",
+    "name": "menorah",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "1F52F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔯",
+    "name": "dotted six-pointed star",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "1FAAF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪯",
+    "name": "khanda",
+    "subgroup": "religion"
+  },
+  {
+    "codepoints": [
+      "2648"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♈",
+    "name": "Aries",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "2649"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♉",
+    "name": "Taurus",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♊",
+    "name": "Gemini",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♋",
+    "name": "Cancer",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♌",
+    "name": "Leo",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♍",
+    "name": "Virgo",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♎",
+    "name": "Libra",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "264F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♏",
+    "name": "Scorpio",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "2650"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♐",
+    "name": "Sagittarius",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "2651"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♑",
+    "name": "Capricorn",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "2652"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♒",
+    "name": "Aquarius",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "2653"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♓",
+    "name": "Pisces",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "26CE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛎",
+    "name": "Ophiuchus",
+    "subgroup": "zodiac"
+  },
+  {
+    "codepoints": [
+      "1F500"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔀",
+    "name": "shuffle tracks button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F501"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔁",
+    "name": "repeat button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F502"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔂",
+    "name": "repeat single button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "25B6",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "▶️",
+    "name": "play button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "25B6"
+    ],
+    "status": "unqualified",
+    "glyph": "▶",
+    "name": "play button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏩",
+    "name": "fast-forward button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23ED",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏭️",
+    "name": "next track button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23ED"
+    ],
+    "status": "unqualified",
+    "glyph": "⏭",
+    "name": "next track button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏯️",
+    "name": "play or pause button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EF"
+    ],
+    "status": "unqualified",
+    "glyph": "⏯",
+    "name": "play or pause button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "25C0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "◀️",
+    "name": "reverse button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "25C0"
+    ],
+    "status": "unqualified",
+    "glyph": "◀",
+    "name": "reverse button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏪",
+    "name": "fast reverse button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏮️",
+    "name": "last track button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EE"
+    ],
+    "status": "unqualified",
+    "glyph": "⏮",
+    "name": "last track button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F53C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔼",
+    "name": "upwards button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏫",
+    "name": "fast up button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F53D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔽",
+    "name": "downwards button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏬",
+    "name": "fast down button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23F8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏸️",
+    "name": "pause button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23F8"
+    ],
+    "status": "unqualified",
+    "glyph": "⏸",
+    "name": "pause button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23F9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏹️",
+    "name": "stop button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23F9"
+    ],
+    "status": "unqualified",
+    "glyph": "⏹",
+    "name": "stop button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23FA",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏺️",
+    "name": "record button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23FA"
+    ],
+    "status": "unqualified",
+    "glyph": "⏺",
+    "name": "record button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23CF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏏️",
+    "name": "eject button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "23CF"
+    ],
+    "status": "unqualified",
+    "glyph": "⏏",
+    "name": "eject button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F3A6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎦",
+    "name": "cinema",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F505"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔅",
+    "name": "dim button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F506"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔆",
+    "name": "bright button",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F4F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📶",
+    "name": "antenna bars",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F6DC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛜",
+    "name": "wireless",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F4F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📳",
+    "name": "vibration mode",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "1F4F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📴",
+    "name": "mobile phone off",
+    "subgroup": "av-symbol"
+  },
+  {
+    "codepoints": [
+      "2640",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♀️",
+    "name": "female sign",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "2640"
+    ],
+    "status": "unqualified",
+    "glyph": "♀",
+    "name": "female sign",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "2642",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♂️",
+    "name": "male sign",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "2642"
+    ],
+    "status": "unqualified",
+    "glyph": "♂",
+    "name": "male sign",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "26A7",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚧️",
+    "name": "transgender symbol",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "26A7"
+    ],
+    "status": "unqualified",
+    "glyph": "⚧",
+    "name": "transgender symbol",
+    "subgroup": "gender"
+  },
+  {
+    "codepoints": [
+      "2716",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✖️",
+    "name": "multiply",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "2716"
+    ],
+    "status": "unqualified",
+    "glyph": "✖",
+    "name": "multiply",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "2795"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➕",
+    "name": "plus",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "2796"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➖",
+    "name": "minus",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "2797"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➗",
+    "name": "divide",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "1F7F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟰",
+    "name": "heavy equals sign",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "267E",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♾️",
+    "name": "infinity",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "267E"
+    ],
+    "status": "unqualified",
+    "glyph": "♾",
+    "name": "infinity",
+    "subgroup": "math"
+  },
+  {
+    "codepoints": [
+      "203C",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "‼️",
+    "name": "double exclamation mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "203C"
+    ],
+    "status": "unqualified",
+    "glyph": "‼",
+    "name": "double exclamation mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2049",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⁉️",
+    "name": "exclamation question mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2049"
+    ],
+    "status": "unqualified",
+    "glyph": "⁉",
+    "name": "exclamation question mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2753"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❓",
+    "name": "red question mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2754"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❔",
+    "name": "white question mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2755"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❕",
+    "name": "white exclamation mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "2757"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❗",
+    "name": "red exclamation mark",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "3030",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "〰️",
+    "name": "wavy dash",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "3030"
+    ],
+    "status": "unqualified",
+    "glyph": "〰",
+    "name": "wavy dash",
+    "subgroup": "punctuation"
+  },
+  {
+    "codepoints": [
+      "1F4B1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💱",
+    "name": "currency exchange",
+    "subgroup": "currency"
+  },
+  {
+    "codepoints": [
+      "1F4B2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💲",
+    "name": "heavy dollar sign",
+    "subgroup": "currency"
+  },
+  {
+    "codepoints": [
+      "2695",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚕️",
+    "name": "medical symbol",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2695"
+    ],
+    "status": "unqualified",
+    "glyph": "⚕",
+    "name": "medical symbol",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "267B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♻️",
+    "name": "recycling symbol",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "267B"
+    ],
+    "status": "unqualified",
+    "glyph": "♻",
+    "name": "recycling symbol",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "269C",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚜️",
+    "name": "fleur-de-lis",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "269C"
+    ],
+    "status": "unqualified",
+    "glyph": "⚜",
+    "name": "fleur-de-lis",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "1F531"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔱",
+    "name": "trident emblem",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "1F4DB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📛",
+    "name": "name badge",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "1F530"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔰",
+    "name": "Japanese symbol for beginner",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2B55"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⭕",
+    "name": "hollow red circle",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2705"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✅",
+    "name": "check mark button",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2611",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☑️",
+    "name": "check box with check",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2611"
+    ],
+    "status": "unqualified",
+    "glyph": "☑",
+    "name": "check box with check",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2714",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✔️",
+    "name": "check mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2714"
+    ],
+    "status": "unqualified",
+    "glyph": "✔",
+    "name": "check mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "274C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❌",
+    "name": "cross mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "274E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❎",
+    "name": "cross mark button",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "27B0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➰",
+    "name": "curly loop",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "27BF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "➿",
+    "name": "double curly loop",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "303D",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "〽️",
+    "name": "part alternation mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "303D"
+    ],
+    "status": "unqualified",
+    "glyph": "〽",
+    "name": "part alternation mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2733",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✳️",
+    "name": "eight-spoked asterisk",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2733"
+    ],
+    "status": "unqualified",
+    "glyph": "✳",
+    "name": "eight-spoked asterisk",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2734",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✴️",
+    "name": "eight-pointed star",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2734"
+    ],
+    "status": "unqualified",
+    "glyph": "✴",
+    "name": "eight-pointed star",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2747",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❇️",
+    "name": "sparkle",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2747"
+    ],
+    "status": "unqualified",
+    "glyph": "❇",
+    "name": "sparkle",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "00A9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "©️",
+    "name": "copyright",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "00A9"
+    ],
+    "status": "unqualified",
+    "glyph": "©",
+    "name": "copyright",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "00AE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "®️",
+    "name": "registered",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "00AE"
+    ],
+    "status": "unqualified",
+    "glyph": "®",
+    "name": "registered",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2122",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "™️",
+    "name": "trade mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "2122"
+    ],
+    "status": "unqualified",
+    "glyph": "™",
+    "name": "trade mark",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "1FADF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫟",
+    "name": "splatter",
+    "subgroup": "other-symbol"
+  },
+  {
+    "codepoints": [
+      "002A",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "*️⃣",
+    "name": "keycap: *",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "002A",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "*⃣",
+    "name": "keycap: *",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0030",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "0️⃣",
+    "name": "keycap: 0",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0030",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "0⃣",
+    "name": "keycap: 0",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0031",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "1️⃣",
+    "name": "keycap: 1",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0031",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "1⃣",
+    "name": "keycap: 1",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0032",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "2️⃣",
+    "name": "keycap: 2",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0032",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "2⃣",
+    "name": "keycap: 2",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0033",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "3️⃣",
+    "name": "keycap: 3",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0033",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "3⃣",
+    "name": "keycap: 3",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0034",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "4️⃣",
+    "name": "keycap: 4",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0034",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "4⃣",
+    "name": "keycap: 4",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0035",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "5️⃣",
+    "name": "keycap: 5",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0035",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "5⃣",
+    "name": "keycap: 5",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0036",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "6️⃣",
+    "name": "keycap: 6",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0036",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "6⃣",
+    "name": "keycap: 6",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0037",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "7️⃣",
+    "name": "keycap: 7",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0037",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "7⃣",
+    "name": "keycap: 7",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0038",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "8️⃣",
+    "name": "keycap: 8",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0038",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "8⃣",
+    "name": "keycap: 8",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0039",
+      "FE0F",
+      "20E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "9️⃣",
+    "name": "keycap: 9",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "0039",
+      "20E3"
+    ],
+    "status": "unqualified",
+    "glyph": "9⃣",
+    "name": "keycap: 9",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "1F51F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔟",
+    "name": "keycap: 10",
+    "subgroup": "keycap"
+  },
+  {
+    "codepoints": [
+      "1F520"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔠",
+    "name": "input latin uppercase",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F521"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔡",
+    "name": "input latin lowercase",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F522"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔢",
+    "name": "input numbers",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F523"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔣",
+    "name": "input symbols",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F524"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔤",
+    "name": "input latin letters",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F170",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🅰️",
+    "name": "A button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F170"
+    ],
+    "status": "unqualified",
+    "glyph": "🅰",
+    "name": "A button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F18E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆎",
+    "name": "AB button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F171",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🅱️",
+    "name": "B button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F171"
+    ],
+    "status": "unqualified",
+    "glyph": "🅱",
+    "name": "B button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F191"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆑",
+    "name": "CL button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F192"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆒",
+    "name": "COOL button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F193"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆓",
+    "name": "FREE button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "2139",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "ℹ️",
+    "name": "information",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "2139"
+    ],
+    "status": "unqualified",
+    "glyph": "ℹ",
+    "name": "information",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F194"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆔",
+    "name": "ID button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "24C2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "Ⓜ️",
+    "name": "circled M",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "24C2"
+    ],
+    "status": "unqualified",
+    "glyph": "Ⓜ",
+    "name": "circled M",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F195"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆕",
+    "name": "NEW button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F196"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆖",
+    "name": "NG button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F17E",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🅾️",
+    "name": "O button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F17E"
+    ],
+    "status": "unqualified",
+    "glyph": "🅾",
+    "name": "O button (blood type)",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F197"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆗",
+    "name": "OK button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F17F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🅿️",
+    "name": "P button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F17F"
+    ],
+    "status": "unqualified",
+    "glyph": "🅿",
+    "name": "P button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F198"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆘",
+    "name": "SOS button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F199"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆙",
+    "name": "UP! button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F19A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🆚",
+    "name": "VS button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F201"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈁",
+    "name": "Japanese “here” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F202",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈂️",
+    "name": "Japanese “service charge” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F202"
+    ],
+    "status": "unqualified",
+    "glyph": "🈂",
+    "name": "Japanese “service charge” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F237",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈷️",
+    "name": "Japanese “monthly amount” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F237"
+    ],
+    "status": "unqualified",
+    "glyph": "🈷",
+    "name": "Japanese “monthly amount” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F236"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈶",
+    "name": "Japanese “not free of charge” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F22F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈯",
+    "name": "Japanese “reserved” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F250"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🉐",
+    "name": "Japanese “bargain” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F239"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈹",
+    "name": "Japanese “discount” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F21A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈚",
+    "name": "Japanese “free of charge” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F232"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈲",
+    "name": "Japanese “prohibited” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F251"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🉑",
+    "name": "Japanese “acceptable” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F238"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈸",
+    "name": "Japanese “application” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F234"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈴",
+    "name": "Japanese “passing grade” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F233"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈳",
+    "name": "Japanese “vacancy” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "3297",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "㊗️",
+    "name": "Japanese “congratulations” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "3297"
+    ],
+    "status": "unqualified",
+    "glyph": "㊗",
+    "name": "Japanese “congratulations” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "3299",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "㊙️",
+    "name": "Japanese “secret” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "3299"
+    ],
+    "status": "unqualified",
+    "glyph": "㊙",
+    "name": "Japanese “secret” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F23A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈺",
+    "name": "Japanese “open for business” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F235"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🈵",
+    "name": "Japanese “no vacancy” button",
+    "subgroup": "alphanum"
+  },
+  {
+    "codepoints": [
+      "1F534"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔴",
+    "name": "red circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟠",
+    "name": "orange circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟡",
+    "name": "yellow circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟢",
+    "name": "green circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F535"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔵",
+    "name": "blue circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟣",
+    "name": "purple circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟤",
+    "name": "brown circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "26AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚫",
+    "name": "black circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "26AA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚪",
+    "name": "white circle",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟥",
+    "name": "red square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟧",
+    "name": "orange square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟨",
+    "name": "yellow square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟩",
+    "name": "green square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟦",
+    "name": "blue square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟪",
+    "name": "purple square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F7EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🟫",
+    "name": "brown square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "2B1B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⬛",
+    "name": "black large square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "2B1C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⬜",
+    "name": "white large square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FC",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "◼️",
+    "name": "black medium square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FC"
+    ],
+    "status": "unqualified",
+    "glyph": "◼",
+    "name": "black medium square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FB",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "◻️",
+    "name": "white medium square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FB"
+    ],
+    "status": "unqualified",
+    "glyph": "◻",
+    "name": "white medium square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "◾",
+    "name": "black medium-small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "◽",
+    "name": "white medium-small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25AA",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "▪️",
+    "name": "black small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25AA"
+    ],
+    "status": "unqualified",
+    "glyph": "▪",
+    "name": "black small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25AB",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "▫️",
+    "name": "white small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "25AB"
+    ],
+    "status": "unqualified",
+    "glyph": "▫",
+    "name": "white small square",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F536"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔶",
+    "name": "large orange diamond",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F537"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔷",
+    "name": "large blue diamond",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F538"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔸",
+    "name": "small orange diamond",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F539"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔹",
+    "name": "small blue diamond",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F53A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔺",
+    "name": "red triangle pointed up",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F53B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔻",
+    "name": "red triangle pointed down",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F4A0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💠",
+    "name": "diamond with a dot",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F518"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔘",
+    "name": "radio button",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F533"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔳",
+    "name": "white square button",
+    "subgroup": "geometric"
+  },
+  {
+    "codepoints": [
+      "1F532"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔲",
+    "name": "black square button",
+    "subgroup": "geometric"
+  }
+]

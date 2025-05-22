@@ -15,7 +15,8 @@ import {
 
 } from 'react-icons/hi';
 import { FiSmile } from 'react-icons/fi';
-import Picker, { Theme, EmojiClickData } from 'emoji-picker-react';
+import dynamic from 'next/dynamic'
+import EmojiGrid from '@/components/EmojiGrid'
 import api from '@/lib/api';
 import { VerifiedBadge } from '@/components/VerifiedBadge';
 import { OfficialBadge } from '@/components/OfficialBadge';
@@ -104,18 +105,20 @@ export default function ChatPage() {
   const [menuPos, setMenuPos] =
     useState<{ top: number; left: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [menuHeight, setMenuHeight] = useState(0);
 
   /* reaction picker */
   const [reactingToId, setReactingToId] = useState<number | null>(null);
+ // for reactions
   const [showReactionPicker, setShowReactionPicker] = useState(false);
+  const [reactionPickerPos, setReactionPickerPos] = useState<{ top: number; left: number } | null>(null);
+  const reactionPickerRef = useRef<HTMLDivElement>(null);
 
-  /* composer picker */
+  // for composer
   const [showComposerPicker, setShowComposerPicker] = useState(false);
+  const [composerPickerPos, setComposerPickerPos] = useState<{ top: number; left: number } | null>(null);
+  const composerPickerRef = useRef<HTMLDivElement>(null);
 
-  /* shared picker position */
-  const [pickerPos, setPickerPos] =
-    useState<{ top: number; left: number } | null>(null);
-  const pickerRef = useRef<HTMLDivElement>(null);
 
   /* misc refs */
   const containerRef = useRef<HTMLDivElement>(null);
@@ -127,6 +130,7 @@ export default function ChatPage() {
   const prevMsgsCount = useRef(0);
   const [error, setError] = useState('');
   const SCROLL_THRESHOLD = 20; // px from bottom
+  
 
   /* helpers */
   const byId = (id: number | null) =>
@@ -251,29 +255,34 @@ export default function ChatPage() {
     }
   }, [editingId, replyTo]);
 
-  /* outside-click handlers */
   useEffect(() => {
-    if (showReactionPicker) {
-      const close = (e: MouseEvent) => {
-        if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
-          setShowReactionPicker(false);
-          setReactingToId(null);
-        }
-      };
-      document.addEventListener('mousedown', close);
-      return () => document.removeEventListener('mousedown', close);
-    }
+    if (!showReactionPicker) return;
+    const close = (e: MouseEvent) => {
+      if (
+        reactionPickerRef.current &&
+        !reactionPickerRef.current.contains(e.target as Node)
+      ) {
+        setShowReactionPicker(false);
+        setReactingToId(null);
+      }
+    };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
   }, [showReactionPicker]);
+  
+  // Composer picker outside click
   useEffect(() => {
-    if (showComposerPicker) {
-      const close = (e: MouseEvent) => {
-        if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
-          setShowComposerPicker(false);
-        }
-      };
-      document.addEventListener('mousedown', close);
-      return () => document.removeEventListener('mousedown', close);
-    }
+    if (!showComposerPicker) return;
+    const close = (e: MouseEvent) => {
+      if (
+        composerPickerRef.current &&
+        !composerPickerRef.current.contains(e.target as Node)
+      ) {
+        setShowComposerPicker(false);
+      }
+    };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
   }, [showComposerPicker]);
   useEffect(() => {
     if (!menuMsgId) return;
@@ -313,7 +322,7 @@ export default function ChatPage() {
     let left = rect.left;
     if (left + W > window.innerWidth) left = window.innerWidth - W - 8;
     if (left < 8) left = 8;
-    setPickerPos({ top: top + window.scrollY, left });
+    setReactionPickerPos({ top: top + window.scrollY, left });
     setReactingToId(id);
     setShowReactionPicker(true);
   };
@@ -327,10 +336,10 @@ export default function ChatPage() {
     left = Math.max(8, Math.min(left, window.innerWidth - W - 8));
     let top = rect.top - H - 8;
     if (top < 8) top = rect.bottom + 8;
-    setPickerPos({ top, left });
+    setComposerPickerPos({ top, left });
     setShowComposerPicker(true);
   };
-
+  
   /* actions */
   const send = async () => {
     if (!msg.trim() || !active || myId === null) return;
@@ -360,7 +369,7 @@ export default function ChatPage() {
     api.post(`/chat/delete/${id}/sender`).catch(() => setError('Delete failed'));
   const rmAll = (id: number) =>
     api.post(`/chat/delete-for-everyone/${id}`).catch(() => setError('Delete-all failed'));
-  const addEmojiToInput = (e: EmojiClickData) => setMsg((p) => p + e.emoji);
+
 
   /* friend filter */
   const filtered = friends.filter(
@@ -665,112 +674,181 @@ export default function ChatPage() {
             <div ref={bottomRef} />
           </div>
 
-          {/* context-menu */}
-          {menuMsgId && menuPos && (
-            <div
-              ref={menuRef}
-              className="fixed z-50 bg-black-100 rounded border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-2"
-              style={{ top: menuPos.top, left: menuPos.left, width: MENU_WIDTH }}
-            >
-              <button
-                onClick={() => {
-                  setReplyTo(menuMsgId!);
-                  setMenuMsgId(null);
+          {menuMsgId && menuPos && createPortal(
+            compact ? (
+              // Mobile: full-width, auto height up to 50vh, scrollable
+              <div
+                ref={menuRef}
+                className="fixed inset-x-0 z-50 bg-black-100 rounded-2xl border-t border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] overflow-y-auto p-2"
+                style={{
+                  // try positioning right under the bubble…
+                  top: menuPos.top - 90,
+                  // …but if that would run off the bottom, flip above it:
+                  ...(menuPos.top + menuHeight + 8 > window.innerHeight
+                    ? { top: Math.max(8, menuPos.top - menuHeight - 8) }
+                    : {}),
+                  maxHeight: '50vh',
+                  left:90,
+                  right:90,
                 }}
-                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
               >
-                <HiOutlineReply className="w-5 h-5" /> Reply
-              </button>
-              {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
                 <button
-                  onClick={() => {
-                    setEditingId(menuMsgId!);
-                    setMenuMsgId(null);
-                  }}
+                  onClick={() => { setReplyTo(menuMsgId!); setMenuMsgId(null); }}
+                  className="w-full text-left px-4 py-3 hover:bg-gray-800 rounded"
+                >
+                  <HiOutlineReply className="inline mr-2 align-middle" /> Reply
+                </button>
+                {msgs.find(m => m.id === menuMsgId)?.senderId === myId && (
+                  <button
+                    onClick={() => { setEditingId(menuMsgId!); setMenuMsgId(null); }}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-800 rounded"
+                  >
+                    <HiOutlinePencilAlt className="inline mr-2 align-middle" /> Edit message
+                  </button>
+                )}
+                <button
+                  onClick={() => { setReactingToId(menuMsgId!); setShowReactionPicker(true); setMenuMsgId(null); }}
+                  className="w-full text-left px-4 py-3 hover:bg-gray-800 rounded"
+                >
+                  <HiOutlineEmojiHappy className="inline mr-2 align-middle" /> React
+                </button>
+                <button
+                  onClick={() => { rmMe(menuMsgId!); setMenuMsgId(null); }}
+                  className="w-full text-left px-4 py-3 hover:bg-gray-800 rounded text-red-400"
+                >
+                  <HiOutlineTrash className="inline mr-2 align-middle" /> Delete for you
+                </button>
+                {msgs.find(m => m.id === menuMsgId)?.senderId === myId && (
+                  <button
+                    onClick={() => { rmAll(menuMsgId!); setMenuMsgId(null); }}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-800 rounded text-red-400"
+                  >
+                    <HiOutlineTrash className="inline mr-2 align-middle" /> Delete for everyone
+                  </button>
+                )}
+              </div>
+            ) : (
+              // Desktop: fixed size, original style
+              <div
+                ref={menuRef}
+                className="fixed z-50 bg-black-100 rounded border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] p-2"
+                style={{ top: menuPos.top, left: menuPos.left, width: MENU_WIDTH }}
+              >
+                <button
+                  onClick={() => { setReplyTo(menuMsgId!); setMenuMsgId(null); }}
                   className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
                 >
-                  <HiOutlinePencilAlt className="w-5 h-5" /> Edit message
+                  <HiOutlineReply className="w-5 h-5" /> Reply
                 </button>
-              )}
-              <button
-                onClick={() => {
-                  setReactingToId(menuMsgId!);
-                  setShowReactionPicker(true);
-                  setMenuMsgId(null);
-                }}
-                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
-              >
-                <HiOutlineEmojiHappy className="w-5 h-5" /> React
-              </button>
-              <button
-                onClick={() => {
-                  rmMe(menuMsgId!);
-                  setMenuMsgId(null);
-                }}
-                className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-red-400"
-              >
-                <HiOutlineTrash className="w-5 h-5" /> Delete for you
-              </button>
-              {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
+                {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
+                  <button
+                    onClick={() => { setEditingId(menuMsgId!); setMenuMsgId(null); }}
+                    className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
+                  >
+                    <HiOutlinePencilAlt className="w-5 h-5" /> Edit message
+                  </button>
+                )}
                 <button
-                  onClick={() => {
-                    rmAll(menuMsgId!);
-                    setMenuMsgId(null);
-                  }}
+                  onClick={() => { setReactingToId(menuMsgId!); setShowReactionPicker(true); setMenuMsgId(null); }}
+                  className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded"
+                >
+                  <HiOutlineEmojiHappy className="w-5 h-5" /> React
+                </button>
+                <button
+                  onClick={() => { rmMe(menuMsgId!); setMenuMsgId(null); }}
                   className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-red-400"
                 >
-                  <HiOutlineTrash className="w-5 h-5" /> Delete for all
+                  <HiOutlineTrash className="w-5 h-5" /> Delete for you
                 </button>
-              )}
-            </div>
+                {msgs.find((m) => m.id === menuMsgId)?.senderId === myId && (
+                  <button
+                    onClick={() => { rmAll(menuMsgId!); setMenuMsgId(null); }}
+                    className="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-800 rounded text-red-400"
+                  >
+                    <HiOutlineTrash className="w-5 h-5" /> Delete for all
+                  </button>
+                )}
+              </div>
+            ),
+            document.body
           )}
 
-       {/* reaction picker portal */}
-        {showReactionPicker && reactingToId !== null && pickerPos && createPortal(
-          <div
-            ref={pickerRef}
-            className={
-              compact
-                ? 'fixed inset-x-2 bottom-10 h-[35vh] bg-black-100/95 rounded-t-2xl border-t border-gray-700 z-50 relative'
-                : 'fixed bg-black-100 rounded-xl shadow-lg z-50 relative'
-            }
-            style={
-              compact
-                ? {}
-                : {
-                    top: pickerPos.top,
-                    left: pickerPos.left,
-                    width: Math.min(320, window.innerWidth - 16),
-                    height: 360,
-                  }
-            }
-          >
-            {/* Close button */}
-            <button
-              onClick={() => {
-                setShowReactionPicker(false);
-                setReactingToId(null);
-              }}
-              className="absolute top-2 right-2 text-white text-2xl leading-none"
-              aria-label="Close emoji picker"
-            >
-              ×
-            </button>
 
-            {/* Emoji picker */}
-            <Picker
-              width={compact ? window.innerWidth - 16 : Math.min(320, window.innerWidth - 16)}
-              height={compact ? window.innerHeight * 0.35 : 360}
-              theme={Theme.DARK}
-              onEmojiClick={(emojiData) => {
-                react(reactingToId!, emojiData.emoji);
-                setShowReactionPicker(false);
-                setReactingToId(null);
-              }}
-            />
-          </div>,
-          document.body
-        )}
+
+    
+          {showReactionPicker &&
+          reactingToId !== null &&
+          reactionPickerPos &&
+          createPortal(
+            compact ? (
+              // MOBILE VERSION: bottom sheet
+              <div
+                ref={reactionPickerRef}
+                className="fixed inset-x-2 bottom-0 border-white/10 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] h-[35vh] bg-black-100/95 rounded-2xl z-50"
+                style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+              >
+                {/* Close button */}
+                <button
+                  onClick={() => {
+                    setShowReactionPicker(false)
+                    setReactingToId(null)
+                  }}
+                  className="absolute top-2 right-2 text-white text-2xl z-10"
+                  aria-label="Close emoji picker"
+                >
+                  ×
+                </button>
+
+                <EmojiGrid
+                  width={window.innerWidth - 16}
+                  height={window.innerHeight * 0.35}
+                  mostUsedOverride={[]} // no “most used” for reactions
+                  onSelect={(emoji) => {
+                    react(reactingToId!, emoji)
+                    setShowReactionPicker(false)
+                  }}
+                />
+              </div>
+            ) : (
+              // DESKTOP VERSION: floating popup
+              <div
+                ref={reactionPickerRef}
+                className="fixed bg-black-100 rounded-2xl shadow-lg z-50"
+                style={{
+                  top: reactionPickerPos.top,
+                  left: reactionPickerPos.left,
+                  width: Math.min(320, window.innerWidth - 16),
+                  height: 360,
+                }}
+              >
+                {/* Close button */}
+                <button
+                  onClick={() => {
+                    setShowReactionPicker(false)
+                    setReactingToId(null)
+                  }}
+                  className="absolute top-2 right-1 p-1 text-white text-xl z-10"
+                  aria-label="Close emoji picker"
+                >
+                  <HiOutlineX size={20} />
+                </button>
+              
+
+                <EmojiGrid
+                  width={Math.min(320, window.innerWidth - 16)}
+                  height={360}
+                  mostUsedOverride={[]} // no “most used” for reactions
+                  onSelect={(emoji) => {
+                    react(reactingToId!, emoji)
+                    setShowReactionPicker(false)
+                  }}
+                />
+              </div>
+            ),
+            document.body
+          )}
+
+
 
 
 
@@ -835,9 +913,9 @@ export default function ChatPage() {
               </button>
             </div>
           </div>
-          {showComposerPicker && pickerPos && createPortal(
+          {showComposerPicker && composerPickerPos && createPortal(
             <div
-              ref={pickerRef}
+              ref={composerPickerRef}
               style={{
                 position: 'fixed',
                 zIndex: 9999,
@@ -849,8 +927,8 @@ export default function ChatPage() {
                       height: '35vh',
                     }
                   : {
-                      top: pickerPos.top,
-                      left: pickerPos.left,
+                      top: composerPickerPos.top,
+                      left: composerPickerPos.left,
                       width: Math.min(320, window.innerWidth - 16),
                       height: 350,
                     }),
@@ -864,23 +942,27 @@ export default function ChatPage() {
               {/* CLOSE BUTTON */}
               <button
                 onClick={() => setShowComposerPicker(false)}
-                className="absolute top-2 right-2 text-white text-xl leading-none"
-                style={{ zIndex: 10000 }}
-                aria-label="Close emoji picker"
+                className="absolute top-2 right-1 p-1 text-white hover:text-gray-300 z-10"
+                title="Close"
               >
-                X
+                <HiOutlineX size={20} />
               </button>
+              
+                {/* THE EMOJI PICKER */}
+                <EmojiGrid
+                  width={compact ? window.innerWidth - 16 : Math.min(320, window.innerWidth - 16)}
+                  height={compact ? window.innerHeight * 0.35 : 350}
+                  onSelect={(emoji) => {
+                    // for your composer:
+                    setMsg((m) => m + emoji)
+                    setShowComposerPicker(false)
 
-              {/* THE EMOJI PICKER */}
-              <Picker
-                width={compact ? window.innerWidth - 16 : Math.min(320, window.innerWidth - 16)}
-                height={compact ? window.innerHeight * 0.35 : 350}
-                theme={Theme.DARK}
-                onEmojiClick={(emojiData) => {
-                  addEmojiToInput(emojiData);
-                  setShowComposerPicker(false);
-                }}
-              />
+                    // for reactions, it’d be similar:
+                    // react(reactingToId!, emoji)
+                    // setShowReactionPicker(false)
+                  }}
+                />
+            
             </div>,
             document.body
           )}

@@ -1,0 +1,2786 @@
+[
+  {
+    "codepoints": [
+      "1F3C1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏁",
+    "name": "chequered flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F6A9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚩",
+    "name": "triangular flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F38C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎌",
+    "name": "crossed flags",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏴",
+    "name": "black flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏳️",
+    "name": "white flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3"
+    ],
+    "status": "unqualified",
+    "glyph": "🏳",
+    "name": "white flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "FE0F",
+      "200D",
+      "1F308"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏳️‍🌈",
+    "name": "rainbow flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "200D",
+      "1F308"
+    ],
+    "status": "unqualified",
+    "glyph": "🏳‍🌈",
+    "name": "rainbow flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "FE0F",
+      "200D",
+      "26A7",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏳️‍⚧️",
+    "name": "transgender flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "200D",
+      "26A7",
+      "FE0F"
+    ],
+    "status": "unqualified",
+    "glyph": "🏳‍⚧️",
+    "name": "transgender flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "FE0F",
+      "200D",
+      "26A7"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "🏳️‍⚧",
+    "name": "transgender flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F3",
+      "200D",
+      "26A7"
+    ],
+    "status": "unqualified",
+    "glyph": "🏳‍⚧",
+    "name": "transgender flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4",
+      "200D",
+      "2620",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏴‍☠️",
+    "name": "pirate flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4",
+      "200D",
+      "2620"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "🏴‍☠",
+    "name": "pirate flag",
+    "subgroup": "flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇨",
+    "name": "flag: Ascension Island",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇩",
+    "name": "flag: Andorra",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇪",
+    "name": "flag: United Arab Emirates",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇫",
+    "name": "flag: Afghanistan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇬",
+    "name": "flag: Antigua & Barbuda",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇮",
+    "name": "flag: Anguilla",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇱",
+    "name": "flag: Albania",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇲",
+    "name": "flag: Armenia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇴",
+    "name": "flag: Angola",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇶",
+    "name": "flag: Antarctica",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇷",
+    "name": "flag: Argentina",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇸",
+    "name": "flag: American Samoa",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇹",
+    "name": "flag: Austria",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇺",
+    "name": "flag: Australia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇼",
+    "name": "flag: Aruba",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇽",
+    "name": "flag: Åland Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E6",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇦🇿",
+    "name": "flag: Azerbaijan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇦",
+    "name": "flag: Bosnia & Herzegovina",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇧",
+    "name": "flag: Barbados",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇩",
+    "name": "flag: Bangladesh",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇪",
+    "name": "flag: Belgium",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇫",
+    "name": "flag: Burkina Faso",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇬",
+    "name": "flag: Bulgaria",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇭",
+    "name": "flag: Bahrain",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇮",
+    "name": "flag: Burundi",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇯",
+    "name": "flag: Benin",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇱",
+    "name": "flag: St. Barthélemy",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇲",
+    "name": "flag: Bermuda",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇳",
+    "name": "flag: Brunei",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇴",
+    "name": "flag: Bolivia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇶",
+    "name": "flag: Caribbean Netherlands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇷",
+    "name": "flag: Brazil",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇸",
+    "name": "flag: Bahamas",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇹",
+    "name": "flag: Bhutan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇻",
+    "name": "flag: Bouvet Island",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇼",
+    "name": "flag: Botswana",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇾",
+    "name": "flag: Belarus",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E7",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇧🇿",
+    "name": "flag: Belize",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇦",
+    "name": "flag: Canada",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇨",
+    "name": "flag: Cocos (Keeling) Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇩",
+    "name": "flag: Congo - Kinshasa",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇫",
+    "name": "flag: Central African Republic",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇬",
+    "name": "flag: Congo - Brazzaville",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇭",
+    "name": "flag: Switzerland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇮",
+    "name": "flag: Côte d’Ivoire",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇰",
+    "name": "flag: Cook Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇱",
+    "name": "flag: Chile",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇲",
+    "name": "flag: Cameroon",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇳",
+    "name": "flag: China",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇴",
+    "name": "flag: Colombia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇵",
+    "name": "flag: Clipperton Island",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇶",
+    "name": "flag: Sark",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇷",
+    "name": "flag: Costa Rica",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇺",
+    "name": "flag: Cuba",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇻",
+    "name": "flag: Cape Verde",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇼",
+    "name": "flag: Curaçao",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇽",
+    "name": "flag: Christmas Island",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇾",
+    "name": "flag: Cyprus",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E8",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇨🇿",
+    "name": "flag: Czechia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇪",
+    "name": "flag: Germany",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇬",
+    "name": "flag: Diego Garcia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇯",
+    "name": "flag: Djibouti",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇰",
+    "name": "flag: Denmark",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇲",
+    "name": "flag: Dominica",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇴",
+    "name": "flag: Dominican Republic",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1E9",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇩🇿",
+    "name": "flag: Algeria",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇦",
+    "name": "flag: Ceuta & Melilla",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇨",
+    "name": "flag: Ecuador",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇪",
+    "name": "flag: Estonia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇬",
+    "name": "flag: Egypt",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇭",
+    "name": "flag: Western Sahara",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇷",
+    "name": "flag: Eritrea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇸",
+    "name": "flag: Spain",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇹",
+    "name": "flag: Ethiopia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EA",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇪🇺",
+    "name": "flag: European Union",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇮",
+    "name": "flag: Finland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇯",
+    "name": "flag: Fiji",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇰",
+    "name": "flag: Falkland Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇲",
+    "name": "flag: Micronesia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇴",
+    "name": "flag: Faroe Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EB",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇫🇷",
+    "name": "flag: France",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇦",
+    "name": "flag: Gabon",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇧",
+    "name": "flag: United Kingdom",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇩",
+    "name": "flag: Grenada",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇪",
+    "name": "flag: Georgia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇫",
+    "name": "flag: French Guiana",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇬",
+    "name": "flag: Guernsey",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇭",
+    "name": "flag: Ghana",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇮",
+    "name": "flag: Gibraltar",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇱",
+    "name": "flag: Greenland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇲",
+    "name": "flag: Gambia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇳",
+    "name": "flag: Guinea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇵",
+    "name": "flag: Guadeloupe",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇶",
+    "name": "flag: Equatorial Guinea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇷",
+    "name": "flag: Greece",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇸",
+    "name": "flag: South Georgia & South Sandwich Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇹",
+    "name": "flag: Guatemala",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇺",
+    "name": "flag: Guam",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇼",
+    "name": "flag: Guinea-Bissau",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EC",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇬🇾",
+    "name": "flag: Guyana",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇰",
+    "name": "flag: Hong Kong SAR China",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇲",
+    "name": "flag: Heard & McDonald Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇳",
+    "name": "flag: Honduras",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇷",
+    "name": "flag: Croatia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇹",
+    "name": "flag: Haiti",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1ED",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇭🇺",
+    "name": "flag: Hungary",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇨",
+    "name": "flag: Canary Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇩",
+    "name": "flag: Indonesia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇪",
+    "name": "flag: Ireland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇱",
+    "name": "flag: Israel",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇲",
+    "name": "flag: Isle of Man",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇳",
+    "name": "flag: India",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇴",
+    "name": "flag: British Indian Ocean Territory",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇶",
+    "name": "flag: Iraq",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇷",
+    "name": "flag: Iran",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇸",
+    "name": "flag: Iceland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EE",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇮🇹",
+    "name": "flag: Italy",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EF",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇯🇪",
+    "name": "flag: Jersey",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EF",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇯🇲",
+    "name": "flag: Jamaica",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EF",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇯🇴",
+    "name": "flag: Jordan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1EF",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇯🇵",
+    "name": "flag: Japan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇪",
+    "name": "flag: Kenya",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇬",
+    "name": "flag: Kyrgyzstan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇭",
+    "name": "flag: Cambodia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇮",
+    "name": "flag: Kiribati",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇲",
+    "name": "flag: Comoros",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇳",
+    "name": "flag: St. Kitts & Nevis",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇵",
+    "name": "flag: North Korea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇷",
+    "name": "flag: South Korea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇼",
+    "name": "flag: Kuwait",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇾",
+    "name": "flag: Cayman Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F0",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇰🇿",
+    "name": "flag: Kazakhstan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇦",
+    "name": "flag: Laos",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇧",
+    "name": "flag: Lebanon",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇨",
+    "name": "flag: St. Lucia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇮",
+    "name": "flag: Liechtenstein",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇰",
+    "name": "flag: Sri Lanka",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇷",
+    "name": "flag: Liberia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇸",
+    "name": "flag: Lesotho",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇹",
+    "name": "flag: Lithuania",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇺",
+    "name": "flag: Luxembourg",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇻",
+    "name": "flag: Latvia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F1",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇱🇾",
+    "name": "flag: Libya",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇦",
+    "name": "flag: Morocco",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇨",
+    "name": "flag: Monaco",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇩",
+    "name": "flag: Moldova",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇪",
+    "name": "flag: Montenegro",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇫",
+    "name": "flag: St. Martin",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇬",
+    "name": "flag: Madagascar",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇭",
+    "name": "flag: Marshall Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇰",
+    "name": "flag: North Macedonia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇱",
+    "name": "flag: Mali",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇲",
+    "name": "flag: Myanmar (Burma)",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇳",
+    "name": "flag: Mongolia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇴",
+    "name": "flag: Macao SAR China",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇵",
+    "name": "flag: Northern Mariana Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇶",
+    "name": "flag: Martinique",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇷",
+    "name": "flag: Mauritania",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇸",
+    "name": "flag: Montserrat",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇹",
+    "name": "flag: Malta",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇺",
+    "name": "flag: Mauritius",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇻",
+    "name": "flag: Maldives",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇼",
+    "name": "flag: Malawi",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇽",
+    "name": "flag: Mexico",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇾",
+    "name": "flag: Malaysia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F2",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇲🇿",
+    "name": "flag: Mozambique",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇦",
+    "name": "flag: Namibia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇨",
+    "name": "flag: New Caledonia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇪",
+    "name": "flag: Niger",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇫",
+    "name": "flag: Norfolk Island",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇬",
+    "name": "flag: Nigeria",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇮",
+    "name": "flag: Nicaragua",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇱",
+    "name": "flag: Netherlands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇴",
+    "name": "flag: Norway",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇵",
+    "name": "flag: Nepal",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇷",
+    "name": "flag: Nauru",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇺",
+    "name": "flag: Niue",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F3",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇳🇿",
+    "name": "flag: New Zealand",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F4",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇴🇲",
+    "name": "flag: Oman",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇦",
+    "name": "flag: Panama",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇪",
+    "name": "flag: Peru",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇫",
+    "name": "flag: French Polynesia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇬",
+    "name": "flag: Papua New Guinea",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇭",
+    "name": "flag: Philippines",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇰",
+    "name": "flag: Pakistan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇱",
+    "name": "flag: Poland",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇲",
+    "name": "flag: St. Pierre & Miquelon",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇳",
+    "name": "flag: Pitcairn Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇷",
+    "name": "flag: Puerto Rico",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇸",
+    "name": "flag: Palestinian Territories",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇹",
+    "name": "flag: Portugal",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇼",
+    "name": "flag: Palau",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F5",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇵🇾",
+    "name": "flag: Paraguay",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F6",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇶🇦",
+    "name": "flag: Qatar",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F7",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇷🇪",
+    "name": "flag: Réunion",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F7",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇷🇴",
+    "name": "flag: Romania",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F7",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇷🇸",
+    "name": "flag: Serbia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F7",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇷🇺",
+    "name": "flag: Russia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F7",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇷🇼",
+    "name": "flag: Rwanda",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇦",
+    "name": "flag: Saudi Arabia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇧",
+    "name": "flag: Solomon Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇨",
+    "name": "flag: Seychelles",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇩",
+    "name": "flag: Sudan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇪",
+    "name": "flag: Sweden",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇬",
+    "name": "flag: Singapore",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇭",
+    "name": "flag: St. Helena",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇮",
+    "name": "flag: Slovenia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇯",
+    "name": "flag: Svalbard & Jan Mayen",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇰",
+    "name": "flag: Slovakia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇱",
+    "name": "flag: Sierra Leone",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇲",
+    "name": "flag: San Marino",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇳",
+    "name": "flag: Senegal",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇴",
+    "name": "flag: Somalia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇷",
+    "name": "flag: Suriname",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇸",
+    "name": "flag: South Sudan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇹",
+    "name": "flag: São Tomé & Príncipe",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇻",
+    "name": "flag: El Salvador",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇽",
+    "name": "flag: Sint Maarten",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇾",
+    "name": "flag: Syria",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F8",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇸🇿",
+    "name": "flag: Eswatini",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇦",
+    "name": "flag: Tristan da Cunha",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇨",
+    "name": "flag: Turks & Caicos Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇩",
+    "name": "flag: Chad",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇫",
+    "name": "flag: French Southern Territories",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇬",
+    "name": "flag: Togo",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇭",
+    "name": "flag: Thailand",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇯",
+    "name": "flag: Tajikistan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇰",
+    "name": "flag: Tokelau",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇱",
+    "name": "flag: Timor-Leste",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇲",
+    "name": "flag: Turkmenistan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇳",
+    "name": "flag: Tunisia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇴",
+    "name": "flag: Tonga",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇷",
+    "name": "flag: Türkiye",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇹",
+    "name": "flag: Trinidad & Tobago",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇻",
+    "name": "flag: Tuvalu",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇼",
+    "name": "flag: Taiwan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1F9",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇹🇿",
+    "name": "flag: Tanzania",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇦",
+    "name": "flag: Ukraine",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇬",
+    "name": "flag: Uganda",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇲",
+    "name": "flag: U.S. Outlying Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇳",
+    "name": "flag: United Nations",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇸",
+    "name": "flag: United States",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇾",
+    "name": "flag: Uruguay",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FA",
+      "1F1FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇺🇿",
+    "name": "flag: Uzbekistan",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇦",
+    "name": "flag: Vatican City",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇨",
+    "name": "flag: St. Vincent & Grenadines",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇪",
+    "name": "flag: Venezuela",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇬",
+    "name": "flag: British Virgin Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇮",
+    "name": "flag: U.S. Virgin Islands",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇳",
+    "name": "flag: Vietnam",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FB",
+      "1F1FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇻🇺",
+    "name": "flag: Vanuatu",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FC",
+      "1F1EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇼🇫",
+    "name": "flag: Wallis & Futuna",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FC",
+      "1F1F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇼🇸",
+    "name": "flag: Samoa",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FD",
+      "1F1F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇽🇰",
+    "name": "flag: Kosovo",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FE",
+      "1F1EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇾🇪",
+    "name": "flag: Yemen",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FE",
+      "1F1F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇾🇹",
+    "name": "flag: Mayotte",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FF",
+      "1F1E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇿🇦",
+    "name": "flag: South Africa",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FF",
+      "1F1F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇿🇲",
+    "name": "flag: Zambia",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F1FF",
+      "1F1FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🇿🇼",
+    "name": "flag: Zimbabwe",
+    "subgroup": "country-flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4",
+      "E0067",
+      "E0062",
+      "E0065",
+      "E006E",
+      "E0067",
+      "E007F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "name": "flag: England",
+    "subgroup": "subdivision-flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4",
+      "E0067",
+      "E0062",
+      "E0073",
+      "E0063",
+      "E0074",
+      "E007F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "name": "flag: Scotland",
+    "subgroup": "subdivision-flag"
+  },
+  {
+    "codepoints": [
+      "1F3F4",
+      "E0067",
+      "E0062",
+      "E0077",
+      "E006C",
+      "E0073",
+      "E007F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+    "name": "flag: Wales",
+    "subgroup": "subdivision-flag"
+  }
+]

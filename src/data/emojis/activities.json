@@ -1,0 +1,877 @@
+[
+  {
+    "codepoints": [
+      "1F383"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎃",
+    "name": "jack-o-lantern",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F384"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎄",
+    "name": "Christmas tree",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F386"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎆",
+    "name": "fireworks",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F387"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎇",
+    "name": "sparkler",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F9E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧨",
+    "name": "firecracker",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "2728"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✨",
+    "name": "sparkles",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F388"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎈",
+    "name": "balloon",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F389"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎉",
+    "name": "party popper",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F38A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎊",
+    "name": "confetti ball",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F38B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎋",
+    "name": "tanabata tree",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F38D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎍",
+    "name": "pine decoration",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F38E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎎",
+    "name": "Japanese dolls",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F38F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎏",
+    "name": "carp streamer",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F390"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎐",
+    "name": "wind chime",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F391"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎑",
+    "name": "moon viewing ceremony",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F9E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧧",
+    "name": "red envelope",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F380"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎀",
+    "name": "ribbon",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F381"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎁",
+    "name": "wrapped gift",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F397",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎗️",
+    "name": "reminder ribbon",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F397"
+    ],
+    "status": "unqualified",
+    "glyph": "🎗",
+    "name": "reminder ribbon",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F39F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎟️",
+    "name": "admission tickets",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F39F"
+    ],
+    "status": "unqualified",
+    "glyph": "🎟",
+    "name": "admission tickets",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F3AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎫",
+    "name": "ticket",
+    "subgroup": "event"
+  },
+  {
+    "codepoints": [
+      "1F396",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎖️",
+    "name": "military medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F396"
+    ],
+    "status": "unqualified",
+    "glyph": "🎖",
+    "name": "military medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F3C6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏆",
+    "name": "trophy",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F3C5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏅",
+    "name": "sports medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F947"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥇",
+    "name": "1st place medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F948"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥈",
+    "name": "2nd place medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "1F949"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥉",
+    "name": "3rd place medal",
+    "subgroup": "award-medal"
+  },
+  {
+    "codepoints": [
+      "26BD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚽",
+    "name": "soccer ball",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "26BE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚾",
+    "name": "baseball",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥎",
+    "name": "softball",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3C0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏀",
+    "name": "basketball",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3D0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏐",
+    "name": "volleyball",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3C8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏈",
+    "name": "american football",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3C9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏉",
+    "name": "rugby football",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3BE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎾",
+    "name": "tennis",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥏",
+    "name": "flying disc",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3B3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎳",
+    "name": "bowling",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3CF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏏",
+    "name": "cricket game",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3D1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏑",
+    "name": "field hockey",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3D2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏒",
+    "name": "ice hockey",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥍",
+    "name": "lacrosse",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3D3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏓",
+    "name": "ping pong",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏸",
+    "name": "badminton",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥊",
+    "name": "boxing glove",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥋",
+    "name": "martial arts uniform",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F945"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥅",
+    "name": "goal net",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "26F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛳",
+    "name": "flag in hole",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "26F8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛸️",
+    "name": "ice skate",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "26F8"
+    ],
+    "status": "unqualified",
+    "glyph": "⛸",
+    "name": "ice skate",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3A3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎣",
+    "name": "fishing pole",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F93F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤿",
+    "name": "diving mask",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3BD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎽",
+    "name": "running shirt",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3BF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎿",
+    "name": "skis",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F6F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛷",
+    "name": "sled",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F94C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥌",
+    "name": "curling stone",
+    "subgroup": "sport"
+  },
+  {
+    "codepoints": [
+      "1F3AF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎯",
+    "name": "bullseye",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FA80"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪀",
+    "name": "yo-yo",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FA81"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪁",
+    "name": "kite",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F52B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔫",
+    "name": "water pistol",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3B1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎱",
+    "name": "pool 8 ball",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F52E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔮",
+    "name": "crystal ball",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FA84"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪄",
+    "name": "magic wand",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3AE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎮",
+    "name": "video game",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F579",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕹️",
+    "name": "joystick",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F579"
+    ],
+    "status": "unqualified",
+    "glyph": "🕹",
+    "name": "joystick",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3B0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎰",
+    "name": "slot machine",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3B2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎲",
+    "name": "game die",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F9E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧩",
+    "name": "puzzle piece",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F9F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧸",
+    "name": "teddy bear",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FA85"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪅",
+    "name": "piñata",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FAA9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪩",
+    "name": "mirror ball",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1FA86"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪆",
+    "name": "nesting dolls",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2660",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♠️",
+    "name": "spade suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2660"
+    ],
+    "status": "unqualified",
+    "glyph": "♠",
+    "name": "spade suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2665",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♥️",
+    "name": "heart suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2665"
+    ],
+    "status": "unqualified",
+    "glyph": "♥",
+    "name": "heart suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2666",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♦️",
+    "name": "diamond suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2666"
+    ],
+    "status": "unqualified",
+    "glyph": "♦",
+    "name": "diamond suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2663",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♣️",
+    "name": "club suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "2663"
+    ],
+    "status": "unqualified",
+    "glyph": "♣",
+    "name": "club suit",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "265F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♟️",
+    "name": "chess pawn",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "265F"
+    ],
+    "status": "unqualified",
+    "glyph": "♟",
+    "name": "chess pawn",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F0CF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🃏",
+    "name": "joker",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F004"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🀄",
+    "name": "mahjong red dragon",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3B4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎴",
+    "name": "flower playing cards",
+    "subgroup": "game"
+  },
+  {
+    "codepoints": [
+      "1F3AD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎭",
+    "name": "performing arts",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1F5BC",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖼️",
+    "name": "framed picture",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1F5BC"
+    ],
+    "status": "unqualified",
+    "glyph": "🖼",
+    "name": "framed picture",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1F3A8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎨",
+    "name": "artist palette",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1F9F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧵",
+    "name": "thread",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1FAA1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪡",
+    "name": "sewing needle",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1F9F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧶",
+    "name": "yarn",
+    "subgroup": "arts & crafts"
+  },
+  {
+    "codepoints": [
+      "1FAA2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪢",
+    "name": "knot",
+    "subgroup": "arts & crafts"
+  }
+]

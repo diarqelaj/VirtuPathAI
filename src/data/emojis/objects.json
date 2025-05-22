@@ -1,0 +1,2882 @@
+[
+  {
+    "codepoints": [
+      "1F453"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👓",
+    "name": "glasses",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F576",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕶️",
+    "name": "sunglasses",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F576"
+    ],
+    "status": "unqualified",
+    "glyph": "🕶",
+    "name": "sunglasses",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F97D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥽",
+    "name": "goggles",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F97C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥼",
+    "name": "lab coat",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9BA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦺",
+    "name": "safety vest",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F454"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👔",
+    "name": "necktie",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F455"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👕",
+    "name": "t-shirt",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F456"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👖",
+    "name": "jeans",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧣",
+    "name": "scarf",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9E4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧤",
+    "name": "gloves",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9E5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧥",
+    "name": "coat",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧦",
+    "name": "socks",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F457"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👗",
+    "name": "dress",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F458"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👘",
+    "name": "kimono",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F97B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥻",
+    "name": "sari",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA71"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩱",
+    "name": "one-piece swimsuit",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA72"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩲",
+    "name": "briefs",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA73"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩳",
+    "name": "shorts",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F459"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👙",
+    "name": "bikini",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👚",
+    "name": "woman’s clothes",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FAAD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪭",
+    "name": "folding hand fan",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👛",
+    "name": "purse",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👜",
+    "name": "handbag",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👝",
+    "name": "clutch bag",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F6CD",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛍️",
+    "name": "shopping bags",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F6CD"
+    ],
+    "status": "unqualified",
+    "glyph": "🛍",
+    "name": "shopping bags",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F392"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎒",
+    "name": "backpack",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA74"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩴",
+    "name": "thong sandal",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👞",
+    "name": "man’s shoe",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F45F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👟",
+    "name": "running shoe",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F97E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥾",
+    "name": "hiking boot",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F97F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥿",
+    "name": "flat shoe",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F460"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👠",
+    "name": "high-heeled shoe",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F461"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👡",
+    "name": "woman’s sandal",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA70"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩰",
+    "name": "ballet shoes",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F462"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👢",
+    "name": "woman’s boot",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FAAE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪮",
+    "name": "hair pick",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F451"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👑",
+    "name": "crown",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F452"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👒",
+    "name": "woman’s hat",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F3A9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎩",
+    "name": "top hat",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F393"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎓",
+    "name": "graduation cap",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F9E2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧢",
+    "name": "billed cap",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1FA96"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪖",
+    "name": "military helmet",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "26D1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛑️",
+    "name": "rescue worker’s helmet",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "26D1"
+    ],
+    "status": "unqualified",
+    "glyph": "⛑",
+    "name": "rescue worker’s helmet",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F4FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📿",
+    "name": "prayer beads",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F484"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💄",
+    "name": "lipstick",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F48D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💍",
+    "name": "ring",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F48E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💎",
+    "name": "gem stone",
+    "subgroup": "clothing"
+  },
+  {
+    "codepoints": [
+      "1F507"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔇",
+    "name": "muted speaker",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F508"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔈",
+    "name": "speaker low volume",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F509"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔉",
+    "name": "speaker medium volume",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F50A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔊",
+    "name": "speaker high volume",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F4E2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📢",
+    "name": "loudspeaker",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F4E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📣",
+    "name": "megaphone",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F4EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📯",
+    "name": "postal horn",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F514"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔔",
+    "name": "bell",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F515"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔕",
+    "name": "bell with slash",
+    "subgroup": "sound"
+  },
+  {
+    "codepoints": [
+      "1F3BC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎼",
+    "name": "musical score",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F3B5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎵",
+    "name": "musical note",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F3B6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎶",
+    "name": "musical notes",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F399",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎙️",
+    "name": "studio microphone",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F399"
+    ],
+    "status": "unqualified",
+    "glyph": "🎙",
+    "name": "studio microphone",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F39A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎚️",
+    "name": "level slider",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F39A"
+    ],
+    "status": "unqualified",
+    "glyph": "🎚",
+    "name": "level slider",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F39B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎛️",
+    "name": "control knobs",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F39B"
+    ],
+    "status": "unqualified",
+    "glyph": "🎛",
+    "name": "control knobs",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F3A4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎤",
+    "name": "microphone",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F3A7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎧",
+    "name": "headphone",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F4FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📻",
+    "name": "radio",
+    "subgroup": "music"
+  },
+  {
+    "codepoints": [
+      "1F3B7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎷",
+    "name": "saxophone",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA97"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪗",
+    "name": "accordion",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F3B8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎸",
+    "name": "guitar",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F3B9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎹",
+    "name": "musical keyboard",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F3BA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎺",
+    "name": "trumpet",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F3BB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎻",
+    "name": "violin",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA95"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪕",
+    "name": "banjo",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F941"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥁",
+    "name": "drum",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA98"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪘",
+    "name": "long drum",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA87"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪇",
+    "name": "maracas",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA88"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪈",
+    "name": "flute",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1FA89"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪉",
+    "name": "harp",
+    "subgroup": "musical-instrument"
+  },
+  {
+    "codepoints": [
+      "1F4F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📱",
+    "name": "mobile phone",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "1F4F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📲",
+    "name": "mobile phone with arrow",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "260E",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☎️",
+    "name": "telephone",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "260E"
+    ],
+    "status": "unqualified",
+    "glyph": "☎",
+    "name": "telephone",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "1F4DE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📞",
+    "name": "telephone receiver",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "1F4DF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📟",
+    "name": "pager",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "1F4E0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📠",
+    "name": "fax machine",
+    "subgroup": "phone"
+  },
+  {
+    "codepoints": [
+      "1F50B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔋",
+    "name": "battery",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1FAAB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪫",
+    "name": "low battery",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F50C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔌",
+    "name": "electric plug",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F4BB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💻",
+    "name": "laptop",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5A5",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖥️",
+    "name": "desktop computer",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5A5"
+    ],
+    "status": "unqualified",
+    "glyph": "🖥",
+    "name": "desktop computer",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5A8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖨️",
+    "name": "printer",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5A8"
+    ],
+    "status": "unqualified",
+    "glyph": "🖨",
+    "name": "printer",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "2328",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⌨️",
+    "name": "keyboard",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "2328"
+    ],
+    "status": "unqualified",
+    "glyph": "⌨",
+    "name": "keyboard",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5B1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖱️",
+    "name": "computer mouse",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5B1"
+    ],
+    "status": "unqualified",
+    "glyph": "🖱",
+    "name": "computer mouse",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5B2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖲️",
+    "name": "trackball",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F5B2"
+    ],
+    "status": "unqualified",
+    "glyph": "🖲",
+    "name": "trackball",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F4BD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💽",
+    "name": "computer disk",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F4BE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💾",
+    "name": "floppy disk",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F4BF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💿",
+    "name": "optical disk",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F4C0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📀",
+    "name": "dvd",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F9EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧮",
+    "name": "abacus",
+    "subgroup": "computer"
+  },
+  {
+    "codepoints": [
+      "1F3A5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎥",
+    "name": "movie camera",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F39E",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎞️",
+    "name": "film frames",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F39E"
+    ],
+    "status": "unqualified",
+    "glyph": "🎞",
+    "name": "film frames",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4FD",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📽️",
+    "name": "film projector",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4FD"
+    ],
+    "status": "unqualified",
+    "glyph": "📽",
+    "name": "film projector",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F3AC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎬",
+    "name": "clapper board",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📺",
+    "name": "television",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📷",
+    "name": "camera",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📸",
+    "name": "camera with flash",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📹",
+    "name": "video camera",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📼",
+    "name": "videocassette",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F50D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔍",
+    "name": "magnifying glass tilted left",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F50E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔎",
+    "name": "magnifying glass tilted right",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F56F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕯️",
+    "name": "candle",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F56F"
+    ],
+    "status": "unqualified",
+    "glyph": "🕯",
+    "name": "candle",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4A1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💡",
+    "name": "light bulb",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F526"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔦",
+    "name": "flashlight",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F3EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏮",
+    "name": "red paper lantern",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1FA94"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪔",
+    "name": "diya lamp",
+    "subgroup": "light & video"
+  },
+  {
+    "codepoints": [
+      "1F4D4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📔",
+    "name": "notebook with decorative cover",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📕",
+    "name": "closed book",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📖",
+    "name": "open book",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📗",
+    "name": "green book",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📘",
+    "name": "blue book",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📙",
+    "name": "orange book",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4DA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📚",
+    "name": "books",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📓",
+    "name": "notebook",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📒",
+    "name": "ledger",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4C3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📃",
+    "name": "page with curl",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4DC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📜",
+    "name": "scroll",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4C4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📄",
+    "name": "page facing up",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📰",
+    "name": "newspaper",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F5DE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗞️",
+    "name": "rolled-up newspaper",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F5DE"
+    ],
+    "status": "unqualified",
+    "glyph": "🗞",
+    "name": "rolled-up newspaper",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4D1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📑",
+    "name": "bookmark tabs",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F516"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔖",
+    "name": "bookmark",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F3F7",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏷️",
+    "name": "label",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F3F7"
+    ],
+    "status": "unqualified",
+    "glyph": "🏷",
+    "name": "label",
+    "subgroup": "book-paper"
+  },
+  {
+    "codepoints": [
+      "1F4B0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💰",
+    "name": "money bag",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1FA99"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪙",
+    "name": "coin",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💴",
+    "name": "yen banknote",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💵",
+    "name": "dollar banknote",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💶",
+    "name": "euro banknote",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💷",
+    "name": "pound banknote",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💸",
+    "name": "money with wings",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💳",
+    "name": "credit card",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F9FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧾",
+    "name": "receipt",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "1F4B9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💹",
+    "name": "chart increasing with yen",
+    "subgroup": "money"
+  },
+  {
+    "codepoints": [
+      "2709",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✉️",
+    "name": "envelope",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "2709"
+    ],
+    "status": "unqualified",
+    "glyph": "✉",
+    "name": "envelope",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📧",
+    "name": "e-mail",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📨",
+    "name": "incoming envelope",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📩",
+    "name": "envelope with arrow",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📤",
+    "name": "outbox tray",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📥",
+    "name": "inbox tray",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📦",
+    "name": "package",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📫",
+    "name": "closed mailbox with raised flag",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📪",
+    "name": "closed mailbox with lowered flag",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📬",
+    "name": "open mailbox with raised flag",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📭",
+    "name": "open mailbox with lowered flag",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F4EE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📮",
+    "name": "postbox",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F5F3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗳️",
+    "name": "ballot box with ballot",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "1F5F3"
+    ],
+    "status": "unqualified",
+    "glyph": "🗳",
+    "name": "ballot box with ballot",
+    "subgroup": "mail"
+  },
+  {
+    "codepoints": [
+      "270F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✏️",
+    "name": "pencil",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "270F"
+    ],
+    "status": "unqualified",
+    "glyph": "✏",
+    "name": "pencil",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "2712",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✒️",
+    "name": "black nib",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "2712"
+    ],
+    "status": "unqualified",
+    "glyph": "✒",
+    "name": "black nib",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖋️",
+    "name": "fountain pen",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58B"
+    ],
+    "status": "unqualified",
+    "glyph": "🖋",
+    "name": "fountain pen",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖊️",
+    "name": "pen",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58A"
+    ],
+    "status": "unqualified",
+    "glyph": "🖊",
+    "name": "pen",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58C",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖌️",
+    "name": "paintbrush",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58C"
+    ],
+    "status": "unqualified",
+    "glyph": "🖌",
+    "name": "paintbrush",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58D",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖍️",
+    "name": "crayon",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F58D"
+    ],
+    "status": "unqualified",
+    "glyph": "🖍",
+    "name": "crayon",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F4DD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📝",
+    "name": "memo",
+    "subgroup": "writing"
+  },
+  {
+    "codepoints": [
+      "1F4BC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💼",
+    "name": "briefcase",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📁",
+    "name": "file folder",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📂",
+    "name": "open file folder",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗂️",
+    "name": "card index dividers",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C2"
+    ],
+    "status": "unqualified",
+    "glyph": "🗂",
+    "name": "card index dividers",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📅",
+    "name": "calendar",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📆",
+    "name": "tear-off calendar",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗒️",
+    "name": "spiral notepad",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D2"
+    ],
+    "status": "unqualified",
+    "glyph": "🗒",
+    "name": "spiral notepad",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗓️",
+    "name": "spiral calendar",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D3"
+    ],
+    "status": "unqualified",
+    "glyph": "🗓",
+    "name": "spiral calendar",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📇",
+    "name": "card index",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📈",
+    "name": "chart increasing",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4C9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📉",
+    "name": "chart decreasing",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📊",
+    "name": "bar chart",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📋",
+    "name": "clipboard",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📌",
+    "name": "pushpin",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📍",
+    "name": "round pushpin",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📎",
+    "name": "paperclip",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F587",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖇️",
+    "name": "linked paperclips",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F587"
+    ],
+    "status": "unqualified",
+    "glyph": "🖇",
+    "name": "linked paperclips",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4CF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📏",
+    "name": "straight ruler",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F4D0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📐",
+    "name": "triangular ruler",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "2702",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✂️",
+    "name": "scissors",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "2702"
+    ],
+    "status": "unqualified",
+    "glyph": "✂",
+    "name": "scissors",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗃️",
+    "name": "card file box",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C3"
+    ],
+    "status": "unqualified",
+    "glyph": "🗃",
+    "name": "card file box",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C4",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗄️",
+    "name": "file cabinet",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5C4"
+    ],
+    "status": "unqualified",
+    "glyph": "🗄",
+    "name": "file cabinet",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗑️",
+    "name": "wastebasket",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F5D1"
+    ],
+    "status": "unqualified",
+    "glyph": "🗑",
+    "name": "wastebasket",
+    "subgroup": "office"
+  },
+  {
+    "codepoints": [
+      "1F512"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔒",
+    "name": "locked",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F513"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔓",
+    "name": "unlocked",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F50F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔏",
+    "name": "locked with pen",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F510"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔐",
+    "name": "locked with key",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F511"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔑",
+    "name": "key",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F5DD",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗝️",
+    "name": "old key",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F5DD"
+    ],
+    "status": "unqualified",
+    "glyph": "🗝",
+    "name": "old key",
+    "subgroup": "lock"
+  },
+  {
+    "codepoints": [
+      "1F528"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔨",
+    "name": "hammer",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA93"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪓",
+    "name": "axe",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26CF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛏️",
+    "name": "pick",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26CF"
+    ],
+    "status": "unqualified",
+    "glyph": "⛏",
+    "name": "pick",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2692",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚒️",
+    "name": "hammer and pick",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2692"
+    ],
+    "status": "unqualified",
+    "glyph": "⚒",
+    "name": "hammer and pick",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F6E0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛠️",
+    "name": "hammer and wrench",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F6E0"
+    ],
+    "status": "unqualified",
+    "glyph": "🛠",
+    "name": "hammer and wrench",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F5E1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗡️",
+    "name": "dagger",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F5E1"
+    ],
+    "status": "unqualified",
+    "glyph": "🗡",
+    "name": "dagger",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2694",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚔️",
+    "name": "crossed swords",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2694"
+    ],
+    "status": "unqualified",
+    "glyph": "⚔",
+    "name": "crossed swords",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F4A3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💣",
+    "name": "bomb",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA83"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪃",
+    "name": "boomerang",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F3F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏹",
+    "name": "bow and arrow",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F6E1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛡️",
+    "name": "shield",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F6E1"
+    ],
+    "status": "unqualified",
+    "glyph": "🛡",
+    "name": "shield",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA9A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪚",
+    "name": "carpentry saw",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F527"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔧",
+    "name": "wrench",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA9B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪛",
+    "name": "screwdriver",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F529"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔩",
+    "name": "nut and bolt",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2699",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚙️",
+    "name": "gear",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2699"
+    ],
+    "status": "unqualified",
+    "glyph": "⚙",
+    "name": "gear",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F5DC",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗜️",
+    "name": "clamp",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F5DC"
+    ],
+    "status": "unqualified",
+    "glyph": "🗜",
+    "name": "clamp",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2696",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚖️",
+    "name": "balance scale",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2696"
+    ],
+    "status": "unqualified",
+    "glyph": "⚖",
+    "name": "balance scale",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F9AF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦯",
+    "name": "white cane",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F517"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔗",
+    "name": "link",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26D3",
+      "FE0F",
+      "200D",
+      "1F4A5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛓️‍💥",
+    "name": "broken chain",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26D3",
+      "200D",
+      "1F4A5"
+    ],
+    "status": "unqualified",
+    "glyph": "⛓‍💥",
+    "name": "broken chain",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26D3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛓️",
+    "name": "chains",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "26D3"
+    ],
+    "status": "unqualified",
+    "glyph": "⛓",
+    "name": "chains",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA9D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪝",
+    "name": "hook",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F9F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧰",
+    "name": "toolbox",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1F9F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧲",
+    "name": "magnet",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA9C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪜",
+    "name": "ladder",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "1FA8F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪏",
+    "name": "shovel",
+    "subgroup": "tool"
+  },
+  {
+    "codepoints": [
+      "2697",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚗️",
+    "name": "alembic",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "2697"
+    ],
+    "status": "unqualified",
+    "glyph": "⚗",
+    "name": "alembic",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F9EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧪",
+    "name": "test tube",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F9EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧫",
+    "name": "petri dish",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F9EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧬",
+    "name": "dna",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F52C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔬",
+    "name": "microscope",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F52D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔭",
+    "name": "telescope",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F4E1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "📡",
+    "name": "satellite antenna",
+    "subgroup": "science"
+  },
+  {
+    "codepoints": [
+      "1F489"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💉",
+    "name": "syringe",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1FA78"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩸",
+    "name": "drop of blood",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1F48A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💊",
+    "name": "pill",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1FA79"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩹",
+    "name": "adhesive bandage",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1FA7C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩼",
+    "name": "crutch",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1FA7A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩺",
+    "name": "stethoscope",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1FA7B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩻",
+    "name": "x-ray",
+    "subgroup": "medical"
+  },
+  {
+    "codepoints": [
+      "1F6AA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚪",
+    "name": "door",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6D7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛗",
+    "name": "elevator",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FA9E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪞",
+    "name": "mirror",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FA9F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪟",
+    "name": "window",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6CF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛏️",
+    "name": "bed",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6CF"
+    ],
+    "status": "unqualified",
+    "glyph": "🛏",
+    "name": "bed",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6CB",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛋️",
+    "name": "couch and lamp",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6CB"
+    ],
+    "status": "unqualified",
+    "glyph": "🛋",
+    "name": "couch and lamp",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FA91"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪑",
+    "name": "chair",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6BD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚽",
+    "name": "toilet",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FAA0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪠",
+    "name": "plunger",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6BF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚿",
+    "name": "shower",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6C1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛁",
+    "name": "bathtub",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FAA4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪤",
+    "name": "mouse trap",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FA92"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪒",
+    "name": "razor",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧴",
+    "name": "lotion bottle",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9F7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧷",
+    "name": "safety pin",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧹",
+    "name": "broom",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧺",
+    "name": "basket",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧻",
+    "name": "roll of paper",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FAA3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪣",
+    "name": "bucket",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧼",
+    "name": "soap",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FAE7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫧",
+    "name": "bubbles",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1FAA5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪥",
+    "name": "toothbrush",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧽",
+    "name": "sponge",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F9EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧯",
+    "name": "fire extinguisher",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6D2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛒",
+    "name": "shopping cart",
+    "subgroup": "household"
+  },
+  {
+    "codepoints": [
+      "1F6AC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚬",
+    "name": "cigarette",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "26B0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚰️",
+    "name": "coffin",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "26B0"
+    ],
+    "status": "unqualified",
+    "glyph": "⚰",
+    "name": "coffin",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1FAA6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪦",
+    "name": "headstone",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "26B1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚱️",
+    "name": "funeral urn",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "26B1"
+    ],
+    "status": "unqualified",
+    "glyph": "⚱",
+    "name": "funeral urn",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1F9FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧿",
+    "name": "nazar amulet",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1FAAC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪬",
+    "name": "hamsa",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1F5FF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗿",
+    "name": "moai",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1FAA7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪧",
+    "name": "placard",
+    "subgroup": "other-object"
+  },
+  {
+    "codepoints": [
+      "1FAAA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪪",
+    "name": "identification card",
+    "subgroup": "other-object"
+  }
+]

@@ -1,0 +1,1515 @@
+[
+  {
+    "codepoints": [
+      "1F435"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐵",
+    "name": "monkey face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F412"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐒",
+    "name": "monkey",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F98D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦍",
+    "name": "gorilla",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦧",
+    "name": "orangutan",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F436"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐶",
+    "name": "dog face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F415"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐕",
+    "name": "dog",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9AE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦮",
+    "name": "guide dog",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F415",
+      "200D",
+      "1F9BA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐕‍🦺",
+    "name": "service dog",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F429"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐩",
+    "name": "poodle",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐺",
+    "name": "wolf",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F98A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦊",
+    "name": "fox",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F99D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦝",
+    "name": "raccoon",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F431"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐱",
+    "name": "cat face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F408"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐈",
+    "name": "cat",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F408",
+      "200D",
+      "2B1B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐈‍⬛",
+    "name": "black cat",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F981"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦁",
+    "name": "lion",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F42F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐯",
+    "name": "tiger face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F405"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐅",
+    "name": "tiger",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F406"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐆",
+    "name": "leopard",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F434"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐴",
+    "name": "horse face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1FACE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫎",
+    "name": "moose",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1FACF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫏",
+    "name": "donkey",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F40E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐎",
+    "name": "horse",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F984"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦄",
+    "name": "unicorn",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F993"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦓",
+    "name": "zebra",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F98C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦌",
+    "name": "deer",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9AC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦬",
+    "name": "bison",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F42E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐮",
+    "name": "cow face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F402"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐂",
+    "name": "ox",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F403"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐃",
+    "name": "water buffalo",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F404"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐄",
+    "name": "cow",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F437"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐷",
+    "name": "pig face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F416"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐖",
+    "name": "pig",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F417"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐗",
+    "name": "boar",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐽",
+    "name": "pig nose",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F40F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐏",
+    "name": "ram",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F411"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐑",
+    "name": "ewe",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F410"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐐",
+    "name": "goat",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F42A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐪",
+    "name": "camel",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F42B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐫",
+    "name": "two-hump camel",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F999"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦙",
+    "name": "llama",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F992"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦒",
+    "name": "giraffe",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F418"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐘",
+    "name": "elephant",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦣",
+    "name": "mammoth",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F98F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦏",
+    "name": "rhinoceros",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F99B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦛",
+    "name": "hippopotamus",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F42D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐭",
+    "name": "mouse face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F401"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐁",
+    "name": "mouse",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F400"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐀",
+    "name": "rat",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F439"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐹",
+    "name": "hamster",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F430"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐰",
+    "name": "rabbit face",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F407"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐇",
+    "name": "rabbit",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43F",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐿️",
+    "name": "chipmunk",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43F"
+    ],
+    "status": "unqualified",
+    "glyph": "🐿",
+    "name": "chipmunk",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦫",
+    "name": "beaver",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F994"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦔",
+    "name": "hedgehog",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F987"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦇",
+    "name": "bat",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐻",
+    "name": "bear",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43B",
+      "200D",
+      "2744",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐻‍❄️",
+    "name": "polar bear",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43B",
+      "200D",
+      "2744"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "🐻‍❄",
+    "name": "polar bear",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F428"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐨",
+    "name": "koala",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐼",
+    "name": "panda",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦥",
+    "name": "sloth",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦦",
+    "name": "otter",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦨",
+    "name": "skunk",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F998"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦘",
+    "name": "kangaroo",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F9A1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦡",
+    "name": "badger",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F43E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐾",
+    "name": "paw prints",
+    "subgroup": "animal-mammal"
+  },
+  {
+    "codepoints": [
+      "1F983"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦃",
+    "name": "turkey",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F414"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐔",
+    "name": "chicken",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F413"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐓",
+    "name": "rooster",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F423"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐣",
+    "name": "hatching chick",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F424"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐤",
+    "name": "baby chick",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F425"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐥",
+    "name": "front-facing baby chick",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F426"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐦",
+    "name": "bird",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F427"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐧",
+    "name": "penguin",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F54A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕊️",
+    "name": "dove",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F54A"
+    ],
+    "status": "unqualified",
+    "glyph": "🕊",
+    "name": "dove",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F985"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦅",
+    "name": "eagle",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F986"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦆",
+    "name": "duck",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F9A2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦢",
+    "name": "swan",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F989"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦉",
+    "name": "owl",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F9A4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦤",
+    "name": "dodo",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1FAB6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪶",
+    "name": "feather",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F9A9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦩",
+    "name": "flamingo",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F99A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦚",
+    "name": "peacock",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F99C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦜",
+    "name": "parrot",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1FABD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪽",
+    "name": "wing",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F426",
+      "200D",
+      "2B1B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐦‍⬛",
+    "name": "black bird",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1FABF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪿",
+    "name": "goose",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F426",
+      "200D",
+      "1F525"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐦‍🔥",
+    "name": "phoenix",
+    "subgroup": "animal-bird"
+  },
+  {
+    "codepoints": [
+      "1F438"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐸",
+    "name": "frog",
+    "subgroup": "animal-amphibian"
+  },
+  {
+    "codepoints": [
+      "1F40A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐊",
+    "name": "crocodile",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F422"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐢",
+    "name": "turtle",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F98E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦎",
+    "name": "lizard",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F40D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐍",
+    "name": "snake",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F432"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐲",
+    "name": "dragon face",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F409"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐉",
+    "name": "dragon",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F995"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦕",
+    "name": "sauropod",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F996"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦖",
+    "name": "T-Rex",
+    "subgroup": "animal-reptile"
+  },
+  {
+    "codepoints": [
+      "1F433"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐳",
+    "name": "spouting whale",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F40B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐋",
+    "name": "whale",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F42C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐬",
+    "name": "dolphin",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F9AD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦭",
+    "name": "seal",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F41F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐟",
+    "name": "fish",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F420"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐠",
+    "name": "tropical fish",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F421"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐡",
+    "name": "blowfish",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F988"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦈",
+    "name": "shark",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F419"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐙",
+    "name": "octopus",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F41A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐚",
+    "name": "spiral shell",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1FAB8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪸",
+    "name": "coral",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1FABC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪼",
+    "name": "jellyfish",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F980"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦀",
+    "name": "crab",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F99E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦞",
+    "name": "lobster",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F990"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦐",
+    "name": "shrimp",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F991"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦑",
+    "name": "squid",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F9AA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦪",
+    "name": "oyster",
+    "subgroup": "animal-marine"
+  },
+  {
+    "codepoints": [
+      "1F40C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐌",
+    "name": "snail",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F98B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦋",
+    "name": "butterfly",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F41B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐛",
+    "name": "bug",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F41C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐜",
+    "name": "ant",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F41D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐝",
+    "name": "honeybee",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1FAB2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪲",
+    "name": "beetle",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F41E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🐞",
+    "name": "lady beetle",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F997"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦗",
+    "name": "cricket",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1FAB3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪳",
+    "name": "cockroach",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F577",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕷️",
+    "name": "spider",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F577"
+    ],
+    "status": "unqualified",
+    "glyph": "🕷",
+    "name": "spider",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F578",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕸️",
+    "name": "spider web",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F578"
+    ],
+    "status": "unqualified",
+    "glyph": "🕸",
+    "name": "spider web",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F982"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦂",
+    "name": "scorpion",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F99F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦟",
+    "name": "mosquito",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1FAB0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪰",
+    "name": "fly",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1FAB1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪱",
+    "name": "worm",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F9A0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦠",
+    "name": "microbe",
+    "subgroup": "animal-bug"
+  },
+  {
+    "codepoints": [
+      "1F490"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💐",
+    "name": "bouquet",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F338"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌸",
+    "name": "cherry blossom",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F4AE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💮",
+    "name": "white flower",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1FAB7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪷",
+    "name": "lotus",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F3F5",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏵️",
+    "name": "rosette",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F3F5"
+    ],
+    "status": "unqualified",
+    "glyph": "🏵",
+    "name": "rosette",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F339"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌹",
+    "name": "rose",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F940"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥀",
+    "name": "wilted flower",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F33A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌺",
+    "name": "hibiscus",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F33B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌻",
+    "name": "sunflower",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F33C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌼",
+    "name": "blossom",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F337"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌷",
+    "name": "tulip",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1FABB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪻",
+    "name": "hyacinth",
+    "subgroup": "plant-flower"
+  },
+  {
+    "codepoints": [
+      "1F331"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌱",
+    "name": "seedling",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1FAB4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪴",
+    "name": "potted plant",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F332"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌲",
+    "name": "evergreen tree",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F333"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌳",
+    "name": "deciduous tree",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F334"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌴",
+    "name": "palm tree",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F335"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌵",
+    "name": "cactus",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F33E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌾",
+    "name": "sheaf of rice",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F33F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌿",
+    "name": "herb",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "2618",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☘️",
+    "name": "shamrock",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "2618"
+    ],
+    "status": "unqualified",
+    "glyph": "☘",
+    "name": "shamrock",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F340"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍀",
+    "name": "four leaf clover",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F341"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍁",
+    "name": "maple leaf",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F342"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍂",
+    "name": "fallen leaf",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F343"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍃",
+    "name": "leaf fluttering in wind",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1FAB9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪹",
+    "name": "empty nest",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1FABA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪺",
+    "name": "nest with eggs",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1F344"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍄",
+    "name": "mushroom",
+    "subgroup": "plant-other"
+  },
+  {
+    "codepoints": [
+      "1FABE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪾",
+    "name": "leafless tree",
+    "subgroup": "plant-other"
+  }
+]

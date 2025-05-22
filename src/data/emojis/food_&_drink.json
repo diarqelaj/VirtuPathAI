@@ -1,0 +1,1205 @@
+[
+  {
+    "codepoints": [
+      "1F347"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍇",
+    "name": "grapes",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F348"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍈",
+    "name": "melon",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F349"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍉",
+    "name": "watermelon",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍊",
+    "name": "tangerine",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍋",
+    "name": "lemon",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34B",
+      "200D",
+      "1F7E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍋‍🟩",
+    "name": "lime",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍌",
+    "name": "banana",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍍",
+    "name": "pineapple",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F96D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥭",
+    "name": "mango",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍎",
+    "name": "red apple",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F34F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍏",
+    "name": "green apple",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F350"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍐",
+    "name": "pear",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F351"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍑",
+    "name": "peach",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F352"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍒",
+    "name": "cherries",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F353"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍓",
+    "name": "strawberry",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1FAD0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫐",
+    "name": "blueberries",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F95D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥝",
+    "name": "kiwi fruit",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F345"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍅",
+    "name": "tomato",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1FAD2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫒",
+    "name": "olive",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F965"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥥",
+    "name": "coconut",
+    "subgroup": "food-fruit"
+  },
+  {
+    "codepoints": [
+      "1F951"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥑",
+    "name": "avocado",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F346"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍆",
+    "name": "eggplant",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F954"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥔",
+    "name": "potato",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F955"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥕",
+    "name": "carrot",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F33D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌽",
+    "name": "ear of corn",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F336",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌶️",
+    "name": "hot pepper",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F336"
+    ],
+    "status": "unqualified",
+    "glyph": "🌶",
+    "name": "hot pepper",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1FAD1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫑",
+    "name": "bell pepper",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F952"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥒",
+    "name": "cucumber",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F96C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥬",
+    "name": "leafy green",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F966"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥦",
+    "name": "broccoli",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F9C4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧄",
+    "name": "garlic",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F9C5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧅",
+    "name": "onion",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F95C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥜",
+    "name": "peanuts",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1FAD8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫘",
+    "name": "beans",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F330"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌰",
+    "name": "chestnut",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1FADA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫚",
+    "name": "ginger root",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1FADB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫛",
+    "name": "pea pod",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F344",
+      "200D",
+      "1F7EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍄‍🟫",
+    "name": "brown mushroom",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1FADC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫜",
+    "name": "root vegetable",
+    "subgroup": "food-vegetable"
+  },
+  {
+    "codepoints": [
+      "1F35E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍞",
+    "name": "bread",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F950"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥐",
+    "name": "croissant",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F956"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥖",
+    "name": "baguette bread",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1FAD3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫓",
+    "name": "flatbread",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F968"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥨",
+    "name": "pretzel",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F96F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥯",
+    "name": "bagel",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F95E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥞",
+    "name": "pancakes",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F9C7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧇",
+    "name": "waffle",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F9C0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧀",
+    "name": "cheese wedge",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F356"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍖",
+    "name": "meat on bone",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F357"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍗",
+    "name": "poultry leg",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F969"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥩",
+    "name": "cut of meat",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F953"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥓",
+    "name": "bacon",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F354"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍔",
+    "name": "hamburger",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F35F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍟",
+    "name": "french fries",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F355"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍕",
+    "name": "pizza",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F32D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌭",
+    "name": "hot dog",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F96A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥪",
+    "name": "sandwich",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F32E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌮",
+    "name": "taco",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F32F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌯",
+    "name": "burrito",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1FAD4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫔",
+    "name": "tamale",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F959"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥙",
+    "name": "stuffed flatbread",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F9C6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧆",
+    "name": "falafel",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F95A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥚",
+    "name": "egg",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F373"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍳",
+    "name": "cooking",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F958"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥘",
+    "name": "shallow pan of food",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F372"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍲",
+    "name": "pot of food",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1FAD5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫕",
+    "name": "fondue",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F963"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥣",
+    "name": "bowl with spoon",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F957"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥗",
+    "name": "green salad",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F37F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍿",
+    "name": "popcorn",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F9C8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧈",
+    "name": "butter",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F9C2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧂",
+    "name": "salt",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F96B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥫",
+    "name": "canned food",
+    "subgroup": "food-prepared"
+  },
+  {
+    "codepoints": [
+      "1F371"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍱",
+    "name": "bento box",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F358"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍘",
+    "name": "rice cracker",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F359"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍙",
+    "name": "rice ball",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F35A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍚",
+    "name": "cooked rice",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F35B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍛",
+    "name": "curry rice",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F35C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍜",
+    "name": "steaming bowl",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F35D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍝",
+    "name": "spaghetti",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F360"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍠",
+    "name": "roasted sweet potato",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F362"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍢",
+    "name": "oden",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F363"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍣",
+    "name": "sushi",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F364"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍤",
+    "name": "fried shrimp",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F365"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍥",
+    "name": "fish cake with swirl",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F96E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥮",
+    "name": "moon cake",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F361"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍡",
+    "name": "dango",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F95F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥟",
+    "name": "dumpling",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F960"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥠",
+    "name": "fortune cookie",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F961"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥡",
+    "name": "takeout box",
+    "subgroup": "food-asian"
+  },
+  {
+    "codepoints": [
+      "1F366"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍦",
+    "name": "soft ice cream",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F367"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍧",
+    "name": "shaved ice",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F368"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍨",
+    "name": "ice cream",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F369"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍩",
+    "name": "doughnut",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍪",
+    "name": "cookie",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F382"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎂",
+    "name": "birthday cake",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F370"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍰",
+    "name": "shortcake",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F9C1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧁",
+    "name": "cupcake",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F967"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥧",
+    "name": "pie",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍫",
+    "name": "chocolate bar",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍬",
+    "name": "candy",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍭",
+    "name": "lollipop",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍮",
+    "name": "custard",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F36F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍯",
+    "name": "honey pot",
+    "subgroup": "food-sweet"
+  },
+  {
+    "codepoints": [
+      "1F37C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍼",
+    "name": "baby bottle",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F95B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥛",
+    "name": "glass of milk",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "2615"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☕",
+    "name": "hot beverage",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1FAD6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫖",
+    "name": "teapot",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F375"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍵",
+    "name": "teacup without handle",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F376"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍶",
+    "name": "sake",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F37E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍾",
+    "name": "bottle with popping cork",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F377"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍷",
+    "name": "wine glass",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F378"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍸",
+    "name": "cocktail glass",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F379"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍹",
+    "name": "tropical drink",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F37A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍺",
+    "name": "beer mug",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F37B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍻",
+    "name": "clinking beer mugs",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F942"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥂",
+    "name": "clinking glasses",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F943"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥃",
+    "name": "tumbler glass",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1FAD7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫗",
+    "name": "pouring liquid",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F964"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥤",
+    "name": "cup with straw",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F9CB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧋",
+    "name": "bubble tea",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F9C3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧃",
+    "name": "beverage box",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F9C9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧉",
+    "name": "mate",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F9CA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧊",
+    "name": "ice",
+    "subgroup": "drink"
+  },
+  {
+    "codepoints": [
+      "1F962"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥢",
+    "name": "chopsticks",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F37D",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍽️",
+    "name": "fork and knife with plate",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F37D"
+    ],
+    "status": "unqualified",
+    "glyph": "🍽",
+    "name": "fork and knife with plate",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F374"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🍴",
+    "name": "fork and knife",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F944"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥄",
+    "name": "spoon",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F52A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔪",
+    "name": "kitchen knife",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1FAD9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫙",
+    "name": "jar",
+    "subgroup": "dishware"
+  },
+  {
+    "codepoints": [
+      "1F3FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏺",
+    "name": "amphora",
+    "subgroup": "dishware"
+  }
+]

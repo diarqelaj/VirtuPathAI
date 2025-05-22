@@ -1,0 +1,1716 @@
+[
+  {
+    "codepoints": [
+      "1F600"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😀",
+    "name": "grinning face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F603"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😃",
+    "name": "grinning face with big eyes",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F604"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😄",
+    "name": "grinning face with smiling eyes",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F601"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😁",
+    "name": "beaming face with smiling eyes",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F606"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😆",
+    "name": "grinning squinting face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F605"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😅",
+    "name": "grinning face with sweat",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F923"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤣",
+    "name": "rolling on the floor laughing",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F602"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😂",
+    "name": "face with tears of joy",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F642"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙂",
+    "name": "slightly smiling face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F643"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙃",
+    "name": "upside-down face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1FAE0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫠",
+    "name": "melting face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F609"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😉",
+    "name": "winking face",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F60A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😊",
+    "name": "smiling face with smiling eyes",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F607"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😇",
+    "name": "smiling face with halo",
+    "subgroup": "face-smiling"
+  },
+  {
+    "codepoints": [
+      "1F970"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥰",
+    "name": "smiling face with hearts",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F60D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😍",
+    "name": "smiling face with heart-eyes",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F929"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤩",
+    "name": "star-struck",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F618"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😘",
+    "name": "face blowing a kiss",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F617"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😗",
+    "name": "kissing face",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "263A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☺️",
+    "name": "smiling face",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "263A"
+    ],
+    "status": "unqualified",
+    "glyph": "☺",
+    "name": "smiling face",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F61A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😚",
+    "name": "kissing face with closed eyes",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F619"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😙",
+    "name": "kissing face with smiling eyes",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F972"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥲",
+    "name": "smiling face with tear",
+    "subgroup": "face-affection"
+  },
+  {
+    "codepoints": [
+      "1F60B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😋",
+    "name": "face savoring food",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F61B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😛",
+    "name": "face with tongue",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F61C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😜",
+    "name": "winking face with tongue",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F92A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤪",
+    "name": "zany face",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F61D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😝",
+    "name": "squinting face with tongue",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F911"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤑",
+    "name": "money-mouth face",
+    "subgroup": "face-tongue"
+  },
+  {
+    "codepoints": [
+      "1F917"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤗",
+    "name": "smiling face with open hands",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1F92D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤭",
+    "name": "face with hand over mouth",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1FAE2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫢",
+    "name": "face with open eyes and hand over mouth",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1FAE3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫣",
+    "name": "face with peeking eye",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1F92B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤫",
+    "name": "shushing face",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1F914"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤔",
+    "name": "thinking face",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1FAE1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫡",
+    "name": "saluting face",
+    "subgroup": "face-hand"
+  },
+  {
+    "codepoints": [
+      "1F910"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤐",
+    "name": "zipper-mouth face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F928"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤨",
+    "name": "face with raised eyebrow",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F610"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😐",
+    "name": "neutral face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F611"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😑",
+    "name": "expressionless face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F636"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😶",
+    "name": "face without mouth",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1FAE5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫥",
+    "name": "dotted line face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F636",
+      "200D",
+      "1F32B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😶‍🌫️",
+    "name": "face in clouds",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F636",
+      "200D",
+      "1F32B"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "😶‍🌫",
+    "name": "face in clouds",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F60F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😏",
+    "name": "smirking face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F612"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😒",
+    "name": "unamused face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F644"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙄",
+    "name": "face with rolling eyes",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F62C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😬",
+    "name": "grimacing face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F62E",
+      "200D",
+      "1F4A8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😮‍💨",
+    "name": "face exhaling",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F925"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤥",
+    "name": "lying face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1FAE8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫨",
+    "name": "shaking face",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F642",
+      "200D",
+      "2194",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙂‍↔️",
+    "name": "head shaking horizontally",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F642",
+      "200D",
+      "2194"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "🙂‍↔",
+    "name": "head shaking horizontally",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F642",
+      "200D",
+      "2195",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙂‍↕️",
+    "name": "head shaking vertically",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F642",
+      "200D",
+      "2195"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "🙂‍↕",
+    "name": "head shaking vertically",
+    "subgroup": "face-neutral-skeptical"
+  },
+  {
+    "codepoints": [
+      "1F60C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😌",
+    "name": "relieved face",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1F614"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😔",
+    "name": "pensive face",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1F62A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😪",
+    "name": "sleepy face",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1F924"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤤",
+    "name": "drooling face",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1F634"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😴",
+    "name": "sleeping face",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1FAE9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫩",
+    "name": "face with bags under eyes",
+    "subgroup": "face-sleepy"
+  },
+  {
+    "codepoints": [
+      "1F637"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😷",
+    "name": "face with medical mask",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F912"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤒",
+    "name": "face with thermometer",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F915"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤕",
+    "name": "face with head-bandage",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F922"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤢",
+    "name": "nauseated face",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F92E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤮",
+    "name": "face vomiting",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F927"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤧",
+    "name": "sneezing face",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F975"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥵",
+    "name": "hot face",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F976"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥶",
+    "name": "cold face",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F974"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥴",
+    "name": "woozy face",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F635"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😵",
+    "name": "face with crossed-out eyes",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F635",
+      "200D",
+      "1F4AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😵‍💫",
+    "name": "face with spiral eyes",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F92F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤯",
+    "name": "exploding head",
+    "subgroup": "face-unwell"
+  },
+  {
+    "codepoints": [
+      "1F920"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤠",
+    "name": "cowboy hat face",
+    "subgroup": "face-hat"
+  },
+  {
+    "codepoints": [
+      "1F973"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥳",
+    "name": "partying face",
+    "subgroup": "face-hat"
+  },
+  {
+    "codepoints": [
+      "1F978"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥸",
+    "name": "disguised face",
+    "subgroup": "face-hat"
+  },
+  {
+    "codepoints": [
+      "1F60E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😎",
+    "name": "smiling face with sunglasses",
+    "subgroup": "face-glasses"
+  },
+  {
+    "codepoints": [
+      "1F913"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤓",
+    "name": "nerd face",
+    "subgroup": "face-glasses"
+  },
+  {
+    "codepoints": [
+      "1F9D0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧐",
+    "name": "face with monocle",
+    "subgroup": "face-glasses"
+  },
+  {
+    "codepoints": [
+      "1F615"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😕",
+    "name": "confused face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1FAE4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🫤",
+    "name": "face with diagonal mouth",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F61F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😟",
+    "name": "worried face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F641"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙁",
+    "name": "slightly frowning face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "2639",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☹️",
+    "name": "frowning face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "2639"
+    ],
+    "status": "unqualified",
+    "glyph": "☹",
+    "name": "frowning face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F62E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😮",
+    "name": "face with open mouth",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F62F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😯",
+    "name": "hushed face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F632"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😲",
+    "name": "astonished face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F633"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😳",
+    "name": "flushed face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F97A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥺",
+    "name": "pleading face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F979"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥹",
+    "name": "face holding back tears",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F626"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😦",
+    "name": "frowning face with open mouth",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F627"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😧",
+    "name": "anguished face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F628"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😨",
+    "name": "fearful face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F630"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😰",
+    "name": "anxious face with sweat",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F625"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😥",
+    "name": "sad but relieved face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F622"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😢",
+    "name": "crying face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F62D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😭",
+    "name": "loudly crying face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F631"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😱",
+    "name": "face screaming in fear",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F616"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😖",
+    "name": "confounded face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F623"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😣",
+    "name": "persevering face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F61E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😞",
+    "name": "disappointed face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F613"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😓",
+    "name": "downcast face with sweat",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F629"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😩",
+    "name": "weary face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F62B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😫",
+    "name": "tired face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F971"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🥱",
+    "name": "yawning face",
+    "subgroup": "face-concerned"
+  },
+  {
+    "codepoints": [
+      "1F624"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😤",
+    "name": "face with steam from nose",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F621"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😡",
+    "name": "enraged face",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F620"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😠",
+    "name": "angry face",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F92C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤬",
+    "name": "face with symbols on mouth",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F608"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😈",
+    "name": "smiling face with horns",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F47F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👿",
+    "name": "angry face with horns",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F480"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💀",
+    "name": "skull",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "2620",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☠️",
+    "name": "skull and crossbones",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "2620"
+    ],
+    "status": "unqualified",
+    "glyph": "☠",
+    "name": "skull and crossbones",
+    "subgroup": "face-negative"
+  },
+  {
+    "codepoints": [
+      "1F4A9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💩",
+    "name": "pile of poo",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F921"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤡",
+    "name": "clown face",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F479"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👹",
+    "name": "ogre",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F47A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👺",
+    "name": "goblin",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F47B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👻",
+    "name": "ghost",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F47D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👽",
+    "name": "alien",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F47E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👾",
+    "name": "alien monster",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F916"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤖",
+    "name": "robot",
+    "subgroup": "face-costume"
+  },
+  {
+    "codepoints": [
+      "1F63A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😺",
+    "name": "grinning cat",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F638"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😸",
+    "name": "grinning cat with smiling eyes",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F639"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😹",
+    "name": "cat with tears of joy",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F63B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😻",
+    "name": "smiling cat with heart-eyes",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F63C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😼",
+    "name": "cat with wry smile",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F63D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😽",
+    "name": "kissing cat",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F640"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙀",
+    "name": "weary cat",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F63F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😿",
+    "name": "crying cat",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F63E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "😾",
+    "name": "pouting cat",
+    "subgroup": "cat-face"
+  },
+  {
+    "codepoints": [
+      "1F648"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙈",
+    "name": "see-no-evil monkey",
+    "subgroup": "monkey-face"
+  },
+  {
+    "codepoints": [
+      "1F649"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙉",
+    "name": "hear-no-evil monkey",
+    "subgroup": "monkey-face"
+  },
+  {
+    "codepoints": [
+      "1F64A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🙊",
+    "name": "speak-no-evil monkey",
+    "subgroup": "monkey-face"
+  },
+  {
+    "codepoints": [
+      "1F48C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💌",
+    "name": "love letter",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F498"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💘",
+    "name": "heart with arrow",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💝",
+    "name": "heart with ribbon",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F496"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💖",
+    "name": "sparkling heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F497"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💗",
+    "name": "growing heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F493"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💓",
+    "name": "beating heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💞",
+    "name": "revolving hearts",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F495"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💕",
+    "name": "two hearts",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💟",
+    "name": "heart decoration",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2763",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❣️",
+    "name": "heart exclamation",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2763"
+    ],
+    "status": "unqualified",
+    "glyph": "❣",
+    "name": "heart exclamation",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F494"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💔",
+    "name": "broken heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764",
+      "FE0F",
+      "200D",
+      "1F525"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❤️‍🔥",
+    "name": "heart on fire",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764",
+      "200D",
+      "1F525"
+    ],
+    "status": "unqualified",
+    "glyph": "❤‍🔥",
+    "name": "heart on fire",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764",
+      "FE0F",
+      "200D",
+      "1FA79"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❤️‍🩹",
+    "name": "mending heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764",
+      "200D",
+      "1FA79"
+    ],
+    "status": "unqualified",
+    "glyph": "❤‍🩹",
+    "name": "mending heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❤️",
+    "name": "red heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "2764"
+    ],
+    "status": "unqualified",
+    "glyph": "❤",
+    "name": "red heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1FA77"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩷",
+    "name": "pink heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F9E1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧡",
+    "name": "orange heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💛",
+    "name": "yellow heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💚",
+    "name": "green heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F499"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💙",
+    "name": "blue heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1FA75"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩵",
+    "name": "light blue heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F49C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💜",
+    "name": "purple heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F90E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤎",
+    "name": "brown heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F5A4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🖤",
+    "name": "black heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1FA76"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🩶",
+    "name": "grey heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F90D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🤍",
+    "name": "white heart",
+    "subgroup": "heart"
+  },
+  {
+    "codepoints": [
+      "1F48B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💋",
+    "name": "kiss mark",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4AF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💯",
+    "name": "hundred points",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4A2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💢",
+    "name": "anger symbol",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4A5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💥",
+    "name": "collision",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4AB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💫",
+    "name": "dizzy",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4A6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💦",
+    "name": "sweat droplets",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4A8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💨",
+    "name": "dashing away",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F573",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕳️",
+    "name": "hole",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F573"
+    ],
+    "status": "unqualified",
+    "glyph": "🕳",
+    "name": "hole",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4AC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💬",
+    "name": "speech balloon",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F441",
+      "FE0F",
+      "200D",
+      "1F5E8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "👁️‍🗨️",
+    "name": "eye in speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F441",
+      "200D",
+      "1F5E8",
+      "FE0F"
+    ],
+    "status": "unqualified",
+    "glyph": "👁‍🗨️",
+    "name": "eye in speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F441",
+      "FE0F",
+      "200D",
+      "1F5E8"
+    ],
+    "status": "minimally-qualified",
+    "glyph": "👁️‍🗨",
+    "name": "eye in speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F441",
+      "200D",
+      "1F5E8"
+    ],
+    "status": "unqualified",
+    "glyph": "👁‍🗨",
+    "name": "eye in speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F5E8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗨️",
+    "name": "left speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F5E8"
+    ],
+    "status": "unqualified",
+    "glyph": "🗨",
+    "name": "left speech bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F5EF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗯️",
+    "name": "right anger bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F5EF"
+    ],
+    "status": "unqualified",
+    "glyph": "🗯",
+    "name": "right anger bubble",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4AD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💭",
+    "name": "thought balloon",
+    "subgroup": "emotion"
+  },
+  {
+    "codepoints": [
+      "1F4A4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💤",
+    "name": "ZZZ",
+    "subgroup": "emotion"
+  }
+]

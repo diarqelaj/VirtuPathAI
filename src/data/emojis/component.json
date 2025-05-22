@@ -1,0 +1,83 @@
+[
+  {
+    "codepoints": [
+      "1F3FB"
+    ],
+    "status": "component",
+    "glyph": "🏻",
+    "name": "light skin tone",
+    "subgroup": "skin-tone"
+  },
+  {
+    "codepoints": [
+      "1F3FC"
+    ],
+    "status": "component",
+    "glyph": "🏼",
+    "name": "medium-light skin tone",
+    "subgroup": "skin-tone"
+  },
+  {
+    "codepoints": [
+      "1F3FD"
+    ],
+    "status": "component",
+    "glyph": "🏽",
+    "name": "medium skin tone",
+    "subgroup": "skin-tone"
+  },
+  {
+    "codepoints": [
+      "1F3FE"
+    ],
+    "status": "component",
+    "glyph": "🏾",
+    "name": "medium-dark skin tone",
+    "subgroup": "skin-tone"
+  },
+  {
+    "codepoints": [
+      "1F3FF"
+    ],
+    "status": "component",
+    "glyph": "🏿",
+    "name": "dark skin tone",
+    "subgroup": "skin-tone"
+  },
+  {
+    "codepoints": [
+      "1F9B0"
+    ],
+    "status": "component",
+    "glyph": "🦰",
+    "name": "red hair",
+    "subgroup": "hair-style"
+  },
+  {
+    "codepoints": [
+      "1F9B1"
+    ],
+    "status": "component",
+    "glyph": "🦱",
+    "name": "curly hair",
+    "subgroup": "hair-style"
+  },
+  {
+    "codepoints": [
+      "1F9B3"
+    ],
+    "status": "component",
+    "glyph": "🦳",
+    "name": "white hair",
+    "subgroup": "hair-style"
+  },
+  {
+    "codepoints": [
+      "1F9B2"
+    ],
+    "status": "component",
+    "glyph": "🦲",
+    "name": "bald",
+    "subgroup": "hair-style"
+  }
+]

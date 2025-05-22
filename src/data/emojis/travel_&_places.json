@@ -1,0 +1,2454 @@
+[
+  {
+    "codepoints": [
+      "1F30D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌍",
+    "name": "globe showing Europe-Africa",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F30E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌎",
+    "name": "globe showing Americas",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F30F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌏",
+    "name": "globe showing Asia-Australia",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F310"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌐",
+    "name": "globe with meridians",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F5FA",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗺️",
+    "name": "world map",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F5FA"
+    ],
+    "status": "unqualified",
+    "glyph": "🗺",
+    "name": "world map",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F5FE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗾",
+    "name": "map of Japan",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F9ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧭",
+    "name": "compass",
+    "subgroup": "place-map"
+  },
+  {
+    "codepoints": [
+      "1F3D4",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏔️",
+    "name": "snow-capped mountain",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3D4"
+    ],
+    "status": "unqualified",
+    "glyph": "🏔",
+    "name": "snow-capped mountain",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "26F0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛰️",
+    "name": "mountain",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "26F0"
+    ],
+    "status": "unqualified",
+    "glyph": "⛰",
+    "name": "mountain",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F30B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌋",
+    "name": "volcano",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F5FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗻",
+    "name": "mount fuji",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3D5",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏕️",
+    "name": "camping",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3D5"
+    ],
+    "status": "unqualified",
+    "glyph": "🏕",
+    "name": "camping",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3D6",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏖️",
+    "name": "beach with umbrella",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3D6"
+    ],
+    "status": "unqualified",
+    "glyph": "🏖",
+    "name": "beach with umbrella",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DC",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏜️",
+    "name": "desert",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DC"
+    ],
+    "status": "unqualified",
+    "glyph": "🏜",
+    "name": "desert",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DD",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏝️",
+    "name": "desert island",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DD"
+    ],
+    "status": "unqualified",
+    "glyph": "🏝",
+    "name": "desert island",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏞️",
+    "name": "national park",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DE"
+    ],
+    "status": "unqualified",
+    "glyph": "🏞",
+    "name": "national park",
+    "subgroup": "place-geographic"
+  },
+  {
+    "codepoints": [
+      "1F3DF",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏟️",
+    "name": "stadium",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3DF"
+    ],
+    "status": "unqualified",
+    "glyph": "🏟",
+    "name": "stadium",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3DB",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏛️",
+    "name": "classical building",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3DB"
+    ],
+    "status": "unqualified",
+    "glyph": "🏛",
+    "name": "classical building",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3D7",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏗️",
+    "name": "building construction",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3D7"
+    ],
+    "status": "unqualified",
+    "glyph": "🏗",
+    "name": "building construction",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F9F1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧱",
+    "name": "brick",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1FAA8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪨",
+    "name": "rock",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1FAB5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪵",
+    "name": "wood",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F6D6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛖",
+    "name": "hut",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3D8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏘️",
+    "name": "houses",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3D8"
+    ],
+    "status": "unqualified",
+    "glyph": "🏘",
+    "name": "houses",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3DA",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏚️",
+    "name": "derelict house",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3DA"
+    ],
+    "status": "unqualified",
+    "glyph": "🏚",
+    "name": "derelict house",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏠",
+    "name": "house",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏡",
+    "name": "house with garden",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏢",
+    "name": "office building",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏣",
+    "name": "Japanese post office",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏤",
+    "name": "post office",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏥",
+    "name": "hospital",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏦",
+    "name": "bank",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏨",
+    "name": "hotel",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3E9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏩",
+    "name": "love hotel",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏪",
+    "name": "convenience store",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏫",
+    "name": "school",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏬",
+    "name": "department store",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3ED"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏭",
+    "name": "factory",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3EF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏯",
+    "name": "Japanese castle",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F3F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏰",
+    "name": "castle",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F492"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💒",
+    "name": "wedding",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F5FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗼",
+    "name": "Tokyo tower",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "1F5FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🗽",
+    "name": "Statue of Liberty",
+    "subgroup": "place-building"
+  },
+  {
+    "codepoints": [
+      "26EA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛪",
+    "name": "church",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "1F54C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕌",
+    "name": "mosque",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "1F6D5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛕",
+    "name": "hindu temple",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "1F54D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕍",
+    "name": "synagogue",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "26E9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛩️",
+    "name": "shinto shrine",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "26E9"
+    ],
+    "status": "unqualified",
+    "glyph": "⛩",
+    "name": "shinto shrine",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "1F54B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕋",
+    "name": "kaaba",
+    "subgroup": "place-religious"
+  },
+  {
+    "codepoints": [
+      "26F2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛲",
+    "name": "fountain",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "26FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛺",
+    "name": "tent",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F301"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌁",
+    "name": "foggy",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F303"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌃",
+    "name": "night with stars",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3D9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏙️",
+    "name": "cityscape",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3D9"
+    ],
+    "status": "unqualified",
+    "glyph": "🏙",
+    "name": "cityscape",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F304"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌄",
+    "name": "sunrise over mountains",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F305"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌅",
+    "name": "sunrise",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F306"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌆",
+    "name": "cityscape at dusk",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F307"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌇",
+    "name": "sunset",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F309"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌉",
+    "name": "bridge at night",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "2668",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "♨️",
+    "name": "hot springs",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "2668"
+    ],
+    "status": "unqualified",
+    "glyph": "♨",
+    "name": "hot springs",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3A0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎠",
+    "name": "carousel horse",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F6DD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛝",
+    "name": "playground slide",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3A1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎡",
+    "name": "ferris wheel",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3A2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎢",
+    "name": "roller coaster",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F488"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💈",
+    "name": "barber pole",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F3AA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🎪",
+    "name": "circus tent",
+    "subgroup": "place-other"
+  },
+  {
+    "codepoints": [
+      "1F682"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚂",
+    "name": "locomotive",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F683"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚃",
+    "name": "railway car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F684"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚄",
+    "name": "high-speed train",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F685"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚅",
+    "name": "bullet train",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F686"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚆",
+    "name": "train",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F687"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚇",
+    "name": "metro",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F688"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚈",
+    "name": "light rail",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F689"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚉",
+    "name": "station",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚊",
+    "name": "tram",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F69D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚝",
+    "name": "monorail",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F69E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚞",
+    "name": "mountain railway",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚋",
+    "name": "tram car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚌",
+    "name": "bus",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚍",
+    "name": "oncoming bus",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚎",
+    "name": "trolleybus",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F690"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚐",
+    "name": "minibus",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F691"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚑",
+    "name": "ambulance",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F692"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚒",
+    "name": "fire engine",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F693"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚓",
+    "name": "police car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F694"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚔",
+    "name": "oncoming police car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F695"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚕",
+    "name": "taxi",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F696"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚖",
+    "name": "oncoming taxi",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F697"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚗",
+    "name": "automobile",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F698"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚘",
+    "name": "oncoming automobile",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F699"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚙",
+    "name": "sport utility vehicle",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6FB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛻",
+    "name": "pickup truck",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F69A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚚",
+    "name": "delivery truck",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F69B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚛",
+    "name": "articulated lorry",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F69C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚜",
+    "name": "tractor",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F3CE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏎️",
+    "name": "racing car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F3CE"
+    ],
+    "status": "unqualified",
+    "glyph": "🏎",
+    "name": "racing car",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F3CD",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🏍️",
+    "name": "motorcycle",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F3CD"
+    ],
+    "status": "unqualified",
+    "glyph": "🏍",
+    "name": "motorcycle",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛵",
+    "name": "motor scooter",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F9BD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦽",
+    "name": "manual wheelchair",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F9BC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🦼",
+    "name": "motorized wheelchair",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6FA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛺",
+    "name": "auto rickshaw",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6B2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚲",
+    "name": "bicycle",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6F4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛴",
+    "name": "kick scooter",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6F9"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛹",
+    "name": "skateboard",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6FC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛼",
+    "name": "roller skate",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F68F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚏",
+    "name": "bus stop",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛣️",
+    "name": "motorway",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E3"
+    ],
+    "status": "unqualified",
+    "glyph": "🛣",
+    "name": "motorway",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E4",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛤️",
+    "name": "railway track",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E4"
+    ],
+    "status": "unqualified",
+    "glyph": "🛤",
+    "name": "railway track",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛢️",
+    "name": "oil drum",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6E2"
+    ],
+    "status": "unqualified",
+    "glyph": "🛢",
+    "name": "oil drum",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "26FD"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛽",
+    "name": "fuel pump",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6DE"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛞",
+    "name": "wheel",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6A8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚨",
+    "name": "police car light",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6A5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚥",
+    "name": "horizontal traffic light",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6A6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚦",
+    "name": "vertical traffic light",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6D1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛑",
+    "name": "stop sign",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "1F6A7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚧",
+    "name": "construction",
+    "subgroup": "transport-ground"
+  },
+  {
+    "codepoints": [
+      "2693"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚓",
+    "name": "anchor",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6DF"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛟",
+    "name": "ring buoy",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "26F5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛵",
+    "name": "sailboat",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6F6"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛶",
+    "name": "canoe",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6A4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚤",
+    "name": "speedboat",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6F3",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛳️",
+    "name": "passenger ship",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6F3"
+    ],
+    "status": "unqualified",
+    "glyph": "🛳",
+    "name": "passenger ship",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "26F4",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛴️",
+    "name": "ferry",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "26F4"
+    ],
+    "status": "unqualified",
+    "glyph": "⛴",
+    "name": "ferry",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6E5",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛥️",
+    "name": "motor boat",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6E5"
+    ],
+    "status": "unqualified",
+    "glyph": "🛥",
+    "name": "motor boat",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "1F6A2"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚢",
+    "name": "ship",
+    "subgroup": "transport-water"
+  },
+  {
+    "codepoints": [
+      "2708",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "✈️",
+    "name": "airplane",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "2708"
+    ],
+    "status": "unqualified",
+    "glyph": "✈",
+    "name": "airplane",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6E9",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛩️",
+    "name": "small airplane",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6E9"
+    ],
+    "status": "unqualified",
+    "glyph": "🛩",
+    "name": "small airplane",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6EB"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛫",
+    "name": "airplane departure",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6EC"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛬",
+    "name": "airplane arrival",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1FA82"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪂",
+    "name": "parachute",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F4BA"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💺",
+    "name": "seat",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F681"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚁",
+    "name": "helicopter",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F69F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚟",
+    "name": "suspension railway",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6A0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚠",
+    "name": "mountain cableway",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6A1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚡",
+    "name": "aerial tramway",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6F0",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛰️",
+    "name": "satellite",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6F0"
+    ],
+    "status": "unqualified",
+    "glyph": "🛰",
+    "name": "satellite",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F680"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🚀",
+    "name": "rocket",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6F8"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛸",
+    "name": "flying saucer",
+    "subgroup": "transport-air"
+  },
+  {
+    "codepoints": [
+      "1F6CE",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🛎️",
+    "name": "bellhop bell",
+    "subgroup": "hotel"
+  },
+  {
+    "codepoints": [
+      "1F6CE"
+    ],
+    "status": "unqualified",
+    "glyph": "🛎",
+    "name": "bellhop bell",
+    "subgroup": "hotel"
+  },
+  {
+    "codepoints": [
+      "1F9F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🧳",
+    "name": "luggage",
+    "subgroup": "hotel"
+  },
+  {
+    "codepoints": [
+      "231B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⌛",
+    "name": "hourglass done",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F3"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏳",
+    "name": "hourglass not done",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "231A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⌚",
+    "name": "watch",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F0"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏰",
+    "name": "alarm clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏱️",
+    "name": "stopwatch",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F1"
+    ],
+    "status": "unqualified",
+    "glyph": "⏱",
+    "name": "stopwatch",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F2",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⏲️",
+    "name": "timer clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "23F2"
+    ],
+    "status": "unqualified",
+    "glyph": "⏲",
+    "name": "timer clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F570",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕰️",
+    "name": "mantelpiece clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F570"
+    ],
+    "status": "unqualified",
+    "glyph": "🕰",
+    "name": "mantelpiece clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕛",
+    "name": "twelve o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F567"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕧",
+    "name": "twelve-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F550"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕐",
+    "name": "one o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕜",
+    "name": "one-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F551"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕑",
+    "name": "two o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕝",
+    "name": "two-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F552"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕒",
+    "name": "three o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕞",
+    "name": "three-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F553"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕓",
+    "name": "four o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕟",
+    "name": "four-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F554"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕔",
+    "name": "five o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F560"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕠",
+    "name": "five-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F555"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕕",
+    "name": "six o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F561"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕡",
+    "name": "six-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F556"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕖",
+    "name": "seven o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F562"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕢",
+    "name": "seven-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F557"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕗",
+    "name": "eight o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F563"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕣",
+    "name": "eight-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F558"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕘",
+    "name": "nine o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F564"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕤",
+    "name": "nine-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F559"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕙",
+    "name": "ten o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F565"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕥",
+    "name": "ten-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F55A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕚",
+    "name": "eleven o’clock",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F566"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🕦",
+    "name": "eleven-thirty",
+    "subgroup": "time"
+  },
+  {
+    "codepoints": [
+      "1F311"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌑",
+    "name": "new moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F312"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌒",
+    "name": "waxing crescent moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F313"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌓",
+    "name": "first quarter moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F314"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌔",
+    "name": "waxing gibbous moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F315"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌕",
+    "name": "full moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F316"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌖",
+    "name": "waning gibbous moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F317"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌗",
+    "name": "last quarter moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F318"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌘",
+    "name": "waning crescent moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F319"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌙",
+    "name": "crescent moon",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌚",
+    "name": "new moon face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31B"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌛",
+    "name": "first quarter moon face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌜",
+    "name": "last quarter moon face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F321",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌡️",
+    "name": "thermometer",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F321"
+    ],
+    "status": "unqualified",
+    "glyph": "🌡",
+    "name": "thermometer",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2600",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☀️",
+    "name": "sun",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2600"
+    ],
+    "status": "unqualified",
+    "glyph": "☀",
+    "name": "sun",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31D"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌝",
+    "name": "full moon face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31E"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌞",
+    "name": "sun with face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1FA90"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🪐",
+    "name": "ringed planet",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2B50"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⭐",
+    "name": "star",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F31F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌟",
+    "name": "glowing star",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F320"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌠",
+    "name": "shooting star",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F30C"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌌",
+    "name": "milky way",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2601",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☁️",
+    "name": "cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2601"
+    ],
+    "status": "unqualified",
+    "glyph": "☁",
+    "name": "cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26C5"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛅",
+    "name": "sun behind cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26C8",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛈️",
+    "name": "cloud with lightning and rain",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26C8"
+    ],
+    "status": "unqualified",
+    "glyph": "⛈",
+    "name": "cloud with lightning and rain",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F324",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌤️",
+    "name": "sun behind small cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F324"
+    ],
+    "status": "unqualified",
+    "glyph": "🌤",
+    "name": "sun behind small cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F325",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌥️",
+    "name": "sun behind large cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F325"
+    ],
+    "status": "unqualified",
+    "glyph": "🌥",
+    "name": "sun behind large cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F326",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌦️",
+    "name": "sun behind rain cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F326"
+    ],
+    "status": "unqualified",
+    "glyph": "🌦",
+    "name": "sun behind rain cloud",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F327",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌧️",
+    "name": "cloud with rain",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F327"
+    ],
+    "status": "unqualified",
+    "glyph": "🌧",
+    "name": "cloud with rain",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F328",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌨️",
+    "name": "cloud with snow",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F328"
+    ],
+    "status": "unqualified",
+    "glyph": "🌨",
+    "name": "cloud with snow",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F329",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌩️",
+    "name": "cloud with lightning",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F329"
+    ],
+    "status": "unqualified",
+    "glyph": "🌩",
+    "name": "cloud with lightning",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32A",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌪️",
+    "name": "tornado",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32A"
+    ],
+    "status": "unqualified",
+    "glyph": "🌪",
+    "name": "tornado",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32B",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌫️",
+    "name": "fog",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32B"
+    ],
+    "status": "unqualified",
+    "glyph": "🌫",
+    "name": "fog",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32C",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌬️",
+    "name": "wind face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F32C"
+    ],
+    "status": "unqualified",
+    "glyph": "🌬",
+    "name": "wind face",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F300"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌀",
+    "name": "cyclone",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F308"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌈",
+    "name": "rainbow",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F302"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌂",
+    "name": "closed umbrella",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2602",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☂️",
+    "name": "umbrella",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2602"
+    ],
+    "status": "unqualified",
+    "glyph": "☂",
+    "name": "umbrella",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2614"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☔",
+    "name": "umbrella with rain drops",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26F1",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛱️",
+    "name": "umbrella on ground",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26F1"
+    ],
+    "status": "unqualified",
+    "glyph": "⛱",
+    "name": "umbrella on ground",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26A1"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⚡",
+    "name": "high voltage",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2744",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "❄️",
+    "name": "snowflake",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2744"
+    ],
+    "status": "unqualified",
+    "glyph": "❄",
+    "name": "snowflake",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2603",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☃️",
+    "name": "snowman",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2603"
+    ],
+    "status": "unqualified",
+    "glyph": "☃",
+    "name": "snowman",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "26C4"
+    ],
+    "status": "fully-qualified",
+    "glyph": "⛄",
+    "name": "snowman without snow",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2604",
+      "FE0F"
+    ],
+    "status": "fully-qualified",
+    "glyph": "☄️",
+    "name": "comet",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "2604"
+    ],
+    "status": "unqualified",
+    "glyph": "☄",
+    "name": "comet",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F525"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🔥",
+    "name": "fire",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F4A7"
+    ],
+    "status": "fully-qualified",
+    "glyph": "💧",
+    "name": "droplet",
+    "subgroup": "sky & weather"
+  },
+  {
+    "codepoints": [
+      "1F30A"
+    ],
+    "status": "fully-qualified",
+    "glyph": "🌊",
+    "name": "water wave",
+    "subgroup": "sky & weather"
+  }
+]
