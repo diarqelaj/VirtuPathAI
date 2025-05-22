@@ -443,20 +443,32 @@ export default function ChatPage() {
   );
 
   const ChatPanel = (
-    <main className="flex-1 flex flex-col overflow-hidden">
+    <main className="flex-1 flex flex-col">
       {!active ? (
         <div className="m-auto text-gray-500">
           Select a friend to start chatting
         </div>
       ) : (
         <>
+         
           {/* header */}
-          <header className={`z-20 h-14 px-4 py-3 border-b border-gray-800
-              flex items-center justify-between bg-black-100/90 backdrop-blur
-              ${compact ? 'fixed top-0 left-0 right-0' : 'sticky top-0'}`}
+          <header
+            className={`z-150 px-4 py-3 border-b border-gray-800
+                        flex items-center justify-between bg-black-100/90 backdrop-blur
+                        ${compact ? 'fixed inset-x-0 top-0' : 'sticky top-0'}`}
+            style={
+              compact
+                ? {
+                    /* stay below the notch / status-bar */
+                    top: `calc(var(--nav-h,56px) + env(safe-area-inset-top))` ,
+                    height: `calc(56px + env(safe-area-inset-top))`, // h-14 (56 px) + safe area
+                    paddingTop: 'env(safe-area-inset-top)',
+                  }
+                : {}
+            }
           >
             <div
-               className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/${active.username}`)}
             >
               {compact && (
@@ -465,24 +477,28 @@ export default function ChatPage() {
                   className="h-5 w-5 text-white"
                 />
               )}
+
               <img
                 src={
                   active.profilePictureUrl
                     ? `${API_HOST}${active.profilePictureUrl}`
                     : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                        active.fullName
+                        active.fullName,
                       )}&background=5e17eb&color=fff`
                 }
                 className="w-8 h-8 rounded-full object-cover"
                 alt={active.username}
               />
+
               <span className="font-semibold">{active.fullName}</span>
+
               {active.isOfficial ? (
                 <OfficialBadge date={active.verifiedDate} />
               ) : active.isVerified ? (
                 <VerifiedBadge date={active.verifiedDate} />
               ) : null}
             </div>
+
             <button
               onClick={() => console.log('User options for', active.id)}
               className="p-1 rounded-full hover:bg-gray-800/60"
@@ -492,12 +508,18 @@ export default function ChatPage() {
             </button>
           </header>
 
+
           {/* messages */}
           <div
             ref={containerRef}
             onScroll={handleScroll}
-            className="flex-1 overflow-y-auto p-4 pt-14 space-y-2"
+            className={`flex-1 overflow-y-auto p-4 space-y-2
+              ${compact
+                ? 'pt-[calc(var(--nav-h,56px)+env(safe-area-inset-top))] pb-[calc(3.5rem+env(safe-area-inset-bottom))]'
+                : 'pt-[var(--nav-h,56px)] pb-16' }
+            `}
           >
+
             {msgs.map((m, idx) => {
               if (myId === null || m.isDeletedForSender) return null;
               const isOutgoing = m.senderId === myId;

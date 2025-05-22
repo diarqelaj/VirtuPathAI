@@ -184,8 +184,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex flex-col h-screen text-white">
       {/* TOPBAR */}
-      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between bg-black-100 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border-b border-white/10">
-
+      <header className="fixed top-0 left-0 right-0 h-16 z-50 px-6 flex items-center justify-between bg-black-100 shadow-[0_0_10px_2px_rgba(255,255,255,0.1)] border-b border-white/10"
+              style={{ '--nav-h': '4rem' } as React.CSSProperties}
+      >
         <div className="flex items-center gap-4">
           <FaBars
             onClick={() =>
