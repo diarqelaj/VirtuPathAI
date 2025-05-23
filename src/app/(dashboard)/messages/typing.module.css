@@ -1,0 +1,15 @@
+.typingDot {
+  width: 6px; height: 6px;
+  margin-right: 4px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1s infinite ease-in-out;
+}
+.typingDotDelay200 { animation-delay: 0.2s; }
+.typingDotDelay400 { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40%          { transform: translateY(-6px); }
+}

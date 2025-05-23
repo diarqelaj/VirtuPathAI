@@ -13,7 +13,7 @@
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
-    "@microsoft/signalr": "^6.0.0",
+    "@microsoft/signalr": "^6.0.25",
     "@react-email/components": "^0.0.38",
     "@react-email/html": "^0.0.11",
     "@react-email/render": "^1.1.0",

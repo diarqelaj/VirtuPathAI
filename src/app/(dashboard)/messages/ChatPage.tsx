@@ -21,6 +21,8 @@ import api from '@/lib/api';
 import { VerifiedBadge } from '@/components/VerifiedBadge';
 import { OfficialBadge } from '@/components/OfficialBadge';
 import { createPortal } from 'react-dom';
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import styles from "./typing.module.css"
 
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
@@ -33,15 +35,16 @@ interface EmojiReaction {
   profilePictureUrl: string | null;
 }
 interface ChatMessage {
-  id: number;
-  senderId: number;
-  receiverId: number;
-  message: string;
-  sentAt: string;
-  replyToId?: number | null;
-  emojis: EmojiReaction[];
-  isEdited?: boolean;
-  isDeletedForSender?: boolean;
+  id:             number;
+  senderId:       number;
+  receiverId:     number;
+  message:        string;
+  sentAt:         string;
+  replyToMessageId?: number | null;  // ← add this
+  replyToId?:       number | null;   // you can still keep replyToId if you like
+  emojis:         EmojiReaction[];
+  isEdited?:      boolean;
+  isDeletedForSender?:   boolean;
   isDeletedForEveryone?: boolean;
 }
 interface RawFriendDto {
@@ -91,7 +94,10 @@ export default function ChatPage() {
   const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 });
   const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
   const emojiButtonRef = useRef<HTMLButtonElement>(null);
-
+  const [hub, setHub] = useState<HubConnection | null>(null);
+  const [onlineUsers, setOnlineUsers] = useState<Set<number>>(new Set());
+  const [typingUsers, setTypingUsers] = useState<Set<number>>(new Set());
+  const typingTimeout = useRef<NodeJS.Timeout | null>(null);
   /* swipe (mobile) */
   const [swipeState, setSwipeState] =
     useState<{ id: number; offset: number; releasing: boolean } | null>(null);
@@ -206,51 +212,98 @@ export default function ChatPage() {
     })();
   }, []);
 
-  /* fetch + poll messages */
-  const enrichMsg = async (m: any): Promise<ChatMessage> => {
-    try {
-      const res = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
-      return {
-        ...m,
-        emojis: res.data,
-        replyToId: m.replyToId ?? (m.replyToMessageId ?? null),
-      };
-    } catch {
-      return {
-        ...m,
-        emojis: [],
-        replyToId: m.replyToId ?? (m.replyToMessageId ?? null),
-      };
-    }
-  };
-  const fetchMessages = async (uid: number) => {
-    const r = await api.get<ChatMessage[]>(`/chat/messages/${uid}`);
-    const data = await Promise.all(r.data.map(enrichMsg));
-    setMsgs(data);
-  };
-  useEffect(() => {
-    if (!active) return;
-    prevMsgsCount.current = 0;
-    setHasNewMessages(false);
-    firstLoad.current = true;
-    scrollAfterSend.current = true;
-    fetchMessages(active.id);
-    const t = setInterval(() => fetchMessages(active.id), 2000);
-    return () => clearInterval(t);
-  }, [active]);
-  useEffect(() => {
-    if (firstLoad.current) {
-      scrollToBottom(false);
-      firstLoad.current = false;
-    } else if (scrollAfterSend.current) {
-      scrollToBottom(true);
-      scrollAfterSend.current = false;
-    } else if (msgs.length > prevMsgsCount.current) {
-      setHasNewMessages(true);
-    }
-    prevMsgsCount.current = msgs.length;
-  }, [msgs]);
+    //  ▶▶▶ REAL-TIME CHAT: initial load + SignalR hookup
+    useEffect(() => {
+      if (!active) return;
 
+      // 1) load history once
+      (async () => {
+        const r = await api.get<ChatMessage[]>(`/chat/messages/${active.id}`);
+        const data = await Promise.all(r.data.map(async m => {
+          const reactions = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
+          return { ...m, emojis: reactions.data, replyToId: m.replyToId ?? m.replyToMessageId ?? null };
+        }));
+        setMsgs(data);
+        scrollAfterSend.current = true;
+      })();
+
+      // 2) build & start SignalR connection
+      const connection = new HubConnectionBuilder()
+        .withUrl(`${API_HOST}/chathub`, { withCredentials: true })
+        .withAutomaticReconnect()
+        .build();
+
+      // 3) subscribe to hub events
+      connection.on("ReceiveMessage", (m: ChatMessage) => {
+        setMsgs(ms => [...ms, { ...m, emojis: [], replyToId: m.replyToId ?? m.replyToMessageId ?? null }]);
+        scrollAfterSend.current = true;
+      });
+      connection.on("MessageEdited", ({ id, message, isEdited }) =>
+        setMsgs(ms => ms.map(m => m.id === id ? { ...m, message, isEdited } : m))
+      );
+      connection.on("MessageDeletedForSender", (id: number) =>
+        setMsgs(ms => ms.filter(m => m.id !== id))
+      );
+      connection.on("MessageDeletedForEveryone", (id: number) =>
+        setMsgs(ms => ms.filter(m => m.id !== id))
+      );
+      connection.on("MessageReacted", ({ messageId, userId, emoji }) => {
+        setMsgs(ms => ms.map(m =>
+          m.id === messageId
+            ? { ...m, emojis: [...m.emojis.filter(e => e.userId !== userId), { userId, emoji, fullName: "", profilePictureUrl: null }] }
+            : m
+        ));
+      });
+      connection.on("MessageReactionRemoved", ({ messageId, userId }) => {
+        setMsgs(ms => ms.map(m =>
+          m.id === messageId
+            ? { ...m, emojis: m.emojis.filter(e => e.userId !== userId) }
+            : m
+        ));
+      });
+
+      connection.start().catch(console.error);
+      setHub(connection);
+
+      return () => {
+        connection.stop();
+        setHub(null);
+      };
+    }, [active]);
+
+  
+    /** establish a single, app-wide hub connection */
+    useEffect(() => {
+      const connection = new HubConnectionBuilder()
+        .withUrl(`${API_HOST}/chathub`, { withCredentials: true })
+        .withAutomaticReconnect()
+        .build();
+
+      // presence
+      connection.on("UserOnline", (uid: string) => {
+        setOnlineUsers(s => { const next = new Set(s); next.add(+uid); return next; });
+      });
+      connection.on("UserOffline", (uid: string) => {
+        setOnlineUsers(s => { const next = new Set(s); next.delete(+uid); return next; });
+      });
+
+      // typing
+      connection.on("UserTyping", (uid: string) => {
+        setTypingUsers(s => { const next = new Set(s); next.add(+uid); return next; });
+      });
+      connection.on("UserStopTyping", (uid: string) => {
+        setTypingUsers(s => { const next = new Set(s); next.delete(+uid); return next; });
+      });
+
+      connection.start()
+        .then(() => {
+          console.log("📶 SignalR connected for presence");
+          setHub(connection);    // reuse this hub for your message logic below
+        })
+        .catch(console.error);
+
+      return () => void connection.stop();
+    }, []);
   /* focus hacks */
   useEffect(() => {
     if (editingId !== null || replyTo !== null) {
@@ -348,14 +401,10 @@ export default function ChatPage() {
     if (!msg.trim() || !active || myId === null) return;
     try {
       if (editingId) {
-        await api.put(`/chat/edit/${editingId}`, { newMessage: msg.trim() });
+        await hub?.invoke("EditMessage", editingId, msg.trim());
         setEditingId(null);
       } else {
-        await api.post('/chat/send', {
-          receiverId: active.id,
-          message: msg.trim(),
-          ReplyToMessageId: replyTo,
-        });
+        await hub?.invoke("SendMessage", active.id, msg.trim(), replyTo);
         scrollAfterSend.current = true;
       }
       setMsg('');
@@ -365,13 +414,13 @@ export default function ChatPage() {
     }
   };
   const react = (id: number, emoji: string) =>
-    api.patch(`/Chat/react/${id}`, { Emoji: emoji }).catch(() => setError('React failed'));
+    hub?.invoke("ReactToMessage", id, emoji)
   const unreact = (id: number) =>
-    api.delete(`/Chat/react/${id}`).catch(() => setError('Unreact failed'));
+    hub?.invoke("RemoveReaction", id)
   const rmMe = (id: number) =>
-    api.post(`/chat/delete/${id}/sender`).catch(() => setError('Delete failed'));
+    hub?.invoke("DeleteForSender", id)
   const rmAll = (id: number) =>
-    api.post(`/chat/delete-for-everyone/${id}`).catch(() => setError('Delete-all failed'));
+    hub?.invoke("DeleteForEveryone", id)
 
 
   /* friend filter */
@@ -405,51 +454,63 @@ export default function ChatPage() {
         className="px-3 py-2 bg-black-100 border border-gray-700 rounded-md text-sm mb-4"
       />
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
-        <ul className="space-y-2 pr-2">
-          {filtered.map((f) => {
-            const isActive = active?.id === f.id;
-            return (
-              <li
-                key={f.id}
-                className={`flex items-center justify-between gap-3 p-2 rounded-lg min-w-0 ${
-                  isActive ? 'bg-gray-800' : 'hover:bg-gray-800/60'
-                }`}
-                onClick={() => setActive(f)}
-              >
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <img
-                    src={
-                      f.profilePictureUrl
-                        ? `${API_HOST}${f.profilePictureUrl}`
-                        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            f.fullName
-                          )}&background=5e17eb&color=fff`
-                    }
-                    className="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0"
-                    alt={f.username}
-                  />
-                  <div className="flex flex-col overflow-hidden min-w-0">
-                    <div className="flex items-center gap-1 text-white font-medium truncate">
-                      {f.fullName}
-                      {f.isOfficial ? (
-                        <OfficialBadge date={f.verifiedDate} />
-                      ) : f.isVerified ? (
-                        <VerifiedBadge date={f.verifiedDate} />
-                      ) : null}
-                    </div>
-                    <div className="text-xs text-gray-400 truncate">@{f.username}</div>
-                  </div>
+      <ul className="space-y-2 pr-2">
+      {filtered.map((f) => {
+        const isActive = active?.id === f.id;
+        const isOnline = onlineUsers.has(f.id);
+        return (
+          <li
+            key={f.id}
+            onClick={() => setActive(f)}
+            className={`flex items-center justify-between gap-3 p-2 rounded-lg min-w-0 ${
+              isActive ? 'bg-gray-800' : 'hover:bg-gray-800/60'
+            }`}
+          >
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              {/* wrap avatar in a relative container */}
+              <div className="relative flex-shrink-0">
+                <img
+                  src={
+                    f.profilePictureUrl
+                      ? `${API_HOST}${f.profilePictureUrl}`
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          f.fullName
+                        )}&background=5e17eb&color=fff`
+                  }
+                  className="w-10 h-10 rounded-full object-cover border border-white/10"
+                  alt={f.username}
+                />
+                {/* status dot */}
+                <span
+                  className={[
+                    "absolute bottom-0 right-0 block w-3 h-3 rounded-full ring-1 ring-black",
+                    isOnline ? "bg-green-400" : "bg-gray-600",
+                  ].join(" ")}
+                  title={isOnline ? "Online" : "Offline"}
+                />
+              </div>
+              <div className="flex flex-col overflow-hidden min-w-0">
+                <div className="flex items-center gap-1 text-white font-medium truncate">
+                  {f.fullName}
+                  {f.isOfficial ? (
+                    <OfficialBadge date={f.verifiedDate} />
+                  ) : f.isVerified ? (
+                    <VerifiedBadge date={f.verifiedDate} />
+                  ) : null}
                 </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); }}
-                  className="flex-shrink-0 text-indigo-400 text-sm"
-                >
-                  Chat
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+                <div className="text-xs text-gray-400 truncate">@{f.username}</div>
+              </div>
+            </div>
+            <button
+              onClick={(e) => e.stopPropagation()}
+              className="flex-shrink-0 text-indigo-400 text-sm"
+            >
+              Chat
+            </button>
+          </li>
+        );
+      })}
+    </ul>
       </div>
     </aside>
   );
@@ -674,6 +735,16 @@ export default function ChatPage() {
                 </div>
               );
             })}
+            {typingUsers.has(active.id) && (
+            <div className="flex items-start mr-auto max-w-[80%]">
+              <div className="px-4 py-2 bg-gray-700 rounded-2xl flex items-center">
+                {/* three-dot loader */}
+                <span className={styles.typingDot} />
+                <span className={styles.typingDotDelay200} />
+                <span className={styles.typingDotDelay400} />
+              </div>
+            </div>
+          )}
             <div ref={bottomRef} />
           </div>
 
@@ -903,10 +974,26 @@ export default function ChatPage() {
               <input
                 ref={inputRef}
                 value={msg}
-                onChange={(e) => setMsg(e.target.value)}
+                onChange={(e) => {
+                  const text = e.target.value;
+                  setMsg(text);
+
+                  // fire “Typing” once per keystroke
+                  hub?.invoke("Typing", active!.id);
+
+                  // reset a “stop typing” timer
+                  if (typingTimeout.current) clearTimeout(typingTimeout.current);
+                  typingTimeout.current = setTimeout(() => {
+                    hub?.invoke("StopTyping", active!.id);
+                  }, 1000);                   // send StopTyping 1s after last keystroke
+                }}
+                onBlur={() => {
+                  // also send StopTyping when they leave the input
+                  hub?.invoke("StopTyping", active!.id);
+                }}
                 onKeyDown={(e) => e.key === 'Enter' && send()}
                 placeholder="Type a message…"
-                className="flex-1 px-3 py-2 bg-black-100 border border-gray-700 rounded-full text-sm"
+                className="…"
               />
               <button
                 onClick={send}
