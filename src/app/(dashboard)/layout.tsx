@@ -421,7 +421,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </header>
 
       {/* BODY */}
-      <div className="flex pt-16 flex-1 overflow-hidden">
+      <div className="flex pt-16 flex-1 h-full">
+      
         {/* SIDEBAR DESKTOP */}
         <aside className={`hidden sm:flex ${
           isOpen ? 'w-64' : 'w-20'
@@ -479,10 +480,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* MAIN CONTENT */}
         <main
-          className={`flex-1 bg-black-100 overflow-y-auto` +
+           className={
+            `flex-1 bg-black-100 h-full ` +
             (isMessagesRoute
-              ? ''                              // let ChatPage handle its own scrolling
-              : 'p-4 sm:p-6'
+              ? 'overflow-hidden'       // chat page handles its own scrolling
+              : 'overflow-y-auto p-4 sm:p-6' // everything else scrolls here
             )
           }
           style={

@@ -26,6 +26,7 @@ import styles from "./typing.module.css"
 import { useSignalR } from "@/app/SignalRProvider";
 
 
+
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
 
 /* ---------- types ---------- */
@@ -148,6 +149,7 @@ export default function ChatPage() {
     setEditingId(null);
     setMsg('');
   };
+  
   const handleScroll = () => {
     const c = containerRef.current;
     if (!c) return;
@@ -156,11 +158,17 @@ export default function ChatPage() {
     }
   };
   const scrollToBottom = (smooth = true) => {
-    bottomRef.current?.scrollIntoView({
-      behavior: smooth ? 'smooth' : 'auto',
-      block: 'end',
+    const c = containerRef.current;
+    if (!c) return;
+    c.scrollTo({
+      top: c.scrollHeight,
+      behavior: smooth ? 'smooth' : 'auto'
     });
   };
+  useEffect(() => {
+    // every time msgs array changes, scroll to the bottom
+    scrollToBottom();
+  }, [msgs]);
 
   /* load me + friends */
   useEffect(() => {
@@ -357,11 +365,13 @@ export default function ChatPage() {
         await hub?.invoke("EditMessage", editingId, msg.trim());
         setEditingId(null);
       } else {
+        
         await hub?.invoke("SendMessage", active.id, msg.trim(), replyTo);
-        scrollAfterSend.current = true;
+        
       }
       setMsg('');
       setReplyTo(null);
+
     } catch {
       setError('Failed to send.');
     }
