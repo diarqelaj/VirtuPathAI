@@ -24,12 +24,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/footer-grid.svg" as="image" />
       </head>
       <body className={`${inter.className} overflow-x-hidden max-w-full`}>
-        <Providers>
-          {/* wrap with our client‐only SignalRProvider */}
-          <SignalRProvider>
-            {children}
-          </SignalRProvider>
-        </Providers>
+        <SignalRProvider>
+          <Providers>
+              {children}
+          </Providers>
+        </SignalRProvider> 
       </body>
     </html>
   )
