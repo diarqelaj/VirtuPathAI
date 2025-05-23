@@ -688,16 +688,17 @@ export default function ChatPage() {
                 </div>
               );
             })}
-            {typingUsers.has(active.id) && (
-            <div className="flex items-start mr-auto max-w-[80%]">
-              <div className="px-4 py-2 bg-gray-700 rounded-2xl flex items-center">
-                {/* three-dot loader */}
-                <span className={styles.typingDot} />
-                <span className={styles.typingDotDelay200} />
-                <span className={styles.typingDotDelay400} />
+              {typingUsers.has(active.id) && (
+              <div className="flex items-start mr-auto max-w-[80%]">
+                <div className="px-4 py-2 bg-gray-700 rounded-2xl flex items-center">
+                  {/* three-dot loader */}
+                  <span className={styles.typingText}>typing</span>
+                  <span className={styles.typingDot} />
+                  <span className={`${styles.typingDot} ${styles.typingDotDelay200}`} />
+                  <span className={`${styles.typingDot} ${styles.typingDotDelay400}`} />
+                </div>
               </div>
-            </div>
-          )}
+            )}
             <div ref={bottomRef} />
           </div>
 
@@ -946,7 +947,7 @@ export default function ChatPage() {
                 }}
                 onKeyDown={(e) => e.key === 'Enter' && send()}
                 placeholder="Type a message…"
-                className="…"
+                className="flex-1 px-3 py-2 bg-black-100 border border-gray-700 rounded-full text-sm"
               />
               <button
                 onClick={send}
