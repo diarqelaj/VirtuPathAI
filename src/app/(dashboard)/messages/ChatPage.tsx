@@ -23,6 +23,7 @@ import { OfficialBadge } from '@/components/OfficialBadge';
 import { createPortal } from 'react-dom';
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import styles from "./typing.module.css"
+import { useSignalR } from "@/app/SignalRProvider";
 
 
 const API_HOST = api.defaults.baseURL?.replace(/\/api\/?$/, '') || '';
@@ -67,7 +68,7 @@ interface Friend {
 
 export default function ChatPage() {
   const router = useRouter();
-
+  const { hub, onlineUsers } = useSignalR()
   const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
@@ -94,9 +95,7 @@ export default function ChatPage() {
   const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 });
   const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
   const emojiButtonRef = useRef<HTMLButtonElement>(null);
-  const [hub, setHub] = useState<HubConnection | null>(null);
-  const [onlineUsers, setOnlineUsers] = useState<Set<number>>(new Set());
-  const [typingUsers, setTypingUsers] = useState<Set<number>>(new Set());
+  const [typingUsers, setTypingUsers] = useState(new Set<number>());
   const typingTimeout = useRef<NodeJS.Timeout | null>(null);
   /* swipe (mobile) */
   const [swipeState, setSwipeState] =
@@ -212,98 +211,30 @@ export default function ChatPage() {
     })();
   }, []);
 
-    //  ▶▶▶ REAL-TIME CHAT: initial load + SignalR hookup
-    useEffect(() => {
-      if (!active) return;
-
-      // 1) load history once
-      (async () => {
-        const r = await api.get<ChatMessage[]>(`/chat/messages/${active.id}`);
-        const data = await Promise.all(r.data.map(async m => {
-          const reactions = await api.get<EmojiReaction[]>(`/Chat/react/${m.id}`);
-          return { ...m, emojis: reactions.data, replyToId: m.replyToId ?? m.replyToMessageId ?? null };
-        }));
-        setMsgs(data);
-        scrollAfterSend.current = true;
-      })();
-
-      // 2) build & start SignalR connection
-      const connection = new HubConnectionBuilder()
-        .withUrl(`${API_HOST}/chathub`, { withCredentials: true })
-        .withAutomaticReconnect()
-        .build();
-
-      // 3) subscribe to hub events
-      connection.on("ReceiveMessage", (m: ChatMessage) => {
-        setMsgs(ms => [...ms, { ...m, emojis: [], replyToId: m.replyToId ?? m.replyToMessageId ?? null }]);
-        scrollAfterSend.current = true;
-      });
-      connection.on("MessageEdited", ({ id, message, isEdited }) =>
-        setMsgs(ms => ms.map(m => m.id === id ? { ...m, message, isEdited } : m))
-      );
-      connection.on("MessageDeletedForSender", (id: number) =>
-        setMsgs(ms => ms.filter(m => m.id !== id))
-      );
-      connection.on("MessageDeletedForEveryone", (id: number) =>
-        setMsgs(ms => ms.filter(m => m.id !== id))
-      );
-      connection.on("MessageReacted", ({ messageId, userId, emoji }) => {
-        setMsgs(ms => ms.map(m =>
-          m.id === messageId
-            ? { ...m, emojis: [...m.emojis.filter(e => e.userId !== userId), { userId, emoji, fullName: "", profilePictureUrl: null }] }
-            : m
-        ));
-      });
-      connection.on("MessageReactionRemoved", ({ messageId, userId }) => {
-        setMsgs(ms => ms.map(m =>
-          m.id === messageId
-            ? { ...m, emojis: m.emojis.filter(e => e.userId !== userId) }
-            : m
-        ));
-      });
-
-      connection.start().catch(console.error);
-      setHub(connection);
-
-      return () => {
-        connection.stop();
-        setHub(null);
-      };
-    }, [active]);
+    
 
   
-    /** establish a single, app-wide hub connection */
-    useEffect(() => {
-      const connection = new HubConnectionBuilder()
-        .withUrl(`${API_HOST}/chathub`, { withCredentials: true })
-        .withAutomaticReconnect()
-        .build();
+  useEffect(() => {
+    if (!hub) return;
 
-      // presence
-      connection.on("UserOnline", (uid: string) => {
-        setOnlineUsers(s => { const next = new Set(s); next.add(+uid); return next; });
-      });
-      connection.on("UserOffline", (uid: string) => {
-        setOnlineUsers(s => { const next = new Set(s); next.delete(+uid); return next; });
+    const handleTypingStart = (id: number) =>
+      setTypingUsers(prev => new Set(prev).add(id));
+    const handleTypingStop = (id: number) =>
+      setTypingUsers(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
       });
 
-      // typing
-      connection.on("UserTyping", (uid: string) => {
-        setTypingUsers(s => { const next = new Set(s); next.add(+uid); return next; });
-      });
-      connection.on("UserStopTyping", (uid: string) => {
-        setTypingUsers(s => { const next = new Set(s); next.delete(+uid); return next; });
-      });
+    hub.on("UserTyping", handleTypingStart);
+    hub.on("UserStopTyping", handleTypingStop);
 
-      connection.start()
-        .then(() => {
-          console.log("📶 SignalR connected for presence");
-          setHub(connection);    // reuse this hub for your message logic below
-        })
-        .catch(console.error);
-
-      return () => void connection.stop();
-    }, []);
+    return () => {
+      hub.off("UserTyping", handleTypingStart);
+      hub.off("UserStopTyping", handleTypingStop);
+    };
+  }, [hub]);
+  
   /* focus hacks */
   useEffect(() => {
     if (editingId !== null || replyTo !== null) {
