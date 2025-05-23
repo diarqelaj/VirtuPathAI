@@ -14,11 +14,13 @@ import { chathubApi } from '@/lib/api';
 interface SignalRContextType {
   hub: HubConnection | null;
   onlineUsers: Set<number>;
+  typingUsers: Set<number>;
 }
 
 const SignalRContext = createContext<SignalRContextType>({
   hub: null,
   onlineUsers: new Set(),
+  typingUsers: new Set(),
 });
 
 export function useSignalR() {
@@ -32,6 +34,7 @@ interface SignalRProviderProps {
 export default function SignalRProvider({ children }: SignalRProviderProps) {
   const [hub, setHub] = useState<HubConnection | null>(null);
   const [onlineUsers, setOnlineUsers] = useState<Set<number>>(new Set());
+  const [typingUsers, setTypingUsers]   = useState<Set<number>>(new Set());
 
   useEffect(() => {
     const base = chathubApi.defaults.baseURL ?? '';
@@ -40,38 +43,38 @@ export default function SignalRProvider({ children }: SignalRProviderProps) {
       .withAutomaticReconnect()
       .build();
 
-    // Presence handlers
-    connection.on('UserOnline', (uid: number | string) => {
-      setOnlineUsers(s => {
-        const next = new Set(s);
-        next.add(typeof uid === 'string' ? parseInt(uid, 10) : uid);
-        return next;
-      });
+    // presence
+    connection.on('OnlineFriends', (ids: number[]) => {
+      setOnlineUsers(new Set(ids));
+    });
+    connection.on('UserOnline',  (uid: number|string) => {
+      const id = typeof uid === 'string' ? +uid : uid;
+      setOnlineUsers(s => new Set(s).add(id));
+    });
+    connection.on('UserOffline', (uid: number|string) => {
+      const id = typeof uid === 'string' ? +uid : uid;
+      setOnlineUsers(s => { const next = new Set(s); next.delete(id); return next; });
     });
 
-    connection.on('UserOffline', (uid: number | string) => {
-      setOnlineUsers(s => {
-        const next = new Set(s);
-        next.delete(typeof uid === 'string' ? parseInt(uid, 10) : uid);
-        return next;
-      });
+    // typing
+    connection.on('UserTyping',   (uid: number|string) => {
+      const id = typeof uid === 'string' ? +uid : uid;
+      setTypingUsers(s => new Set(s).add(id));
+    });
+    connection.on('UserStopTyping', (uid: number|string) => {
+      const id = typeof uid === 'string' ? +uid : uid;
+      setTypingUsers(s => { const next = new Set(s); next.delete(id); return next; });
     });
 
-    connection
-      .start()
-      .then(() => {
-        console.log('✅ SignalR connected');
-        setHub(connection);
-      })
-      .catch(err => console.error('SignalR connect failed', err));
+    connection.start()
+      .then(() => setHub(connection))
+      .catch(console.error);
 
-    return () => {
-      connection.stop().catch(console.error);
-    };
+    return () => void connection.stop();
   }, []);
 
   return (
-    <SignalRContext.Provider value={{ hub, onlineUsers }}>
+    <SignalRContext.Provider value={{ hub, onlineUsers, typingUsers }}>
       {children}
     </SignalRContext.Provider>
   );

@@ -69,7 +69,7 @@ interface Friend {
 export default function ChatPage() {
   const router = useRouter();
   const [chatHub, setChatHub] = useState<HubConnection | null>(null);
-  const { hub, onlineUsers } = useSignalR()
+  const { hub, onlineUsers, typingUsers } = useSignalR()
   const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
@@ -96,7 +96,7 @@ export default function ChatPage() {
   const lastTapRef = useRef<{ id: number; t: number }>({ id: 0, t: 0 });
   const [hoveredMsgId, setHoveredMsgId] = useState<number | null>(null);
   const emojiButtonRef = useRef<HTMLButtonElement>(null);
-  const [typingUsers, setTypingUsers] = useState(new Set<number>());
+
   const typingTimeout = useRef<NodeJS.Timeout | null>(null);
   /* swipe (mobile) */
   const [swipeState, setSwipeState] =
@@ -256,26 +256,6 @@ export default function ChatPage() {
     
 
   
-  useEffect(() => {
-    if (!hub) return;
-
-    const handleTypingStart = (id: number) =>
-      setTypingUsers(prev => new Set(prev).add(id));
-    const handleTypingStop = (id: number) =>
-      setTypingUsers(prev => {
-        const next = new Set(prev);
-        next.delete(id);
-        return next;
-      });
-
-    hub.on("UserTyping", handleTypingStart);
-    hub.on("UserStopTyping", handleTypingStop);
-
-    return () => {
-      hub.off("UserTyping", handleTypingStart);
-      hub.off("UserStopTyping", handleTypingStop);
-    };
-  }, [hub]);
   
   /* focus hacks */
   useEffect(() => {
