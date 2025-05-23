@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, {
   createContext,
@@ -6,47 +6,46 @@ import React, {
   useEffect,
   useState,
   ReactNode,
-} from 'react'
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr'
+} from 'react';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { chathubApi } from '@/lib/api';   // ← pull in the axios instance
 
-const SignalRContext = createContext<HubConnection | null>(null)
+const SignalRContext = createContext<HubConnection | null>(null);
 
 export function useSignalR() {
-  return useContext(SignalRContext)
+  return useContext(SignalRContext);
 }
 
 interface SignalRProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function SignalRProvider({ children }: SignalRProviderProps) {
-  const [hub, setHub] = useState<HubConnection | null>(null)
+  const [hub, setHub] = useState<HubConnection | null>(null);
 
   useEffect(() => {
+    const base = chathubApi.defaults.baseURL ?? ''; 
     const connection = new HubConnectionBuilder()
-      .withUrl(
-        `${process.env.NEXT_PUBLIC_API_HOST || ''}/chathub`,
-        { withCredentials: true }
-      )
+      .withUrl(`${base}/chathub`, { withCredentials: true })
       .withAutomaticReconnect()
-      .build()
+      .build();
 
     connection
       .start()
       .then(() => {
-        console.log('✅ SignalR connected')
-        setHub(connection)
+        console.log('✅ SignalR connected');
+        setHub(connection);
       })
-      .catch(err => console.error('SignalR connect failed', err))
+      .catch(err => console.error('SignalR connect failed', err));
 
     return () => {
-      connection.stop().catch(console.error)
-    }
-  }, [])
+      connection.stop().catch(console.error);
+    };
+  }, []);
 
   return (
     <SignalRContext.Provider value={hub}>
       {children}
     </SignalRContext.Provider>
-  )
+  );
 }
