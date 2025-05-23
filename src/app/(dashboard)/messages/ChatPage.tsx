@@ -68,6 +68,7 @@ interface Friend {
 
 export default function ChatPage() {
   const router = useRouter();
+  const [chatHub, setChatHub] = useState<HubConnection | null>(null);
   const { hub, onlineUsers } = useSignalR()
   const [isMobile, setIsMobile] = useState(false);
 
@@ -210,6 +211,47 @@ export default function ChatPage() {
       }
     })();
   }, []);
+  useEffect(() => {
+    if (!active) return;
+  
+    // 1️⃣ load history
+    ;(async () => {
+      const res = await api.get<ChatMessage[]>(`/chat/messages/${active.id}`);
+      setMsgs(res.data.map(m => ({
+        ...m,
+        emojis: [],                // you can optionally re-fetch reactions here
+        replyToId: m.replyToMessageId ?? null
+      })));
+      scrollToBottom(false);
+    })();
+  
+    // 2️⃣ open a *new* hub connection just for this friend
+    const h = new HubConnectionBuilder()
+      .withUrl(`${API_HOST}/chathub`, { withCredentials: true })
+      .withAutomaticReconnect()
+      .build();
+  
+    h.on("ReceiveMessage",       m => { setMsgs(ms => [...ms, { ...m, emojis: [], replyToId: m.replyToId ?? m.replyToMessageId }]); scrollToBottom(); });
+    h.on("MessageEdited",        ({ id, message, isEdited }) => setMsgs(ms => ms.map(m => m.id === id ? { ...m, message, isEdited } : m)));
+    h.on("MessageDeletedForSender",(id) => setMsgs(ms => ms.filter(m => m.id !== id)));
+    h.on("MessageDeletedForEveryone",(id) => setMsgs(ms => ms.filter(m => m.id !== id)));
+    h.on("MessageReacted",       ({ messageId, userId, emoji }) =>
+      setMsgs(ms => ms.map(m =>
+        m.id === messageId
+          ? { ...m, emojis: [...m.emojis.filter(e => e.userId !== userId), { userId, emoji, fullName:'', profilePictureUrl:null }] }
+          : m
+      ))
+    );
+    h.on("MessageReactionRemoved",({ messageId, userId }) =>
+      setMsgs(ms => ms.map(m => m.id === messageId
+        ? { ...m, emojis: m.emojis.filter(e => e.userId !== userId) }
+        : m
+      ))
+    );
+  
+    h.start().then(() => setChatHub(h)).catch(console.error);
+    return () => { h.stop().catch(console.error); setChatHub(null); };
+  }, [active]);
 
     
 
