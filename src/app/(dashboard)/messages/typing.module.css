@@ -1,34 +1,38 @@
-/* typing.module.css */
-.typingIndicator {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-.typingText {
-  margin-right: 6px;
-}
-
-.typingDot {
-  width: 6px;
-  height: 6px;
-  margin-right: 4px;
-  background: currentColor;
-  border-radius: 50%;
-  display: inline-block;
-  animation: bounce 1s infinite ease-in-out;
-}
-
-.typingDotDelay200 {
-  animation-delay: 0.2s;
-}
-
-.typingDotDelay400 {
-  animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: translateY(0); }
-  40%          { transform: translateY(-6px); }
-}
+.header {
+    --safe-top: env(safe-area-inset-top);
+  }
+  /* typing.module.css */
+  .typingIndicator {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .typingText {
+    margin-right: 6px;
+  }
+  
+  .typingDot {
+    width: 6px;
+    height: 6px;
+    margin-right: 4px;
+    background: currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1s infinite ease-in-out;
+  }
+  
+  .typingDotDelay200 {
+    animation-delay: 0.2s;
+  }
+  
+  .typingDotDelay400 {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40%          { transform: translateY(-6px); }
+  }
+  

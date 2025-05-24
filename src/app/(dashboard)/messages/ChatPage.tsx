@@ -479,7 +479,7 @@ export default function ChatPage() {
   );
 
   const ChatPanel = (
-    <main className="flex-1 flex flex-col">
+    <main className="flex-1 flex flex-col overflow-hidden">
       {!active ? (
         <div className="m-auto text-gray-500">
           Select a friend to start chatting
